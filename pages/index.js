@@ -1,16 +1,15 @@
 import Head from "next/head";
 import Link from "next/link";
-
-import {
-  getChainNodeInfo
-} from "../lib/chainApi";
-
 import { makeStore } from "../lib/store";
+import {
+  getChainNodeInfo,
+  getRunningOperationPromises,
+} from '../lib/chainApi'
 
 
 
 export default function Home(props) {
-  //console.log(props.results)
+  console.log(props.results.data.node_info)
   return (
     <div>
     hello
@@ -21,16 +20,12 @@ export default function Home(props) {
 
 
 
-
-
 export async function getServerSideProps() {
   const store = makeStore();
   const dataNodeInfo = await store.dispatch(getChainNodeInfo.initiate());
-  const results = JSON.stringify(dataNodeInfo)
-console.log(results)
-
+  const results =  JSON.parse(JSON.stringify(dataNodeInfo))
+  await Promise.all(getRunningOperationPromises());
 
 return { props: { results } }
-
 
 }

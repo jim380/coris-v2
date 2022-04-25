@@ -13,7 +13,7 @@ export const chainApi = createApi({
   tagTypes: [],
   endpoints: (builder) => ({
     //getChainLastBlock: builder.query<any, void>({
-      //query: (name) => ``,
+      //query: () => `/blocks/latest`,
    // }),
     getChainNodeInfo: builder.query<any, void>({
       query: () => `/node_info`,
