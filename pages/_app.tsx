@@ -1,5 +1,7 @@
+import { NextPage } from "next";
 import { AppProps } from "next/app";
-import Layout from "../components/Layout";
+import { ReactElement, ReactNode } from "react";
+//import Layout from "../components/Layout";
 const { default: AbortController } = require("abort-controller");
 const { wrapper } = require("../lib/store");
 const { default: fetch, Headers, Request, Response } = require("node-fetch");
@@ -13,12 +15,18 @@ Object.assign(globalThis, {
   AbortController,
 });
 
-export function App({ Component, pageProps }: AppProps) {
-  return (
-    <Layout>
-    <Component {...pageProps} />
-  </Layout>
-  );
+//dynamic layout
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export function App({ Component, pageProps }: AppPropsWithLayout) {
+    const getLayout = Component.getLayout ?? ((page) => page);
+    return getLayout(<Component {...pageProps} />);
 }
 
 export default wrapper.withRedux(App);

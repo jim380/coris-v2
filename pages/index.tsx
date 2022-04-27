@@ -7,10 +7,11 @@ import {
   getChainLatestBlock,
   getRunningOperationPromises,
 } from '../lib/chainApi';
+import Layout from "../components/Layout";
 
 
 
-const Home: NextPage = ({cachedResults}: any) => {
+function Home ({cachedResults}: any) {
   console.log(cachedResults)
   return (
    <div> 
@@ -19,7 +20,11 @@ const Home: NextPage = ({cachedResults}: any) => {
   );
 }
 
+export default Home
 
+Home.getLayout = function getLayout(page: any) {
+  return <Layout>{page}</Layout>
+};
 
 
 export const  getServerSideProps: GetServerSideProps = async () => {
@@ -41,4 +46,3 @@ return { props: {
 }
 
 
-export default Home
