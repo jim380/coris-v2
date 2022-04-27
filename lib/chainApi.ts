@@ -12,25 +12,25 @@ export const chainApi = createApi({
   },
   tagTypes: [],
   endpoints: (builder) => ({
-  //  getChainLatestBlock: builder.query<any, void>({
-    //  query: () => `/blocks/latest`,
-    //}),
-    getChainNodeInfo: builder.query<any, void>({
-      query: () => `/node_info`,
+   getChainLatestBlock: builder.query<any, void>({
+      query: () => `/blocks/latest`,
     }),
+    //getChainNodeInfo: builder.query<any, void>({
+     // query: () => `/node_info`,
+    //}),
   }),
 });
 
 // Export hooks for usage in functional components
 export const {
-  //useGetChainLatestBlockQuery,
-  useGetChainNodeInfoQuery,
+  useGetChainLatestBlockQuery,
+  //useGetChainNodeInfoQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
 
 
 // export endpoints for use in SSR
 export const {
-   //getChainLatestBlock, 
-   getChainNodeInfo
+   getChainLatestBlock, 
+   //getChainNodeInfo
  } = chainApi.endpoints;

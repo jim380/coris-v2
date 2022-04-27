@@ -1,0 +1,44 @@
+import { GetServerSideProps, NextPage } from "next";
+import Head from "next/head";
+import Link from "next/link";
+import cache from '../backend/utils/DB/cache'
+import { makeStore } from "../lib/store";
+import {
+  getChainLatestBlock,
+  getRunningOperationPromises,
+} from '../lib/chainApi';
+
+
+
+const Home: NextPage = ({cachedResults}: any) => {
+  console.log(cachedResults)
+  return (
+   <div> 
+   Hello
+  </div>
+  );
+}
+
+
+
+
+export const  getServerSideProps: GetServerSideProps = async () => {
+  const fetcher = async () => {
+  const store = makeStore();
+  const dataNodeInfo = await store.dispatch(getChainLatestBlock.initiate());
+  const results =  JSON.parse(JSON.stringify(dataNodeInfo)) 
+  await Promise.all(getRunningOperationPromises());
+  return results
+  
+}
+
+//function to persist data in Redis
+ const cachedResults = await cache.fetch("", fetcher, 35)
+
+return { props: {
+   cachedResults: cachedResults } 
+ }
+}
+
+
+export default Home
