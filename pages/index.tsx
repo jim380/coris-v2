@@ -12,7 +12,7 @@ import Layout from "../components/layout/Layout";
 
 
 function Home ({cachedResults}: any) {
-  console.log(cachedResults)
+  //console.log(cachedResults)
   return (
    <div> 
    Hello

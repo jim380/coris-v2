@@ -5,7 +5,7 @@
 /* The following line is used to measure usage of this code in production. For more info see our usage billing page */
 @import url("https://px.animaapp.com/626b0bed0186986aa7979306.626b0bf092a814c9cabf6f71.OwaoBmE.rcp.png");
 
-#screen a {
+.screen a {
   display: contents;
   text-decoration: none;
 }
