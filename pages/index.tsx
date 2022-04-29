@@ -7,7 +7,7 @@ import {
   getChainLatestBlock,
   getRunningOperationPromises,
 } from '../lib/chainApi';
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 
 
 

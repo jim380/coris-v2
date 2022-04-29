@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { AppProps } from "next/app";
+import '../styles/global.css'
 import { ReactElement, ReactNode } from "react";
-//import Layout from "../components/Layout";
 const { default: AbortController } = require("abort-controller");
 const { wrapper } = require("../lib/store");
 const { default: fetch, Headers, Request, Response } = require("node-fetch");

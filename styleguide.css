@@ -1,0 +1,26 @@
+:root { 
+    --absolute-zero: #003fc6;
+    --black: #000000;
+    --black-2: #000000d9;
+    --black-3: #000000e6;
+    --chambray: #3a428a;
+    --coconut: #fcfefe;
+    --gray: #808080;
+    --new-car: #0f4bcb;
+    --ocean-blue-pearl: #473ad2;
+    --roman: #e05d63;
+    --soap: #cfd3eeb2;
+    --titan-white: #ebedff;
+    --white: #ffffff;
+   
+    --font-size-l: 18px;
+    --font-size-m: 17.2px;
+    --font-size-s: 16px;
+    --font-size-xl: 20px;
+    --font-size-xs: 12px;
+    --font-size-xxl: 24px;
+    --font-size-xxxl: 26px;
+   
+    --font-family-urbanist: "Urbanist", Helvetica;
+  }
+  

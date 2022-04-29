@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
+import { chainURL } from "./interfaces/chainsURL";
 
 export const chainApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.cosmos.network",
+    baseUrl: chainURL.cosmosChain,
   }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
