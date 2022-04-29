@@ -1,5 +1,9 @@
 import React from "react";
 import styles from './SideBar.module.css'
+import Header from "../Header";
+import { HeaderData} from "../Header/HeaderData"
+
+
 import {SideNaveBar, OverlapGroup18, FlexRow, Asset31, Asset41, Asset51, Group7293, Group7266, Navigation, SolidGeneralChartPie, Overview, Ellipse5, Validators, Group7267, Blocks, Group7269, OutlineInterfaceEdit, Proposals, Group7270, Parameters, Group7268  } from "./SideBarStyles"
 
 
@@ -23,7 +27,7 @@ function SideBar(props: any) {
 
   return (
     <div className="container-center-horizontal">
-      <div className={styles['sidebar'] +""+ `screen`}>
+      <div className={styles['sidebar']} id={styles.screen}>
         <SideNaveBar >
           <OverlapGroup18 style={{ backgroundImage: `url(${overlapGroup18})` }}>
             <FlexRow>
@@ -58,6 +62,10 @@ function SideBar(props: any) {
             </Navigation>
           </OverlapGroup18>
         </SideNaveBar>
+   
+        <Header {...HeaderData} />
+
+
         </div>
         </div>);
         }

@@ -8,3 +8,11 @@
   width: 1728px;
 }
 
+#screen {
+  display: contents;
+  text-decoration: none;
+}
+
+#body {
+  background-color: red;
+}
