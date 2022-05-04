@@ -8,16 +8,16 @@ import {
   getRunningOperationPromises,
 } from '../lib/chainApi';
 import Layout from "../components/layout/Layout";
-import HomePageContent from "../components/Body/HomePageContent";
-import { HomePageData } from "../components/Body/HomePageData";
+import HomePageContent from "../components/Body/HomePage";
+
 
 
 
 function Home ({cachedResults}: any) {
-  //console.log(cachedResults)
+ // console.log(cachedResults.data.block.data.txs[0])
   return (
    <div> 
-   <HomePageContent {...HomePageData} />
+   <HomePageContent />
   </div>
   );
 }

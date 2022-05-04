@@ -1,16 +1,20 @@
 import React from "react";
-import SideBar from "./SideBar";
-import { sideBarData } from "./SideBar/SideBarData";
+import styles from "./Layout.module.css"
+import Footer from "./Footer";
+import Header from "./Header";
+import SideNavBar from "./SideBar";
 
 const Layout  = ({ children }: {children:React.ReactNode}) => {
     return (
-     <div> 
-         <SideBar  {...sideBarData} />
-        <h2>Body</h2>
+<div className="screen" id={styles['overview-desktop-screen']}>
+        <SideNavBar />
+        <div className={styles["flex-col-3"]}>
+     <Header />
+
         {children}
-        <h4>Footer</h4>
-    </div>
-  
+  <Footer />
+  </div>
+  </div>
     );
   }
 

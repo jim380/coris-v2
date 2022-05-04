@@ -1,73 +1,54 @@
-import React from "react";
-import styles from './SideBar.module.css'
-import Header from "../Header";
-import { HeaderData} from "../Header/HeaderData"
+import styles from "../Layout.module.css"
 
-
-import {SideNaveBar, OverlapGroup18, FlexRow, Asset31, Asset41, Asset51, Group7293, Group7266, Navigation, SolidGeneralChartPie, Overview, Ellipse5, Validators, Group7267, Blocks, Group7269, OutlineInterfaceEdit, Proposals, Group7270, Parameters, Group7268  } from "./SideBarStyles"
-
-
-function SideBar(props: any) {
-  const {
-    overlapGroup18,
-    asset31,
-    asset41,
-    asset51,
-    solidGeneralChartPie,
-    overview,
-    iconUser,
-    validators,
-    outlineInterfaceStack,
-    blocks,
-    outlineInterfaceEdit,
-    proposals,
-    outlineInterfaceSettingsAdjust,
-    parameters,
-  } = props;
-
-  return (
-    <div className="container-center-horizontal">
-      <div className={styles['sidebar']} id={styles.screen}>
-        <SideNaveBar >
-          <OverlapGroup18 style={{ backgroundImage: `url(${overlapGroup18})` }}>
-            <FlexRow>
-              <Asset31 src={asset31} />
-              <Group7293>
-                <Asset41 src={asset41} />
-                <Asset51 src={asset51} />
-              </Group7293>
-            </FlexRow>
-            <Navigation>
-              <Group7266>
-                <SolidGeneralChartPie src={solidGeneralChartPie} />
-                <Overview>{overview}</Overview>
-                <Ellipse5></Ellipse5>
-              </Group7266>
-              <Group7267>
-                <SolidGeneralChartPie src={iconUser} />
-                <Validators>{validators}</Validators>
-              </Group7267>
-              <Group7268>
-                <SolidGeneralChartPie src={outlineInterfaceStack} />
-                <Blocks>{blocks}</Blocks>
-              </Group7268>
-              <Group7269>
-                <OutlineInterfaceEdit src={outlineInterfaceEdit} />
-                <Proposals>{proposals}</Proposals>
-              </Group7269>
-              <Group7270>
-                <OutlineInterfaceEdit src={outlineInterfaceSettingsAdjust} />
-                <Parameters>{parameters}</Parameters>
-              </Group7270>
-            </Navigation>
-          </OverlapGroup18>
-        </SideNaveBar>
-   
-        <Header {...HeaderData} />
-
-
+function SideNavBar () {
+    return (  
+  <div className={styles["side-navigation"]}>
+    <div className={styles["overlap-group16"]}>
+      <div className={styles["logo"]}>
+        <img className={styles["logo-1"]} src="img/asset-3-1@2x.png" />
+        <div className={styles["coris-name"]}>
+          <img className={styles["asset-4-1"]} src="img/asset-4-1@2x.png" /><img
+            className={styles["asset-5-1"]}
+            src="img/asset-5-1@2x.png"
+          />
         </div>
-        </div>);
-        }
+      </div>
+      <div className={styles["flex-row"]}>
+        <div className={styles["flex-col-1"]}>
+          <img
+            className={styles["solid-general-chart-pie"]}
+            src="img/solid-general-chart-pie@2x.png"
+          /><img
+            className={styles["flex-col-item"]}
+            src="img/outline-communication-user@2x.png"
+          /><img className={styles["flex-col-item"]} src="img/outline-interface-stack@2x.png" /><img
+            className={styles["icon"]}
+            src="img/outline-interface-edit@2x.png"
+          /><img className={styles["icon-1"]} src="img/outline-interface-settings-adjust@2x.png" />
+        </div>
+        <div className={styles["flex-col-2"]}>
+          <div className={styles["overview"] +" "+ styles["valign-text-middle"]}>Overview</div>
+          <div className={styles["validators"] +" "+ styles["valign-text-middle"]}>Validators</div>
+          <div className={styles["blocks"] +" "+ styles["valign-text-middle"] +" "+ "urbanist-semi-bold-soap-24px"}>
+            Blocks
+          </div>
+          <div
+            className={styles["flex-col-item-1"] +" "+ styles["valign-text-middle"] +" "+ "urbanist-semi-bold-soap-24px"}
+          >
+            Proposals
+          </div>
+          <div
+           className={styles["flex-col-item-1"] +" "+ styles["valign-text-middle"] +" "+ "urbanist-semi-bold-soap-24px"}
+          >
+            Parameters
+          </div>
+        </div>
+        <div className={styles["ellipse-5"]}></div>
+      </div>
+    </div>
+  </div>
+    )
+}
 
-export default SideBar
+
+export default SideNavBar

@@ -1,35 +1,27 @@
-import { FlexRow1, FlexCol, Group7325, IconSearch, Title, GroupContainer, OverlapGroup2, OutlineGeneralMoon, Group7295, Asset62, Asset72, OutlineMediaShuffle  } from "./HeaderStyles"
+import styles from "../Layout.module.css"
 
 
-function Header(props: any) {
-    const {
-        iconSearch,
-        title,
-        overlapGroup2,
-        asset621,
-        asset721,
-        outlineMediaShuffle
-    } = props
-
-    return (
-<FlexRow1>
-<FlexCol>
-  <Group7325>
-    <IconSearch src={iconSearch} />
-  </Group7325>
-  <Title>{title}</Title>
-</FlexCol>
-<GroupContainer>
-  <OverlapGroup2 style={{ backgroundImage: `url(${overlapGroup2})` }}>
-    <OutlineGeneralMoon src="/img/outline-general-moon@2x.svg" />
-  </OverlapGroup2>
-  <Group7295>
-    <Asset62 src={asset621} />
-    <Asset72 src={asset721} />
-    <OutlineMediaShuffle src={outlineMediaShuffle} />
-  </Group7295>
-</GroupContainer>
-</FlexRow1>
+function Header() {
+    return(
+        <div className={styles["top_-nav_-bar"]}>
+        <div className={styles["search-bar"]}>
+          <img
+            className={styles["outline-interface-search"]}
+            src="img/outline-interface-search@2x.png"
+          />
+        </div>
+        <div className={styles["connect-wallet"]}>
+          <img className={styles["asset-6-2"]} src="img/asset-6-2@2x.png" /><img
+            className={styles["asset-7-2"]}
+            src="img/asset-7-1@2x.png"
+          /><img className={styles["outline-media-shuffle"]} src="img/outline-media-shuffle@2x.png" />
+        </div>
+        <div className={styles["nightmode-button"]}>
+          <div className={styles["overlap-group-2"]}>
+            <img className={styles["outline-general-moon"]} src="img/outline-general-moon@2x.svg" />
+          </div>
+        </div>
+      </div>
     )
 }
 
