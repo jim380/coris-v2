@@ -1,4 +1,5 @@
 
 export const chainURL = {
-cosmosChain: "https://api.cosmos.network"
+//cosmosChainREST: process.env.NEXT_PUBLIC_CosmosChain_RESTAPI
+cosmosChainRPC: process.env.NEXT_PUBLIC_CosmosChain_RPC
 }

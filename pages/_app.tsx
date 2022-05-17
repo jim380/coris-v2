@@ -29,3 +29,4 @@ export function App({ Component, pageProps }: AppPropsWithLayout) {
 }
 
 export default wrapper.withRedux(App);
+

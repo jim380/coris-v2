@@ -1,7 +1,30 @@
-import styles from "../layout/Layout.module.css"
+import  React from "react";
+import styles from "../layout/Layout.module.css";
+import {formatTime} from "../Util/formatTime"
+
+function HomePageContent({data}: any) {
+  
+  function formatHash(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substring(0,index) + chr + str.substring(index+1);
+    
+}
 
 
-function HomePageContent() {
+
+  
+if (typeof(data) == 'object') {
+ data.data.result.blocks.map((block: any) => {
+  //console.log(block)
+  console.log(formatHash(block.block_id.hash.slice(0), 15, "..."))
+ //console.log(formatTime(block.block.header.time))
+ 
+  //console.log(block.block.data.txs.length)
+}) 
+
+}
+
+
     return(
         <>
         <div className={styles["flex-row-1"]}>
@@ -209,38 +232,27 @@ function HomePageContent() {
             Time
           </div>
         </div>
-        <div className={styles["row1"]}>
+        { typeof(data) == 'object' && 
+        data?.data?.result?.blocks?.map((block:any, index:any) => 
+        <div className={styles["row1"]} key={index} >
           <div className={styles["overlap-group"]}>
             <div className={styles["phone"] +" "+ "urbanist-medium-absolute-zero-17-2px"}>
-              6 508 396
+              {block.block.header?.height? block.block.header.height : null} 
             </div>
             <div className={styles["x34567efe34g6j7k85h"] +" "+ "urbanist-normal-black-17-2px"}>
-              34567ef...e34g6j7k85h
+             {block.block_id?.hash? block.block_id.hash : null} 
             </div>
             <div className={styles["ellipse-8"]}></div>
             <div className={styles["dgtize-stake"] +" "+ "urbanist-normal-new-car-17-2px"}>
               Dgtize Stake
             </div>
-            <div className={styles["number"] +" "+ "urbanist-normal-black-17-2px"}>3</div>
-            <div className={styles["x6s-ago"] +" "+ "urbanist-normal-black-17-2px"}>6s ago</div>
+            <div className={styles["number"] +" "+ "urbanist-normal-black-17-2px"}>
+              {block.block?.data?.txs? block.block.data.txs.length : null} </div>
+            <div className={styles["x6s-ago"] +" "+ "urbanist-normal-black-17-2px"}>
+              {block.block?.header?.time? formatTime(block.block.header.time) : null}  </div>
           </div>
         </div>
-        <div className={styles["latest-blocks-item"]}>
-          <div className={styles["overlap-group-1"]}>
-            <div className={styles["phone"] +" "+ "urbanist-medium-absolute-zero-17-2px"}>
-              6 508 396
-            </div>
-            <div className={styles["x34567efe34g6j7k85h"] +" "+ "urbanist-normal-black-17-2px"}>
-              34567ef...e34g6j7k85h
-            </div>
-            <div className={styles["ellipse-8-1"]}></div>
-            <div className={styles["dgtize-stake"] +" "+ "urbanist-normal-new-car-17-2px"}>
-              Dgtize Stake
-            </div>
-            <div className={styles["number"] +" "+ "urbanist-normal-black-17-2px"}>3</div>
-            <div className={styles["x6s-ago"] +" "+ "urbanist-normal-black-17-2px"}>6s ago</div>
-          </div>
-        </div>
+   )} 
       </div>
       </>
     )

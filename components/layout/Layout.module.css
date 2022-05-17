@@ -9,15 +9,16 @@
 }
 
 
-
 .flex-col-3 {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 380px;
+  margin-left: 390px;
   margin-top: 32px;
   min-height: 2367px;
-  width: 1384px;
+  width: 100%;
+  overflow: hidden;
+  float:right;
 }
 
 .flex-row-3 {
@@ -1485,6 +1486,8 @@
   min-height: 1193px;
   padding: 97px 84px;
   width: 410px;
+  height: 100%;
+  overflow: auto
 }
 
 .logo {
