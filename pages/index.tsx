@@ -1,7 +1,7 @@
 import  React from "react";
 import useSWR from "swr";
 import Layout from "../components/layout/Layout";
-import HomePageContent from "../components/Body/HomePage";
+import HomePageContent from "../components/Homepage/HomePage";
 import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -24,7 +24,7 @@ function Home () {
   }
  
   //useSWR handles caching, revalidation, focus tracking, refetching on intervals
-  const  data  = useSWR('blocks/latest', fetcher)
+  const  data  = useSWR('blocks/latest', fetcher, { refreshInterval: 4000 })
 
   return (
    <> 

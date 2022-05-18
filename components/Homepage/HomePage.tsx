@@ -1,28 +1,25 @@
 import  React from "react";
 import styles from "../layout/Layout.module.css";
-import {formatTime} from "../Util/formatTime"
+import {formatTime, formatHash} from "../Util/format"
+
 
 function HomePageContent({data}: any) {
-  
-  function formatHash(str,index,chr) {
-    if(index > str.length-1) return str;
-    return str.substring(0,index) + chr + str.substring(index+1);
-    
-}
+
+ 
 
 
 
   
-if (typeof(data) == 'object') {
- data.data.result.blocks.map((block: any) => {
+//if (typeof(data) == 'object') {
+ //data.data.result.blocks.map((block: any) => {
   //console.log(block)
-  console.log(formatHash(block.block_id.hash.slice(0), 15, "..."))
+  //console.log()
  //console.log(formatTime(block.block.header.time))
  
   //console.log(block.block.data.txs.length)
-}) 
+//}) 
 
-}
+//}
 
 
     return(
@@ -240,7 +237,7 @@ if (typeof(data) == 'object') {
               {block.block.header?.height? block.block.header.height : null} 
             </div>
             <div className={styles["x34567efe34g6j7k85h"] +" "+ "urbanist-normal-black-17-2px"}>
-             {block.block_id?.hash? block.block_id.hash : null} 
+             {block.block_id?.hash? formatHash(block.block_id.hash, 10, "...") : null} 
             </div>
             <div className={styles["ellipse-8"]}></div>
             <div className={styles["dgtize-stake"] +" "+ "urbanist-normal-new-car-17-2px"}>
