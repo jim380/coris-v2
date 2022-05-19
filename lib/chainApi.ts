@@ -13,29 +13,41 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['latestBlocks'],
+  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'NodeInfo'],
   endpoints: (builder) => ({
-   getChainLatestBlocks: builder.query<any, void>({
+    getChainLatestBlocks: builder.query<any, void>({
       query: () => `/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
-      //query: () => `/blocks/latest`,
-      providesTags:  ['latestBlocks'],
-    })
-    //getChainNodeInfo: builder.query<any, void>({
-     // query: () => `/node_info`,
-    //}),
+      providesTags:  ['LatestBlocks'],
+    }), 
+     getChainBlocks: builder.query<any, void>({
+      query: () => `/block_search?query=%22block.height%3E10000000%22&per_page=50&page=1`,
+      providesTags:  ['Blocks'],
+    }),
+     getChainValidators: builder.query<any, void>({
+      query: () => `/validators`,
+      providesTags:  ['Validators'],
+    }),
+    getChainNodeInfo: builder.query<any, void>({
+      query: () => `/status`,
+      providesTags:  ['NodeInfo'],
+    }),
   }),
 });
 
 // Export hooks for usage in functional components
 export const {
   useGetChainLatestBlocksQuery,
-  //useGetChainNodeInfoQuery,
+  useGetChainBlocksQuery,
+  useGetChainValidatorsQuery,
+  useGetChainNodeInfoQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
 
 
 // export endpoints for use in SSR
 export const {
-   getChainLatestBlocks, 
-   //getChainNodeInfo
+   getChainLatestBlocks,
+   getChainBlocks, 
+   getChainValidators,
+   getChainNodeInfo
  } = chainApi.endpoints;

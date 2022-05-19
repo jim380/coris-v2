@@ -8,7 +8,7 @@ function HomePageContent({data}: any) {
  
 
 
-
+console.log()
   
 //if (typeof(data) == 'object') {
  //data.data.result.blocks.map((block: any) => {
@@ -90,18 +90,18 @@ function HomePageContent({data}: any) {
                   <div className={styles["latest-block"] +" "+ "urbanist-normal-black-24px"}>
                     Latest Block
                   </div>
-                  <div className={styles["phone-3"] +" "+ "urbanist-bold-black-26px"}>6 508 366</div>
+                  <div className={styles["phone-3"] +" "+ "urbanist-bold-black-26px"}>{data?.data?.result?.blocks[0]?.block?.header?.height? data.data.result.blocks[0].block.header.height : null}</div>
                 </div>
                 <div className={styles["group-7279"]}>
                   <div className={styles["block-time"] +" "+ "urbanist-normal-black-24px"}>
                     Block Time
                   </div>
-                  <div className={styles["x602s"] +" "+ "urbanist-bold-black-26px"}>6.02s</div>
+                  <div className={styles["x602s"] +" "+ "urbanist-bold-black-26px"}>{data?.data?.result?.blocks[0]?.block?.header?.time? formatTime(data.data.result.blocks[0].block.header.time) : null}</div>
                 </div>
                 <div className={styles["group-7280"]}>
                   <div className={styles["chain"] +" "+ "urbanist-normal-black-24px"}>Chain</div>
                   <div className={styles["corichain-1"] +" "+ "urbanist-bold-black-26px"}>
-                    corichain-1
+                    {data?.data?.result?.blocks[0]?.block?.header?.chain_id? data.data.result.blocks[0].block.header.chain_id : null}
                   </div>
                 </div>
               </div>
