@@ -6,4 +6,9 @@ const nextConfig = {
   
   module.exports = nextConfig
   
-  
+  module.exports = {
+    // This will build the project as a standalone app inside the Docker image.
+    experimental: {
+      outputStandalone: true,
+    },
+  }

@@ -10,7 +10,7 @@ import {
 
 function Validators() {
   
-  //get blocks
+  //get validators
   const validators = async () => {
     const store = makeStore();
     const validatorsData = await store.dispatch(getChainValidators.initiate());
