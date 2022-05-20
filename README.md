@@ -4,16 +4,18 @@ A community-built Blockchain explorer for the cosmos ecosystem, brought to you b
 
 
 ## Using Docker
- 1. [Install Docker](https://docs.docker.com/get-docker/)  on your machine.
+ [Install Docker](https://docs.docker.com/get-docker/)  on your machine.
  
- 2. Build your container: ``` docker build -t corisv2-dev ./ ```
-
   Development
-
+  
+  Build your container: ``` docker build -t corisv2-dev ./ ```
+  
   Run your container: ``` docker run -p 3000:3000 corisv2-dev. ```
 
   Production
-
+  
+  Build your container: ``` docker build -t corisv2-prod ./ ```
+  
   Run your container: ``` docker run -p 3000:3000 corisv2-prod.```
 
   You can view your images created with ```docker images```
