@@ -1,0 +1,498 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+@import url("https://fonts.googleapis.com/css?family=Urbanist:400,700,300,500,600,800");
+
+/* The following line is used to measure usage of this code in production. For more info see our usage billing page */
+@import url("https://px.animaapp.com/626b0bed0186986aa7979306.626b0bf092a814c9cabf6f71.OwaoBmE.rcp.png");
+
+.screen a {
+  display: contents;
+  text-decoration: none;
+}
+
+.container-center-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.container-center-horizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.hidden,
+.hidden * {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+
+.container {
+ margin: 0;
+}
+
+
+
+
+/* Variables */
+
+:root {
+  --black-4: rgba(0, 0, 0, 0.502);
+  --black-2: rgba(0, 0, 0, 0.851);
+  --black-3: rgba(0, 0, 0, 0.902);
+  --black: rgba(0, 0, 0, 1);
+  --absolute-zero: rgba(0, 63, 198, 1);
+  --caribbean-green: rgba(0, 222, 163, 1);
+  --cyan--aqua: rgba(0, 224, 255, 1);
+  --navy-blue: rgba(2, 0, 115, 1);
+  --new-car: rgba(15, 75, 203, 1);
+  --mountain-meadow: rgba(46, 193, 105, 1);
+  --chambray: rgba(58, 66, 138, 1);
+  --ocean-blue-pearl: rgba(71, 58, 210, 1);
+  --eminence: rgba(115, 47, 139, 1);
+  --gray: rgba(128, 128, 128, 1);
+  --blue-bell: rgba(162, 167, 208, 1);
+  --soap: rgba(207, 211, 238, 0.698);
+  --fog-22: rgba(209, 213, 255, 1);
+  --fog2: rgba(209, 214, 255, 1);
+  --chartreuse-yellow: rgba(219, 255, 0, 1);
+  --brilliant-rose: rgba(224, 92, 163, 1);
+  --roman: rgba(224, 93, 99, 1);
+  --mercury: rgba(229, 229, 229, 1);
+  --lavender-magenta: rgba(235, 106, 230, 1);
+  --titan-white: rgba(235, 237, 255, 1);
+  --magnolia: rgba(245, 244, 255, 1);
+  --coconut: rgba(252, 254, 254, 1);
+  --white: rgba(255, 255, 255, 1);
+
+  --font-size-xxs: 10.1px;
+  --font-size-xs: 12px;
+  --font-size-l: 18px;
+  --font-size-xl: 14px;
+  --font-size-xl: 20px;
+  --font-size-xxxl: 26px;
+  --font-size-s2: 16px;
+  --font-size-m2: 17.2px;
+  --font-size-xs2: 11.9px;
+  --font-size-xxl2: 24px;
+
+  --font-family-urbanist: "Urbanist";
+}
+
+/* Classes */
+
+.urbanist-normal-black-22px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 22px;
+  font-weight: 400;
+  font-style: normal;
+}
+.border-8-2px-fog {
+  border-width: 8.2px;
+  border-style: solid;
+  border-color: var(--fog2);
+}
+.urbanist-bold-chambray-24-7px {
+  color: var(--chambray);
+  font-family: var(--font-family-urbanist);
+  font-size: 24.73758888244629px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-bold-black-18px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 18px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-light-black-14px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 14.045849800109863px;
+  font-weight: 300;
+  font-style: normal;
+}
+.urbanist-bold-black-40px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 40px;
+  font-weight: 700;
+  font-style: normal;
+}
+.border-13-6px-chambray {
+  border-width: 13.6px;
+  border-style: solid;
+  border-color: var(--chambray);
+}
+.urbanist-bold-black-12px {
+  color: var(--black-4);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-medium-black-10-5px {
+  color: var(--black-2);
+  font-family: var(--font-family-urbanist);
+  font-size: 10.534388542175293px;
+  font-weight: 500;
+  font-style: normal;
+}
+.urbanist-normal-black-24px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxl2);
+  font-weight: 400;
+  font-style: normal;
+}
+.border-10px-fog-2 {
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--fog2);
+}
+.border-12-4px-chambray {
+  border-width: 12.4px;
+  border-style: solid;
+  border-color: var(--chambray);
+}
+.urbanist-light-black-24px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxl2);
+  font-weight: 300;
+  font-style: normal;
+}
+.urbanist-bold-black-11-7px {
+  color: var(--black-2);
+  font-family: var(--font-family-urbanist);
+  font-size: 11.704875946044922px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-semi-bold-black-9-8px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 9.84536075592041px;
+  font-weight: 600;
+  font-style: normal;
+}
+.border-8-2px-chambray {
+  border-width: 8.2px;
+  border-style: solid;
+  border-color: var(--chambray);
+}
+.urbanist-normal-black-14px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-bold-black-13-6px {
+  color: var(--black-4);
+  font-family: var(--font-family-urbanist);
+  font-size: 13.617021560668945px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-normal-black-15-8px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 15.752577781677246px;
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-normal-black-14px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 14.045849800109863px;
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-light-black-15px {
+  color: var(--black-2);
+  font-family: var(--font-family-urbanist);
+  font-size: 15px;
+  font-weight: 300;
+  font-style: normal;
+}
+.urbanist-bold-black-20px {
+  color: var(--black-2);
+  font-family: var(--font-family-urbanist);
+  font-size: 20px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-normal-new-car-10-1px {
+  color: var(--new-car);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxs);
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-extra-bold-mountain-meadow-32px {
+  color: var(--mountain-meadow);
+  font-family: var(--font-family-urbanist);
+  font-size: 32px;
+  font-weight: 800;
+  font-style: normal;
+}
+.urbanist-bold-black-26px {
+  color: var(--black-3);
+  font-family: var(--font-family-urbanist);
+  font-size: 26px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-medium-black-12px {
+  color: var(--black-2);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  font-style: normal;
+}
+.urbanist-semi-bold-black-10-1px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxs);
+  font-weight: 600;
+  font-style: normal;
+}
+.urbanist-normal-black-17-2px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-m2);
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-semi-bold-black-7px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 7.022924900054932px;
+  font-weight: 600;
+  font-style: normal;
+}
+.urbanist-normal-black-11-9px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xs2);
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-bold-black-16px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-s2);
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-bold-chambray-21px {
+  color: var(--chambray);
+  font-family: var(--font-family-urbanist);
+  font-size: 20.967742919921875px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-normal-new-car-11-9px {
+  color: var(--new-car);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xs2);
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-normal-black-16px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-s2);
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-semi-bold-soap-24px {
+  color: var(--soap);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxl2);
+  font-weight: 600;
+  font-style: normal;
+}
+.urbanist-medium-absolute-zero-17-2px {
+  color: var(--absolute-zero);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-m2);
+  font-weight: 500;
+  font-style: normal;
+}
+.urbanist-normal-ocean-blue-pearl-17-6px {
+  color: var(--ocean-blue-pearl);
+  font-family: var(--font-family-urbanist);
+  font-size: 17.590551376342773px;
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-bold-black-16px-2 {
+  color: var(--black-3);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-s2);
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-bold-black-32px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 32px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-normal-ocean-blue-pearl-13-2px {
+  color: var(--ocean-blue-pearl);
+  font-family: var(--font-family-urbanist);
+  font-size: 13.192913055419922px;
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-bold-black-9-4px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 9.363900184631348px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-medium-black-18px {
+  color: var(--black-2);
+  font-family: var(--font-family-urbanist);
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+}
+.urbanist-bold-chambray-12-3px {
+  color: var(--chambray);
+  font-family: var(--font-family-urbanist);
+  font-size: 12.271241188049316px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-semi-bold-black-11-9px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xs2);
+  font-weight: 600;
+  font-style: normal;
+}
+.urbanist-medium-absolute-zero-11-9px {
+  color: var(--absolute-zero);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xs2);
+  font-weight: 500;
+  font-style: normal;
+}
+.urbanist-normal-black-9-4px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: 9.363900184631348px;
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-bold-chambray-27-2px {
+  color: var(--chambray);
+  font-family: var(--font-family-urbanist);
+  font-size: 27.23404312133789px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-bold-black-15-2px {
+  color: var(--black-3);
+  font-family: var(--font-family-urbanist);
+  font-size: 15.216337203979492px;
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-light-black-14px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xl);
+  font-weight: 300;
+  font-style: normal;
+}
+.urbanist-semi-bold-black-17-2px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-m2);
+  font-weight: 600;
+  font-style: normal;
+}
+.urbanist-normal-black-10-1px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxs);
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-bold-black-14px {
+  color: var(--black-2);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-semi-bold-black-12px {
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  font-style: normal;
+}
+.urbanist-semi-bold-soap-14px {
+  color: var(--soap);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  font-style: normal;
+}
+.urbanist-normal-new-car-17-2px {
+  color: var(--new-car);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-m2);
+  font-weight: 400;
+  font-style: normal;
+}
+.urbanist-medium-absolute-zero-10-1px {
+  color: var(--absolute-zero);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxs);
+  font-weight: 500;
+  font-style: normal;
+}
+.urbanist-extra-bold-mountain-meadow-23-6px {
+  color: var(--mountain-meadow);
+  font-family: var(--font-family-urbanist);
+  font-size: 23.62886619567871px;
+  font-weight: 800;
+  font-style: normal;
+}
+.urbanist-bold-chambray-17-2px {
+  color: var(--chambray);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-m2);
+  font-weight: 700;
+  font-style: normal;
+}
+.urbanist-semi-bold-soap-14px {
+  color: var(--soap);
+  font-family: var(--font-family-urbanist);
+  font-size: 14.045849800109863px;
+  font-weight: 600;
+  font-style: normal;
+}
+.border-10px-chambray {
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--chambray);
+}
