@@ -1,3 +1,0 @@
-# files to ignore while copying to the file system
-.next
-node_modules
