@@ -5,7 +5,7 @@ import { chainURL } from "./interfaces/chainsURL";
 
 export const chainApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:4000',
+    baseUrl: 'http://',
      mode: 'cors',  
   }),
   extractRehydrationInfo(action, { reducerPath }) {
@@ -16,19 +16,19 @@ export const chainApi = createApi({
   tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'NodeInfo'],
   endpoints: (builder) => ({
     getChainLatestBlocks: builder.query<any, void>({
-      query: () => `/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
+      query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
       providesTags:  ['LatestBlocks'],
     }), 
      getChainBlocks: builder.query<any, void>({
-      query: () => `/Blocks`,
+      query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=5&page=1`,
       providesTags:  ['Blocks'],
     }),
      getChainValidators: builder.query<any, void>({
-      query: () => `/validators`,
+      query: () => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators`,
       providesTags:  ['Validators'],
     }),
     getChainNodeInfo: builder.query<any, void>({
-      query: () => `/status`,
+      query: () => `${chainURL.cosmosChainRPC}/status`,
       providesTags:  ['NodeInfo'],
     }),
   }),
@@ -43,8 +43,7 @@ export const {
   util: { getRunningOperationPromises },
 } = chainApi;
 
-
-// export endpoints for use in SSR
+//can be used in SSR
 export const {
    getChainLatestBlocks,
    getChainBlocks, 

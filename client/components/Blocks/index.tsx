@@ -4,7 +4,7 @@ import {formatTime, formatHash} from "../Util/format"
 
 
 function BlocksContent({data}: any) {
-
+console.log(data)
 
   
 //if (typeof(data) == 'object') {
