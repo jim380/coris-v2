@@ -1,28 +1,60 @@
-import styles from "../Layout.module.css"
+import styled from "styled-components";
+import SearchBar from "./SearchBar";
+import ConnectWallet from "./ConnectWallet";
 
 
 function Header() {
+  //const {  searchBarProps,  connectWallet1Data } = props;
     return(
-        <div className={styles["top_-nav_-bar"]}>
-        <div className={styles["search-bar"]}>
-          <img
-            className={styles["outline-interface-search"]}
-            src="img/outline-interface-search@2x.png"
-          />
-        </div>
-        <div className={styles["connect-wallet"]}>
-          <img className={styles["asset-6-2"]} src="img/asset-6-2@2x.png" /><img
-            className={styles["asset-7-2"]}
-            src="img/asset-7-1@2x.png"
-          /><img className={styles["outline-media-shuffle"]} src="img/outline-media-shuffle@2x.png" />
-        </div>
-        <div className={styles["nightmode-button"]}>
-          <div className={styles["overlap-group-2"]}>
-            <img className={styles["outline-general-moon"]} src="img/outline-general-moon@2x.svg" />
-          </div>
-        </div>
-      </div>
+      <TopNavBar>
+      <SearchBar src={searchBarData.src} />
+      <ConnectWallet
+        asset62={connectWallet1Data.asset62}
+        asset72={connectWallet1Data.asset72}
+        outlineMediaShuffle={connectWallet1Data.outlineMediaShuffle}
+      />
+      <NightmodeButton>
+        <OutlineGeneralMoon src="/img/outline-general-moon@2x.svg" />
+      </NightmodeButton>
+    </TopNavBar>
+
     )
 }
+
+const searchBarData = {
+  src: "/img/outline-interface-search@2x.png",
+    className: "search-bar-1",
+};
+
+const connectWallet1Data = {
+  asset62: "/img/asset-6-2@2x.png",
+  asset72: "/img/asset-7-1@2x.png",
+  outlineMediaShuffle: "/img/outline-media-shuffle@2x.png",
+};
+
+const TopNavBar = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 1317px;
+`;
+
+const NightmodeButton = styled.div`
+  height: 64px;
+  margin-left: 16px;
+  display: flex;
+  padding: 16px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-width: 64px;
+  background-color: var(--white);
+  border-radius: 32px;
+  box-shadow: 0px 7px 30px #0015da29;
+`;
+
+const OutlineGeneralMoon = styled.img`
+  width: 31px;
+  height: 31px;
+`;
 
 export default Header
