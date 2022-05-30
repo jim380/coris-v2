@@ -75,7 +75,7 @@ function HomePageContent(props) {
     details2Props,
     latestBlocksTilteProps,
   } = props;
-
+  //console.log(blocks)
     return(
      <>
       <FlexRow1>

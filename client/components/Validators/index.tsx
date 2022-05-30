@@ -1,64 +1,154 @@
-import styles from "./Validators.module.css";
+import  React from "react";
+import styles from "./Blocks.module.css";
+import {formatTime, formatHash} from "../Util/format"
+import ValidatorTilte from "./ValidatorsTitle";
+import styled from "styled-components";
+import {
+  UrbanistNormalNewCar172px,
+  UrbanistNormalBlack172px,
+  UrbanistMediumAbsoluteZero172px,
+  UrbanistBoldBlack40px 
+} from "../../styledMixins";
 
 
-function ValidatorsContent() {
-
+function ValidatorsContent(props) {
+  const {
+     validators
+  } = props;
+ validators?.map((data, index) => {
+   console.log(data.description.moniker, index+1)
+ })
   return (
     <>
-   <div>
+    <Title>Validators</Title>
+    <Validators>
+      <ValidatorTilte
+        rank={ValidatorTitleData.rank}
+        validator={ValidatorTitleData.validator}
+        votingPower={ValidatorTitleData.votingPower}
+        cumulativeshare={ValidatorTitleData.cumulativeshare}
+        commission={ValidatorTitleData.commission}
+        uptime={ValidatorTitleData.uptime}
+      />
+      {validators?.map((data, index) =>
+      <OverlapGroup10>
+        <RankValue>{index+1}</RankValue>
+        <ValidatorValue>{data.description.moniker}</ValidatorValue>
+        <Voting>{}</Voting>
+        <CumulativeShare>{}</CumulativeShare>
+        <Commission>{}</Commission>
+        <Uptime>{}</Uptime>
+      </OverlapGroup10>
+      )}
+    </Validators>
+    </>
+  );
+}
 
-</div>
-<div className={styles["flex-row-5"]}>
-<div className={styles["latest-blocks"]}>Validators</div>
-</div>
-<div className={styles["latest-blocks-1"]}>
-<div className={styles["latest-blocks-tilte"]}>
-  <div className={styles["height"] +" "+ styles["valign-text-middle"] +" "+ "urbanist-semi-bold-black-17-2px"}>
-    Height
-  </div>
-  <div className={styles["hash"] +" "+ styles["valign-text-middle"] +" "+ "urbanist-semi-bold-black-17-2px"}>
-    Hash
-  </div>
-  <div
-    className={styles["proposer"] +" "+ styles["valign-text-middle"] +" "+ "urbanist-semi-bold-black-17-2px"}
-  >
-    Proposer
-  </div>
-  <div
-    className={styles["no-of-txs"] +" "+ styles["valign-text-middle"] +" "+  "urbanist-semi-bold-black-17-2px"}
-  >
-    No. of Txs
-  </div>
-  <div className={styles["time-1"] +" "+ styles["valign-text-middle"] +" "+ "urbanist-semi-bold-black-17-2px"}>
-    Time
-  </div>
-</div>
+const ValidatorTitleData = {
+  rank: "Rank",
+  validator: "Validator",
+  votingPower: "Voting Power",
+  cumulativeshare: "Cumulative Share",
+  commission: "Commission",
+  uptime: "Uptime",
+};
 
-<div className={styles["row1"]}  >
-  <div className={styles["overlap-group"]}>
-    <div className={styles["phone"] +" "+ "urbanist-medium-absolute-zero-17-2px"}>
-     1
-    </div>
-    <div className={styles["x34567efe34g6j7k85h"] +" "+ "urbanist-normal-black-17-2px"}>
-  hhdjjkdk 
-    </div>
-    <div className={styles["ellipse-8"]}></div>
-    <div className={styles["dgtize-stake"] +" "+ "urbanist-normal-new-car-17-2px"}>
-      Dgtize Stake
-    </div>
-    <div className={styles["number"] +" "+ "urbanist-normal-black-17-2px"}>
-     fgg</div>
-    <div className={styles["x6s-ago"] +" "+ "urbanist-normal-black-17-2px"}>
-    8888</div>
-  </div>
-</div>
+const Title = styled.h1`
+  ${UrbanistBoldBlack40px}
+  min-height: 48px;
+  min-width: 112px;
+  letter-spacing: 0;
+  margin-top: 30px
+`;
 
-</div>
-<div>
+const Validators = styled.div`
+  width: 1336px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 18.2px 16px;
+  align-items: flex-start;
+  min-height: 797px;
+  background-color: var(--white);
+  border-radius: 20px;
+  box-shadow: 0px 7px 30px #0015da29;
+`;
 
-</div>
- </>
-       
-  )}
+const OverlapGroup10 = styled.div`
+  height: 60px;
+  margin-top: 19px;
+  display: flex;
+  padding: 13.8px 14.6px;
+  align-items: center;
+  min-width: 1303px;
+  background-color: var(--titan-white);
+`;
 
-export default ValidatorsContent
+const RankValue = styled.div`
+  ${UrbanistMediumAbsoluteZero172px}
+  min-height: 21px;
+  margin-top: 0.33px;
+  min-width: 74px;
+  letter-spacing: 0;
+`;
+
+const ValidatorValue = styled.div`
+  ${UrbanistNormalBlack172px}
+  min-height: 21px;
+  margin-left: 12px;
+  margin-top: 0.33px;
+  min-width: 167px;
+  letter-spacing: 0;
+`;
+
+const Ellipse8 = styled.div`
+  width: 32px;
+  height: 32px;
+  align-self: flex-end;
+  margin-left: 100px;
+  background-color: var(--roman);
+  border-radius: 15.93px;
+`;
+
+const Voting = styled.div`
+  ${UrbanistNormalNewCar172px}
+  min-height: 21px;
+  margin-left: 120px;
+  margin-top: 0.33px;
+  min-width: 99px;
+  letter-spacing: 0;
+`;
+
+const CumulativeShare = styled.div`
+  ${UrbanistNormalBlack172px}
+  min-height: 21px;
+  margin-left: 320px;
+  margin-top: 0.33px;
+  min-width: 9px;
+  letter-spacing: 0;
+`;
+
+const Commission = styled.div`
+  ${UrbanistNormalBlack172px}
+  min-height: 21px;
+  margin-left: 190px;
+  margin-top: 0.33px;
+  min-width: 51px;
+  letter-spacing: 0;
+`;
+
+const Uptime = styled.div`
+  ${UrbanistNormalBlack172px}
+  min-height: 21px;
+  margin-left: 160px;
+  margin-top: 0.33px;
+  min-width: 51px;
+  letter-spacing: 0;
+`;
+
+
+
+
+
+export default ValidatorsContent;

@@ -7,14 +7,17 @@ import {
 
 function Validators() {
   
-    const validatorsData =  useGetChainValidatorsQuery()
-
-  const {isLoading, error, data}  =  validatorsData
-   //console.log(data)
-
+  const getValidators =  useGetChainValidatorsQuery()
+  const validatorsData = getValidators?.data?.validators?.map((validator: any) => {
+   return  validator
+  })
+  const validatorsDetails = {
+    validators: validatorsData
+  }
+  
   return (
    <> 
-  <ValidatorsContent />
+  <ValidatorsContent {...validatorsDetails } />
   </>
   );
 }

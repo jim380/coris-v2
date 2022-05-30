@@ -31,9 +31,7 @@ function Home () {
   const block = data?.data?.result?.blocks?.map((block: any) =>{
     return block
   })
-  console.log(block )
-
-
+  
   const homePageData = {
     title: "Overview",
     text2: "13:00",

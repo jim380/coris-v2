@@ -15,7 +15,7 @@ const Layout  = ({ children }: {children:React.ReactNode}) => {
      <Header />
      {children}
 
-      <Footer {...footerData} />
+     <Footer {...footerData} />
       </FlexCol2>
       </div>
     </div>
