@@ -24,7 +24,7 @@ export const chainApi = createApi({
       providesTags:  ['Blocks'],
     }),
      getChainValidators: builder.query<any, void>({
-      query: () => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators`,
+      query: () => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators?pagination.limit=1000&pagination.reverse=true`,
       providesTags:  ['Validators'],
     }),
     getChainNodeInfo: builder.query<any, void>({

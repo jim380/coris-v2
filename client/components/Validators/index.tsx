@@ -1,6 +1,5 @@
 import  React from "react";
-import styles from "./Blocks.module.css";
-import {formatTime, formatHash} from "../Util/format"
+import {sortValidatorsByVotingPower} from "../Util/format"
 import ValidatorTilte from "./ValidatorsTitle";
 import styled from "styled-components";
 import {
@@ -15,9 +14,16 @@ function ValidatorsContent(props) {
   const {
      validators
   } = props;
- validators?.map((data, index) => {
-   console.log(data.description.moniker, index+1)
- })
+  
+  //console.log(validators)
+
+ var validatorsData = validators?.map((data, index) => {
+   return  data
+ }) 
+sortValidatorsByVotingPower(validatorsData)
+ 
+console.log(validatorsData)
+ 
   return (
     <>
     <Title>Validators</Title>
@@ -30,16 +36,17 @@ function ValidatorsContent(props) {
         commission={ValidatorTitleData.commission}
         uptime={ValidatorTitleData.uptime}
       />
-      {validators?.map((data, index) =>
-      <OverlapGroup10>
+   
+       {validatorsData?.map((data, index) => 
+        <OverlapGroup10>
         <RankValue>{index+1}</RankValue>
-        <ValidatorValue>{data.description.moniker}</ValidatorValue>
-        <Voting>{}</Voting>
-        <CumulativeShare>{}</CumulativeShare>
+        <ValidatorValue>{data?.description?.moniker}</ValidatorValue>
+       <Voting>{data?.tokens}</Voting>
+       <CumulativeShare>{}</CumulativeShare>
         <Commission>{}</Commission>
         <Uptime>{}</Uptime>
       </OverlapGroup10>
-      )}
+   )}
     </Validators>
     </>
   );
@@ -146,9 +153,6 @@ const Uptime = styled.div`
   min-width: 51px;
   letter-spacing: 0;
 `;
-
-
-
 
 
 export default ValidatorsContent;

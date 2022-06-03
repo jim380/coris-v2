@@ -11,10 +11,15 @@ function Validators() {
   const validatorsData = getValidators?.data?.validators?.map((validator: any) => {
    return  validator
   })
+  
   const validatorsDetails = {
     validators: validatorsData
   }
-  
+  //console.log(getValidators)
+
+
+
+
   return (
    <> 
   <ValidatorsContent {...validatorsDetails } />
