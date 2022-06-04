@@ -1,5 +1,5 @@
 import  React from "react";
-import {sortValidatorsByVotingPower} from "../Util/format"
+import {getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber, sortValidatorsByVotingPower} from "../Util/format"
 import ValidatorTilte from "./ValidatorsTitle";
 import styled from "styled-components";
 import {
@@ -15,14 +15,13 @@ function ValidatorsContent(props) {
      validators
   } = props;
   
-  //console.log(validators)
-
  var validatorsData = validators?.map((data, index) => {
-   return  data
+   return data
  }) 
 sortValidatorsByVotingPower(validatorsData)
  
-console.log(validatorsData)
+//console.log(validatorsData[0]?.description)
+
  
   return (
     <>
@@ -40,8 +39,15 @@ console.log(validatorsData)
        {validatorsData?.map((data, index) => 
         <OverlapGroup10>
         <RankValue>{index+1}</RankValue>
-        <ValidatorValue>{data?.description?.moniker}</ValidatorValue>
-       <Voting>{data?.tokens}</Voting>
+        <ValidatorValue>
+          <img className="img"  src={getValidatorsLogoFromWebsites(data.description.website)} alt="" />
+          <style jsx>{`
+           .img {
+           margin-right: 10px;
+           }
+         `}</style>
+          {data?.description?.moniker}</ValidatorValue>
+       <Voting>{roundValidatorsVotingPowerToWholeNumber(data?.tokens)}</Voting>
        <CumulativeShare>{}</CumulativeShare>
         <Commission>{}</Commission>
         <Uptime>{}</Uptime>
@@ -51,6 +57,8 @@ console.log(validatorsData)
     </>
   );
 }
+
+
 
 const ValidatorTitleData = {
   rank: "Rank",
