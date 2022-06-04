@@ -1,6 +1,7 @@
 import Layout from "../../components/layout/Layout";
 import ValidatorsContent from "../../components/Validators";
 import {
+  useGetChainPoolQuery,
   useGetChainValidatorsQuery,
 } from '../../lib/chainApi';
 
@@ -11,14 +12,19 @@ function Validators() {
   const validatorsData = getValidators?.data?.validators?.map((validator: any) => {
    return  validator
   })
+
+  const getChainPool = useGetChainPoolQuery()
+  const bondedTokensFromPool = getChainPool?.data?.pool?.bonded_tokens
+
   
+ 
+ 
+ 
   const validatorsDetails = {
-    validators: validatorsData
+    validators: validatorsData,
+    bonded_tokens: bondedTokensFromPool
   }
   //console.log(getValidators)
-
-
-
 
   return (
    <> 

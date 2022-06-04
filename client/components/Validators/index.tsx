@@ -1,5 +1,5 @@
 import  React from "react";
-import {getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber, sortValidatorsByVotingPower} from "../Util/format"
+import {getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber, sortValidatorsByVotingPower} from "../Util/format"
 import ValidatorTilte from "./ValidatorsTitle";
 import styled from "styled-components";
 import {
@@ -12,8 +12,10 @@ import {
 
 function ValidatorsContent(props) {
   const {
-     validators
+     validators, 
+     bonded_tokens
   } = props;
+  console.log(bonded_tokens)
   
  var validatorsData = validators?.map((data, index) => {
    return data
@@ -41,19 +43,28 @@ sortValidatorsByVotingPower(validatorsData)
         <RankValue>{index+1}</RankValue>
         <ValidatorValue>
           <img className="img"  src={getValidatorsLogoFromWebsites(data.description.website)} alt="" />
-          <style jsx>{`
-           .img {
-           margin-right: 10px;
-           }
-         `}</style>
-          {data?.description?.moniker}</ValidatorValue>
-       <Voting>{roundValidatorsVotingPowerToWholeNumber(data?.tokens)}</Voting>
+          {data?.description?.moniker}
+          </ValidatorValue>
+       <Voting>
+         {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
+         <br />
+         <sub className="sub">{getPercentageOfValidatorsBondedTokens(data?.tokens, bonded_tokens)}</sub>
+         </Voting>
        <CumulativeShare>{}</CumulativeShare>
         <Commission>{}</Commission>
         <Uptime>{}</Uptime>
       </OverlapGroup10>
    )}
     </Validators>
+         <style jsx>{`
+           .img {
+           margin-right: 10px;
+           }
+           .sub {
+             color: red;
+             font-size: 10px;
+           }
+         `}</style>
     </>
   );
 }

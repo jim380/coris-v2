@@ -13,7 +13,7 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'NodeInfo'],
+  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'Pool', 'NodeInfo'],
   endpoints: (builder) => ({
     getChainLatestBlocks: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
@@ -26,6 +26,10 @@ export const chainApi = createApi({
      getChainValidators: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators?pagination.limit=1000&pagination.reverse=true`,
       providesTags:  ['Validators'],
+    }), 
+     getChainPool: builder.query<any, void>({
+      query: () => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/pool`,
+      providesTags:  ['Pool'],
     }),
     getChainNodeInfo: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainRPC}/status`,
@@ -39,6 +43,7 @@ export const {
   useGetChainLatestBlocksQuery,
   useGetChainBlocksQuery,
   useGetChainValidatorsQuery,
+  useGetChainPoolQuery,
   useGetChainNodeInfoQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
@@ -48,5 +53,6 @@ export const {
    getChainLatestBlocks,
    getChainBlocks, 
    getChainValidators,
+   getChainPool,
    getChainNodeInfo
  } = chainApi.endpoints;
