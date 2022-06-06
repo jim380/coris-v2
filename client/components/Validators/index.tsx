@@ -9,22 +9,18 @@ import {
   UrbanistBoldBlack40px 
 } from "../../styledMixins";
 
-
 function ValidatorsContent(props) {
   const {
      validators, 
-     bonded_tokens
+     totalBondedTokens
   } = props;
-  console.log(bonded_tokens)
   
  var validatorsData = validators?.map((data, index) => {
    return data
  }) 
 sortValidatorsByVotingPower(validatorsData)
- 
-//console.log(validatorsData[0]?.description)
+ let cumulativeShare:number = 0
 
- 
   return (
     <>
     <Title>Validators</Title>
@@ -38,7 +34,12 @@ sortValidatorsByVotingPower(validatorsData)
         uptime={ValidatorTitleData.uptime}
       />
    
-       {validatorsData?.map((data, index) => 
+       {validatorsData?.map((data, index) => {
+         var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
+  
+         cumulativeShare += percentageOfVotingPower
+
+      return (
         <OverlapGroup10>
         <RankValue>{index+1}</RankValue>
         <ValidatorValue>
@@ -48,13 +49,13 @@ sortValidatorsByVotingPower(validatorsData)
        <Voting>
          {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
          <br />
-         <sub className="sub">{getPercentageOfValidatorsBondedTokens(data?.tokens, bonded_tokens)}</sub>
+         <sub className="sub">{percentageOfVotingPower.toFixed(2)+'%'}</sub>
          </Voting>
-       <CumulativeShare>{}</CumulativeShare>
+       <CumulativeShare>{cumulativeShare.toFixed(2)+'%'}</CumulativeShare>
         <Commission>{}</Commission>
         <Uptime>{}</Uptime>
       </OverlapGroup10>
-   )}
+       )})}
     </Validators>
          <style jsx>{`
            .img {
@@ -68,8 +69,6 @@ sortValidatorsByVotingPower(validatorsData)
     </>
   );
 }
-
-
 
 const ValidatorTitleData = {
   rank: "Rank",

@@ -5,7 +5,6 @@ import {
   useGetChainValidatorsQuery,
 } from '../../lib/chainApi';
 
-
 function Validators() {
   
   const getValidators =  useGetChainValidatorsQuery()
@@ -15,16 +14,11 @@ function Validators() {
 
   const getChainPool = useGetChainPoolQuery()
   const bondedTokensFromPool = getChainPool?.data?.pool?.bonded_tokens
-
-  
- 
- 
  
   const validatorsDetails = {
     validators: validatorsData,
-    bonded_tokens: bondedTokensFromPool
+    totalBondedTokens: bondedTokensFromPool
   }
-  //console.log(getValidators)
 
   return (
    <> 

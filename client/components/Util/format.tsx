@@ -19,9 +19,9 @@ export const getValidatorsLogoFromWebsites = (websiteURL: any) => {
  return  ("http://www.google.com/s2/favicons?domain="+ websiteURL)
 }
 
-export const getPercentageOfValidatorsBondedTokens = (totalBondedTokens: any, validatorsToken: any) => {
-  const percentageBondedTokens = ((totalBondedTokens/validatorsToken)*(100))
-  return percentageBondedTokens.toFixed(2)+'%'
+export const getPercentageOfValidatorsBondedTokens = 
+( validatorsToken: number, totalBondedTokens: number,) => {
+  var percentageOfBondedTokens:number 
+   percentageOfBondedTokens = ((Number(validatorsToken)/Number(totalBondedTokens))*(100))
+  return percentageOfBondedTokens
 }
-
-
