@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import ConnectWallet from "./ConnectWallet";
+import WalletButton from "./ConnectWallet/walletButton";
 
 
 function Header() {
@@ -16,6 +17,7 @@ function Header() {
       <NightmodeButton>
         <OutlineGeneralMoon src="/img/outline-general-moon@2x.svg" />
       </NightmodeButton>
+      <WalletButton />
     </TopNavBar>
 
     )
@@ -40,13 +42,13 @@ const TopNavBar = styled.div`
 `;
 
 const NightmodeButton = styled.div`
-  height: 64px;
+  height: 50px;
   margin-left: 16px;
   display: flex;
-  padding: 16px;
+  padding: 10px;
   justify-content: flex-end;
   align-items: flex-start;
-  min-width: 64px;
+  min-width: 50px;
   background-color: var(--white);
   border-radius: 32px;
   box-shadow: 0px 7px 30px #0015da29;

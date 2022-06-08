@@ -20,7 +20,8 @@ function SideNavBar (props) {
     validators,
     blocks,
     proposals,
-    parameters} = props;
+    parameters,
+    Assets} = props;
     return (  
       <SideNavigation>
           <OverlapGroup16>
@@ -32,6 +33,7 @@ function SideNavBar (props) {
                 <IconUser src={icon1} />
                 <Icon src={icon2} />
                 <Icon1 src={icon3} />
+                <Icon1 src={icon3} />
               </FlexCol>
               <FlexCol1>
                 <Overview>{overview}</Overview>
@@ -39,8 +41,8 @@ function SideNavBar (props) {
                 <Blocks>{blocks}</Blocks>
                 <Proposals>{proposals}</Proposals>
                 <Proposals>{parameters}</Proposals>
+                <Proposals>{Assets}</Proposals>
               </FlexCol1>
-              <Ellipse5></Ellipse5>
             </FlexRow>
           </OverlapGroup16>
         </SideNavigation>
@@ -54,11 +56,12 @@ const SideNavigation = styled.div`
   display: flex;
   align-items: flex-start;
   min-width: 370px;
+  margin: 0;
 `;
 
 const OverlapGroup16 = styled.div`
   width: 360px;
-  position: relative;
+  position: fixed;
   display: flex;
   flex-direction: column;
   padding: 82px 59px;
@@ -67,6 +70,7 @@ const OverlapGroup16 = styled.div`
   background-color: var(--chambray);
   border-radius: 0px 30px 30px 0px;
   box-shadow: 0px 20px 50px #000d7d99;
+
 `;
 
 const FlexRow = styled.div`
@@ -89,6 +93,8 @@ const SolidGeneralChartPie = styled.img`
   width: 40px;
   height: 40px;
   margin-left: 1px;
+  margin-top: -60px;
+ 
 `;
 
 const IconUser = styled.img`

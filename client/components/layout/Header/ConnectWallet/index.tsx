@@ -15,13 +15,13 @@ function ConnectWallet(props) {
 }
 
 const ConnectWallet1 = styled.div`
-  height: 64px;
+  height: 50px;
   margin-left: 16px;
   display: flex;
   padding: 5px 19px;
   justify-content: flex-end;
   align-items: center;
-  min-width: 289px;
+  min-width: 280px;
   background-color: var(--white);
   border-radius: 59px;
   box-shadow: 0px 7px 30px #0015da29;

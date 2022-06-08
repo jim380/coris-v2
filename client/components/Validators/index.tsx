@@ -8,6 +8,7 @@ import {
   UrbanistMediumAbsoluteZero172px,
   UrbanistBoldBlack40px 
 } from "../../styledMixins";
+import ValidatorsActiveInactive from "./Buttons";
 
 function ValidatorsContent(props) {
   const {
@@ -25,20 +26,22 @@ sortValidatorsByVotingPower(validatorsData)
     <>
     <Title>Validators</Title>
     <Validators>
+      <ValidatorsActiveInactive />
       <ValidatorTilte
         rank={ValidatorTitleData.rank}
         validator={ValidatorTitleData.validator}
         votingPower={ValidatorTitleData.votingPower}
         cumulativeshare={ValidatorTitleData.cumulativeshare}
         commission={ValidatorTitleData.commission}
-        uptime={ValidatorTitleData.uptime}
+        //uptime={ValidatorTitleData.uptime}
       />
    
        {validatorsData?.map((data, index) => {
          var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
   
          cumulativeShare += percentageOfVotingPower
-
+         const commission = data.commission.commission_rates.rate * 100
+         console.log(data)
       return (
         <OverlapGroup10>
         <RankValue>{index+1}</RankValue>
@@ -52,8 +55,10 @@ sortValidatorsByVotingPower(validatorsData)
          <sub className="sub">{percentageOfVotingPower.toFixed(2)+'%'}</sub>
          </Voting>
        <CumulativeShare>{cumulativeShare.toFixed(2)+'%'}</CumulativeShare>
-        <Commission>{}</Commission>
-        <Uptime>{}</Uptime>
+        <Commission>{commission.toFixed(2)+'%'}</Commission>
+        <Uptime>
+          Delegate
+        </Uptime>
       </OverlapGroup10>
        )})}
     </Validators>
@@ -166,10 +171,11 @@ const Commission = styled.div`
 const Uptime = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
-  margin-left: 160px;
+  margin-left: 140px;
   margin-top: 0.33px;
   min-width: 51px;
   letter-spacing: 0;
+  color: blue;
 `;
 
 

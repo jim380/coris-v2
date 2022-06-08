@@ -32,7 +32,8 @@ const Layout  = ({ children }: {children:React.ReactNode}) => {
     validators: "Validators",
     blocks: "Blocks",
     proposals: "Proposals",
-    parameters: "Parameters"
+    parameters: "Parameters",
+    Assets: "Assets"
   }
   
   const footerData = {

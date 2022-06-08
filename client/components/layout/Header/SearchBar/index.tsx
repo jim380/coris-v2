@@ -13,11 +13,11 @@ function SearchBar(props) {
 }
 
 const SearchBar1 = styled.div`
-  height: 60px;
+  height: 50px;
   display: flex;
-  padding: 12px 19px;
+  padding: 10px 19px;
   align-items: flex-start;
-  min-width: 932px;
+  min-width: 700px;
   background-color: var(--white);
   border-radius: 59px;
   box-shadow: 0px 7px 30px #0015da29;
