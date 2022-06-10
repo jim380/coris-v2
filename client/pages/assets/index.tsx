@@ -14,10 +14,12 @@ function Assets() {
             console.log(error)
         })
     }, [])
-  
+   const coins = {
+       coinsData: coinsData
+   }
   return (
    <> 
-   <AssetsContent coins={coinsData} />
+   <AssetsContent {...coins} />
   </>
   );
 }

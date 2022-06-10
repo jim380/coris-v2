@@ -1,4 +1,4 @@
-import  React from "react";
+import  React, { useState } from "react";
 import AssetsTitle from "./AssetTitle";
 import styled from "styled-components";
 import {
@@ -7,38 +7,53 @@ import {
   UrbanistMediumAbsoluteZero172px,
   UrbanistBoldBlack40px 
 } from "../../styledMixins";
+import SearchButton from "./SearchButton";
 
-function AssetsContent({...coinsData}) {
-  console.log(coinsData.coins)
+function AssetsContent(props) {
+  const coinsData = props
+  //console.log(coinsData)
+
+  const [ query, setQuery] = useState("")
+  let emptyname = 'Not Found'
 
   return (
     <>
     <Title>Assets</Title>
     <CoinList>
+    <SearchButton setQuery={setQuery} />
       <AssetsTitle
         id={AssetsTitleData.id}
         coinName={AssetsTitleData.coinName}
         coinCurrentPrice={AssetsTitleData.coinCurrentPrice}
         coinMarketCap={AssetsTitleData.coinMarketCap}
         coinTotalVolume={AssetsTitleData.coinTotalVolume}
-        priceChange={AssetsTitleData.priceChange}
+        totalSupply={AssetsTitleData.totalSupply}
       />
-     
-     {coinsData?.coins?.map((coin) =>
-        <OverlapGroup10>
-        <IdValue>{coin?.market_cap_rank} </IdValue>
+     {coinsData?.coinsData?.filter(coin => {
+         //if Query does not exist
+        if (query === ' ') {
+            return coin;
+        }else if (coin.name.toLowerCase().includes(query.toLocaleLowerCase())) {
+            //query exists here
+            return coin
+        } 
+     })
+     .map((coin, index) =>
+        <OverlapGroup10 key={index}>
+        <IdValue>{coin?.market_cap_rank? coin.market_cap_rank : null} </IdValue>
         <CoinNameValue>
-            <img src={coin?.image} alt="" className="img" />
-            {coin?.id}
+            <img src={coin?.image? coin.image : null} alt="" className="img" />
+            {coin?.id? coin.id : null}
             <br/>
-            <sub className="symbol" >{coin?.symbol}</sub>
+            <sub className="symbol" >{coin?.symbol? coin.symbol : null}
+            </sub>
         </CoinNameValue>
-       <PriceValue>${coin?.current_price.toFixed(2)}</PriceValue>
-       <MarketCapValue>${coin?.market_cap.toLocaleString()}</MarketCapValue>
-        <TotalVolumeValue>{coin?.total_volume.toLocaleString()}</TotalVolumeValue>
-            <PriceChangeValue>
-            {coin?.price_change_percentage_24h > 0 ? coin.price_change_percentage_24h.toFixed(2) :   <p className="priceLessThan"> {coin.price_change_percentage_24h.toFixed(2)}% </p>  }
-        </PriceChangeValue>
+       <PriceValue>${coin?.current_price? coin.current_price.toFixed(2) : null}</PriceValue>
+       <MarketCapValue>${coin?.market_cap ? coin.market_cap.toLocaleString() : null}</MarketCapValue>
+        <TotalVolumeValue>{coin?.total_volume ? coin.total_volume.toLocaleString() : null}</TotalVolumeValue>
+            <TotalSupplyValue>
+            {coin?.total_supply ? coin.total_supply.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :  <p className="total_supply">null</p>  }
+        </TotalSupplyValue>
       </OverlapGroup10>
         )}
     </CoinList>
@@ -51,7 +66,7 @@ function AssetsContent({...coinsData}) {
            margin-right: 10px;
            width:23px;
            }
-           .priceLessThan {
+           .total_supply {
                color: red;
            }
          `}</style>
@@ -65,7 +80,7 @@ const AssetsTitleData = {
   coinCurrentPrice: "Price",
   coinMarketCap: "Mkt cap",
   coinTotalVolume: "Total Volume",
-  priceChange: "Price Change",
+  totalSupply: "Total Supply",
 };
 
 const Title = styled.h1`
@@ -143,7 +158,7 @@ const TotalVolumeValue = styled.div`
   letter-spacing: 0;
 `;
 
-const PriceChangeValue = styled.div`
+const TotalSupplyValue = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
   margin-left: 150px;
@@ -152,6 +167,5 @@ const PriceChangeValue = styled.div`
   letter-spacing: 0;
   color: blue;
 `;
-
 
 export default AssetsContent

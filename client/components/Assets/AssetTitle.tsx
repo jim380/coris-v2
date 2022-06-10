@@ -4,7 +4,7 @@ import { UrbanistSemiBoldBlack172px, ValignTextMiddle } from "../../styledMixins
 
 
 function AssetsTitle(props) {
-  const { id, coinName, coinCurrentPrice, coinMarketCap, coinTotalVolume, priceChange } = props;
+  const { id, coinName, coinCurrentPrice, coinMarketCap, coinTotalVolume, totalSupply } = props;
 
   return (
     <AssetTitle>
@@ -13,7 +13,7 @@ function AssetsTitle(props) {
       <CurrentPrice>{coinCurrentPrice}</CurrentPrice>
       <MarketCap>{coinMarketCap}</MarketCap>
       <TotalVolume>{coinTotalVolume}</TotalVolume>
-        <PriceChange>{priceChange}</PriceChange>
+        <TotalSupply>{totalSupply}</TotalSupply>
     </AssetTitle>
   );
 }
@@ -71,7 +71,7 @@ const TotalVolume = styled.div`
   letter-spacing: 0;
 `;
 
-const PriceChange = styled.div`
+const TotalSupply = styled.div`
   ${ValignTextMiddle}
   height: 21px;
   margin-left: 118px;
