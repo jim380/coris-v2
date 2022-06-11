@@ -48,7 +48,7 @@ const Validator = styled.div`
 const VotingPower = styled.div`
   ${ValignTextMiddle}
   height: 21px;
-  margin-left: 200px;
+  margin-left: 350px;
   margin-top: 0;
   min-width: 69px;
   letter-spacing: 0;
@@ -57,7 +57,7 @@ const VotingPower = styled.div`
 const CumulativeShare = styled.div`
   ${ValignTextMiddle}
   height: 21px;
-  margin-left: 300px;
+  margin-left: 200px;
   margin-top: 0;
   min-width: 77px;
   letter-spacing: 0;
@@ -66,7 +66,7 @@ const CumulativeShare = styled.div`
 const Commission = styled.div`
   ${ValignTextMiddle}
   height: 21px;
-  margin-left: 90px;
+  margin-left: 50px;
   margin-top: 0;
   letter-spacing: 0;
 `;

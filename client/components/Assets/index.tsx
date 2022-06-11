@@ -14,7 +14,6 @@ function AssetsContent(props) {
   //console.log(coinsData)
 
   const [ query, setQuery] = useState("")
-  let emptyname = 'Not Found'
 
   return (
     <>

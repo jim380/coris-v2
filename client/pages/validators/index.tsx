@@ -7,16 +7,18 @@ import {
 
 function Validators() {
   
+  //get all validators data for bonded, unbonded and unbounding
   const getValidators =  useGetChainValidatorsQuery()
-  const validatorsData = getValidators?.data?.validators?.map((validator: any) => {
+  const ValidatorsData = getValidators?.data?.validators?.map((validator: any) => {
    return  validator
   })
 
+  //get total bonded tokens
   const getChainPool = useGetChainPoolQuery()
   const bondedTokensFromPool = getChainPool?.data?.pool?.bonded_tokens
  
   const validatorsDetails = {
-    validators: validatorsData,
+    validators: ValidatorsData,
     totalBondedTokens: bondedTokensFromPool
   }
 

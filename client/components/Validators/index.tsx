@@ -1,52 +1,80 @@
-import  React from "react";
+import  React, { useState } from "react";
 import {getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber, sortValidatorsByVotingPower} from "../Util/format"
 import ValidatorTilte from "./ValidatorsTitle";
 import styled from "styled-components";
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
+
 import {
   UrbanistNormalNewCar172px,
   UrbanistNormalBlack172px,
   UrbanistMediumAbsoluteZero172px,
   UrbanistBoldBlack40px 
 } from "../../styledMixins";
-import ValidatorsActiveInactive from "./Buttons";
+import SearchButton from "./SearchButton";
 
 function ValidatorsContent(props) {
+  const [ query, setQuery] = useState("")
+
   const {
      validators, 
      totalBondedTokens
   } = props;
-  
- var validatorsData = validators?.map((data, index) => {
+ 
+ var activeValidatorsData = validators?.map((data) => {
+     if (data.status === 'BOND_STATUS_BONDED') {
    return data
+     }
  }) 
-sortValidatorsByVotingPower(validatorsData)
- let cumulativeShare:number = 0
+
+var inActiveValidatorsData = validators?.map((data) => {
+     if (data.status === 'BOND_STATUS_UNBONDED' || data.status === 'BOND_STATUS_UNBONDING') {
+   return data
+     }
+ }) 
+
+ //sort by voting power
+sortValidatorsByVotingPower(activeValidatorsData)
+sortValidatorsByVotingPower(inActiveValidatorsData)
+
+//declare cumulative shares for both active and inactive validators
+ let activeValidatorsCumulativeShare:number = 0
+ let inActiveValidatorsCumulativeShare:number = 0
 
   return (
     <>
     <Title>Validators</Title>
     <Validators>
-      <ValidatorsActiveInactive />
+    <SearchButton setQuery={setQuery} />
+    <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="">
+    <Tab eventKey="active" title="Active">
       <ValidatorTilte
         rank={ValidatorTitleData.rank}
         validator={ValidatorTitleData.validator}
         votingPower={ValidatorTitleData.votingPower}
         cumulativeshare={ValidatorTitleData.cumulativeshare}
         commission={ValidatorTitleData.commission}
-        //uptime={ValidatorTitleData.uptime}
       />
-   
-       {validatorsData?.map((data, index) => {
+       
+       {activeValidatorsData?.filter(data => {
+         //if Query does not exist
+        if (query === ' ') {
+            return data;
+        }else if (data?.description?.moniker.toLowerCase().includes(query.toLocaleLowerCase())) {
+            return data
+        } 
+     })
+      .map((data, index) => {
          var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
   
-         cumulativeShare += percentageOfVotingPower
-         const commission = data.commission.commission_rates.rate * 100
-         console.log(data)
+         activeValidatorsCumulativeShare += percentageOfVotingPower
+
+         const commission = data?.commission?.commission_rates?.rate * 100
       return (
         <OverlapGroup10>
         <RankValue>{index+1}</RankValue>
         <ValidatorValue>
-          <img className="img"  src={getValidatorsLogoFromWebsites(data.description.website)} alt="" />
+          <img className="img"  src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
           {data?.description?.moniker}
           </ValidatorValue>
        <Voting>
@@ -54,13 +82,59 @@ sortValidatorsByVotingPower(validatorsData)
          <br />
          <sub className="sub">{percentageOfVotingPower.toFixed(2)+'%'}</sub>
          </Voting>
-       <CumulativeShare>{cumulativeShare.toFixed(2)+'%'}</CumulativeShare>
+       <CumulativeShare>{activeValidatorsCumulativeShare.toFixed(2)+'%'}</CumulativeShare>
         <Commission>{commission.toFixed(2)+'%'}</Commission>
-        <Uptime>
+        <Delegate>
           Delegate
-        </Uptime>
+        </Delegate>
+       
       </OverlapGroup10>
        )})}
+  </Tab>
+  <Tab eventKey="inactive" title="InActive">
+  <ValidatorTilte
+        rank={ValidatorTitleData.rank}
+        validator={ValidatorTitleData.validator}
+        votingPower={ValidatorTitleData.votingPower}
+        cumulativeshare={ValidatorTitleData.cumulativeshare}
+        commission={ValidatorTitleData.commission}
+      />
+       
+       {inActiveValidatorsData?.filter(data => {
+         //if Query does not exist
+        if (query === ' ') {
+            return data;
+        }else if (data?.description?.moniker.toLowerCase().includes(query.toLocaleLowerCase())) {
+            return data
+        } 
+     })
+       .map((data, index) => {
+         var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
+  
+         inActiveValidatorsCumulativeShare += percentageOfVotingPower
+         const commission = data?.commission?.commission_rates?.rate * 100
+      return (
+        <OverlapGroup10>
+        <RankValue>{index+1}</RankValue>
+        <ValidatorValue>
+          <img className="img"  src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
+          {data?.description?.moniker}
+          </ValidatorValue>
+       <Voting>
+         {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
+         <br />
+         <sub className="sub">{percentageOfVotingPower.toFixed(2)+'%'}</sub>
+         </Voting>
+       <CumulativeShare>{inActiveValidatorsCumulativeShare.toFixed(2)+'%'}</CumulativeShare>
+        <Commission>{commission.toFixed(2)+'%'}</Commission>
+        <Delegate>
+          Delegate
+        </Delegate>
+      </OverlapGroup10>
+       )})}
+  </Tab>
+ </Tabs>
+
     </Validators>
          <style jsx>{`
            .img {
@@ -126,25 +200,16 @@ const RankValue = styled.div`
 const ValidatorValue = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
-  margin-left: 12px;
+  margin-left: 1px;
   margin-top: 0.33px;
   min-width: 167px;
   letter-spacing: 0;
 `;
 
-const Ellipse8 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 100px;
-  background-color: var(--roman);
-  border-radius: 15.93px;
-`;
-
 const Voting = styled.div`
   ${UrbanistNormalNewCar172px}
   min-height: 21px;
-  margin-left: 120px;
+  margin-left: 300px;
   margin-top: 0.33px;
   min-width: 99px;
   letter-spacing: 0;
@@ -153,7 +218,7 @@ const Voting = styled.div`
 const CumulativeShare = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
-  margin-left: 320px;
+  margin-left: 220px;
   margin-top: 0.33px;
   min-width: 9px;
   letter-spacing: 0;
@@ -162,16 +227,16 @@ const CumulativeShare = styled.div`
 const Commission = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
-  margin-left: 190px;
+  margin-left: 100px;
   margin-top: 0.33px;
   min-width: 51px;
   letter-spacing: 0;
 `;
 
-const Uptime = styled.div`
+const Delegate = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
-  margin-left: 140px;
+  margin-left: 90px;
   margin-top: 0.33px;
   min-width: 51px;
   letter-spacing: 0;
