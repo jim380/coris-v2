@@ -46,7 +46,7 @@ sortValidatorsByVotingPower(inActiveValidatorsData)
     <Title>Validators</Title>
     <Validators>
     <SearchButton setQuery={setQuery} />
-    <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="">
+    <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="" variant="tabs">
     <Tab eventKey="active" title="Active">
       <ValidatorTilte
         rank={ValidatorTitleData.rank}
@@ -134,8 +134,8 @@ sortValidatorsByVotingPower(inActiveValidatorsData)
        )})}
   </Tab>
  </Tabs>
-
     </Validators>
+    
          <style jsx>{`
            .img {
            margin-right: 10px;

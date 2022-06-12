@@ -385,3 +385,11 @@ export const Border82pxFog = css`
 export const Border124pxChambray = css`
   border: 12.4px solid var(--chambray);
 `;
+
+export const UrbanistSemiBoldCoconut24px = css`
+  color: var(--coconut);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxl2);
+  font-weight: 600;
+  font-style: normal;
+`;

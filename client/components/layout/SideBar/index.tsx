@@ -1,4 +1,4 @@
-import styles from "../Layout.module.css"
+import Link from 'next/link';
 import styled from "styled-components";
 import {
   UrbanistSemiBoldSoap24px,
@@ -6,8 +6,6 @@ import {
   ValignTextMiddle,
 } from "../../../styledMixins";
 import Logo from "./Logo";
-
-
 
 function SideNavBar (props) {
   const {
@@ -21,11 +19,11 @@ function SideNavBar (props) {
     blocks,
     proposals,
     parameters,
-    Assets} = props;
+    assets} = props;
     return (  
       <SideNavigation>
           <OverlapGroup16>
-            <Logo />
+          <Link href="/"><a> <Logo /></a></Link>
             <FlexRow>
               <FlexCol>
                 <SolidGeneralChartPie src={solidGeneralChartPie} />
@@ -36,20 +34,18 @@ function SideNavBar (props) {
                 <Icon1 src={icon3} />
               </FlexCol>
               <FlexCol1>
-                <Overview>{overview}</Overview>
-                <Validators>{validators}</Validators>
-                <Blocks>{blocks}</Blocks>
-                <Proposals>{proposals}</Proposals>
-                <Proposals>{parameters}</Proposals>
-                <Proposals>{Assets}</Proposals>
+               <Link href="/"><a><Overview>{overview}</Overview></a></Link>
+               <Link href="/validators"><a><Validators>{validators}</Validators></a></Link>
+               <Link href="/blocks"><a><Blocks>{blocks}</Blocks></a></Link>
+               <Link href="/proposals"><a><Proposals>{proposals}</Proposals></a></Link>
+               <Link href="/parameters"><a><Parameters>{parameters}</Parameters></a></Link>
+               <Link href="/assets"><a><Assets>{assets}</Assets></a></Link>
               </FlexCol1>
             </FlexRow>
           </OverlapGroup16>
         </SideNavigation>
     )
 }
-
-
 
 const SideNavigation = styled.div`
   height: 1123px;
@@ -159,15 +155,20 @@ const Proposals = styled.div`
   margin-top: 82px;
   letter-spacing: 0;
 `;
-
-const Ellipse5 = styled.div`
-  width: 12px;
-  height: 12px;
-  margin-left: 14px;
-  margin-top: 13px;
-  background-color: var(--coconut);
-  border-radius: 6px;
+const Parameters = styled.div`
+  ${ValignTextMiddle}
+  ${UrbanistSemiBoldSoap24px}
+            height: 29px;
+  margin-top: 82px;
+  letter-spacing: 0;
 `;
 
+const Assets = styled.div`
+  ${ValignTextMiddle}
+  ${UrbanistSemiBoldSoap24px}
+            height: 29px;
+  margin-top: 82px;
+  letter-spacing: 0;
+`;
 
 export default SideNavBar
