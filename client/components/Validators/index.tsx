@@ -12,6 +12,7 @@ import {
   UrbanistBoldBlack40px 
 } from "../../styledMixins";
 import SearchButton from "./SearchButton";
+import Link from "next/link";
 
 function ValidatorsContent(props) {
   const [ query, setQuery] = useState("")
@@ -20,7 +21,7 @@ function ValidatorsContent(props) {
      validators, 
      totalBondedTokens
   } = props;
- 
+
  var activeValidatorsData = validators?.map((data) => {
      if (data.status === 'BOND_STATUS_BONDED') {
    return data
@@ -68,12 +69,12 @@ sortValidatorsByVotingPower(inActiveValidatorsData)
          var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
   
          activeValidatorsCumulativeShare += percentageOfVotingPower
-
+    
          const commission = data?.commission?.commission_rates?.rate * 100
       return (
         <OverlapGroup10>
-        <RankValue>{index+1}</RankValue>
-        <ValidatorValue>
+<Link href='/validators[address]' as={`/validators/${data.operator_address}`} ><a> <RankValue>{index+1}</RankValue>
+       <ValidatorValue>
           <img className="img"  src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
           {data?.description?.moniker}
           </ValidatorValue>
@@ -83,11 +84,11 @@ sortValidatorsByVotingPower(inActiveValidatorsData)
          <sub className="sub">{percentageOfVotingPower.toFixed(2)+'%'}</sub>
          </Voting>
        <CumulativeShare>{activeValidatorsCumulativeShare.toFixed(2)+'%'}</CumulativeShare>
-        <Commission>{commission.toFixed(2)+'%'}</Commission>
+        <Commission>{commission.toFixed(2)+'%'}</Commission> 
         <Delegate>
           Delegate
         </Delegate>
-       
+        </a></Link> 
       </OverlapGroup10>
        )})}
   </Tab>
@@ -115,6 +116,7 @@ sortValidatorsByVotingPower(inActiveValidatorsData)
          const commission = data?.commission?.commission_rates?.rate * 100
       return (
         <OverlapGroup10>
+          <Link href='/validators[address]' as={`/validators/${data.operator_address}`} ><a>
         <RankValue>{index+1}</RankValue>
         <ValidatorValue>
           <img className="img"  src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
@@ -130,6 +132,7 @@ sortValidatorsByVotingPower(inActiveValidatorsData)
         <Delegate>
           Delegate
         </Delegate>
+        </a></Link> 
       </OverlapGroup10>
        )})}
   </Tab>

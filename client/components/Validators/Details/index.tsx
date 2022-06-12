@@ -6,8 +6,13 @@ import {
   UrbanistLightBlack24px,
 } from "../../../styledMixins";
 import DelegationsContent from "./Delegation";
+import { formatTime, getValidatorsLogoFromWebsites } from "../../Util/format";
+import Image from 'next/image'
+import Link from "next/link";
 
 function ValidatorsDetailsContent(props) {
+    const validatorsDetails = props?.data?.validator
+    console.log(validatorsDetails)
     const {
         validatorsName,
         httpsOdogwuCom,
@@ -26,33 +31,31 @@ function ValidatorsDetailsContent(props) {
         phone,
         x34Gd73874Gf783Ff374Gfg4783Gf298H,
       } = props;
-
+    
     return (
         <>
          <Title>Validator Detail</Title>
          <FlexRow1>
             <OverlapGroup13>
-              <OverlapGroup16>
-                <IconStar src="https://anima-uploads.s3.amazonaws.com/projects/626b0c710186986aa7979309/releases/62a4ee972857c158760c7c4f/img/star-1@2x.svg" />
-              </OverlapGroup16>
-              <ValidatorsName>{validatorsName}</ValidatorsName>
-              <ValidatorsWebsite>{httpsOdogwuCom}</ValidatorsWebsite>
-              <ValidatorsDescription>{chibuzorOneIsANo}</ValidatorsDescription>
+                <IconStar src={getValidatorsLogoFromWebsites(validatorsDetails?.description?.website)} />
+              <ValidatorsName>{validatorsDetails?.description?.moniker}</ValidatorsName>
+              <ValidatorsWebsite><Link href={''}><a>https:{validatorsDetails?.description?.website}</a></Link></ValidatorsWebsite>
+              <ValidatorsDescription>{validatorsDetails?.description?.details}</ValidatorsDescription>
             </OverlapGroup13>
             <OverlapGroupContainer>
 
               <FlexRow2>
                 <FlexCol4>
-                  <Active>Active</Active>
-                  <Status>No</Status>
+                  <Active>{validatorsDetails?.status !== 'BOND_STATUS_BONDED' ? 'Inactive' : 'Active'}</Active>
+                  <Status>Status</Status>
                 </FlexCol4>
                 <FlexCol5>
-                  <Active>{place1}</Active>
-                  <InJail>{inJail}</InJail>
+                  <Active>{validatorsDetails?.jailed !== false ? 'Yes' : 'No'}</Active>
+                  <InJail>In Jail</InJail>
                 </FlexCol5>
                 <FlexCol6>
                   <Active>100%</Active>
-                  <Uptime>{uptime}</Uptime>
+                  <Uptime>Uptime</Uptime>
                 </FlexCol6>
               </FlexRow2>
 
@@ -81,14 +84,14 @@ function ValidatorsDetailsContent(props) {
                     <Name>Max Change Rate</Name>
                   </FlexCol9>
                   <PercentContainer>
-                    <Percent1>{percent3}</Percent1>
-                    <Percent2>{percent4}</Percent2>
-                    <Percent3>{percent5}</Percent3>
+                    <Percent1>{validatorsDetails?.commission?.commission_rates?.rate *100+'%'}</Percent1>
+                    <Percent2>{validatorsDetails?.commission?.commission_rates?.max_rate*100+'%'}</Percent2>
+                    <Percent3>{validatorsDetails?.commission?.commission_rates?.max_change_rate*100+'%'}</Percent3>
                   </PercentContainer>
                 </FlexRow3>
                 <FlexRow4>
                   <Updated>Updated</Updated>
-                  <Text1>{text1}</Text1>
+                  <Text1>{formatTime(validatorsDetails?.commission?.update_time)}</Text1>
                 </FlexRow4>
               </FlexCol8>
 
@@ -98,12 +101,12 @@ function ValidatorsDetailsContent(props) {
                   <Bonded>Bonded</Bonded>
                   <Commission1>Self Bonded</Commission1>
                   <Name>Delegators</Name>
-                  <Name>Bonded Height</Name>
+                  <Name>UnBonded Height</Name>
                 </FlexCol10>
                 <FlexCol11>
-                  <Percent1>{percent6}</Percent1>
+                  <Percent1>{validatorsDetails?.min_self_delegation}</Percent1>
                   <Number>{number1}</Number>
-                  <Phone>{phone}</Phone>
+                  <Phone>{validatorsDetails?.unbonding_height}</Phone>
                 </FlexCol11>
               </FlexRow5>
 
@@ -168,8 +171,8 @@ const OverlapGroup16 = styled.div`
 `;
 
 const IconStar = styled.img`
-  width: 58px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
 `;
 
 const ValidatorsName = styled.div`
