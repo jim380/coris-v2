@@ -8,7 +8,6 @@ import cache from '../backend/utils/DB/cache'
 import { makeStore } from "../lib/store";
 import {
   getChainLatestBlocks,
-  getChainNodeInfo,
   getRunningOperationPromises,
 } from '../lib/chainApi';
 

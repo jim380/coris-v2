@@ -223,7 +223,6 @@ function HomePageContent(props) {
     )
 }
 
-
 const group7277Data = {
   vector2: "/img/vector-2@2x.svg",
   price: "$0.11",

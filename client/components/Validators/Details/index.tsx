@@ -6,32 +6,37 @@ import {
   UrbanistLightBlack24px,
 } from "../../../styledMixins";
 import DelegationsContent from "./Delegation";
-import { formatTime, getValidatorsLogoFromWebsites } from "../../Util/format";
+import { formatTime, getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber } from "../../Util/format";
 import Image from 'next/image'
 import Link from "next/link";
+import { useGetChainPoolQuery, 
+         getChainDelegations,
+         getRunningOperationPromises,
+       } from '../../../lib/chainApi';
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import { makeStore } from "../../../lib/store";
 
 function ValidatorsDetailsContent(props) {
     const validatorsDetails = props?.data?.validator
-    console.log(validatorsDetails)
-    const {
-        validatorsName,
-        httpsOdogwuCom,
-        chibuzorOneIsANo,
-        place1,
-        inJail,
-        uptime,
-        percent2,
-        address1,
-        percent3,
-        percent4,
-        percent5,
-        text1,
-        percent6,
-        number1,
-        phone,
-        x34Gd73874Gf783Ff374Gfg4783Gf298H,
-      } = props;
-    
+    const delegatorsShares = (validatorsDetails?.delegator_shares/1000000).toFixed(2)
+    //console.log(validatorsDetails)
+
+    //get total bonded tokens
+  const getChainPool = useGetChainPoolQuery()
+  const bondedTokens = getChainPool?.data?.pool?.bonded_tokens
+  const percentageofVotingPower: number = getPercentageOfValidatorsBondedTokens(validatorsDetails?.tokens, bondedTokens)
+  
+
+  const delegations = async () => {
+    const store = makeStore;
+    const delegationsData = await store.dispatch(getChainDelegations.initiate(validatorsDetails.operator_address));
+    const results =  JSON.parse(JSON.stringify(delegationsData))
+    console.log(results)
+    await Promise.all(getRunningOperationPromises());
+    return results
+  }
+console.log(delegations)
+
     return (
         <>
          <Title>Validator Detail</Title>
@@ -39,18 +44,18 @@ function ValidatorsDetailsContent(props) {
             <OverlapGroup13>
                 <IconStar src={getValidatorsLogoFromWebsites(validatorsDetails?.description?.website)} />
               <ValidatorsName>{validatorsDetails?.description?.moniker}</ValidatorsName>
-              <ValidatorsWebsite><Link href={''}><a>https:{validatorsDetails?.description?.website}</a></Link></ValidatorsWebsite>
+              <ValidatorsWebsite><Link href={''}><a>{validatorsDetails?.description?.website}</a></Link></ValidatorsWebsite>
               <ValidatorsDescription>{validatorsDetails?.description?.details}</ValidatorsDescription>
             </OverlapGroup13>
+            
             <OverlapGroupContainer>
-
               <FlexRow2>
                 <FlexCol4>
-                  <Active>{validatorsDetails?.status !== 'BOND_STATUS_BONDED' ? 'Inactive' : 'Active'}</Active>
+                  <Active>{validatorsDetails?.status !== 'BOND_STATUS_BONDED' ? <p className="inActive">Inactive</p> : <p className="active">Active</p>}</Active>
                   <Status>Status</Status>
                 </FlexCol4>
                 <FlexCol5>
-                  <Active>{validatorsDetails?.jailed !== false ? 'Yes' : 'No'}</Active>
+                  <Active>{validatorsDetails?.jailed !== false ? <p className="inActive">Yes</p> : <p className="active">No</p>}</Active>
                   <InJail>In Jail</InJail>
                 </FlexCol5>
                 <FlexCol6>
@@ -61,17 +66,12 @@ function ValidatorsDetailsContent(props) {
 
               <OverlapGroup15>
                 <OverlapGroup2>
-                  <Ellipse10></Ellipse10>
-                  <Ellipse11 src="https://anima-uploads.s3.amazonaws.com/projects/626b0c710186986aa7979309/releases/62a4ee972857c158760c7c4f/img/ellipse-11@2x.svg" />
-                  <Percent>{percent2}</Percent>
-                </OverlapGroup2>
-                <Details>
-                  <VotingPower>Voting Power</VotingPower>
-                  <Address>{address1}</Address>
-                </Details>
+                    {roundValidatorsVotingPowerToWholeNumber(validatorsDetails?.tokens)}
+                <ProgressBar animated now={percentageofVotingPower} />
+                  <Percent>{percentageofVotingPower.toFixed(2)+'%'}</Percent>
+                </OverlapGroup2> 
               </OverlapGroup15>
             </OverlapGroupContainer>
-
             
           </FlexRow1>
             <OverlapGroupContainer1>
@@ -95,46 +95,53 @@ function ValidatorsDetailsContent(props) {
                 </FlexRow4>
               </FlexCol8>
 
-
               <FlexRow5>
                 <FlexCol10>
                   <Bonded>Bonded</Bonded>
                   <Commission1>Self Bonded</Commission1>
-                  <Name>Delegators</Name>
+                  <Name>Delegators Shares</Name>
                   <Name>UnBonded Height</Name>
                 </FlexCol10>
                 <FlexCol11>
                   <Percent1>{validatorsDetails?.min_self_delegation}</Percent1>
-                  <Number>{number1}</Number>
+                  <Number>{delegatorsShares}</Number>
                   <Phone>{validatorsDetails?.unbonding_height}</Phone>
                 </FlexCol11>
               </FlexRow5>
-
 
               <OverlapGroup9>
                 <Addresses>Addresses</Addresses>
                 <Accoubt>Account</Accoubt>
                 <Account>
                   <Value>
-                    {x34Gd73874Gf783Ff374Gfg4783Gf298H}
+                    oooo
                   </Value>
                 </Account>
                 <Operator>Operator</Operator>
                 <Value>
-                    {x34Gd73874Gf783Ff374Gfg4783Gf298H}
+                   iiojkkj
                   </Value>
                 <Operator>Consensus</Operator>
                 <Value>
-                    {x34Gd73874Gf783Ff374Gfg4783Gf298H}
+                  iooo
                   </Value>
                 <Operator>Hex</Operator>
                 <Value>
-                    {x34Gd73874Gf783Ff374Gfg4783Gf298H}
+                  9999
                   </Value>
               </OverlapGroup9>
             </OverlapGroupContainer1>
             <Rectangle46></Rectangle46>
             <DelegationsContent />
+         
+         <style jsx>{`
+           .inActive {
+           color: red;
+           }
+           .active {
+           color: green;
+           }
+         `}</style>
         </>
     )
 }
@@ -157,17 +164,6 @@ const OverlapGroup13 = styled.div`
   background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0px 7px 30px #0015da29;
-`;
-
-const OverlapGroup16 = styled.div`
-  height: 128px;
-  margin-right: 6px;
-  display: flex;
-  padding: 36.3px 34px;
-  align-items: flex-end;
-  min-width: 128px;
-  background-color: #5d2ac9;
-  border-radius: 64px;
 `;
 
 const IconStar = styled.img`
@@ -299,27 +295,8 @@ const OverlapGroup15 = styled.div`
 `;
 
 const OverlapGroup2 = styled.div`
-  width: 128px;
-  height: 129px;
+  width: 400px;
   position: relative;
-`;
-
-const Ellipse10 = styled.div`
-  position: absolute;
-  width: 128px;
-  height: 128px;
-  top: 1px;
-  left: 0;
-  border-radius: 64px;
-  border: 14.5px solid var(--chambray);
-`;
-
-const Ellipse11 = styled.img`
-  position: absolute;
-  width: 71px;
-  height: 72px;
-  top: 0;
-  left: 0;
 `;
 
 const Percent = styled.div`
@@ -331,34 +308,6 @@ const Percent = styled.div`
   color: var(--chambray);
   font-size: 29px;
   letter-spacing: 2.32px;
-`;
-
-const Details = styled.div`
-  width: 150px;
-  align-self: center;
-  margin-left: 128px;
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 62px;
-`;
-
-const VotingPower = styled.div`
-  ${UrbanistNormalBlack24px}
-  min-height: 29px;
-  letter-spacing: 0;
-`;
-
-const Address = styled.div`
-  min-height: 24px;
-  margin-top: 9px;
-  margin-left: 6px;
-  font-family: var(--font-family-urbanist);
-  font-weight: 700;
-  color: var(--black);
-  font-size: var(--font-size-xl2);
-  letter-spacing: 1.6px;
 `;
 
 const OverlapGroupContainer1 = styled.div`
@@ -512,6 +461,7 @@ const Number = styled.div`
   min-height: 31px;
   margin-top: 32px;
   min-width: 42px;
+  font-size: 20px;
   letter-spacing: 2.08px;
 `;
 
@@ -567,13 +517,6 @@ const Value = styled.div`
   color: #0015da;
   font-size: var(--font-size-xxl2);
   letter-spacing: 0;
-`;
-
-const IconCopy = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-left: 19px;
-  margin-bottom: 1px;
 `;
 
 const Operator = styled.div`

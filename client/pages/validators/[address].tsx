@@ -5,19 +5,16 @@ import {
   useGetChainValidatorDetailsQuery,
 } from '../../lib/chainApi';
 import { useRouter } from 'next/router'
+import { makeStore } from '../../lib/store';
 
 function ValidatorsDetails() {
     const {query} = useRouter()
     const getValidatorDetails =  useGetChainValidatorDetailsQuery(query.address)
-    
 
-  console.log(getValidatorDetails)
-  
     return (
         <ValidatorsDetailsContent {...getValidatorDetails} />
     )
 }
-
 
 export default ValidatorsDetails
 

@@ -13,7 +13,7 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Assets', 'NodeInfo'],
+  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations'],
   endpoints: (builder) => ({
     getChainLatestBlocks: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
@@ -34,10 +34,10 @@ export const chainApi = createApi({
      getChainPool: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/pool`,
       providesTags:  ['Pool'],
-    }),
-    getChainNodeInfo: builder.query<any, void>({
-      query: () => `${chainURL.cosmosChainRPC}/status`,
-      providesTags:  ['NodeInfo'],
+    }), 
+    getChainDelegations: builder.query<any, void>({
+      query: (validator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators/${validator_addr}/delegations`,
+      providesTags:  ['Delegations'],
     }),
   }),
 });
@@ -49,7 +49,7 @@ export const {
   useGetChainValidatorsQuery,
   useGetChainValidatorDetailsQuery,
   useGetChainPoolQuery,
-  useGetChainNodeInfoQuery,
+  useGetChainDelegationsQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
 
@@ -59,5 +59,5 @@ export const {
    getChainBlocks, 
    getChainValidators,
    getChainPool,
-   getChainNodeInfo
+   getChainDelegations,
  } = chainApi.endpoints;
