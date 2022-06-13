@@ -5,9 +5,8 @@ import {
   useGetChainValidatorDetailsQuery,
 } from '../../lib/chainApi';
 import { useRouter } from 'next/router'
-import { makeStore } from '../../lib/store';
 
-function ValidatorsDetails() {
+function ValidatorsDetails(props) {
     const {query} = useRouter()
     const getValidatorDetails =  useGetChainValidatorDetailsQuery(query.address)
 
@@ -21,5 +20,3 @@ export default ValidatorsDetails
 ValidatorsDetails.getLayout = function getLayout(page: any) {
     return <Layout>{page}</Layout>
   };
-
-

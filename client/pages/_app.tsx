@@ -6,6 +6,7 @@ const { default: AbortController } = require("abort-controller");
 const { wrapper } = require("../lib/store");
 const { default: fetch, Headers, Request, Response } = require("node-fetch");
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SSRProvider } from 'react-bootstrap';
 
 Object.assign(globalThis, {
   fetch,
@@ -25,8 +26,14 @@ type AppPropsWithLayout = AppProps & {
 }
 
 export function App({ Component, pageProps }: AppPropsWithLayout) {
+ 
     const getLayout = Component.getLayout ?? ((page) => page);
-    return getLayout(<Component {...pageProps} />);
+    return getLayout(
+      <SSRProvider>
+    <Component {...pageProps} />
+    </SSRProvider>
+    );
+   
 }
 
 export default wrapper.withRedux(App);

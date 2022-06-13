@@ -35,8 +35,8 @@ export const chainApi = createApi({
       query: () => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/pool`,
       providesTags:  ['Pool'],
     }), 
-    getChainDelegations: builder.query<any, void>({
-      query: (validator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators/${validator_addr}/delegations`,
+    getChainDelegations: builder.query<any, any>({
+      query: (validator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators/${validator_addr}/delegations?pagination.key=hhhh&pagination.limit=500&pagination.reverse=true`,
       providesTags:  ['Delegations'],
     }),
   }),

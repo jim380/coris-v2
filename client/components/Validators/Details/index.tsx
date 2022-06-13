@@ -7,14 +7,9 @@ import {
 } from "../../../styledMixins";
 import DelegationsContent from "./Delegation";
 import { formatTime, getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber } from "../../Util/format";
-import Image from 'next/image'
 import Link from "next/link";
-import { useGetChainPoolQuery, 
-         getChainDelegations,
-         getRunningOperationPromises,
-       } from '../../../lib/chainApi';
+import { useGetChainPoolQuery, useGetChainDelegationsQuery } from '../../../lib/chainApi';
 import ProgressBar from 'react-bootstrap/ProgressBar'
-import { makeStore } from "../../../lib/store";
 
 function ValidatorsDetailsContent(props) {
     const validatorsDetails = props?.data?.validator
@@ -25,17 +20,9 @@ function ValidatorsDetailsContent(props) {
   const getChainPool = useGetChainPoolQuery()
   const bondedTokens = getChainPool?.data?.pool?.bonded_tokens
   const percentageofVotingPower: number = getPercentageOfValidatorsBondedTokens(validatorsDetails?.tokens, bondedTokens)
-  
-
-  const delegations = async () => {
-    const store = makeStore;
-    const delegationsData = await store.dispatch(getChainDelegations.initiate(validatorsDetails.operator_address));
-    const results =  JSON.parse(JSON.stringify(delegationsData))
-    console.log(results)
-    await Promise.all(getRunningOperationPromises());
-    return results
-  }
-console.log(delegations)
+   
+  //get validatorsDelegations and pass to delegation component
+   const validatorsDelegations = useGetChainDelegationsQuery(validatorsDetails?.operator_address)
 
     return (
         <>
@@ -132,7 +119,7 @@ console.log(delegations)
               </OverlapGroup9>
             </OverlapGroupContainer1>
             <Rectangle46></Rectangle46>
-            <DelegationsContent />
+            <DelegationsContent {...validatorsDelegations} />
          
          <style jsx>{`
            .inActive {

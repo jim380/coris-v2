@@ -12,8 +12,11 @@ import {
 import RelegationsContent from "./Relegations";
 import UndelegationsContent from "./Undelegations";
 
-function DelegationsContent() {
- 
+function DelegationsContent(props) {
+    const d = props?.data?.delegation_responses.map((delegator) => {
+        return delegator.delegation.delegator_address
+    })
+  console.log(d)
   return (
     <>
     <Title>Delegations</Title>
@@ -22,12 +25,12 @@ function DelegationsContent() {
     <Tab eventKey="delegations" title="Delegations">
     <Address>Address</Address>
     <Amount>Amount</Amount>
+        {props?.data?.delegation_responses?.map((delegator) =>
         <OverlapGroup10>
-        <AddressValue>uuu....jjkkk</AddressValue>
-       <AmountValue>
-        7990999
-         </AmountValue>
+        <AddressValue>{delegator?.delegation?.delegator_address}</AddressValue>
+       <AmountValue>{delegator?.balance?.amount +' '+ delegator.balance.denom}</AmountValue>
       </OverlapGroup10>
+   )}
   </Tab>   
   <Tab eventKey="undelegations" title="Undelegations">
     <UndelegationsContent />
