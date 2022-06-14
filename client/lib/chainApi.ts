@@ -13,7 +13,7 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations'],
+  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations'],
   endpoints: (builder) => ({
     getChainLatestBlocks: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
@@ -39,6 +39,10 @@ export const chainApi = createApi({
       query: (validator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators/${validator_addr}/delegations?pagination.key=hhhh&pagination.limit=500&pagination.reverse=true`,
       providesTags:  ['Delegations'],
     }),
+    getChainUnDelegations: builder.query<any, any>({
+      query: (validator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators/${validator_addr}/unbonding_delegations?pagination.key=hhhh&pagination.limit=500&pagination.reverse=true`,
+      providesTags:  ['UnDelegations'],
+    }),
   }),
 });
 
@@ -50,6 +54,7 @@ export const {
   useGetChainValidatorDetailsQuery,
   useGetChainPoolQuery,
   useGetChainDelegationsQuery,
+  useGetChainUnDelegationsQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
 

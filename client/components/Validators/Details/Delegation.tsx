@@ -1,45 +1,28 @@
 import  React, { useState } from "react";
 import styled from "styled-components";
-import Tabs from 'react-bootstrap/Tabs'
-import Tab from 'react-bootstrap/Tab'
-
 import {
   UrbanistNormalNewCar172px,
   UrbanistMediumAbsoluteZero172px,
-  UrbanistBoldBlack40px, 
- ValignTextMiddle
+  ValignTextMiddle
 } from "../../../styledMixins";
-import RelegationsContent from "./Relegations";
-import UndelegationsContent from "./Undelegations";
+import { sortDelegatorsByAmount } from "../../Util/format";
 
 function DelegationsContent(props) {
-    const d = props?.data?.delegation_responses.map((delegator) => {
-        return delegator.delegation.delegator_address
+    const delegatorsData = props?.data?.delegation_responses?.map((delegator) => {
+        return delegator
     })
-  console.log(d)
+sortDelegatorsByAmount(delegatorsData)   
+//console.log(delegatorsData)
   return (
     <>
-    <Title>Delegations</Title>
-    <Transactions>
-    <Tabs defaultActiveKey="delegations" id="uncontrolled-tab-example" className="" variant="tabs">
-    <Tab eventKey="delegations" title="Delegations">
     <Address>Address</Address>
     <Amount>Amount</Amount>
-        {props?.data?.delegation_responses?.map((delegator) =>
+        {delegatorsData?.map((delegator) =>
         <OverlapGroup10>
         <AddressValue>{delegator?.delegation?.delegator_address}</AddressValue>
-       <AmountValue>{delegator?.balance?.amount +' '+ delegator.balance.denom}</AmountValue>
+       <AmountValue>{delegator?.balance?.amount +' '+ delegator?.balance?.denom}</AmountValue>
       </OverlapGroup10>
    )}
-  </Tab>   
-  <Tab eventKey="undelegations" title="Undelegations">
-    <UndelegationsContent />
-  </Tab>
-  <Tab eventKey="redelegations" title="Redelegations">
-  <RelegationsContent />
-  </Tab>
- </Tabs>
-    </Transactions>
     </>
   );
 }
@@ -55,32 +38,10 @@ const Address = styled.div`
 const Amount = styled.div`
   ${ValignTextMiddle}
   height: 21px;
-  margin-left: 550px;
+  margin-left: 850px;
   margin-top: -18px;
   min-width: 69px;
   letter-spacing: 0;
-`;
-
-
-const Title = styled.h1`
-  ${UrbanistBoldBlack40px}
-  min-height: 48px;
-  min-width: 112px;
-  letter-spacing: 0;
-  margin-top: 30px
-`;
-
-const Transactions = styled.div`
-  width: 1336px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 18.2px 16px;
-  align-items: flex-start;
-  min-height: 797px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
 `;
 
 const OverlapGroup10 = styled.div`

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { UrbanistBoldBlack40px } from "../../../styledMixins";
 
-
 function Title(props) {
   const { children } = props;
 

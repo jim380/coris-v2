@@ -4,12 +4,17 @@ import {
   UrbanistBoldBlack26px,
   UrbanistNormalBlack24px,
   UrbanistLightBlack24px,
+  UrbanistBoldBlack40px, 
 } from "../../../styledMixins";
 import DelegationsContent from "./Delegation";
 import { formatTime, getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber } from "../../Util/format";
 import Link from "next/link";
-import { useGetChainPoolQuery, useGetChainDelegationsQuery } from '../../../lib/chainApi';
+import { useGetChainPoolQuery, useGetChainDelegationsQuery, useGetChainUnDelegationsQuery } from '../../../lib/chainApi';
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
+import UndelegationsContent from "./Undelegations";
+import RelegationsContent from "./Relegations";
 
 function ValidatorsDetailsContent(props) {
     const validatorsDetails = props?.data?.validator
@@ -21,8 +26,11 @@ function ValidatorsDetailsContent(props) {
   const bondedTokens = getChainPool?.data?.pool?.bonded_tokens
   const percentageofVotingPower: number = getPercentageOfValidatorsBondedTokens(validatorsDetails?.tokens, bondedTokens)
    
-  //get validatorsDelegations and pass to delegation component
+   //get validatorsDelegations and pass to delegation component
    const validatorsDelegations = useGetChainDelegationsQuery(validatorsDetails?.operator_address)
+
+  //get UnDelegations and pass to delegation component
+   const unDelegations = useGetChainUnDelegationsQuery(validatorsDetails?.operator_address)
 
     return (
         <>
@@ -119,7 +127,21 @@ function ValidatorsDetailsContent(props) {
               </OverlapGroup9>
             </OverlapGroupContainer1>
             <Rectangle46></Rectangle46>
+
+            <TitleDelegation>Delegations</TitleDelegation>
+           <Transactions>
+           <Tabs defaultActiveKey="delegations" id="uncontrolled-tab-example" className="" variant="tabs">
+           <Tab eventKey="delegations" title="Delegations">
             <DelegationsContent {...validatorsDelegations} />
+            </Tab>
+            <Tab eventKey="undelegations" title="Undelegations">
+            <UndelegationsContent {...unDelegations} />
+           </Tab>
+           <Tab eventKey="redelegations" title="Redelegations">
+           <RelegationsContent />
+            </Tab>
+         </Tabs>
+      </Transactions>
          
          <style jsx>{`
            .inActive {
@@ -522,4 +544,24 @@ const Rectangle46 = styled.div`
   box-shadow: 0px 7px 30px #0015da29;
 `;
 
+const Transactions = styled.div`
+  width: 1336px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 18.2px 16px;
+  align-items: flex-start;
+  min-height: 797px;
+  background-color: var(--white);
+  border-radius: 20px;
+  box-shadow: 0px 7px 30px #0015da29;
+`;
+
+const TitleDelegation = styled.h1`
+  ${UrbanistBoldBlack40px}
+  min-height: 48px;
+  min-width: 112px;
+  letter-spacing: 0;
+  margin-top: 30px
+`;
 export default ValidatorsDetailsContent

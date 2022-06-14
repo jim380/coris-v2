@@ -5,19 +5,28 @@ import {
   UrbanistMediumAbsoluteZero172px, 
  ValignTextMiddle
 } from "../../../styledMixins";
+import { formatHash, formatTimeDateYear, sortUnDelegationsByBalance } from "../../Util/format";
 
-function UndelegationsContent() {
-
+function UndelegationsContent(props) {
+    const UndelegationsData = props?.data?.unbonding_responses?.map((delegator) => {
+       return delegator
+    })
+    sortUnDelegationsByBalance(UndelegationsData)
+ console.log(UndelegationsData)
     return (
          <>
         <Address>Address</Address>
         <Amount>Amount</Amount>
+        <Height>Creation Height</Height>
+        <Time>Completion Time</Time>
+          {UndelegationsData?.map((delegator) =>
             <OverlapGroup10>
-            <AddressValue>uuu....jjkkk</AddressValue>
-           <AmountValue>
-            7990999
-             </AmountValue>
+            <AddressValue>{formatHash(delegator?.delegator_address, 10, '.....')}</AddressValue>
+           <AmountValue>{delegator?.entries[0]?.balance}</AmountValue>
+           <HeightValue>{delegator?.entries[0]?.creation_height}</HeightValue>
+           <TimeValue>{formatTimeDateYear(delegator?.entries[0]?.completion_time)}</TimeValue>
           </OverlapGroup10>
+          )}
       </>
     )
 }
@@ -33,7 +42,25 @@ const Address = styled.div`
 const Amount = styled.div`
   ${ValignTextMiddle}
   height: 21px;
-  margin-left: 550px;
+  margin-left: 450px;
+  margin-top: -18px;
+  min-width: 69px;
+  letter-spacing: 0;
+`;
+
+const Height = styled.div`
+  ${ValignTextMiddle}
+  height: 21px;
+  margin-left: 650px;
+  margin-top: -18px;
+  min-width: 69px;
+  letter-spacing: 0;
+`;
+
+const Time = styled.div`
+  ${ValignTextMiddle}
+  height: 21px;
+  margin-left: 850px;
   margin-top: -18px;
   min-width: 69px;
   letter-spacing: 0;
@@ -61,7 +88,25 @@ const AddressValue = styled.div`
 const AmountValue = styled.div`
   ${UrbanistNormalNewCar172px}
   min-height: 21px;
-  margin-left: 460px;
+  margin-left: 330px;
+  margin-top: 0.33px;
+  min-width: 99px;
+  letter-spacing: 0;
+`;
+
+const HeightValue = styled.div`
+  ${UrbanistNormalNewCar172px}
+  min-height: 21px;
+  margin-left: 120px;
+  margin-top: 0.33px;
+  min-width: 99px;
+  letter-spacing: 0;
+`;
+
+const TimeValue = styled.div`
+  ${UrbanistNormalNewCar172px}
+  min-height: 21px;
+  margin-left: 80px;
   margin-top: 0.33px;
   min-width: 99px;
   letter-spacing: 0;

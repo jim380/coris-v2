@@ -3,6 +3,11 @@ export const formatTime = (t: Date) => {
     return d.toLocaleTimeString()
   }
 
+export const formatTimeDateYear = (t: Date) => {
+    const d = new Date(t)
+    return d.toLocaleString()
+  }
+
  export function formatHash(hash:string,index:number,chr:string) {
     if(index > hash.length-1) return hash;
     return hash.substring(0,index).slice(0 ,6) + chr + hash.substring(index+1).slice(-6); 
@@ -25,3 +30,9 @@ export const getPercentageOfValidatorsBondedTokens =
    percentageOfBondedTokens = ((Number(validatorsToken)/Number(totalBondedTokens))*(100))
   return percentageOfBondedTokens
 }
+
+//sort delegators shares by highest amount
+export const sortDelegatorsByAmount = (delegatorsArray: any[]) => delegatorsArray?.sort((delegation1, delegation2) => delegation2.balance.amount - delegation1.balance.amount)
+
+//sort undelegators shares by highest balance
+export const sortUnDelegationsByBalance = (unDelegatorsArray: any[]) => unDelegatorsArray?.sort((unDelegation1, unDelegation2) => unDelegation2.entries[0].balance - unDelegation1.entries[0].balance)

@@ -6,7 +6,7 @@ import {
  ValignTextMiddle
 } from "../../../styledMixins";
 
-function RelegationsContent() {
+function RelegationsContent(props) {
 
     return (
          <>
