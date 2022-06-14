@@ -9,7 +9,7 @@ import {
 import DelegationsContent from "./Delegation";
 import { formatTime, getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber } from "../../Util/format";
 import Link from "next/link";
-import { useGetChainPoolQuery, useGetChainDelegationsQuery, useGetChainUnDelegationsQuery } from '../../../lib/chainApi';
+import { useGetChainPoolQuery, useGetChainDelegationsQuery, useGetChainUnDelegationsQuery, useGetChainRelegationsQuery } from '../../../lib/chainApi';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
@@ -26,11 +26,11 @@ function ValidatorsDetailsContent(props) {
   const bondedTokens = getChainPool?.data?.pool?.bonded_tokens
   const percentageofVotingPower: number = getPercentageOfValidatorsBondedTokens(validatorsDetails?.tokens, bondedTokens)
    
-   //get validatorsDelegations and pass to delegation component
-   const validatorsDelegations = useGetChainDelegationsQuery(validatorsDetails?.operator_address)
+   //get validatorsDelegations and pass to delegation component and relegation to get fetch the delegators address
+  const validatorsDelegations = useGetChainDelegationsQuery(validatorsDetails?.operator_address)
 
-  //get UnDelegations and pass to delegation component
-   const unDelegations = useGetChainUnDelegationsQuery(validatorsDetails?.operator_address)
+    //get UnDelegations and pass to delegation component
+  const unDelegations = useGetChainUnDelegationsQuery(validatorsDetails?.operator_address)
 
     return (
         <>
@@ -138,7 +138,7 @@ function ValidatorsDetailsContent(props) {
             <UndelegationsContent {...unDelegations} />
            </Tab>
            <Tab eventKey="redelegations" title="Redelegations">
-           <RelegationsContent />
+           <RelegationsContent {...validatorsDelegations} />
             </Tab>
          </Tabs>
       </Transactions>

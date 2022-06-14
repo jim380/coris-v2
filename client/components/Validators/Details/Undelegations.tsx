@@ -12,7 +12,7 @@ function UndelegationsContent(props) {
        return delegator
     })
     sortUnDelegationsByBalance(UndelegationsData)
- console.log(UndelegationsData)
+ //console.log(UndelegationsData)
     return (
          <>
         <Address>Address</Address>

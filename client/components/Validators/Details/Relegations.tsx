@@ -1,5 +1,6 @@
 import  React, { useState } from "react";
 import styled from "styled-components";
+import { useGetChainRelegationsQuery } from "../../../lib/chainApi";
 import {
   UrbanistNormalNewCar172px,
   UrbanistMediumAbsoluteZero172px, 
@@ -7,6 +8,18 @@ import {
 } from "../../../styledMixins";
 
 function RelegationsContent(props) {
+     //get relegations data
+    const relegators = props?.data?.delegation_responses?.map((delegator) => {
+        const delegatorsAddress = delegator?.delegation?.delegator_address
+        const getRelegationData =useGetChainRelegationsQuery(delegatorsAddress)
+        const relegatorsData =getRelegationData?.data?.redelegation_responses.map((relegatorsDetails) => {
+          return relegatorsDetails
+        })
+        return relegatorsData
+    })
+  //relegators?.map((relegator) => {
+    // console.log(relegator)
+  //})
 
     return (
          <>
