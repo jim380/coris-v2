@@ -12,8 +12,6 @@ import {
 } from '../lib/chainApi';
 
 
-
-
 function Home () {
   
   //get latest blocks

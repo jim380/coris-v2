@@ -38,7 +38,7 @@ function SideNavBar (props) {
                <Link href="/validators"><a><Validators>{validators}</Validators></a></Link>
                <Link href="/blocks"><a><Blocks>{blocks}</Blocks></a></Link>
                <Link href="/proposals"><a><Proposals>{proposals}</Proposals></a></Link>
-               <Link href="/parameters"><a><Parameters>{parameters}</Parameters></a></Link>
+               <Link href="/params"><a><Parameters>{parameters}</Parameters></a></Link>
                <Link href="/assets"><a><Assets>{assets}</Assets></a></Link>
               </FlexCol1>
             </FlexRow>

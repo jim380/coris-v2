@@ -393,3 +393,11 @@ export const UrbanistSemiBoldCoconut24px = css`
   font-weight: 600;
   font-style: normal;
 `;
+
+export const UrbanistSemiBoldBlack24px = css`
+  color: var(--black);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxl2);
+  font-weight: 600;
+  font-style: normal;
+`;
