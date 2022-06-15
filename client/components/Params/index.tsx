@@ -4,8 +4,10 @@ import {
   UrbanistNormalBlack24px,
   UrbanistBoldBlack40px,
 } from "../../styledMixins";
-import GovParams from './GovParams';
-import MintParams from './MintingParams';
+import GovParams from './Gov';
+import MintParams from './Minting';
+import SlashingParams from './Slashing';
+import StakingParams from './Staking';
 
 function ParamsContent(props) {
     const {
@@ -34,8 +36,8 @@ function ParamsContent(props) {
             <StakingParameters>{stakingParameters}</StakingParameters>
           </IngParametersContainer>
           <OverlapGroupContainer>
-
-
+            <SlashingParams />
+            <StakingParams />
           </OverlapGroupContainer>
           
           <DistributionParametersContainer>
