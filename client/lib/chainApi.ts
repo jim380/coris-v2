@@ -13,7 +13,7 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Relegations'],
+  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations'],
   endpoints: (builder) => ({
     getChainLatestBlocks: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
@@ -36,16 +36,16 @@ export const chainApi = createApi({
       providesTags:  ['Pool'],
     }), 
     getChainDelegations: builder.query<any, any>({
-      query: (validator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators/${validator_addr}/delegations?pagination.key=hhhh&pagination.limit=500&pagination.reverse=true`,
+      query: (validator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators/${validator_addr}/delegations?pagination.key=hhhh&pagination.limit=600&pagination.reverse=true`,
       providesTags:  ['Delegations'],
     }),
     getChainUnDelegations: builder.query<any, any>({
       query: (validator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/validators/${validator_addr}/unbonding_delegations?pagination.key=hhhh&pagination.limit=500&pagination.reverse=true`,
       providesTags:  ['UnDelegations'],
     }),
-    getChainRelegations: builder.query<any, any>({
-      query: (delegator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/delegators/${delegator_addr}/redelegations?pagination.limit=10`,
-      providesTags:  ['Relegations'],
+    getChainRedelegations: builder.query<any, any>({
+      query: (delegator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/delegators/${delegator_addr}/redelegations?pagination.limit=600`,
+      providesTags:  ['Redelegations'],
     }),
   }),
 });
@@ -59,7 +59,7 @@ export const {
   useGetChainPoolQuery,
   useGetChainDelegationsQuery,
   useGetChainUnDelegationsQuery,
-  useGetChainRelegationsQuery,
+  useGetChainRedelegationsQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
 

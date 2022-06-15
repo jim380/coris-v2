@@ -9,12 +9,12 @@ import {
 import DelegationsContent from "./Delegation";
 import { formatTime, getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber } from "../../Util/format";
 import Link from "next/link";
-import { useGetChainPoolQuery, useGetChainDelegationsQuery, useGetChainUnDelegationsQuery, useGetChainRelegationsQuery } from '../../../lib/chainApi';
+import { useGetChainPoolQuery, useGetChainDelegationsQuery, useGetChainUnDelegationsQuery, useGetChainRedelegationsQuery } from '../../../lib/chainApi';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import UndelegationsContent from "./Undelegations";
-import RelegationsContent from "./Relegations";
+import RelegationsContent from "./Redelegations";
 
 function ValidatorsDetailsContent(props) {
     const validatorsDetails = props?.data?.validator
