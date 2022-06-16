@@ -4,6 +4,7 @@ import {
   UrbanistNormalBlack24px,
   UrbanistBoldBlack40px,
 } from "../../styledMixins";
+import DistributionParams from './Distribution';
 import GovParams from './Gov';
 import MintParams from './Minting';
 import SlashingParams from './Slashing';
@@ -21,35 +22,119 @@ function ParamsContent(props) {
       } = props;
     return (
     <>
-      <Title>{title}</Title>
+      <Title>{parametersData.title}</Title>
           <ParametersContainer>
-            <MiningParameters>{miningParameters}</MiningParameters>
-            <GovernanceParameters>{governanceParameters}</GovernanceParameters>
+            <MiningParameters>{parametersData.miningParameters}</MiningParameters>
+            <GovernanceParameters>{parametersData.governanceParameters}</GovernanceParameters>
           </ParametersContainer>
           <OverlapGroupContainer>
-            <MintParams />
-            <GovParams />
+            <MintParams {...minitingParamtersData} />
+            <GovParams {...govParamtersData} />
           </OverlapGroupContainer>
 
           <IngParametersContainer>
-            <SlashingParameters>{slashingParameters}</SlashingParameters>
-            <StakingParameters>{stakingParameters}</StakingParameters>
+            <SlashingParameters>{parametersData.slashingParameters}</SlashingParameters>
+            <StakingParameters>{parametersData.stakingParameters}</StakingParameters>
           </IngParametersContainer>
           <OverlapGroupContainer>
-            <SlashingParams />
-            <StakingParams />
+            <SlashingParams {...slashingParametersData} />
+            <StakingParams {...stakingParametersData} />
           </OverlapGroupContainer>
           
           <DistributionParametersContainer>
-            <DistributionParameters>{distributionParameters1}</DistributionParameters>
-            <DistributionParameters1>{distributionParameters2}</DistributionParameters1>
+            <DistributionParameters>{parametersData.distributionParameters1}</DistributionParameters>
+            <DistributionParameters1>{parametersData.distributionParameters2}</DistributionParameters1>
           </DistributionParametersContainer>
           <OverlapGroupContainer>
-
-            </OverlapGroupContainer>
+           <DistributionParams {...distributionParamtersData} />
+          </OverlapGroupContainer>
     </>
     )
 }
+
+const parametersData = {
+    title: "Parameters",
+    miningParameters: "Minting Parameters",
+    governanceParameters: "Governance Parameters",
+    slashingParameters: "Slashing Parameters",
+    stakingParameters: "Staking Parameters",
+    distributionParameters1: "Distribution Parameters",
+    distributionParameters2: "Distribution Parameters",
+};
+
+const minitingParamtersData = {
+    mintDenom: "Mint Denom",
+    inflationRateChange: "Inflation Rate Change",
+    inflationMax: "Inflation Max",
+    inflationMin: "Inflation Min",
+    goalBonded: "Goal Bonded",
+    blocksPerYear: "Blocks Per Year",
+    coris: "CORIS",
+    percent1: "13%",
+    percent2: "49%",
+    percent3: "35%",
+    percent4: "67%",
+    address1: "6 987 654S",
+}
+
+const govParamtersData = {
+    minDeposit: "Min Deposit",
+    name1: "Max Deposit Period",
+    quorom: "Quorom",
+    threshold: "Threshold",
+    vetoThreshold: "Veto Threshold",
+    votingPeriod: "Voting Period",
+    address2: "45 679 CORIS",
+    address3: "4 days",
+    percent5: "49%",
+    percent6: "35%",
+    percent7: "67%",
+    address4: "2 days",
+}
+
+const slashingParametersData = {
+    signedBlockWindow: "Signed Block Window",
+    minSignedPerWindow: "Min signed Per Window",
+    downtimeJailDuration: "Downtime Jail Duration",
+    slashFractionDoubleSign: "Slash Fraction Double Sign",
+    slashFractionDowntime: "Slash Fraction Downtime",
+    address5: "5 000",
+    percent8: "13%",
+    address6: "2 minutes",
+    percent9: "35%",
+    percent10: "67%",
+}
+
+const stakingParametersData = {
+    unbondingTime: "Unbonding Time",
+    name2: "Max Validators",
+    name3: "Max Entries",
+    historicalEntries: "Historical Entries",
+    surname: "Bond Denom",
+    address7: "4 days",
+    number1: "115",
+    number2: "7",
+    address8: "10 000",
+    address9: "45 679 CORIS",
+}
+
+const distributionParamtersData = {
+    communityTax: "Community Tax",
+    baseProposerReward: "Base Proposer Reward",
+    bonusProposerReward: "Bonus Proposer Reward",
+    withdrawalAdressEnabled: "Withdrawal Adress Enabled",
+    percent11: "2%",
+    percent12: "13%",
+    percent13: "4%",
+    place1: "True",
+    cosmosSdkVersion: "Cosmos SDK Version",
+    tendermintVersion: "Tendermint Version",
+    binaryVersion: "Binary Version",
+    text1: "0.00.5",
+    text2: "1.2",
+    text3: "3.4",
+}
+
 
 const Title = styled.h1`
   ${UrbanistBoldBlack40px}

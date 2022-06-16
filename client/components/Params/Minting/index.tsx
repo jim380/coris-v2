@@ -127,14 +127,4 @@ const Address = styled.div`
   letter-spacing: 0;
 `;
 
-
-
-
-
-
-
-
-
-
-
 export default MintParams
