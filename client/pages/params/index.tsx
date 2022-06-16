@@ -2,8 +2,8 @@ import React from 'react'
 import ParamsContent from '../../components/Params'
 import Layout from "../../components/layout/Layout";
 
-
 function Params() {
+    
     return (
      <>
       <ParamsContent />

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
+import { useGetChainMintingParamsQuery } from '../../lib/chainApi';
 import {
   UrbanistNormalBlack24px,
   UrbanistBoldBlack40px,
@@ -10,21 +11,27 @@ import MintParams from './Minting';
 import SlashingParams from './Slashing';
 import StakingParams from './Staking';
 
-function ParamsContent(props) {
-    const {
-        title,
-        miningParameters,
-        governanceParameters,
-        slashingParameters,
-        stakingParameters,
-        distributionParameters1,
-        distributionParameters2,
-      } = props;
+function ParamsContent() {
+  
+    const getMintingParams = useGetChainMintingParamsQuery()
+
+
+    
+    const minitingParamtersData = {
+        mintDenom: "Mint Denom",
+        inflationRateChange: "Inflation Rate Change",
+        inflationMax: "Inflation Max",
+        inflationMin: "Inflation Min",
+        goalBonded: "Goal Bonded",
+        blocksPerYear: "Blocks Per Year",
+        mintingData: getMintingParams
+    }
+
     return (
     <>
       <Title>{parametersData.title}</Title>
           <ParametersContainer>
-            <MiningParameters>{parametersData.miningParameters}</MiningParameters>
+            <MiningParameters>{parametersData.mintingParameters}</MiningParameters>
             <GovernanceParameters>{parametersData.governanceParameters}</GovernanceParameters>
           </ParametersContainer>
           <OverlapGroupContainer>
@@ -54,7 +61,7 @@ function ParamsContent(props) {
 
 const parametersData = {
     title: "Parameters",
-    miningParameters: "Minting Parameters",
+    mintingParameters: "Minting Parameters",
     governanceParameters: "Governance Parameters",
     slashingParameters: "Slashing Parameters",
     stakingParameters: "Staking Parameters",
@@ -62,20 +69,6 @@ const parametersData = {
     distributionParameters2: "Distribution Parameters",
 };
 
-const minitingParamtersData = {
-    mintDenom: "Mint Denom",
-    inflationRateChange: "Inflation Rate Change",
-    inflationMax: "Inflation Max",
-    inflationMin: "Inflation Min",
-    goalBonded: "Goal Bonded",
-    blocksPerYear: "Blocks Per Year",
-    coris: "CORIS",
-    percent1: "13%",
-    percent2: "49%",
-    percent3: "35%",
-    percent4: "67%",
-    address1: "6 987 654S",
-}
 
 const govParamtersData = {
     minDeposit: "Min Deposit",

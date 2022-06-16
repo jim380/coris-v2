@@ -20,7 +20,9 @@ function MintParams(props) {
         percent3,
         percent4,
         address1,
+        mintingData
       } = props;
+      console.log(mintingData)
     return (
         <>
         <FlexRow1>
@@ -33,12 +35,12 @@ function MintParams(props) {
                 <InflationRateChange>{blocksPerYear}</InflationRateChange>
               </FlexCol3>
               <FlexCol4>
-                <CORIS>{coris}</CORIS>
-                <Percent>{percent1}</Percent>
-                <Percent1>{percent2}</Percent1>
-                <Percent2>{percent3}</Percent2>
-                <Percent1>{percent4}</Percent1>
-                <Address>{address1}</Address>
+                <CORIS>{mintingData?.data?.params?.mint_denom?  mintingData.data.params.mint_denom : null}</CORIS>
+                <Percent>{mintingData?.data?.params?.inflation_rate_change? Math.round(mintingData.data.params.inflation_rate_change*100)+'%' : null}</Percent>
+                <Percent1>{mintingData?.data?.params?.inflation_max ?  Math.round(mintingData.data.params.inflation_max*100)+'%' : null}</Percent1>
+                <Percent2>{mintingData?.data?.params?.inflation_max ?  Math.round(mintingData.data.params.inflation_min*100)+'%' : null}</Percent2>
+                <Percent1>{mintingData?.data?.params?.goal_bonded ? Math.round(mintingData.data.params.goal_bonded*100)+'%' : null}</Percent1>
+                <Address>{mintingData?.data?.params?.blocks_per_year? mintingData.data.params.blocks_per_year : null}</Address>
               </FlexCol4>
             </FlexRow1>
         </>

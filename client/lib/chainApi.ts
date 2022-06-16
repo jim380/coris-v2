@@ -13,7 +13,7 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations'],
+  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations', 'MintingParameters'],
   endpoints: (builder) => ({
     getChainLatestBlocks: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
@@ -47,6 +47,10 @@ export const chainApi = createApi({
       query: (delegator_addr) => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/delegators/${delegator_addr}/redelegations?pagination.limit=600`,
       providesTags:  ['Redelegations'],
     }),
+    getChainMintingParams: builder.query<any, void>({
+      query: () => `${chainURL.cosmosChainREST}/cosmos/mint/v1beta1/params`,
+      providesTags:  ['MintingParameters'],
+    }),
   }),
 });
 
@@ -60,6 +64,7 @@ export const {
   useGetChainDelegationsQuery,
   useGetChainUnDelegationsQuery,
   useGetChainRedelegationsQuery,
+  useGetChainMintingParamsQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
 
