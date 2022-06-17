@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { useGetChainGovParamsQuery, useGetChainMintingParamsQuery, useGetChainSlashingParamsQuery, useGetChainStakingParamsQuery } from '../../lib/chainApi';
+import { useGetChainDistributionParamsQuery, useGetChainGovParamsQuery, useGetChainMintingParamsQuery, useGetChainSlashingParamsQuery, useGetChainStakingParamsQuery } from '../../lib/chainApi';
 import {
   UrbanistNormalBlack24px,
   UrbanistBoldBlack40px,
@@ -8,6 +8,7 @@ import {
 import DistributionParams from './Distribution';
 import GovParams from './Gov';
 import MintParams from './Minting';
+import NodeInfoParams from './NodeInfo';
 import SlashingParams from './Slashing';
 import StakingParams from './Staking';
 
@@ -19,9 +20,8 @@ function ParamsContent() {
        getGovDepositParams = useGetChainGovParamsQuery('deposit'),   
        getGovTallyingParams = useGetChainGovParamsQuery('tallying'),
        getSlashingParams = useGetChainSlashingParamsQuery(),
-       getStakingparams = useGetChainStakingParamsQuery()
-       ;   
-
+       getStakingParams = useGetChainStakingParamsQuery(),
+       getDistributionParams = useGetChainDistributionParamsQuery();   
 
     const minitingParamtersData = {
         mintDenom: "Mint Denom",
@@ -60,13 +60,30 @@ function ParamsContent() {
     name3: "Max Entries",
     historicalEntries: "Historical Entries",
     surname: "Bond Denom",
-    address7: "4 days",
-    number1: "115",
-    number2: "7",
-    address8: "10 000",
-    address9: "45 679 CORIS",
-    stakingParamsData: getStakingparams
+    stakingParamsData: getStakingParams
     }
+
+    const distributionParamtersData = {
+        communityTax: "Community Tax",
+        baseProposerReward: "Base Proposer Reward",
+        bonusProposerReward: "Bonus Proposer Reward",
+        withdrawalAdressEnabled: "Withdrawal Adress Enabled",
+        percent11: "2%",
+        percent12: "13%",
+        percent13: "4%",
+        place1: "True",
+        distributionParamsData: getDistributionParams
+    }
+
+    const parametersData = {
+        title: "Parameters",
+        mintingParameters: "Minting Parameters",
+        governanceParameters: "Governance Parameters",
+        slashingParameters: "Slashing Parameters",
+        stakingParameters: "Staking Parameters",
+        distributionParameters1: "Distribution Parameters",
+        distributionParameters2: "NodeInfo Parameters",
+    };
 
     return (
     <>
@@ -95,30 +112,13 @@ function ParamsContent() {
           </DistributionParametersContainer>
           <OverlapGroupContainer>
            <DistributionParams {...distributionParamtersData} />
+           <NodeInfoParams {...nodeInfoParametersData} />
           </OverlapGroupContainer>
     </>
     )
 }
 
-const parametersData = {
-    title: "Parameters",
-    mintingParameters: "Minting Parameters",
-    governanceParameters: "Governance Parameters",
-    slashingParameters: "Slashing Parameters",
-    stakingParameters: "Staking Parameters",
-    distributionParameters1: "Distribution Parameters",
-    distributionParameters2: "Distribution Parameters",
-};
-
-const distributionParamtersData = {
-    communityTax: "Community Tax",
-    baseProposerReward: "Base Proposer Reward",
-    bonusProposerReward: "Bonus Proposer Reward",
-    withdrawalAdressEnabled: "Withdrawal Adress Enabled",
-    percent11: "2%",
-    percent12: "13%",
-    percent13: "4%",
-    place1: "True",
+const nodeInfoParametersData = {
     cosmosSdkVersion: "Cosmos SDK Version",
     tendermintVersion: "Tendermint Version",
     binaryVersion: "Binary Version",

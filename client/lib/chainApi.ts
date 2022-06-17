@@ -13,7 +13,7 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations', 'MintingParameters', 'GovParameters', 'SlashingParameters', 'StakingParameters'],
+  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations', 'MintingParameters', 'GovParameters', 'SlashingParameters', 'StakingParameters', 'DistributionParameters'],
   endpoints: (builder) => ({
     getChainLatestBlocks: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
@@ -63,6 +63,10 @@ export const chainApi = createApi({
       query: () => `${chainURL.cosmosChainREST}/cosmos/staking/v1beta1/params`,
       providesTags:  ['StakingParameters'],
     }),
+    getChainDistributionParams: builder.query<any,void>({
+      query: () => `${chainURL.cosmosChainREST}/cosmos/distribution/v1beta1/params`,
+      providesTags:  ['DistributionParameters'],
+    }),
   }),
 });
 
@@ -80,6 +84,7 @@ export const {
   useGetChainGovParamsQuery,
   useGetChainSlashingParamsQuery,
   useGetChainStakingParamsQuery,
+  useGetChainDistributionParamsQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
 
