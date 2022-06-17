@@ -119,7 +119,7 @@ const Address = styled.div`
   ${ValignTextMiddle}
   height: 29px;
   margin-top: 16px;
-  min-width: 119px;
+  min-width: 11px;
   letter-spacing: 0;
 `;
 

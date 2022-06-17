@@ -1,16 +1,11 @@
 import React from 'react'
 import styled from "styled-components";
 import {
-  UrbanistSemiBoldSoap24px,
-  UrbanistSemiBoldBlueBell24px,
   UrbanistNormalBlack24px,
-  UrbanistBoldBlack20px,
   UrbanistSemiBoldBlack24px,
-  UrbanistBoldBlack40px,
-  UrbanistLightBlack15px,
-  UrbanistMediumBlack18px,
   ValignTextMiddle,
 } from "../../../styledMixins";
+import { periodsInDays } from '../../Util/format';
 
 function StakingParams(props) {
     const {
@@ -24,7 +19,9 @@ function StakingParams(props) {
         number2,
         address8,
         address9,
+        stakingParamsData
       } = props;
+      console.log(stakingParamsData)
     return (
         <>
         <FlexRow4>
@@ -36,11 +33,11 @@ function StakingParams(props) {
                 <InflationRateChange>{surname}</InflationRateChange>
               </FlexCol9>
               <FlexCol10>
-                <CORIS>{address7}</CORIS>
-                <Number>{number1}</Number>
-                <Number1>{number2}</Number1>
-                <Address5>{address8}</Address5>
-                <Address6>{address9}</Address6>
+                <CORIS>{stakingParamsData?.data?.params?.unbonding_time?  periodsInDays(stakingParamsData.data.params.unbonding_time) : null}</CORIS>
+                <Number>{stakingParamsData?.data?.params?.max_validators ? stakingParamsData.data.params.max_validators : null }</Number>
+                <Number1>{stakingParamsData?.data?.params?.max_entries ? stakingParamsData.data.params.max_entries : null}</Number1>
+                <Address5>{stakingParamsData?.data?.params?.historical_entries ? stakingParamsData.data.params.historical_entries : null}</Address5>
+                <Address6>{stakingParamsData?.data?.params?.bond_denom ? stakingParamsData.data.params.bond_denom : null}</Address6>
               </FlexCol10>
             </FlexRow4>
         </>
@@ -126,7 +123,7 @@ const Address6 = styled.div`
   ${ValignTextMiddle}
   height: 29px;
   margin-top: 16px;
-  min-width: 148px;
+  min-width: 14px;
   letter-spacing: 0;
 `;
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { useGetChainGovParamsQuery, useGetChainMintingParamsQuery, useGetChainSlashingParamsQuery } from '../../lib/chainApi';
+import { useGetChainGovParamsQuery, useGetChainMintingParamsQuery, useGetChainSlashingParamsQuery, useGetChainStakingParamsQuery } from '../../lib/chainApi';
 import {
   UrbanistNormalBlack24px,
   UrbanistBoldBlack40px,
@@ -18,7 +18,9 @@ function ParamsContent() {
        getGovVotingParams = useGetChainGovParamsQuery('voting'),   
        getGovDepositParams = useGetChainGovParamsQuery('deposit'),   
        getGovTallyingParams = useGetChainGovParamsQuery('tallying'),
-       getSlashingParams = useGetChainSlashingParamsQuery();   
+       getSlashingParams = useGetChainSlashingParamsQuery(),
+       getStakingparams = useGetChainStakingParamsQuery()
+       ;   
 
 
     const minitingParamtersData = {
@@ -49,13 +51,22 @@ function ParamsContent() {
     downtimeJailDuration: "Downtime Jail Duration",
     slashFractionDoubleSign: "Slash Fraction Double Sign",
     slashFractionDowntime: "Slash Fraction Downtime",
-    address5: "5 000",
-    percent8: "13%",
-    address6: "2 minutes",
-    percent9: "35%",
-    percent10: "67%",
     slashingParamsData: getSlashingParams
-}
+   }
+
+   const stakingParametersData = {
+    unbondingTime: "Unbonding Time",
+    name2: "Max Validators",
+    name3: "Max Entries",
+    historicalEntries: "Historical Entries",
+    surname: "Bond Denom",
+    address7: "4 days",
+    number1: "115",
+    number2: "7",
+    address8: "10 000",
+    address9: "45 679 CORIS",
+    stakingParamsData: getStakingparams
+    }
 
     return (
     <>
@@ -98,19 +109,6 @@ const parametersData = {
     distributionParameters1: "Distribution Parameters",
     distributionParameters2: "Distribution Parameters",
 };
-
-const stakingParametersData = {
-    unbondingTime: "Unbonding Time",
-    name2: "Max Validators",
-    name3: "Max Entries",
-    historicalEntries: "Historical Entries",
-    surname: "Bond Denom",
-    address7: "4 days",
-    number1: "115",
-    number2: "7",
-    address8: "10 000",
-    address9: "45 679 CORIS",
-}
 
 const distributionParamtersData = {
     communityTax: "Community Tax",
