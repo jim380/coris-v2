@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { useGetChainGovParamsQuery, useGetChainMintingParamsQuery } from '../../lib/chainApi';
+import { useGetChainGovParamsQuery, useGetChainMintingParamsQuery, useGetChainSlashingParamsQuery } from '../../lib/chainApi';
 import {
   UrbanistNormalBlack24px,
   UrbanistBoldBlack40px,
@@ -13,10 +13,13 @@ import StakingParams from './Staking';
 
 function ParamsContent() {
   
- const getMintingParams = useGetChainMintingParamsQuery()
- const getGovVotingParams = useGetChainGovParamsQuery('voting')   
- const getGovDepositParams = useGetChainGovParamsQuery('deposit')   
- const getGovTallyingParams = useGetChainGovParamsQuery('tallying')   
+ const getMintingParams = useGetChainMintingParamsQuery(),
+       //pass the params type to the gov 
+       getGovVotingParams = useGetChainGovParamsQuery('voting'),   
+       getGovDepositParams = useGetChainGovParamsQuery('deposit'),   
+       getGovTallyingParams = useGetChainGovParamsQuery('tallying'),
+       getSlashingParams = useGetChainSlashingParamsQuery();   
+
 
     const minitingParamtersData = {
         mintDenom: "Mint Denom",
@@ -39,6 +42,20 @@ function ParamsContent() {
        govDepositParamsData: getGovDepositParams,
        govTallyingParamsData: getGovTallyingParams
    }
+
+   const slashingParametersData = {
+    signedBlockWindow: "Signed Block Window",
+    minSignedPerWindow: "Min signed Per Window",
+    downtimeJailDuration: "Downtime Jail Duration",
+    slashFractionDoubleSign: "Slash Fraction Double Sign",
+    slashFractionDowntime: "Slash Fraction Downtime",
+    address5: "5 000",
+    percent8: "13%",
+    address6: "2 minutes",
+    percent9: "35%",
+    percent10: "67%",
+    slashingParamsData: getSlashingParams
+}
 
     return (
     <>
@@ -81,20 +98,6 @@ const parametersData = {
     distributionParameters1: "Distribution Parameters",
     distributionParameters2: "Distribution Parameters",
 };
-
-
-const slashingParametersData = {
-    signedBlockWindow: "Signed Block Window",
-    minSignedPerWindow: "Min signed Per Window",
-    downtimeJailDuration: "Downtime Jail Duration",
-    slashFractionDoubleSign: "Slash Fraction Double Sign",
-    slashFractionDowntime: "Slash Fraction Downtime",
-    address5: "5 000",
-    percent8: "13%",
-    address6: "2 minutes",
-    percent9: "35%",
-    percent10: "67%",
-}
 
 const stakingParametersData = {
     unbondingTime: "Unbonding Time",

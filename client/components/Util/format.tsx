@@ -44,3 +44,11 @@ export const periodsInDays = (periodsInSeconds: any) => {
    const  periodDays  = Math.floor(t/(3600*24))+' days'     
   return periodDays
 } 
+
+//function to convert voting periods to days
+export const periodsInMinutes = (periodsInSeconds: any) => {
+  //use slice to remove s attached to the string 
+  let t = periodsInSeconds?.slice(0, -1)
+   const  periodDays  = Math.floor(t/(60))+ 'minutes'     
+  return periodDays
+} 

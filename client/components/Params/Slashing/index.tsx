@@ -5,6 +5,7 @@ import {
   UrbanistSemiBoldBlack24px,
   ValignTextMiddle,
 } from "../../../styledMixins";
+import { periodsInMinutes } from '../../Util/format';
 
 function SlashingParams(props) {
     const {
@@ -13,12 +14,9 @@ function SlashingParams(props) {
         downtimeJailDuration,
         slashFractionDoubleSign,
         slashFractionDowntime,
-        address5,
-        percent8,
-        address6,
-        percent9,
-        percent10
+        slashingParamsData
       } = props;
+      console.log(slashingParamsData)
     return (
         <>
          <FlexRow3>
@@ -30,11 +28,11 @@ function SlashingParams(props) {
                 <InflationRateChange>{slashFractionDowntime}</InflationRateChange>
               </FlexCol7>
               <FlexCol8>
-                <Address3>{address5}</Address3>
-                <Percent>{percent8}</Percent>
-                <Address4>{address6}</Address4>
-                <Percent2>{percent9}</Percent2>
-                <Percent1>{percent10}</Percent1>
+                <Address3>{slashingParamsData?.data?.params?.signed_blocks_window ? slashingParamsData.data.params.signed_blocks_window : null}</Address3>
+                <Percent>{slashingParamsData?.data?.params?.min_signed_per_window ? slashingParamsData.data.params.min_signed_per_window*100+'%' : null }</Percent>
+                <Address4>{slashingParamsData?.data?.params?.downtime_jail_duration ? periodsInMinutes(slashingParamsData.data.params.downtime_jail_duration) : null }</Address4>
+                <Percent2>{slashingParamsData?.data?.params?.slash_fraction_double_sign ? slashingParamsData.data.params.slash_fraction_double_sign*100+'%' : null}</Percent2>
+                <Percent1>{slashingParamsData?.data?.params?.slash_fraction_downtime ? slashingParamsData.data.params.slash_fraction_downtime*100+'%' : null}</Percent1>
               </FlexCol8>
             </FlexRow3>
         </>

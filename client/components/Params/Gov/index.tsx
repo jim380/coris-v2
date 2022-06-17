@@ -15,12 +15,6 @@ function GovParams(props) {
         threshold,
         vetoThreshold,
         votingPeriod,
-        address2,
-        address3,
-        percent5,
-        percent6,
-        percent7,
-        address4,
         govVotingParamsData,
         govDepositParamsData,
         govTallyingParamsData 
