@@ -24,7 +24,7 @@ function DistributionParams(props) {
         place1,
         distributionParamsData
       } = props;
-     console.log(distributionParamsData)
+ 
     return (
       <>
        <FlexRow5>

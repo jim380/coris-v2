@@ -14,14 +14,9 @@ function StakingParams(props) {
         name3,
         historicalEntries,
         surname,
-        address7,
-        number1,
-        number2,
-        address8,
-        address9,
         stakingParamsData
       } = props;
-      console.log(stakingParamsData)
+
     return (
         <>
         <FlexRow4>

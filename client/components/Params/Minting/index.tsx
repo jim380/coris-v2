@@ -16,7 +16,7 @@ function MintParams(props) {
         blocksPerYear,
         mintingParamsData
       } = props;
-      //console.log(mintingParamsData)
+   
     return (
         <>
         <FlexRow1>

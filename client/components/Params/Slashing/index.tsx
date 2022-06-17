@@ -16,7 +16,7 @@ function SlashingParams(props) {
         slashFractionDowntime,
         slashingParamsData
       } = props;
-      console.log(slashingParamsData)
+ 
     return (
         <>
          <FlexRow3>

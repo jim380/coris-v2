@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { useGetChainDistributionParamsQuery, useGetChainGovParamsQuery, useGetChainMintingParamsQuery, useGetChainSlashingParamsQuery, useGetChainStakingParamsQuery } from '../../lib/chainApi';
+import { useGetChainDistributionParamsQuery, useGetChainGovParamsQuery, useGetChainMintingParamsQuery, useGetChainNodeInfoQuery, useGetChainSlashingParamsQuery, useGetChainStakingParamsQuery } from '../../lib/chainApi';
 import {
   UrbanistNormalBlack24px,
   UrbanistBoldBlack40px,
@@ -21,7 +21,8 @@ function ParamsContent() {
        getGovTallyingParams = useGetChainGovParamsQuery('tallying'),
        getSlashingParams = useGetChainSlashingParamsQuery(),
        getStakingParams = useGetChainStakingParamsQuery(),
-       getDistributionParams = useGetChainDistributionParamsQuery();   
+       getDistributionParams = useGetChainDistributionParamsQuery(),
+       getNodeInfo = useGetChainNodeInfoQuery();   
 
     const minitingParamtersData = {
         mintDenom: "Mint Denom",
@@ -68,11 +69,17 @@ function ParamsContent() {
         baseProposerReward: "Base Proposer Reward",
         bonusProposerReward: "Bonus Proposer Reward",
         withdrawalAdressEnabled: "Withdrawal Adress Enabled",
-        percent11: "2%",
-        percent12: "13%",
-        percent13: "4%",
-        place1: "True",
         distributionParamsData: getDistributionParams
+    }
+
+    const nodeInfoParametersData = {
+        cosmosSdkVersion: "Cosmos SDK Version",
+        tendermintVersion: "Tendermint Version",
+        binaryVersion: "Binary Version",
+        text1: "0.00.5",
+        text2: "1.2",
+        text3: "3.4",
+        nodeInfoData: getNodeInfo
     }
 
     const parametersData = {
@@ -117,16 +124,6 @@ function ParamsContent() {
     </>
     )
 }
-
-const nodeInfoParametersData = {
-    cosmosSdkVersion: "Cosmos SDK Version",
-    tendermintVersion: "Tendermint Version",
-    binaryVersion: "Binary Version",
-    text1: "0.00.5",
-    text2: "1.2",
-    text3: "3.4",
-}
-
 
 const Title = styled.h1`
   ${UrbanistBoldBlack40px}

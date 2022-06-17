@@ -14,8 +14,10 @@ function NodeInfoParams(props) {
         text1,
         text2,
         text3,
+        nodeInfoData
       } = props;
-    
+     console.log(nodeInfoData.data.application_version.cosmos_sdk_version) 
+     console.log(nodeInfoData.data.node_info.version)
     return (
        <>
             <FlexRow6>
@@ -25,9 +27,9 @@ function NodeInfoParams(props) {
                 <InflationRateChange>{binaryVersion}</InflationRateChange>
               </VersionContainer>
               <TextContainer>
-                <Text1>{text1}</Text1>
-                <Text2>{text2}</Text2>
-                <Percent4>{text3}</Percent4>
+                <Text1>{nodeInfoData?.data?.application_version?.cosmos_sdk_version? nodeInfoData.data.application_version.cosmos_sdk_version : null}</Text1>
+                <Text2>{nodeInfoData?.data?.node_info?.version? nodeInfoData.data.node_info.version : null}</Text2>
+                <Percent4>{nodeInfoData?.data?.application_version?.cosmos_sdk_version? nodeInfoData.data.application_version.version : null}</Percent4>
               </TextContainer>
             </FlexRow6>
       </>       
