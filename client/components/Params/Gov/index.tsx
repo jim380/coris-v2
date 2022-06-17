@@ -5,6 +5,7 @@ import {
   UrbanistSemiBoldBlack24px,
   ValignTextMiddle,
 } from "../../../styledMixins";
+import { periodsInDays } from '../../Util/format';
 
 function GovParams(props) {
     const {
@@ -19,9 +20,12 @@ function GovParams(props) {
         percent5,
         percent6,
         percent7,
-        address4, 
+        address4,
+        govVotingParamsData,
+        govDepositParamsData,
+        govTallyingParamsData 
       } = props;
-    
+  
     return (
         <>
          <FlexRow2>
@@ -34,12 +38,12 @@ function GovParams(props) {
                 <InflationRateChange>{votingPeriod}</InflationRateChange>
               </FlexCol5>
               <FlexCol6>
-                <Address1>{address2}</Address1>
-                <Address2>{address3}</Address2>
-                <Percent1>{percent5}</Percent1>
-                <Percent2>{percent6}</Percent2>
-                <Percent1>{percent7}</Percent1>
-                <Address2>{address4}</Address2>
+                <Address1>{govDepositParamsData?.data?.deposit_params?.min_deposit ? govDepositParamsData?.data?.deposit_params?.min_deposit[0]?.amount+''+ govDepositParamsData?.data?.deposit_params?.min_deposit[0]?.denom : null}</Address1>
+                <Address2>{govDepositParamsData?.data?.deposit_params?.max_deposit_period ? periodsInDays(govDepositParamsData.data.deposit_params.max_deposit_period): null}</Address2>
+                <Percent1>{govTallyingParamsData?.data?.tally_params?.quorum? govTallyingParamsData.data.tally_params.quorum*100+'%' : null}</Percent1>
+                <Percent2>{govTallyingParamsData?.data?.tally_params?.threshold? govTallyingParamsData.data.tally_params.threshold*100+'%' : null }</Percent2>
+                <Percent1>{govTallyingParamsData?.data?.tally_params?.veto_threshold ? govTallyingParamsData.data.tally_params.veto_threshold*100+'%' : null}</Percent1>
+                <Address2>{govVotingParamsData?.data?.voting_params?.voting_period? periodsInDays(govVotingParamsData.data.voting_params.voting_period): null}</Address2>
               </FlexCol6>
             </FlexRow2>
         </>

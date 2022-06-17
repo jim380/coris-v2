@@ -36,3 +36,11 @@ export const sortDelegatorsByAmount = (delegatorsArray: any[]) => delegatorsArra
 
 //sort undelegators shares by highest balance
 export const sortUnDelegationsByBalance = (unDelegatorsArray: any[]) => unDelegatorsArray?.sort((unDelegation1, unDelegation2) => unDelegation2.entries[0].balance - unDelegation1.entries[0].balance)
+
+//function to convert voting periods to days
+export const periodsInDays = (periodsInSeconds: any) => {
+  //use slice to remove s attached to the string 
+  let t = periodsInSeconds?.slice(0, -1)
+   const  periodDays  = Math.floor(t/(3600*24))+' days'     
+  return periodDays
+} 

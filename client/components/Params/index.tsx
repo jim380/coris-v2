@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { useGetChainMintingParamsQuery } from '../../lib/chainApi';
+import { useGetChainGovParamsQuery, useGetChainMintingParamsQuery } from '../../lib/chainApi';
 import {
   UrbanistNormalBlack24px,
   UrbanistBoldBlack40px,
@@ -13,10 +13,11 @@ import StakingParams from './Staking';
 
 function ParamsContent() {
   
-    const getMintingParams = useGetChainMintingParamsQuery()
+ const getMintingParams = useGetChainMintingParamsQuery()
+ const getGovVotingParams = useGetChainGovParamsQuery('voting')   
+ const getGovDepositParams = useGetChainGovParamsQuery('deposit')   
+ const getGovTallyingParams = useGetChainGovParamsQuery('tallying')   
 
-
-    
     const minitingParamtersData = {
         mintDenom: "Mint Denom",
         inflationRateChange: "Inflation Rate Change",
@@ -24,8 +25,20 @@ function ParamsContent() {
         inflationMin: "Inflation Min",
         goalBonded: "Goal Bonded",
         blocksPerYear: "Blocks Per Year",
-        mintingData: getMintingParams
+        mintingParamsData: getMintingParams
     }
+
+    const govParamtersData = {
+       minDeposit: "Min Deposit",
+       name1: "Max Deposit Period",
+       quorom: "Quorom",
+       threshold: "Threshold",
+       vetoThreshold: "Veto Threshold",
+       votingPeriod: "Voting Period",
+       govVotingParamsData: getGovVotingParams,
+       govDepositParamsData: getGovDepositParams,
+       govTallyingParamsData: getGovTallyingParams
+   }
 
     return (
     <>
@@ -69,21 +82,6 @@ const parametersData = {
     distributionParameters2: "Distribution Parameters",
 };
 
-
-const govParamtersData = {
-    minDeposit: "Min Deposit",
-    name1: "Max Deposit Period",
-    quorom: "Quorom",
-    threshold: "Threshold",
-    vetoThreshold: "Veto Threshold",
-    votingPeriod: "Voting Period",
-    address2: "45 679 CORIS",
-    address3: "4 days",
-    percent5: "49%",
-    percent6: "35%",
-    percent7: "67%",
-    address4: "2 days",
-}
 
 const slashingParametersData = {
     signedBlockWindow: "Signed Block Window",

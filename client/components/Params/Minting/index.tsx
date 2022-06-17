@@ -14,15 +14,9 @@ function MintParams(props) {
         inflationMin,
         goalBonded,
         blocksPerYear,
-        coris,
-        percent1,
-        percent2,
-        percent3,
-        percent4,
-        address1,
-        mintingData
+        mintingParamsData
       } = props;
-      console.log(mintingData)
+      //console.log(mintingParamsData)
     return (
         <>
         <FlexRow1>
@@ -35,12 +29,12 @@ function MintParams(props) {
                 <InflationRateChange>{blocksPerYear}</InflationRateChange>
               </FlexCol3>
               <FlexCol4>
-                <CORIS>{mintingData?.data?.params?.mint_denom?  mintingData.data.params.mint_denom : null}</CORIS>
-                <Percent>{mintingData?.data?.params?.inflation_rate_change? Math.round(mintingData.data.params.inflation_rate_change*100)+'%' : null}</Percent>
-                <Percent1>{mintingData?.data?.params?.inflation_max ?  Math.round(mintingData.data.params.inflation_max*100)+'%' : null}</Percent1>
-                <Percent2>{mintingData?.data?.params?.inflation_max ?  Math.round(mintingData.data.params.inflation_min*100)+'%' : null}</Percent2>
-                <Percent1>{mintingData?.data?.params?.goal_bonded ? Math.round(mintingData.data.params.goal_bonded*100)+'%' : null}</Percent1>
-                <Address>{mintingData?.data?.params?.blocks_per_year? mintingData.data.params.blocks_per_year : null}</Address>
+                <CORIS>{mintingParamsData?.data?.params?.mint_denom?  mintingParamsData.data.params.mint_denom : null}</CORIS>
+                <Percent>{mintingParamsData?.data?.params?.inflation_rate_change? Math.round(mintingParamsData.data.params.inflation_rate_change*100)+'%' : null}</Percent>
+                <Percent1>{mintingParamsData?.data?.params?.inflation_max ?  Math.round(mintingParamsData.data.params.inflation_max*100)+'%' : null}</Percent1>
+                <Percent2>{mintingParamsData?.data?.params?.inflation_max ?  Math.round(mintingParamsData.data.params.inflation_min*100)+'%' : null}</Percent2>
+                <Percent1>{mintingParamsData?.data?.params?.goal_bonded ? Math.round(mintingParamsData.data.params.goal_bonded*100)+'%' : null}</Percent1>
+                <Address>{mintingParamsData?.data?.params?.blocks_per_year? mintingParamsData.data.params.blocks_per_year : null}</Address>
               </FlexCol4>
             </FlexRow1>
         </>

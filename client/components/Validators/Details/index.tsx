@@ -50,7 +50,7 @@ function ValidatorsDetailsContent(props) {
                   <Status>Status</Status>
                 </FlexCol4>
                 <FlexCol5>
-                  <Active>{validatorsDetails?.jailed !== false ? <p className="inActive">Yes</p> : <p className="active">No</p>}</Active>
+                  <Active>{ validatorsDetails?.jailed !== false ? <p className="inActive">Yes</p> : <p className="active">No</p>}</Active>
                   <InJail>In Jail</InJail>
                 </FlexCol5>
                 <FlexCol6>
