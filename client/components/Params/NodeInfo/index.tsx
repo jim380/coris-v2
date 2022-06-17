@@ -11,13 +11,9 @@ function NodeInfoParams(props) {
         cosmosSdkVersion,
         tendermintVersion,
         binaryVersion,
-        text1,
-        text2,
-        text3,
         nodeInfoData
       } = props;
-     console.log(nodeInfoData.data.application_version.cosmos_sdk_version) 
-     console.log(nodeInfoData.data.node_info.version)
+
     return (
        <>
             <FlexRow6>

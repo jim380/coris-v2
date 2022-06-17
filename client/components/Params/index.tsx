@@ -76,9 +76,6 @@ function ParamsContent() {
         cosmosSdkVersion: "Cosmos SDK Version",
         tendermintVersion: "Tendermint Version",
         binaryVersion: "Binary Version",
-        text1: "0.00.5",
-        text2: "1.2",
-        text3: "3.4",
         nodeInfoData: getNodeInfo
     }
 
@@ -201,6 +198,5 @@ const DistributionParameters1 = styled.div`
   margin-left: 431px;
   letter-spacing: 0;
 `;
-
 
 export default ParamsContent
