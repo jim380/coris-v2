@@ -13,7 +13,7 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations', 'MintingParameters', 'GovParameters', 'SlashingParameters', 'StakingParameters', 'DistributionParameters', 'NodeInfo'],
+  tagTypes: ['LatestBlocks', 'Blocks', 'Validators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations', 'MintingParameters', 'GovParameters', 'SlashingParameters', 'StakingParameters', 'DistributionParameters', 'NodeInfo', 'Proposals', 'ProposalDetails'],
   endpoints: (builder) => ({
     getChainLatestBlocks: builder.query<any, void>({
       query: () => `${chainURL.cosmosChainRPC}/block_search?query=%22block.height%3E10000000%22&per_page=9&page=1`,
@@ -71,6 +71,14 @@ export const chainApi = createApi({
       query: () => `${chainURL.cosmosChainREST}/node_info`,
       providesTags:  ['NodeInfo'],
     }),
+    getChainProposals: builder.query<any,void>({
+      query: () => `${chainURL.cosmosChainREST}/cosmos/gov/v1beta1/proposals?pagination.limit=500&pagination.reverse=true`,
+      providesTags:  ['Proposals'],
+    }),
+    getChainProposalDetails: builder.query<any, any>({
+      query: (proposal_id) => `${chainURL.cosmosChainREST}/cosmos/gov/v1beta1/proposals/${proposal_id}`,
+      providesTags:  ['ProposalDetails'],
+    }),
   }),
 });
 
@@ -90,6 +98,8 @@ export const {
   useGetChainStakingParamsQuery,
   useGetChainDistributionParamsQuery,
   useGetChainNodeInfoQuery,
+  useGetChainProposalsQuery,
+  useGetChainProposalDetailsQuery,
   util: { getRunningOperationPromises },
 } = chainApi;
 

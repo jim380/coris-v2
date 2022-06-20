@@ -401,3 +401,19 @@ export const UrbanistSemiBoldBlack24px = css`
   font-weight: 600;
   font-style: normal;
 `;
+
+export const UrbanistBoldWhite20px = css`
+  color: var(--white);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  font-style: normal;
+`;
+
+export const UrbanistSemiBoldWhite24px = css`
+  color: var(--white);
+  font-family: var(--font-family-urbanist);
+  font-size: var(--font-size-xxl2);
+  font-weight: 600;
+  font-style: normal;
+`;

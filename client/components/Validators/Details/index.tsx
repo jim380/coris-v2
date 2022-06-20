@@ -13,6 +13,8 @@ import { useGetChainPoolQuery, useGetChainDelegationsQuery, useGetChainUnDelegat
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 import UndelegationsContent from "./Undelegations";
 import RelegationsContent from "./Redelegations";
 
@@ -62,7 +64,9 @@ function ValidatorsDetailsContent(props) {
               <OverlapGroup15>
                 <OverlapGroup2>
                     {roundValidatorsVotingPowerToWholeNumber(validatorsDetails?.tokens)}
-                <ProgressBar animated now={percentageofVotingPower} />
+                    <OverlayTrigger  overlay={<Tooltip id="tooltip-disabled">{percentageofVotingPower.toFixed(2)+'%'}</Tooltip>}>
+                  <ProgressBar animated   now={percentageofVotingPower} />
+                </OverlayTrigger>
                   <Percent>{percentageofVotingPower.toFixed(2)+'%'}</Percent>
                 </OverlapGroup2> 
               </OverlapGroup15>

@@ -4,7 +4,6 @@ import ValidatorTilte from "./ValidatorsTitle";
 import styled from "styled-components";
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
-
 import {
   UrbanistNormalNewCar172px,
   UrbanistNormalBlack172px,
@@ -15,7 +14,7 @@ import SearchButton from "./SearchButton";
 import Link from "next/link";
 
 function ValidatorsContent(props) {
-  const [ query, setQuery] = useState("")
+  const [query, setQuery] = useState("")
 
   const {
      validators, 
