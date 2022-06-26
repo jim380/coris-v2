@@ -8,33 +8,42 @@ require("dotenv").config();
 
 const fetchURL = process.env.COSMOS_RPC
 
-cron.schedule('* * * * * *', function(){
-    async function blocks() {
-        const blocksData = await fetch(
-            `${fetchURL}/block_search?query=%22block.height%3E10000000%22&per_page=10&page=1`)
-        const response = await blocksData.json(); 
-     
-     response?.result?.blocks?.map((block) => {
-      const b =  new  blockModel({
-        height: block.block.header.height
+cron.schedule('*/5 * * * * *', function(){
+    //cron to run at every 5sec to get latest blocks
+        getBlocksAsync()
+});
+
+
+async function getBlocksAsync() {
+    try{
+      let response = await fetch(`${fetchURL}/blocks/latest`);
+      const block = await response.json();
+      const blockData =  new blockModel({
+        height: block.block.header.height,
+        hash: block.block_id.hash,
+        proposer: block.block.header.proposer_address,
+        noTxs: block.block.data.txs.length,
+        time: block.block.header.time
          })
-         b.save((err)=>{
+         blockData.save((err)=>{
             try {
                 if (err){
-                    throw('block height can not be duplicated')
+                    throw('blockdata can not be duplicated')
                 }
             } catch(e) {
                 console.log(e)
             }
         })
-       
-    }) 
-    
-    
-        }
-    
-        blocks()
-});
+
+
+     }catch(err){
+      console.error(err);
+      // Handle errors here
+    }
+  }
+
+
+
   
 app.use(cors({
     origin: '*'
