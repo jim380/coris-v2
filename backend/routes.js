@@ -10,7 +10,7 @@ const fetchURL = process.env.COSMOS_RPC
 
 cron.schedule('*/5 * * * * *', function(){
     //cron to run at every 5sec to get latest blocks
-        getBlocksAsync()
+        //getBlocksAsync()
 });
 
 
@@ -35,27 +35,42 @@ async function getBlocksAsync() {
             }
         })
 
-
      }catch(err){
       console.error(err);
       // Handle errors here
     }
   }
 
-
-
   
 app.use(cors({
     origin: '*'
 }));
 
-app.get('/Blocks', async function(req, res) {
-      
-   const blocks = await blockModel.find({})
-    res.json(blocks)
+//return 15 latest blocks
+app.get('/blocks/latest', async function(req, res) {
+    try{  
+   const blocks = await blockModel.find({}, {}, { sort: {'_id': -1}}).limit(15)
+    res.json(blocks) 
    console.log(blocks)
+}
+catch(error){
+    res.status(500).json({message: error.message})
+}
+
 });
 
+//return 5000 latest blocks
+app.get('/blocks', async function(req, res) {
+    try{  
+   const blocks = await blockModel.find({}, {}, { sort: {'_id': -1}}).limit(5000)
+    res.json(blocks) 
+   console.log(blocks)
+}
+catch(error){
+    res.status(500).json({message: error.message})
+}
+
+});
 
 
 module.exports = app;
