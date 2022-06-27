@@ -15,4 +15,5 @@ const nextConfig = {
     images: {
       domains: ['http://www.google.com/s2/favicons?domain=https://stake.fish/'],
     },
+
   }

@@ -6,7 +6,7 @@ import axios from 'axios'
 function Assets() {
    
     const [coinsData, setCoins] = useState([])
-    let coinsAPi = process.env.NEXT_PUBLIC_Asset_API
+    let coinsAPi = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=cosmos-ecosystem&order=market_cap_desc&per_page=50&page=1&sparkline=false'
     useEffect(() => {
         axios.get(coinsAPi).then((response) => {
             setCoins(response.data)

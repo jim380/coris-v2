@@ -1,33 +1,21 @@
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
 import Layout from "../components/layout/Layout";
-import HomePageContent from "../components/Homepage/HomePage";
+import HomePageContent from "../components/Homepage";
 import Head from "next/head";
 import Link from "next/link";
-import cache from '../backend/utils/DB/cache'
-import { makeStore } from "../lib/store";
-import {
-  getChainLatestBlocks,
-  getRunningOperationPromises,
-} from '../lib/chainApi';
-
+import axios from 'axios'
 
 function Home () {
-  
-  //get latest blocks
-  const latestBlocks = async () => {
-    const store = makeStore();
-    const latestBlocksData = await store.dispatch(getChainLatestBlocks.initiate());
-    const results =  JSON.parse(JSON.stringify(latestBlocksData))
-    await Promise.all(getRunningOperationPromises());
-    return results
-  }
 
-  //useSWR handles caching, revalidation, focus tracking, refetching on intervals
-  const  {data}  = useSWR('blocks/latest', latestBlocks, { refreshInterval: 4000 })
-  const block = data?.data?.result?.blocks?.map((block: any) =>{
-    return block
-  })
+  const [blocks, setBlocks] = useState([])
+  let getBlocksLatestAPi = process.env.NEXT_PUBLIC_GetBlocksLatest
+  useEffect(() => {
+      axios.get(getBlocksLatestAPi).then((response) => {
+          setBlocks(response.data)
+      }).catch((error) => {
+          console.log(error)
+      })
+  }, [blocks])
   
   const homePageData = {
     title: "Overview",
@@ -56,7 +44,7 @@ function Home () {
     percent4: "75%",
     latestBlocks: "Latest Blocks",
     viewAll: "View all",
-    blocks: block,  
+    blocks: blocks,  
   }
 
   return (
@@ -67,15 +55,10 @@ function Home () {
 }
 
 
-
 export default Home
 
 Home.getLayout = function getLayout(page: any) {
   return <Layout>{page}</Layout>
 };
 
-  
-
-//function to persist data in Redis
-//const cachedLatestBlocks = await cache.fetch("", fetcher, 10)
 
