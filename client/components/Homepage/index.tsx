@@ -8,27 +8,22 @@ import  LatestBlocksTilte from './LatestBlocksTilte'
 import {
   UrbanistMediumAbsoluteZero172px,
   UrbanistBoldBlack26px,
-  UrbanistSemiBoldSoap24px,
   UrbanistNormalBlack172px,
-  UrbanistSemiBoldBlueBell24px,
   UrbanistNormalBlack24px,
   UrbanistNormalNewCar172px,
   UrbanistBoldChambray21px,
-  UrbanistSemiBoldBlack12px,
   UrbanistBoldBlack16px,
-  UrbanistBoldBlack20px,
   UrbanistLightBlack24px,
   UrbanistBoldBlack40px,
-  UrbanistLightBlack15px,
-  UrbanistMediumBlack18px,
-  ValignTextMiddle,
 } from "../../styledMixins";
 
 import { sha256 } from "@cosmjs/crypto";
-import { Bech32, fromBase64, toHex  } from "@cosmjs/encoding";
+import { Bech32, fromBase64, toHex, fromHex, toBech32  } from "@cosmjs/encoding";
 import { encodeBech32Pubkey } from "@cosmjs/launchpad";
 import { pubkeyToAddress } from "@cosmjs/amino";
 import { decodeBech32Pubkey } from "@cosmjs/launchpad"
+import { useGetChainActiveValidatorsQuery } from "../../lib/chainApi";
+import Blocks from "../Blocks";
 
 
 function HomePageContent(props) {
@@ -53,9 +48,9 @@ function HomePageContent(props) {
     percent4,
     latestBlocks,
     viewAll,
-    blocks,
+    getBlocks,
   } = props;
-  console.log(blocks)
+  //console.log(getBlocks)
 
  
 // Ed25519 pubkey from genesis
@@ -79,6 +74,34 @@ const p = decodeBech32Pubkey(
 const a = sha256(fromBase64(p.value)).slice(0, 20);
 const address = toHex(a).toUpperCase();
 //console.log(address)
+
+//function that receieves proposer address and returns the validators details
+const getChainValidators = useGetChainActiveValidatorsQuery()
+const joinedBlocksValidatorsData = getBlocks.map(block => {
+   //convert proposer address to cosmosvalcons
+   const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
+  
+   const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
+     //fetch just the active validators
+        //get the consensus pubkey
+    const ed25519PubkeyRaw = fromBase64(validator.consensus_pubkey.key);
+    const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
+    const bech32Address = Bech32.encode("cosmosvalcons", addressData);
+     
+    if (bech32Address === proposerToBech32){
+     return {...validator, ...block}
+    }
+   })
+
+return getActiveChainValidators
+
+})
+
+//console.log(joinedBlocksValidatorsData)
+joinedBlocksValidatorsData.map((data, i ) => {
+  console.log(data)
+})
+
 
     return(
      <>
@@ -108,11 +131,11 @@ const address = toHex(a).toUpperCase();
           <GetOneBlock>
           <LatestBlockTitle>
       <LatestBlock>latest Block</LatestBlock>
-      <Phone00>{blocks[0]?.height}</Phone00>
+      <Phone00>{getBlocks[0]?.height}</Phone00>
        </LatestBlockTitle>
        <BlockTimeTitle>
       <BlockTime>Block Time</BlockTime>
-      <X602s>{formatTime(blocks[0]?.time)}</X602s>
+      <X602s>{formatTime(getBlocks[0]?.time)}</X602s>
     </BlockTimeTitle>
     <ChainName>
       <Chain>chain</Chain>
@@ -204,14 +227,14 @@ const address = toHex(a).toUpperCase();
         noOfTxs={latestBlocksTilteData.noOfTxs}
         time={latestBlocksTilteData.time}
       />
-       {blocks?.map((block: any) =>
+       {getBlocks?.map((block: any) =>
       <OverlapGroup10>
        <Phone2>{block?.height}</Phone2>
-        <X34567efe34g6j7k85h>{formatHash(block?.hash, 10, "....")}</X34567efe34g6j7k85h>
+        <X34567efe34g6j7k85h>{}</X34567efe34g6j7k85h>
         <Ellipse8></Ellipse8>
         <DgtizeStake>{block?.height}</DgtizeStake>
         <Number>{block?.noTxs}</Number>
-        <X6sAgo>{formatTime(block?.time)}</X6sAgo>
+        <X6sAgo>{block.time}</X6sAgo>
       </OverlapGroup10>
 )}
     </LatestBlocks1>

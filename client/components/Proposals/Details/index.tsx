@@ -39,7 +39,7 @@ function ProposalDetailsContents(props){
               <TitleValue>{proposalDetails?.data?.proposal?.content?.title? proposalDetails.data.proposal.content.title : null}</TitleValue>
               <OverlapGroup2>
                 <PASSED>
-                {proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_PASSED'? (<Badge bg="success">PASSED</Badge>) : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_REJECTED'? (<Badge bg="danger">REJECTED</Badge>) : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_VOTING_PERIOD'? ('<Badge bg="info">VOTING PERIOD</Badge>') : (<Badge bg="warning">FAILED</Badge>)}
+                {proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_PASSED'? (<Badge bg="success">PASSED</Badge>) : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_REJECTED'? (<Badge bg="danger">REJECTED</Badge>) : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_VOTING_PERIOD'? (<Badge bg="info">VOTING PERIOD</Badge>) : (<Badge bg="warning">FAILED</Badge>)}
                 </PASSED>
               </OverlapGroup2>
               <FlexRow1>
@@ -173,7 +173,7 @@ const PASSED = styled.div`
   ${UrbanistBoldWhite20px}
   min-height: 24px;
   letter-spacing: 0;
-  margin-left: -40px;
+  margin-left: -10px;
 `;
 
 const FlexRow1 = styled.div`

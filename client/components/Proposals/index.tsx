@@ -27,7 +27,7 @@ function ProposalsContent(props) {
         totalDeposit,
         proposalsData
       } = props;
-    console.log(proposalsData)
+    //console.log(proposalsData)
       const activeProposals = proposalsData?.data?.proposals?.map(proposal => {
           if (proposal.status === 'PROPOSAL_STATUS_VOTING_PERIOD' || proposal.status === 'PROPOSAL_STATUS_PASSED' || proposal.status === 'PROPOSAL_STATUS_REJECTED' || proposal.status === 'PROPOSAL_STATUS_FAILED' ) {
             return proposal
@@ -67,9 +67,9 @@ function ProposalsContent(props) {
               <Link href='/proposals[id]' as={`/proposals/${proposal?.proposal_id}`} ><a>
               <OverlapGroup2>
                 <Number>{proposal?.proposal_id}</Number>
-                <TitleValue>{proposal?.content?.description? proposal.content.title.slice(0, 55)+'.....' : null}</TitleValue>
+                <TitleValue>{proposal?.content?.description? proposal.content.title.slice(0, 40)+'....' : null}</TitleValue>
                 <OverlapGroup3>
-                <SatusValue>{proposal.status === 'PROPOSAL_STATUS_PASSED'? (<Badge bg="success">PASSED</Badge>) : proposal.status === 'PROPOSAL_STATUS_REJECTED'? (<Badge bg="danger">REJECTED</Badge>) : proposal.status === 'PROPOSAL_STATUS_VOTING_PERIOD'? ('<Badge bg="info">VOTING PERIOD</Badge>') : (<Badge bg="warning">FAILED</Badge>)}</SatusValue>
+                <SatusValue>{proposal.status === 'PROPOSAL_STATUS_PASSED'? (<Badge bg="success">PASSED</Badge>) : proposal.status === 'PROPOSAL_STATUS_REJECTED'? (<Badge bg="danger">REJECTED</Badge>) : proposal.status === 'PROPOSAL_STATUS_VOTING_PERIOD'? (<Badge bg="info">VOTING PERIOD</Badge>) : (<Badge bg="warning">FAILED</Badge>)}</SatusValue>
                 </OverlapGroup3>
                 <VotingStartValue>{formatTimeDateYear(proposal.voting_start_time)}</VotingStartValue>
                 <VotingEndvalue>{formatTimeDateYear(proposal.voting_end_time)}</VotingEndvalue>

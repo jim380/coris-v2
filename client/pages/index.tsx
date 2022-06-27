@@ -44,7 +44,7 @@ function Home () {
     percent4: "75%",
     latestBlocks: "Latest Blocks",
     viewAll: "View all",
-    blocks: blocks,  
+    getBlocks: blocks,  
   }
 
   return (

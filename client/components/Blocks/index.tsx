@@ -13,63 +13,9 @@ import {
 
 function Blocks(props) {
   const {
-    phone1,
-    x34567EfE34G6J7K85H1,
-    dgtizeStake1,
-    number1,
-    x6SAgo1,
-    phone2,
-    x34567EfE34G6J7K85H2,
-    dgtizeStake2,
-    number2,
-    x6SAgo2,
-    phone3,
-    x34567EfE34G6J7K85H3,
-    dgtizeStake3,
-    number3,
-    x6SAgo3,
-    phone4,
-    x34567EfE34G6J7K85H4,
-    dgtizeStake4,
-    number4,
-    x6SAgo4,
-    phone5,
-    x34567EfE34G6J7K85H5,
-    dgtizeStake5,
-    number5,
-    x6SAgo5,
-    phone6,
-    x34567EfE34G6J7K85H6,
-    dgtizeStake6,
-    number6,
-    x6SAgo6,
-    phone7,
-    x34567EfE34G6J7K85H7,
-    dgtizeStake7,
-    number7,
-    x6SAgo7,
-    phone8,
-    x34567EfE34G6J7K85H8,
-    dgtizeStake8,
-    number8,
-    x6SAgo8,
-    phone9,
-    x34567EfE34G6J7K85H9,
-    dgtizeStake9,
-    number9,
-    x6SAgo9,
-    phone10,
-    x34567EfE34G6J7K85H10,
-    dgtizeStake10,
-    number10,
-    x6SAgo10,
-    phone11,
-    x34567EfE34G6J7K85H11,
-    dgtizeStake11,
-    number11,
-    x6SAgo11
+    getBlocks
   } = props;
-
+ //console.log(getBlocks)
   return (
     <>
     <Title>Blocks</Title>
@@ -81,94 +27,16 @@ function Blocks(props) {
         noOfTxs={BlocksTitleData.noOfTxs}
         time={BlocksTitleData.time}
       />
+      {getBlocks.map((block) => 
       <OverlapGroup10>
-        <Phone>{phone1}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H1}</X34567efe34g6j7k85h>
+        <HeightValue>{block?.height? block.height : null}</HeightValue>
+        <HashValue>{block?.hash? formatHash(block.hash, 15, '....') : null}</HashValue>
         <Ellipse8></Ellipse8>
-        <DgtizeStake>{dgtizeStake1}</DgtizeStake>
-        <Number>{number1}</Number>
-        <X6sAgo>{x6SAgo1}</X6sAgo>
+        <ProposerValue>{block?.height? block.height : null}</ProposerValue>
+        <NumberOfTxs>{block?.noTxs}</NumberOfTxs>
+        <TimeValue>{block?.time? formatTime(block.time): null}</TimeValue>
       </OverlapGroup10>
-      <OverlapGroup9>
-        <Phone>{phone2}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H2}</X34567efe34g6j7k85h>
-        <Ellipse81></Ellipse81>
-        <DgtizeStake>{dgtizeStake2}</DgtizeStake>
-        <Number>{number2}</Number>
-        <X6sAgo>{x6SAgo2}</X6sAgo>
-      </OverlapGroup9>
-      <OverlapGroup8>
-        <Phone>{phone3}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H3}</X34567efe34g6j7k85h>
-        <Ellipse82></Ellipse82>
-        <DgtizeStake>{dgtizeStake3}</DgtizeStake>
-        <Number>{number3}</Number>
-        <X6sAgo>{x6SAgo3}</X6sAgo>
-      </OverlapGroup8>
-      <OverlapGroup9>
-        <Phone>{phone4}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H4}</X34567efe34g6j7k85h>
-        <Ellipse83></Ellipse83>
-        <DgtizeStake>{dgtizeStake4}</DgtizeStake>
-        <Number>{number4}</Number>
-        <X6sAgo>{x6SAgo4}</X6sAgo>
-      </OverlapGroup9>
-      <OverlapGroup8>
-        <Phone>{phone5}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H5}</X34567efe34g6j7k85h>
-        <Ellipse84></Ellipse84>
-        <DgtizeStake>{dgtizeStake5}</DgtizeStake>
-        <Number>{number5}</Number>
-        <X6sAgo>{x6SAgo5}</X6sAgo>
-      </OverlapGroup8>
-      <OverlapGroup9>
-        <Phone>{phone6}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H6}</X34567efe34g6j7k85h>
-        <Ellipse85></Ellipse85>
-        <DgtizeStake>{dgtizeStake6}</DgtizeStake>
-        <Number>{number6}</Number>
-        <X6sAgo>{x6SAgo6}</X6sAgo>
-      </OverlapGroup9>
-      <OverlapGroup8>
-        <Phone>{phone7}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H7}</X34567efe34g6j7k85h>
-        <Ellipse86></Ellipse86>
-        <DgtizeStake>{dgtizeStake7}</DgtizeStake>
-        <Number>{number7}</Number>
-        <X6sAgo>{x6SAgo7}</X6sAgo>
-      </OverlapGroup8>
-      <OverlapGroup9>
-        <Phone>{phone8}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H8}</X34567efe34g6j7k85h>
-        <Ellipse8></Ellipse8>
-        <DgtizeStake>{dgtizeStake8}</DgtizeStake>
-        <Number>{number8}</Number>
-        <X6sAgo>{x6SAgo8}</X6sAgo>
-      </OverlapGroup9>
-      <OverlapGroup8>
-        <Phone>{phone9}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H9}</X34567efe34g6j7k85h>
-        <Ellipse87></Ellipse87>
-        <DgtizeStake>{dgtizeStake9}</DgtizeStake>
-        <Number>{number9}</Number>
-        <X6sAgo>{x6SAgo9}</X6sAgo>
-      </OverlapGroup8>
-      <OverlapGroup9>
-        <Phone>{phone10}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H10}</X34567efe34g6j7k85h>
-        <Ellipse88></Ellipse88>
-        <DgtizeStake>{dgtizeStake10}</DgtizeStake>
-        <Number>{number10}</Number>
-        <X6sAgo>{x6SAgo10}</X6sAgo>
-      </OverlapGroup9>
-      <OverlapGroup8>
-        <Phone>{phone11}</Phone>
-        <X34567efe34g6j7k85h>{x34567EfE34G6J7K85H11}</X34567efe34g6j7k85h>
-        <Ellipse89></Ellipse89>
-        <DgtizeStake>{dgtizeStake11}</DgtizeStake>
-        <Number>{number11}</Number>
-        <X6sAgo>{x6SAgo11}</X6sAgo>
-      </OverlapGroup8>
+      )}
     </LatestBlocks1>
     </>
   );
@@ -213,7 +81,7 @@ const OverlapGroup10 = styled.div`
   background-color: var(--titan-white);
 `;
 
-const Phone = styled.div`
+const HeightValue = styled.div`
   ${UrbanistMediumAbsoluteZero172px}
   min-height: 21px;
   margin-top: 0.33px;
@@ -221,7 +89,7 @@ const Phone = styled.div`
   letter-spacing: 0;
 `;
 
-const X34567efe34g6j7k85h = styled.div`
+const HashValue = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
   margin-left: 125px;
@@ -239,7 +107,7 @@ const Ellipse8 = styled.div`
   border-radius: 15.93px;
 `;
 
-const DgtizeStake = styled.div`
+const ProposerValue = styled.div`
   ${UrbanistNormalNewCar172px}
   min-height: 21px;
   margin-left: 14px;
@@ -248,7 +116,7 @@ const DgtizeStake = styled.div`
   letter-spacing: 0;
 `;
 
-const Number = styled.div`
+const NumberOfTxs = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
   margin-left: 247px;
@@ -257,7 +125,7 @@ const Number = styled.div`
   letter-spacing: 0;
 `;
 
-const X6sAgo = styled.div`
+const TimeValue = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
   margin-left: 186px;
@@ -265,108 +133,5 @@ const X6sAgo = styled.div`
   min-width: 51px;
   letter-spacing: 0;
 `;
-
-const OverlapGroup9 = styled.div`
-  height: 60px;
-  margin-top: 4px;
-  display: flex;
-  padding: 13.8px 14.6px;
-  align-items: center;
-  min-width: 1303px;
-  background-color: var(--white);
-`;
-
-const Ellipse81 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--navy-blue);
-  border-radius: 15.93px;
-`;
-
-const OverlapGroup8 = styled.div`
-  height: 60px;
-  margin-top: 4px;
-  display: flex;
-  padding: 13.8px 14.6px;
-  align-items: center;
-  min-width: 1303px;
-  background-color: var(--titan-white);
-`;
-
-const Ellipse82 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--caribbean-green);
-  border-radius: 15.93px;
-`;
-
-const Ellipse83 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--lavender-magenta);
-  border-radius: 15.93px;
-`;
-
-const Ellipse84 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--gray);
-  border-radius: 15.93px;
-`;
-
-const Ellipse85 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--mercury);
-  border-radius: 15.93px;
-`;
-
-const Ellipse86 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--brilliant-rose);
-  border-radius: 15.93px;
-`;
-
-const Ellipse87 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--eminence);
-  border-radius: 15.93px;
-`;
-
-const Ellipse88 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--cyan--aqua);
-  border-radius: 15.93px;
-`;
-
-const Ellipse89 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--chartreuse-yellow);
-  border-radius: 15.93px;
-`;
-
-
 
 export default Blocks;
