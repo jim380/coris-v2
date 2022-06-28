@@ -1,0 +1,8 @@
+.overview-desktop-screen {
+  align-items: flex-start;
+  background-color: var(--magnolia);
+  display: flex;
+  height: 2422px;
+  overflow: hidden;
+  width: 1728px;
+}
