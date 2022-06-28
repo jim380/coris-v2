@@ -495,6 +495,7 @@
   border-width: 10px;
   border-style: solid;
   border-color: var(--chambray);
+<<<<<<< HEAD
 }
 
 a{
@@ -570,4 +571,6 @@ html, body, #__next{
 
 .w-100{
   width: 100%;
+=======
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 }

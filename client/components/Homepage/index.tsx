@@ -1,10 +1,10 @@
-import React from "react";
-import styles from "../layout/Layout.module.css";
-import { formatTime, formatHash } from "../Util/format"
+import  React from "react";
+import Link from "next/link";
+import {formatTime, formatHash, getValidatorsLogoFromWebsites} from "../Util/format"
 import styled from "styled-components";
 import Details from './Details'
 import Details2 from './Details2'
-import LatestBlocksTilte from './LatestBlocksTilte'
+import  LatestBlocksTilte from './LatestBlocksTilte'
 import {
   UrbanistMediumAbsoluteZero172px,
   UrbanistBoldBlack26px,
@@ -16,15 +16,9 @@ import {
   UrbanistLightBlack24px,
   UrbanistBoldBlack40px,
 } from "../../styledMixins";
-
 import { sha256 } from "@cosmjs/crypto";
-import { Bech32, fromBase64, toHex, fromHex, toBech32 } from "@cosmjs/encoding";
-import { encodeBech32Pubkey } from "@cosmjs/launchpad";
-import { pubkeyToAddress } from "@cosmjs/amino";
-import { decodeBech32Pubkey } from "@cosmjs/launchpad"
+import { Bech32, fromBase64, toHex, fromHex, toBech32  } from "@cosmjs/encoding";
 import { useGetChainActiveValidatorsQuery } from "../../lib/chainApi";
-import Blocks from "../Blocks";
-
 
 function HomePageContent(props) {
   const {
@@ -52,103 +46,70 @@ function HomePageContent(props) {
   } = props;
   //console.log(getBlocks)
 
+//function that receieves proposer address and returns the validators details
+const getChainValidators = useGetChainActiveValidatorsQuery()
+const joinedBlocksValidatorsData = getBlocks.map((block)=> {
+   //convert proposer address to cosmosvalcons
+   const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
+  
+   const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
+     //fetch just the active validators
+    //get the consensus pubkey
+    const ed25519PubkeyRaw = fromBase64(validator.consensus_pubkey.key);
+    const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
+    const bech32Address = Bech32.encode("cosmosvalcons", addressData);
+     
+    if (bech32Address === proposerToBech32){
+      return {validator, block}
+    }
+   })
+  return getActiveChainValidators
+})
 
-  // Ed25519 pubkey from genesis
-  const pubkey = {
-    type: "tendermint/PubKeyEd25519",
-    value: "w3rKE+tQoLK8G+XPmjn+NszCk07iQ0sWaBbN5hQZcBY=",
-  };
-
-  const ed25519PubkeyRaw = fromBase64(pubkey.value);
-  const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
-  const bech32Address = Bech32.encode("cosmosvalcons", addressData);
-  //console.log(bech32Address); 
-
-  const bech32Pubkey = encodeBech32Pubkey(pubkey, "cosmosvalconspub");
-  //console.log(bech32Pubkey)
-
-  const p = decodeBech32Pubkey(
-    'cosmosvalconspub1zcjduepqcdav5ylt2zst90qmuh8e5w07xmxv9y6wufp5k9ngzmx7v9qewqtqkcq4z8',
-  );
-  //console.log(p)
-  const a = sha256(fromBase64(p.value)).slice(0, 20);
-  const address = toHex(a).toUpperCase();
-  //console.log(address)
-
-  //function that receieves proposer address and returns the validators details
-  const getChainValidators = useGetChainActiveValidatorsQuery()
-  const joinedBlocksValidatorsData = getBlocks.map(block => {
-    //convert proposer address to cosmosvalcons
-    const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
-
-    const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
-      //fetch just the active validators
-      //get the consensus pubkey
-      const ed25519PubkeyRaw = fromBase64(validator.consensus_pubkey.key);
-      const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
-      const bech32Address = Bech32.encode("cosmosvalcons", addressData);
-
-      if (bech32Address === proposerToBech32) {
-        return { ...validator, ...block }
-      }
-    })
-
-    return getActiveChainValidators
-
-  })
-
-  //console.log(joinedBlocksValidatorsData)
-  joinedBlocksValidatorsData.map((data, i) => {
-    console.log(data)
-  })
-
-
-  return (
-    <>
+    return(
+     <>
       <FlexRow1>
-        <FlexCol3>
-          <Title>{title}</Title>
-          <LiveLineChartSection>
-            <OverlapGroup1>
-              <OverlapGroup>
-                chat.js here
-              </OverlapGroup>
-            </OverlapGroup1>
-          </LiveLineChartSection>
-        </FlexCol3>
-
-
-        <FlexCol4>
+          <FlexCol3>
+            <Title>{title}</Title>
+            <LiveLineChartSection>
+              <OverlapGroup1>
+                <OverlapGroup>
+                  chat.js here
+                </OverlapGroup>
+              </OverlapGroup1>
+            </LiveLineChartSection>
+          </FlexCol3>
+      <FlexCol4>
           <MarketCap>
             <MarketCapTitle>
-              <MarketCap0>marketCap</MarketCap0>
-              <X24thVol>24h Vol</X24thVol>
+            <MarketCap0>marketCap</MarketCap0>
+            <X24thVol>24h Vol</X24thVol>
             </MarketCapTitle>
             <MarketCapValue>
-              <Phone90>$88999</Phone90>
-              <Phone900>$89899</Phone900>
-            </MarketCapValue>
-          </MarketCap>
-          <OverlapGroup12>
-            <GetOneBlock>
-              <LatestBlockTitle>
-                <LatestBlock>latest Block</LatestBlock>
-                <Phone00>{getBlocks[0]?.height}</Phone00>
-              </LatestBlockTitle>
-              <BlockTimeTitle>
-                <BlockTime>Block Time</BlockTime>
-                <X602s>{formatTime(getBlocks[0]?.time)}</X602s>
-              </BlockTimeTitle>
-              <ChainName>
-                <Chain>chain</Chain>
-                <Corichain1>Coris</Corichain1>
-              </ChainName>
-            </GetOneBlock>
-            <Rectangle31></Rectangle31>
-            <Rectangle32></Rectangle32>
-          </OverlapGroup12>
-        </FlexCol4>
-      </FlexRow1>
+          <Phone90>$88999</Phone90>
+          <Phone900>$89899</Phone900>
+          </MarketCapValue>
+        </MarketCap>
+        <OverlapGroup12>
+          <GetOneBlock>
+          <LatestBlockTitle>
+      <LatestBlock>latest Block</LatestBlock>
+      <Phone00>{getBlocks[0]?.height}</Phone00>
+       </LatestBlockTitle>
+       <BlockTimeTitle>
+      <BlockTime>Block Time</BlockTime>
+      <X602s>{formatTime(getBlocks[0]?.time)}</X602s>
+    </BlockTimeTitle>
+    <ChainName>
+      <Chain>chain</Chain>
+      <Corichain1>Coris</Corichain1>
+    </ChainName>
+          </GetOneBlock>
+          <Rectangle31></Rectangle31>
+          <Rectangle32></Rectangle32>
+        </OverlapGroup12>
+      </FlexCol4>
+    </FlexRow1>
 
       <FlexRow2>
         <APR>
@@ -185,63 +146,81 @@ function HomePageContent(props) {
         </ActiveValidators>
       </FlexRow2>
 
-      <FlexRow3>
-        <Inflation>
-          <APR1>{inflation}</APR1>
-          <Text1>{percent3}</Text1>
-        </Inflation>
-        <OverlapGroup14>
-          <Place>{communityPool}</Place>
-          <Address>{address2}</Address>
-        </OverlapGroup14>
-        <OverlapGroup15>
-          <FlexCol5>
-            <APR1>{tokenomics}</APR1>
-            <FlexRow4>
-              <Rectangle28></Rectangle28>
-              <Place1>{place2}</Place1>
-              <Rectangle34></Rectangle34>
-              <Bonded>{bonded}</Bonded>
-            </FlexRow4>
-            <PhoneContainer>
-              <Phone>{phone1}</Phone>
-              <Phone1>{phone2}</Phone1>
-            </PhoneContainer>
-          </FlexCol5>
-          <OverlapGroup4>
-            <Ellipse11 src="/img/ellipse-11@2x.svg" />
-            <Place2>{place3}</Place2>
-            <Percent2>{percent4}</Percent2>
-          </OverlapGroup4>
-        </OverlapGroup15>
-      </FlexRow3>
+    <FlexRow3>
+      <Inflation>
+        <APR1>{inflation}</APR1>
+        <Text1>{percent3}</Text1>
+      </Inflation>
+      <OverlapGroup14>
+        <Place>{communityPool}</Place>
+        <Address>{address2}</Address>
+      </OverlapGroup14>
+      <OverlapGroup15>
+        <FlexCol5>
+          <APR1>{tokenomics}</APR1>
+          <FlexRow4>
+            <Rectangle28></Rectangle28>
+            <Place1>{place2}</Place1>
+            <Rectangle34></Rectangle34>
+            <Bonded>{bonded}</Bonded>
+          </FlexRow4>
+          <PhoneContainer>
+            <Phone>{phone1}</Phone>
+            <Phone1>{phone2}</Phone1>
+          </PhoneContainer>
+        </FlexCol5>
+        <OverlapGroup4>
+          <Ellipse11 src="/img/ellipse-11@2x.svg" />
+          <Place2>{place3}</Place2>
+          <Percent2>{percent4}</Percent2>
+        </OverlapGroup4>
+      </OverlapGroup15>
+    </FlexRow3>
 
-      <FlexRow5>
-        <LatestBlocks>{latestBlocks}</LatestBlocks>
-        <ViewAll>{viewAll}</ViewAll>
-      </FlexRow5>
+    <FlexRow5>
+      <LatestBlocks>{latestBlocks}</LatestBlocks>
+      <ViewAll>{viewAll}</ViewAll>
+    </FlexRow5>
 
-      <LatestBlocks1>
-        <LatestBlocksTilte
-          height={latestBlocksTilteData.height}
-          hash={latestBlocksTilteData.hash}
-          proposer={latestBlocksTilteData.proposer}
-          noOfTxs={latestBlocksTilteData.noOfTxs}
-          time={latestBlocksTilteData.time}
-        />
-        {getBlocks?.map((block: any) =>
-          <OverlapGroup10>
-            <Phone2>{block?.height}</Phone2>
-            <X34567efe34g6j7k85h>{ }</X34567efe34g6j7k85h>
-            <Ellipse8></Ellipse8>
-            <DgtizeStake>{block?.height}</DgtizeStake>
-            <Number>{block?.noTxs}</Number>
-            <X6sAgo>{block.time}</X6sAgo>
-          </OverlapGroup10>
-        )}
-      </LatestBlocks1>
+    <LatestBlocks1>
+      <LatestBlocksTilte
+        height={latestBlocksTilteData.height}
+        hash={latestBlocksTilteData.hash}
+        proposer={latestBlocksTilteData.proposer}
+        noOfTxs={latestBlocksTilteData.noOfTxs}
+        time={latestBlocksTilteData.time}
+      />  
+
+      {joinedBlocksValidatorsData.map((details) => {
+          return details?.map((data) => {
+             if (data !== undefined){
+            return(
+              <OverlapGroup10>
+                 <Link href='/blocks[height]' as={`/blocks/${data.block.height }`} ><a>
+              <Phone2>{data?.block?.height}</Phone2>
+               </a></Link>
+                <X34567efe34g6j7k85h>{formatHash(data?.block?.hash, 10, '...')}</X34567efe34g6j7k85h>
+                <Link href='/validators[address]' as={`/validators/${data.validator.operator_address}`} ><a>
+                <DgtizeStake>
+                   <img className="img" src={getValidatorsLogoFromWebsites(data?.validator?.description?.website)} alt="" />
+                  {data?.validator?.description?.moniker}
+                  </DgtizeStake>
+                  </a></Link>
+                <Number>{data?.block?.noTxs}</Number>
+                <X6sAgo>{formatTime(data?.block?.time)}</X6sAgo>
+              </OverlapGroup10>
+            )}
+           })
+       })
+      }     
+    </LatestBlocks1>
+         <style jsx>{`
+           .img {
+           margin-right: 10px;
+           }
+         `}</style>
     </>
-  )
+    )
 }
 
 const detailsData = {
@@ -267,27 +246,35 @@ const latestBlocksTilteData = {
 };
 
 const FlexRow1 = styled.div`
+  height: 426px;
   margin-top: 54px;
   display: flex;
-  align-items: flex-start;
-  width: 100%;
+  align-items: flex-end;
+  min-width: 1336px;
 `;
 
 const FlexCol3 = styled.div`
-  width: 65%;
+  width: 835px;
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  align-items: flex-start;
+  min-height: 426px;
 `;
 
 const Title = styled.h1`
   ${UrbanistBoldBlack40px}
+  min-height: 48px;
   letter-spacing: 0;
 `;
 
 const LiveLineChartSection = styled.div`
+  height: 364px;
+  margin-top: 14px;
   display: flex;
   padding: 0 13px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-width: 835px;
   background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0px 7px 30px #0015da29;
@@ -309,29 +296,32 @@ const OverlapGroup = styled.div`
 `;
 
 const FlexCol4 = styled.div`
-  width: 30%;
+  width: 485px;
   margin-left: 16px;
   display: flex;
   flex-direction: column;
-  margin-top: 54px;
+  align-items: flex-start;
+  min-height: 364px;
 `;
 
 const MarketCap = styled.div`
+  height: 174px;
   position: relative;
   display: flex;
   padding: 0 18px;
   align-items: center;
+  min-width: 485px;
   background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0px 7px 30px #0015da29;
-  height: 153px;
 `;
 
 const OverlapGroup12 = styled.div`
+  width: 485px;
+  height: 174px;
   position: relative;
   margin-top: 16px;
   border-radius: 20px;
-  height: 50%;
 `;
 
 const GetOneBlock = styled.div`
@@ -343,6 +333,7 @@ const GetOneBlock = styled.div`
   padding: 0 13px;
   justify-content: flex-end;
   align-items: center;
+  min-width: 485px;
   background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0px 7px 30px #0015da29;
@@ -746,7 +737,7 @@ const Ellipse8 = styled.div`
 const DgtizeStake = styled.div`
   ${UrbanistNormalNewCar172px}
   min-height: 21px;
-  margin-left: 14px;
+  margin-left: 150px;
   margin-top: 0.33px;
   min-width: 97px;
   letter-spacing: 0;
@@ -755,7 +746,7 @@ const DgtizeStake = styled.div`
 const Number = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
-  margin-left: 249px;
+  margin-left: 310px;
   margin-top: 0.33px;
   min-width: 9px;
   letter-spacing: 0;
@@ -838,18 +829,22 @@ const Corichain1 = styled.div`
 
 const MarketCapTitle = styled.div`
   ${UrbanistNormalBlack24px}
+  width: 141px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-height: 62px;
 `;
 
 const MarketCap0 = styled.div`
   width: 137px;
+  min-height: 23px;
   letter-spacing: 0;
 `;
 
 const X24thVol = styled.div`
   width: 119px;
+  min-height: 23px;
   margin-top: 16px;
   margin-left: 4px;
   letter-spacing: 0;

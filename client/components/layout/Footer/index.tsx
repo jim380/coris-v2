@@ -37,6 +37,7 @@ function Footer(props) {
     learn,
     testnetPortal2,
     stakingPortal2,
+<<<<<<< HEAD
     nodeMonitoring2 } = props;
   return (
     <FlexFull>
@@ -118,6 +119,51 @@ function Footer(props) {
         </FlexCol7> */}
     </FlexFull>
   )
+=======
+    nodeMonitoring2} = props;
+    return(
+      <FlexRow6>
+      <FlexCol6>
+        <Company>{company}</Company>
+        <About>{about1}</About>
+        <Security>{security1}</Security>
+        <Security>{place4}</Security>
+      </FlexCol6>
+      <FlexCol7>
+        <Company>{ourProjects}</Company>
+        <About>{testnetPortal1}</About>
+        <Security>{stakingPortal1}</Security>
+      </FlexCol7>
+      <FlexCol8>
+        <Logo2 asset62={logo2Data.asset62} asset72={logo2Data.asset72} asset81={logo2Data.asset81} />
+        <Community>{community}</Community>
+        <About1>{about2}</About1>
+        <Security1>{security2}</Security1>
+        <Place3>{place5}</Place3>
+        <FlexRow7>
+          <IconPaperPlane src={iconPaper_Plane} />
+          <IconLinkedin src={iconLinkedin} />
+          <IconLinkedin src={iconInstagram} />
+          <IconLinkedin src={iconTwitter} />
+          <IconLinkedin src={solidBrandsYoutube} />
+          <IconLinkedin src={solidBrandsChrome} />
+        </FlexRow7>
+        <Eosadolor382gmailcom>{eosadolor382GmailCom}</Eosadolor382gmailcom>
+      </FlexCol8>
+      <FlexCol9>
+        <Company>{resources}</Company>
+        <About>{about3}</About>
+        <Security>{security3}</Security>
+        <Security>{place6}</Security>
+      </FlexCol9>
+      <FlexCol7>
+        <Company>{learn}</Company>
+        <About>{testnetPortal2}</About>
+        <Security>{stakingPortal2}</Security>
+      </FlexCol7>
+    </FlexRow6>
+    )
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 }
 
 const logo2Data = {
@@ -127,6 +173,7 @@ const logo2Data = {
   className: "logo-5",
 };
 
+<<<<<<< HEAD
 const FlexFull = styled.div`
   width: 100%;
   display: flex;
@@ -178,13 +225,19 @@ const GridItem = styled.div`
   flex-direction: column;
 `;
 
+=======
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 const FlexRow6 = styled.div`
   height: 522px;
   margin-top: 44px;
   display: flex;
   padding: 26px 190px;
   align-items: center;
+<<<<<<< HEAD
   width: 100%;
+=======
+  min-width: 1336px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
   background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0px 7px 30px #0015da29;
@@ -233,12 +286,23 @@ const FlexCol7 = styled.div`
 `;
 
 const FlexCol8 = styled.div`
+<<<<<<< HEAD
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 20px;
+=======
+  width: 289px;
+  position: relative;
+  align-self: flex-start;
+  margin-left: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 452px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const Community = styled.div`
@@ -294,7 +358,12 @@ const Climate = styled.div`
 const FlexRow7 = styled.div`
   margin-top: 64px;
   display: flex;
+<<<<<<< HEAD
   align-items: center;
+=======
+  align-items: flex-start;
+  min-width: 289px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const IconPaperPlane = styled.img`
@@ -311,7 +380,14 @@ const IconLinkedin = styled.img`
 const Eosadolor382gmailcom = styled.div`
   ${ValignTextMiddle}
   ${UrbanistLightBlack15px}
+<<<<<<< HEAD
   margin-top: 60px;
+=======
+            height: 18px;
+  margin-top: 64px;
+  margin-right: 1px;
+  min-width: 170px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
   letter-spacing: 0;
 `;
 

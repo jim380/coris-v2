@@ -1,12 +1,16 @@
 import Link from 'next/link';
 import styled from "styled-components";
+<<<<<<< HEAD
 import { toggleSidebar } from '../../../lib/features/generalSlice';
 import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
+=======
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 import {
   UrbanistSemiBoldSoap24px,
   UrbanistSemiBoldBlueBell24px,
   ValignTextMiddle,
 } from "../../../styledMixins";
+<<<<<<< HEAD
 import { searchBarData } from '../Header';
 import WalletButton from '../Header/ConnectWallet/walletButton';
 import SearchBar from '../Header/SearchBar';
@@ -15,6 +19,11 @@ import Logo from "./Logo";
 function SideNavBar(props) {
   const { sidebarToggled } = useAppSelector(state => state.general)
   const dispatch = useAppDispatch()
+=======
+import Logo from "./Logo";
+
+function SideNavBar (props) {
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
   const {
     solidGeneralChartPie,
     iconUser,
@@ -26,6 +35,7 @@ function SideNavBar(props) {
     blocks,
     proposals,
     parameters,
+<<<<<<< HEAD
     assets } = props;
   return (
     <SideNavigation className={sidebarToggled && 'show'}>
@@ -156,6 +166,64 @@ const SideNavigation = styled.div`
 
 const FlexRow = styled.div`
   display: flex;
+=======
+    assets} = props;
+    return (  
+      <SideNavigation>
+          <OverlapGroup16>
+          <Link href="/"><a> <Logo /></a></Link>
+            <FlexRow>
+              <FlexCol>
+                <SolidGeneralChartPie src={solidGeneralChartPie} />
+                <IconUser src={iconUser} />
+                <IconUser src={icon1} />
+                <Icon src={icon2} />
+                <Icon1 src={icon3} />
+                <Icon1 src={icon3} />
+              </FlexCol>
+              <FlexCol1>
+               <Link href="/"><a><Overview>{overview}</Overview></a></Link>
+               <Link href="/validators"><a><Validators>{validators}</Validators></a></Link>
+               <Link href="/blocks"><a><Blocks>{blocks}</Blocks></a></Link>
+               <Link href="/proposals"><a><Proposals>{proposals}</Proposals></a></Link>
+               <Link href="/params"><a><Parameters>{parameters}</Parameters></a></Link>
+               <Link href="/assets"><a><Assets>{assets}</Assets></a></Link>
+              </FlexCol1>
+            </FlexRow>
+          </OverlapGroup16>
+        </SideNavigation>
+    )
+}
+
+const SideNavigation = styled.div`
+  height: 1123px;
+  display: flex;
+  align-items: flex-start;
+  min-width: 370px;
+  margin: 0;
+`;
+
+const OverlapGroup16 = styled.div`
+  width: 360px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 82px 59px;
+  align-items: flex-start;
+  min-height: 1123px;
+  background-color: var(--chambray);
+  border-radius: 0px 30px 30px 0px;
+  box-shadow: 0px 20px 50px #000d7d99;
+
+`;
+
+const FlexRow = styled.div`
+  height: 486px;
+  margin-top: 185px;
+  display: flex;
+  align-items: flex-start;
+  min-width: 205px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const FlexCol = styled.div`
@@ -168,21 +236,41 @@ const FlexCol = styled.div`
 
 const SolidGeneralChartPie = styled.img`
   width: 40px;
+<<<<<<< HEAD
   height: 40px; 
+=======
+  height: 40px;
+  margin-left: 1px;
+  margin-top: -60px;
+ 
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const IconUser = styled.img`
   width: 40px;
+<<<<<<< HEAD
+=======
+  height: 40px;
+  margin-top: 72px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const Icon = styled.img`
   width: 40px;
   height: 41px;
+<<<<<<< HEAD
+=======
+  margin-top: 71px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const Icon1 = styled.img`
   width: 40px;
   height: 41px;
+<<<<<<< HEAD
+=======
+  margin-top: 69px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const FlexCol1 = styled.div`
@@ -204,6 +292,7 @@ const Overview = styled.div`
   color: var(--coconut);
   font-size: var(--font-size-xxxxl);
   letter-spacing: 0;
+<<<<<<< HEAD
   display: flex;
   align-items: center;
   @media screen and (max-width: 1334px){
@@ -212,11 +301,14 @@ const Overview = styled.div`
   @media screen and (max-width: 1074px){
     display: flex;
   }
+=======
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const Validators = styled.div`
   ${ValignTextMiddle}
   ${UrbanistSemiBoldBlueBell24px}
+<<<<<<< HEAD
   height: 29px;
   letter-spacing: 0;
   @media screen and (max-width: 1334px){
@@ -225,12 +317,18 @@ const Validators = styled.div`
   @media screen and (max-width: 1074px){
     display: flex;
   }
+=======
+            height: 29px;
+  margin-top: 85px;
+  letter-spacing: 0;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const Blocks = styled.div`
   ${ValignTextMiddle}
   ${UrbanistSemiBoldSoap24px}
             height: 29px;
+<<<<<<< HEAD
   letter-spacing: 0;
   @media screen and (max-width: 1334px){
     display:none
@@ -238,12 +336,17 @@ const Blocks = styled.div`
   @media screen and (max-width: 1074px){
     display: flex;
   }
+=======
+  margin-top: 83px;
+  letter-spacing: 0;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const Proposals = styled.div`
   ${ValignTextMiddle}
   ${UrbanistSemiBoldSoap24px}
             height: 29px;
+<<<<<<< HEAD
   letter-spacing: 0;
   @media screen and (max-width: 1334px){
     display:none
@@ -251,11 +354,16 @@ const Proposals = styled.div`
   @media screen and (max-width: 1074px){
     display: flex;
   }
+=======
+  margin-top: 82px;
+  letter-spacing: 0;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 const Parameters = styled.div`
   ${ValignTextMiddle}
   ${UrbanistSemiBoldSoap24px}
             height: 29px;
+<<<<<<< HEAD
   letter-spacing: 0;
   @media screen and (max-width: 1334px){
     display:none
@@ -263,12 +371,17 @@ const Parameters = styled.div`
   @media screen and (max-width: 1074px){
     display: flex;
   }
+=======
+  margin-top: 82px;
+  letter-spacing: 0;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const Assets = styled.div`
   ${ValignTextMiddle}
   ${UrbanistSemiBoldSoap24px}
             height: 29px;
+<<<<<<< HEAD
   letter-spacing: 0;
   @media screen and (max-width: 1334px){
     display:none
@@ -279,4 +392,10 @@ const Assets = styled.div`
 `;
 
 
+=======
+  margin-top: 82px;
+  letter-spacing: 0;
+`;
+
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 export default SideNavBar

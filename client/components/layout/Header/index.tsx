@@ -2,13 +2,17 @@ import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import ConnectWallet from "./ConnectWallet";
 import WalletButton from "./ConnectWallet/walletButton";
+<<<<<<< HEAD
 import { useState } from "react";
 import { useAppDispatch } from "../../../lib/hooks";
 import { toggleSidebar } from "../../../lib/features/generalSlice";
+=======
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 
 
 function Header() {
   //const {  searchBarProps,  connectWallet1Data } = props;
+<<<<<<< HEAD
   const dispatch = useAppDispatch()
   return (
     <TopNavBar>
@@ -36,6 +40,28 @@ function Header() {
 export const searchBarData = {
   src: "/img/outline-interface-search@2x.png",
   className: "search-bar-1",
+=======
+    return(
+      <TopNavBar>
+      <SearchBar src={searchBarData.src} />
+      <ConnectWallet
+        asset62={connectWallet1Data.asset62}
+        asset72={connectWallet1Data.asset72}
+        outlineMediaShuffle={connectWallet1Data.outlineMediaShuffle}
+      />
+      <NightmodeButton>
+        <OutlineGeneralMoon src="/img/outline-general-moon@2x.svg" />
+      </NightmodeButton>
+      <WalletButton />
+    </TopNavBar>
+
+    )
+}
+
+const searchBarData = {
+  src: "/img/outline-interface-search@2x.png",
+    className: "search-bar-1",
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 };
 
 const connectWallet1Data = {
@@ -44,6 +70,7 @@ const connectWallet1Data = {
   outlineMediaShuffle: "/img/outline-media-shuffle@2x.png",
 };
 
+<<<<<<< HEAD
 const FlexBetween = styled.div`
   display: flex;
   justify-content: space-between;
@@ -64,6 +91,13 @@ const TopNavBar = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
+=======
+const TopNavBar = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 1317px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const NightmodeButton = styled.div`

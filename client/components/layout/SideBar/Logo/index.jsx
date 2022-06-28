@@ -42,12 +42,15 @@ const CorisName = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 50px;
+<<<<<<< HEAD
   @media screen and (max-width: 1334px) {
     display: none;
   }
   @media screen and (max-width: 775px) {
     display: flex;
   }
+=======
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 const Asset41 = styled.img`

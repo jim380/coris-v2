@@ -15,7 +15,12 @@ function Logo2(props) {
 }
 
 const Logo = styled.div`
+<<<<<<< HEAD
   width: 71px;
+=======
+  width: 31px;
+  margin-right: 2px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,19 +44,34 @@ const Logo = styled.div`
 `;
 
 const Asset62 = styled.img`
+<<<<<<< HEAD
   width: 40px;
+=======
+  width: 20px;
+  height: 19px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
   margin-right: 0.02px;
   object-fit: cover;
 `;
 
 const Asset72 = styled.img`
+<<<<<<< HEAD
   width: 41px;
+=======
+  width: 31px;
+  height: 14px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
   margin-top: 5px;
   object-fit: cover;
 `;
 
 const Asset81 = styled.img`
+<<<<<<< HEAD
   width: 38px;
+=======
+  width: 28px;
+  height: 6px;
+>>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
   margin-top: 6px;
   margin-right: 0.94px;
   object-fit: cover;
