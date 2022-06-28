@@ -1,6 +1,6 @@
 import  React from "react";
-import styles from "../layout/Layout.module.css";
-import {formatTime, formatHash} from "../Util/format"
+import Link from "next/link";
+import {formatTime, formatHash, getValidatorsLogoFromWebsites} from "../Util/format"
 import styled from "styled-components";
 import Details from './Details'
 import Details2 from './Details2'
@@ -16,15 +16,9 @@ import {
   UrbanistLightBlack24px,
   UrbanistBoldBlack40px,
 } from "../../styledMixins";
-
 import { sha256 } from "@cosmjs/crypto";
 import { Bech32, fromBase64, toHex, fromHex, toBech32  } from "@cosmjs/encoding";
-import { encodeBech32Pubkey } from "@cosmjs/launchpad";
-import { pubkeyToAddress } from "@cosmjs/amino";
-import { decodeBech32Pubkey } from "@cosmjs/launchpad"
 import { useGetChainActiveValidatorsQuery } from "../../lib/chainApi";
-import Blocks from "../Blocks";
-
 
 function HomePageContent(props) {
   const {
@@ -52,56 +46,25 @@ function HomePageContent(props) {
   } = props;
   //console.log(getBlocks)
 
- 
-// Ed25519 pubkey from genesis
-const pubkey = {
-  type: "tendermint/PubKeyEd25519",
-  value: "w3rKE+tQoLK8G+XPmjn+NszCk07iQ0sWaBbN5hQZcBY=",
-};
-
-const ed25519PubkeyRaw = fromBase64(pubkey.value);
-const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
-const bech32Address = Bech32.encode("cosmosvalcons", addressData);
-//console.log(bech32Address); 
-
-const bech32Pubkey = encodeBech32Pubkey(pubkey, "cosmosvalconspub");
-//console.log(bech32Pubkey)
-
-const p = decodeBech32Pubkey(
-  'cosmosvalconspub1zcjduepqcdav5ylt2zst90qmuh8e5w07xmxv9y6wufp5k9ngzmx7v9qewqtqkcq4z8',
-);
-//console.log(p)
-const a = sha256(fromBase64(p.value)).slice(0, 20);
-const address = toHex(a).toUpperCase();
-//console.log(address)
-
 //function that receieves proposer address and returns the validators details
 const getChainValidators = useGetChainActiveValidatorsQuery()
-const joinedBlocksValidatorsData = getBlocks.map(block => {
+const joinedBlocksValidatorsData = getBlocks.map((block)=> {
    //convert proposer address to cosmosvalcons
    const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
   
    const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
      //fetch just the active validators
-        //get the consensus pubkey
+    //get the consensus pubkey
     const ed25519PubkeyRaw = fromBase64(validator.consensus_pubkey.key);
     const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
     const bech32Address = Bech32.encode("cosmosvalcons", addressData);
      
     if (bech32Address === proposerToBech32){
-     return {...validator, ...block}
+      return {validator, block}
     }
    })
-
-return getActiveChainValidators
-
+  return getActiveChainValidators
 })
-
-//console.log(joinedBlocksValidatorsData)
-joinedBlocksValidatorsData.map((data, i ) => {
-  console.log(data)
-})
-
 
     return(
      <>
@@ -226,18 +189,36 @@ joinedBlocksValidatorsData.map((data, i ) => {
         proposer={latestBlocksTilteData.proposer}
         noOfTxs={latestBlocksTilteData.noOfTxs}
         time={latestBlocksTilteData.time}
-      />
-       {getBlocks?.map((block: any) =>
-      <OverlapGroup10>
-       <Phone2>{block?.height}</Phone2>
-        <X34567efe34g6j7k85h>{}</X34567efe34g6j7k85h>
-        <Ellipse8></Ellipse8>
-        <DgtizeStake>{block?.height}</DgtizeStake>
-        <Number>{block?.noTxs}</Number>
-        <X6sAgo>{block.time}</X6sAgo>
-      </OverlapGroup10>
-)}
+      />  
+
+      {joinedBlocksValidatorsData.map((details) => {
+          return details?.map((data) => {
+             if (data !== undefined){
+            return(
+              <OverlapGroup10>
+                 <Link href='/blocks[height]' as={`/blocks/${data.block.height }`} ><a>
+              <Phone2>{data?.block?.height}</Phone2>
+               </a></Link>
+                <X34567efe34g6j7k85h>{formatHash(data?.block?.hash, 10, '...')}</X34567efe34g6j7k85h>
+                <Link href='/validators[address]' as={`/validators/${data.validator.operator_address}`} ><a>
+                <DgtizeStake>
+                   <img className="img" src={getValidatorsLogoFromWebsites(data?.validator?.description?.website)} alt="" />
+                  {data?.validator?.description?.moniker}
+                  </DgtizeStake>
+                  </a></Link>
+                <Number>{data?.block?.noTxs}</Number>
+                <X6sAgo>{formatTime(data?.block?.time)}</X6sAgo>
+              </OverlapGroup10>
+            )}
+           })
+       })
+      }     
     </LatestBlocks1>
+         <style jsx>{`
+           .img {
+           margin-right: 10px;
+           }
+         `}</style>
     </>
     )
 }
@@ -756,7 +737,7 @@ const Ellipse8 = styled.div`
 const DgtizeStake = styled.div`
   ${UrbanistNormalNewCar172px}
   min-height: 21px;
-  margin-left: 14px;
+  margin-left: 150px;
   margin-top: 0.33px;
   min-width: 97px;
   letter-spacing: 0;
@@ -765,7 +746,7 @@ const DgtizeStake = styled.div`
 const Number = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
-  margin-left: 249px;
+  margin-left: 310px;
   margin-top: 0.33px;
   min-width: 9px;
   letter-spacing: 0;
