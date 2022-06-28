@@ -13,9 +13,13 @@ export const chainApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ['Validators','ActiveValidators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations', 'MintingParameters', 'GovParameters', 'SlashingParameters', 'StakingParameters', 'DistributionParameters', 'NodeInfo', 'Proposals', 'ProposalDetails'],
+  tagTypes: ['Height', 'Validators','ActiveValidators', 'ValidatorDetails', 'Pool', 'Delegations', 'UnDelegations', 'Redelegations', 'MintingParameters', 'GovParameters', 'SlashingParameters', 'StakingParameters', 'DistributionParameters', 'NodeInfo', 'Proposals', 'ProposalDetails'],
   endpoints: (builder) => ({
-     getChainValidators: builder.query<any, void>({
+     getChainBlockHeight: builder.query<any, any>({
+      query: (height) => `/blocks/${height}`,
+      providesTags:  ['Height'],
+    }),   
+    getChainValidators: builder.query<any, void>({
       query: () => `/cosmos/staking/v1beta1/validators?pagination.limit=500`,
       providesTags:  ['Validators'],
     }),  
@@ -80,6 +84,7 @@ export const chainApi = createApi({
 
 // Export hooks for usage in functional components
 export const {
+  useGetChainBlockHeightQuery,
   useGetChainValidatorsQuery,
   useGetChainActiveValidatorsQuery,
   useGetChainValidatorDetailsQuery,
