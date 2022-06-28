@@ -2,23 +2,15 @@ import Button from 'react-bootstrap/Button'
 import styled from "styled-components";
 
 
-<<<<<<< HEAD
 function WalletButton ({className}) {
     return (
         <Wallet className={`${className} connect-wallet`}>
          Connect Wallet
-=======
-function WalletButton () {
-    return (
-        <Wallet>
-        <Button  variant="outline-primary" className='button'>Connect Wallet</Button>
->>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
         </Wallet>
     )
 }
 
 
-<<<<<<< HEAD
 const Wallet = styled.button`
   width: 200px;
   height: 40px;
@@ -39,14 +31,6 @@ const Wallet = styled.button`
   @media screen and (max-width: 775px){
     display: none;
   }
-=======
-const Wallet = styled.div`
-  margin-left: 60px;
-  display: flex;
-  padding: 5px 19px;
-  align-items: center;
-  min-width: 280px;
->>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 `;
 
 

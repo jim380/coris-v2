@@ -9,13 +9,8 @@ export const formatTimeDateYear = (t: Date) => {
   }
 
  export function formatHash(hash:string,index:number,chr:string) {
-<<<<<<< HEAD
-    if(index > hash.length-1) return hash;
-    return hash.substring(0,index).slice(0 ,6) + chr + hash.substring(index+1).slice(-6); 
-=======
     if(index > hash?.length-1) return hash;
     return hash?.substring(0,index).slice(0 ,6) + chr + hash?.substring(index+1).slice(-6); 
->>>>>>> fc2b3f0d20d885cab291f180a48a237e4f7fb548
 }
  
 export const sortValidatorsByVotingPower = (validatorsArray: any[]) => validatorsArray?.sort((validator1, validator2) => validator2.tokens - validator1.tokens)
