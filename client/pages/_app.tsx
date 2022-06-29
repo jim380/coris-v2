@@ -3,10 +3,10 @@ import { AppProps } from "next/app";
 import '../styles/global.css'
 import { ReactElement, ReactNode } from "react";
 const { default: AbortController } = require("abort-controller");
-const { wrapper } = require("../lib/store");
 const { default: fetch, Headers, Request, Response } = require("node-fetch");
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SSRProvider } from 'react-bootstrap';
+import { wrapper } from "../lib/store";
 
 Object.assign(globalThis, {
   fetch,

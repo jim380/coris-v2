@@ -6,11 +6,11 @@ const cron = require("node-cron");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
-const fetchURL = process.env.COSMOS_RPC
+const fetchURL = process.env.COSMOS_REST
 
 cron.schedule('*/5 * * * * *', function(){
     //cron to run at every 5sec to get latest blocks
-        //getBlocksAsync()
+        getBlocksAsync()
 });
 
 
@@ -51,7 +51,7 @@ app.get('/blocks/latest', async function(req, res) {
     try{  
    const blocks = await blockModel.find({}, {}, { sort: {'_id': -1}}).limit(15)
     res.json(blocks) 
-   console.log(blocks)
+   //console.log(blocks)
 }
 catch(error){
     res.status(500).json({message: error.message})
@@ -64,7 +64,7 @@ app.get('/blocks', async function(req, res) {
     try{  
    const blocks = await blockModel.find({}, {}, { sort: {'_id': -1}}).limit(5000)
     res.json(blocks) 
-   console.log(blocks)
+   //console.log(blocks)
 }
 catch(error){
     res.status(500).json({message: error.message})
