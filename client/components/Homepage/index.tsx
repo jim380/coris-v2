@@ -77,17 +77,6 @@ const joinedBlocksValidatorsData = getBlocks.map((block)=> {
   const bech32Address = Bech32.encode("cosmosvalcons", addressData);
   //console.log(bech32Address); 
 
-  const bech32Pubkey = encodeBech32Pubkey(pubkey, "cosmosvalconspub");
-  //console.log(bech32Pubkey)
-
-  const p = decodeBech32Pubkey(
-    'cosmosvalconspub1zcjduepqcdav5ylt2zst90qmuh8e5w07xmxv9y6wufp5k9ngzmx7v9qewqtqkcq4z8',
-  );
-  //console.log(p)
-  const a = sha256(fromBase64(p.value)).slice(0, 20);
-  const address = toHex(a).toUpperCase();
-  //console.log(address)
-
   //console.log(joinedBlocksValidatorsData)
   joinedBlocksValidatorsData.map((data, i) => {
     console.log(data)

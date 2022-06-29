@@ -601,3 +601,23 @@ html, body, #__next{
 .justify-content-between{
   justify-content: space-between;
 }
+
+tr.validator-item-row:nth-child(even){
+ background-color: var(--titan-white);;
+}
+
+tr.validator-item-row > td{
+  padding: 10px 10px;
+}
+
+.sub{
+  font-size: 14px !important;
+}
+
+tr.validator-item-row{
+  cursor: pointer;
+}
+
+.tab-content{
+  width: 100%;
+}
