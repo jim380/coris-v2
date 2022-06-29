@@ -3,7 +3,7 @@
 A community-built Blockchain explorer for the cosmos ecosystem, brought to you by Cypher Core LLC
 
 
-## Using Docker On the Client
+## Using Docker
  [Install Docker](https://docs.docker.com/get-docker/)  on your machine.
    
    ``` 
