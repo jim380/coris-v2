@@ -19,7 +19,7 @@ function Details(props) {
 }
 
 const Details1 = styled.div`
-  width: 216px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

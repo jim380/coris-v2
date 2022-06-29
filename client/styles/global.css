@@ -568,6 +568,36 @@ html, body, #__next{
   display: table-cell;
 }
 
+.p-3{
+  padding: 1rem;
+}
+
 .w-100{
   width: 100%;
+}
+
+.h-100{
+  height: 100%;
+}
+
+.h-50{
+  height: 50%;
+}
+
+.w-50{
+  width: 50%;
+}
+
+.align-items-center{
+  display: flex;
+  align-items: center;
+}
+
+.justify-content-center{
+  display: flex;
+  justify-content: center;
+}
+
+.justify-content-between{
+  justify-content: space-between;
 }

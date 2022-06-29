@@ -66,162 +66,419 @@ const joinedBlocksValidatorsData = getBlocks.map((block)=> {
   return getActiveChainValidators
 })
 
-    return(
-     <>
-      <FlexRow1>
-          <FlexCol3>
-            <Title>{title}</Title>
-            <LiveLineChartSection>
-              <OverlapGroup1>
-                <OverlapGroup>
-                  chat.js here
-                </OverlapGroup>
-              </OverlapGroup1>
-            </LiveLineChartSection>
-          </FlexCol3>
-      <FlexCol4>
-          <MarketCap>
-            <MarketCapTitle>
-            <MarketCap0>marketCap</MarketCap0>
-            <X24thVol>24h Vol</X24thVol>
-            </MarketCapTitle>
-            <MarketCapValue>
-          <Phone90>$88999</Phone90>
-          <Phone900>$89899</Phone900>
-          </MarketCapValue>
-        </MarketCap>
-        <OverlapGroup12>
-          <GetOneBlock>
-          <LatestBlockTitle>
-      <LatestBlock>latest Block</LatestBlock>
-      <Phone00>{getBlocks[0]?.height}</Phone00>
-       </LatestBlockTitle>
-       <BlockTimeTitle>
-      <BlockTime>Block Time</BlockTime>
-      <X602s>{formatTime(getBlocks[0]?.time)}</X602s>
-    </BlockTimeTitle>
-    <ChainName>
-      <Chain>chain</Chain>
-      <Corichain1>Coris</Corichain1>
-    </ChainName>
-          </GetOneBlock>
-          <Rectangle31></Rectangle31>
-          <Rectangle32></Rectangle32>
-        </OverlapGroup12>
-      </FlexCol4>
-    </FlexRow1>
+  // Ed25519 pubkey from genesis
+  const pubkey = {
+    type: "tendermint/PubKeyEd25519",
+    value: "w3rKE+tQoLK8G+XPmjn+NszCk07iQ0sWaBbN5hQZcBY=",
+  };
 
-      <FlexRow2>
-        <APR>
-          <APR1>{apr}</APR1>
-          <Text1>{text1}</Text1>
-        </APR>
-        <OverlapGroup13>
-          <Place>{place1}</Place>
-          <Address>{address1}</Address>
-        </OverlapGroup13>
-        <OnlineVotingPower>
-          <Details
-            onlineVotingPower={detailsData.onlineVotingPower}
-            x36516M1={detailsData.x36516M1}
-            place={detailsData.place}
-            x36516M2={detailsData.x36516M2}
-          />
-          <OverlapGroup2>
-            <Percent>{percent1}</Percent>
-            <Ellipse9></Ellipse9>
-          </OverlapGroup2>
-        </OnlineVotingPower>
-        <ActiveValidators>
-          <Details2
-            activeValidators={details2Data.activeValidators}
-            number1={details2Data.number1}
-            outOf={details2Data.outOf}
-            number2={details2Data.number2}
-          />
-          <OverlapGroup3>
-            <Vector src="/img/ellipse-11@2x.svg" />
-            <Percent1>{percent2}</Percent1>
-          </OverlapGroup3>
-        </ActiveValidators>
-      </FlexRow2>
+  const ed25519PubkeyRaw = fromBase64(pubkey.value);
+  const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
+  const bech32Address = Bech32.encode("cosmosvalcons", addressData);
+  //console.log(bech32Address); 
 
-    <FlexRow3>
-      <Inflation>
-        <APR1>{inflation}</APR1>
-        <Text1>{percent3}</Text1>
-      </Inflation>
-      <OverlapGroup14>
-        <Place>{communityPool}</Place>
-        <Address>{address2}</Address>
-      </OverlapGroup14>
-      <OverlapGroup15>
-        <FlexCol5>
-          <APR1>{tokenomics}</APR1>
-          <FlexRow4>
-            <Rectangle28></Rectangle28>
-            <Place1>{place2}</Place1>
-            <Rectangle34></Rectangle34>
-            <Bonded>{bonded}</Bonded>
-          </FlexRow4>
-          <PhoneContainer>
-            <Phone>{phone1}</Phone>
-            <Phone1>{phone2}</Phone1>
-          </PhoneContainer>
-        </FlexCol5>
-        <OverlapGroup4>
-          <Ellipse11 src="/img/ellipse-11@2x.svg" />
-          <Place2>{place3}</Place2>
-          <Percent2>{percent4}</Percent2>
-        </OverlapGroup4>
-      </OverlapGroup15>
-    </FlexRow3>
+  const bech32Pubkey = encodeBech32Pubkey(pubkey, "cosmosvalconspub");
+  //console.log(bech32Pubkey)
 
-    <FlexRow5>
-      <LatestBlocks>{latestBlocks}</LatestBlocks>
-      <ViewAll>{viewAll}</ViewAll>
-    </FlexRow5>
+  const p = decodeBech32Pubkey(
+    'cosmosvalconspub1zcjduepqcdav5ylt2zst90qmuh8e5w07xmxv9y6wufp5k9ngzmx7v9qewqtqkcq4z8',
+  );
+  //console.log(p)
+  const a = sha256(fromBase64(p.value)).slice(0, 20);
+  const address = toHex(a).toUpperCase();
+  //console.log(address)
 
-    <LatestBlocks1>
-      <LatestBlocksTilte
-        height={latestBlocksTilteData.height}
-        hash={latestBlocksTilteData.hash}
-        proposer={latestBlocksTilteData.proposer}
-        noOfTxs={latestBlocksTilteData.noOfTxs}
-        time={latestBlocksTilteData.time}
-      />  
+  //console.log(joinedBlocksValidatorsData)
+  joinedBlocksValidatorsData.map((data, i) => {
+    console.log(data)
+  })
 
-      {joinedBlocksValidatorsData.map((details) => {
-          return details?.map((data) => {
-             if (data !== undefined){
-            return(
-              <OverlapGroup10>
-                 <Link href='/blocks[height]' as={`/blocks/${data.block.height }`} ><a>
-              <Phone2>{data?.block?.height}</Phone2>
-               </a></Link>
-                <X34567efe34g6j7k85h>{formatHash(data?.block?.hash, 10, '...')}</X34567efe34g6j7k85h>
-                <Link href='/validators[address]' as={`/validators/${data.validator.operator_address}`} ><a>
-                <DgtizeStake>
-                   <img className="img" src={getValidatorsLogoFromWebsites(data?.validator?.description?.website)} alt="" />
-                  {data?.validator?.description?.moniker}
-                  </DgtizeStake>
-                  </a></Link>
-                <Number>{data?.block?.noTxs}</Number>
-                <X6sAgo>{formatTime(data?.block?.time)}</X6sAgo>
-              </OverlapGroup10>
+
+  return (
+    <>
+      <Title>{title}</Title>
+      <Grid>
+        <GridItem className="first-item">chat.js here</GridItem>
+        <GridItem className="second-item p-3">
+          <FlexCol className="h-100">
+            <Flex className="h-50 align-items-center">
+              <MarketCapDef className="w-50">marketCap</MarketCapDef>
+              <MarketCapVal className="w-50">$88999</MarketCapVal>
+            </Flex>
+            <Flex className="h-50 align-items-center">
+              <MarketCapDef className="w-50">24h Vol</MarketCapDef>
+              <MarketCapVal className="w-50">$88999</MarketCapVal>
+            </Flex>
+          </FlexCol>
+        </GridItem>
+        <GridItem className="third-item">
+          <Flex className="h-100">
+            <FlexCol className="w-50 align-items-center justify-content-center">
+              <LatestBlock>latest Block</LatestBlock>
+              <Phone00>{getBlocks[0]?.height}</Phone00>
+            </FlexCol>
+            <Divider></Divider>
+            <FlexCol className="w-50 align-items-center justify-content-center">
+              <BlockTime>Block Time</BlockTime>
+              <X602s>{formatTime(getBlocks[0]?.time)}</X602s>
+            </FlexCol>
+            <Divider></Divider>
+            <FlexCol className="w-50 align-items-center justify-content-center">
+              <Chain>chain</Chain>
+              <Corichain1>Coris</Corichain1>
+            </FlexCol>
+          </Flex>
+        </GridItem>
+      </Grid>
+      <Grid1>
+        <GridItem1 className="first-item">
+          <FlexCenter className="h-100">
+            <div>
+              <APR1>{apr}</APR1>
+              <Text1>{text1}</Text1>
+            </div>
+          </FlexCenter>
+        </GridItem1>
+        <GridItem1 className="second-item">
+          <FlexCenter className="h-100">
+            <OverlapGroup13>
+              <Place>{place1}</Place>
+              <Address>{address1}</Address>
+            </OverlapGroup13>
+          </FlexCenter>
+        </GridItem1>
+        <GridItem1 className="third-item">
+          <OnlineVotingPower>
+            <Details
+              onlineVotingPower={detailsData.onlineVotingPower}
+              x36516M1={detailsData.x36516M1}
+              place={detailsData.place}
+              x36516M2={detailsData.x36516M2}
+            />
+            <OverlapGroup2>
+              <Percent>{percent1}</Percent>
+              <Ellipse9></Ellipse9>
+            </OverlapGroup2>
+          </OnlineVotingPower>
+        </GridItem1>
+        <GridItem1 className="fourth-item">
+          <ActiveValidators>
+            <Details2
+              activeValidators={details2Data.activeValidators}
+              number1={details2Data.number1}
+              outOf={details2Data.outOf}
+              number2={details2Data.number2}
+            />
+            <OverlapGroup3>
+              <Vector src="/img/ellipse-11@2x.svg" />
+              <Percent1>{percent2}</Percent1>
+            </OverlapGroup3>
+          </ActiveValidators>
+        </GridItem1>
+      </Grid1>
+      <Grid1>
+        <GridItem1 className="first-item">
+          <FlexCenter className="h-100">
+            <Inflation>
+              <APR1>{inflation}</APR1>
+              <Text1>{percent3}</Text1>
+            </Inflation>
+          </FlexCenter>
+        </GridItem1>
+        <GridItem1 className="second-item">
+          <FlexCenter className="h-100">
+            <OverlapGroup14>
+              <Place>{communityPool}</Place>
+              <Address>{address2}</Address>
+            </OverlapGroup14>
+          </FlexCenter>
+        </GridItem1>
+        <GridItem1 className="third-item span-last-ends">
+          <Flex className="h-100 w-100 align-items-center" style={{ padding: "20px" }}>
+            <FlexCol className="w-100">
+              <APR1>{tokenomics}</APR1>
+              <Flex>
+                <FlexCol><Bullet /></FlexCol>
+                <FlexCol style={{ margin: '0px 20px' }}>
+                  <Place1>{place2}</Place1>
+                  <Phone>{phone1}</Phone>
+                </FlexCol>
+                <FlexCol><Bullet className="light" /></FlexCol>
+                <FlexCol style={{ margin: '0px 20px' }}>
+                  <Bonded>{bonded}</Bonded>
+                  <Phone1>{phone2}</Phone1>
+                </FlexCol>
+              </Flex>
+            </FlexCol>
+            <Flex className="h-100 p-3">
+              <OverlapGroup2>
+                <Percent>{percent1}</Percent>
+                <Ellipse9></Ellipse9>
+              </OverlapGroup2>
+            </Flex>
+          </Flex>
+        </GridItem1>
+      </Grid1>
+
+      <Flex className="align-items-center justify-content-between">
+        <LatestBlocks>{latestBlocks}</LatestBlocks>
+        <ViewAll>{viewAll}</ViewAll>
+      </Flex>
+      <Container>
+        <table className="w-100">
+          <thead>
+            <tr>
+              <th>Height</th>
+              <th>Hash</th>
+              <th>Proposal</th>
+              <th>No.of Txs</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {getBlocks?.map((block: any) =>
+              <tr>
+                <td>{block?.height}</td>
+                <td><X34567efe34g6j7k85h>{ }</X34567efe34g6j7k85h></td>
+                <td>
+                  <Ellipse8></Ellipse8>
+                  <DgtizeStake>{block?.height}</DgtizeStake>
+                </td>
+                <td><Number>{block?.noTxs}</Number></td>
+                <td><X6sAgo>{block.time}</X6sAgo></td>
+              </tr>
             )}
-           })
-       })
-      }     
-    </LatestBlocks1>
-         <style jsx>{`
-           .img {
-           margin-right: 10px;
-           }
-         `}</style>
+          </tbody>
+        </table>
+      </Container>
     </>
     )
 }
+
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 20px 0px;
+  width: 100%;
+  grid-gap: 20px;
+  @media screen and (max-width:1272px){
+      grid-template-columns: repeat(6, 1fr);
+    }
+`;
+
+const GridItem = styled.div`
+  display: block;
+  box-shadow: 0px 7px 30px #0015da29;
+  border-radius: 20px;
+  height: 150px;
+  &.first-item{
+    grid-column: 1 / 4;
+    grid-row: 1 / span 2;
+    height: unset;
+    @media screen and (max-width:1272px){
+      grid-column: 1 / span 8;
+    }
+    @media screen and (max-width:838px){
+      grid-column: 1 / span 8;
+    }
+  }
+  &.second-item{
+    grid-column: 4 / span 2;
+    @media screen and (max-width:1272px){
+      grid-column: 1 / span 3;
+    };
+    @media screen and (max-width:838px){
+      grid-column: 1 / span 8;
+    };
+  }
+  &.third-item{
+    grid-column: 4 / span 2;
+    @media screen and (max-width:1272px){
+      grid-column: 4/ 9;
+    };
+    @media screen and (max-width:838px){
+      grid-column: 1 / span 8;
+    }
+  }
+  &.w-200px{
+    width: 200px;
+  }
+  &.h-200px{
+    height: 200px;
+  }
+`;
+
+const Grid1 = styled.div`
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  margin: 20px 0px;
+  width: 100%;
+  grid-gap: 20px;
+`;
+
+const GridItem1 = styled.div`
+  display: block;
+  box-shadow: 0px 7px 30px #0015da29;
+  border-radius: 20px;
+  height: 160px;
+  @media screen and (max-width:1272px){
+    grid-column: 1/ 5;
+  }
+  @media screen and (max-width:838px){
+      grid-column: 1 / span 11;
+    }
+  &.second-item{
+    grid-column: 2 / 4;
+    @media screen and (max-width:1272px){
+      grid-column: 5/ 11;
+    }
+    @media screen and (max-width:838px){
+      grid-column: 1 / span 11;
+    }
+  }
+  &.third-item{
+    grid-column: 4 / 7;
+    @media screen and (max-width:1272px){
+      grid-column: 1/ 5;
+    }
+    @media screen and (max-width:838px){
+      grid-column: 1 / span 11;
+    }
+  }
+  &.fourth-item{
+    grid-column: 7 / 10;
+    @media screen and (max-width:1272px){
+      grid-column: 5/ 11;
+    }
+    @media screen and (max-width:838px){
+      grid-column: 1 / span 11;
+    }
+  }
+  &.span-last-ends{
+    grid-column: 4 / 10;
+    @media screen and (max-width:1272px){
+      grid-column: 1/ 11;
+    }
+    @media screen and (max-width:838px){
+      grid-column: 1 / span 11;
+    }
+  }
+`;
+
+const Container = styled.div`
+  display: block;
+  box-shadow: 0px 7px 30px #0015da29;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px 0px;
+`;
+
+const FlexCol = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Flex = styled.div`
+  display: flex;
+`;
+
+const MarketCapDef = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const MarketCapVal = styled.div`
+  font-weight: bold;
+  font-size: 24px;
+`;
+
+const Divider = styled.div`
+  width: 5px;
+  height: 90%;
+  background: radial-gradient( 50% 50% at 50% 50%,rgba(57.9999965429306,66.00001126527786,138.00000697374344,0.2199999988079071) 0%,rgba(93.00000205636024,83.00000265240669,213.00000250339508,0) 100% );
+`;
+
+const FlexCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Bullet = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: #3a428a;
+  &.light{
+    background: #d1d6ff;
+  }
+`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const detailsData = {
   onlineVotingPower: "Online Voting power",
@@ -265,6 +522,7 @@ const Title = styled.h1`
   ${UrbanistBoldBlack40px}
   min-height: 48px;
   letter-spacing: 0;
+  margin-top: 40px;
 `;
 
 const LiveLineChartSection = styled.div`
@@ -373,15 +631,10 @@ const FlexRow2 = styled.div`
 `;
 
 const APR = styled.div`
-  width: 149px;
   display: flex;
   flex-direction: column;
-  padding: 31px 17px;
-  align-items: flex-start;
-  min-height: 174px;
-  background-color: var(--white);
+  align-items: center;
   border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
 `;
 
 const APR1 = styled.div`
@@ -392,8 +645,6 @@ const APR1 = styled.div`
 
 const Text1 = styled.div`
   ${UrbanistBoldBlack26px}
-  min-height: 31px;
-  margin-top: 16px;
   letter-spacing: 2.08px;
 `;
 
@@ -402,12 +653,7 @@ const OverlapGroup13 = styled.div`
   margin-left: 16px;
   display: flex;
   flex-direction: column;
-  padding: 26px 19px;
   align-items: flex-start;
-  min-height: 174px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
 `;
 
 const Place = styled.div`
@@ -419,38 +665,30 @@ const Place = styled.div`
 
 const Address = styled.div`
   ${UrbanistBoldBlack26px}
-  min-height: 31px;
-  margin-top: 57px;
   letter-spacing: 2.08px;
+  font-size: 16px !important;
 `;
 
 const OnlineVotingPower = styled.div`
-  height: 174px;
-  position: relative;
-  margin-left: 16px;
+  height: 90%;
   display: flex;
   padding: 39px 16px;
-  align-items: center;
-  min-width: 351px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
+  width: 100%;
+  padding-right: 30px;
 `;
 
 const OverlapGroup2 = styled.div`
-  width: 95px;
-  height: 95px;
   position: relative;
-  align-self: flex-end;
+  align-items: center;
   margin-left: 8px;
   border-radius: 47.5px;
 `;
 
 const Percent = styled.div`
   ${UrbanistBoldChambray21px}
-  position: absolute;
+  position: relative;
   top: 35px;
-  left: 21px;
+  left:1px;
   letter-spacing: 1.68px;
 `;
 
@@ -459,7 +697,7 @@ const Ellipse9 = styled.div`
   width: 95px;
   height: 95px;
   top: 0;
-  left: 0;
+  left: -21px;
   border-radius: 47.5px;
   border: 10px solid var(--chambray);
 `;
@@ -471,10 +709,6 @@ const ActiveValidators = styled.div`
   display: flex;
   padding: 39px 16px;
   align-items: center;
-  min-width: 351px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
 `;
 
 const OverlapGroup3 = styled.div`
@@ -511,28 +745,18 @@ const FlexRow3 = styled.div`
 `;
 
 const Inflation = styled.div`
-  width: 149px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 31px 19px;
   align-items: flex-start;
-  min-height: 174px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
 `;
 
 const OverlapGroup14 = styled.div`
-  width: 435px;
-  margin-left: 16px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 26px 18px;
-  align-items: flex-start;
-  min-height: 174px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
 `;
 
 const OverlapGroup15 = styled.div`
@@ -575,9 +799,6 @@ const Rectangle28 = styled.div`
 `;
 
 const Place1 = styled.div`
-  min-height: 29px;
-  margin-left: 17px;
-  min-width: 74px;
   letter-spacing: 0;
 `;
 
@@ -591,8 +812,6 @@ const Rectangle34 = styled.div`
 `;
 
 const Bonded = styled.div`
-  min-height: 29px;
-  margin-left: 17px;
   letter-spacing: 0;
 `;
 
@@ -607,24 +826,20 @@ const PhoneContainer = styled.div`
 `;
 
 const Phone = styled.div`
-  min-height: 19px;
-  min-width: 114px;
+    font-weight: bold;
   letter-spacing: 1.28px;
 `;
 
 const Phone1 = styled.div`
-  min-height: 19px;
-  margin-left: 72px;
   letter-spacing: 1.28px;
+  font-weight: bold;
 `;
 
 const OverlapGroup4 = styled.div`
   width: 120px;
   height: 120px;
-  position: relative;
-  margin-left: 199px;
-  border-radius: 60px;
-  border: 13.6px solid var(--chambray);
+  left: 0px;
+
 `;
 
 const Ellipse11 = styled.img`
@@ -660,15 +875,12 @@ const Percent2 = styled.div`
 const FlexRow5 = styled.div`
   height: 38px;
   margin-top: 28px;
-  margin-left: 5px;
   display: flex;
-  align-items: flex-end;
-  min-width: 1314px;
+  justify-content: space-between
+  width: 100%;
 `;
 
 const LatestBlocks = styled.div`
-  min-height: 38px;
-  min-width: 189px;
   font-family: var(--font-family-urbanist);
   font-weight: 700;
   color: var(--black);
@@ -678,9 +890,6 @@ const LatestBlocks = styled.div`
 
 const ViewAll = styled.div`
   ${UrbanistNormalBlack24px}
-  min-height: 29px;
-  margin-left: 1043px;
-  min-width: 82px;
   letter-spacing: 0;
 `;
 
