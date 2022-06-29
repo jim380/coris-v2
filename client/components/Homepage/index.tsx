@@ -1,10 +1,10 @@
-import React from "react";
-import styles from "../layout/Layout.module.css";
-import { formatTime, formatHash } from "../Util/format"
+import  React from "react";
+import Link from "next/link";
+import {formatTime, formatHash, getValidatorsLogoFromWebsites} from "../Util/format"
 import styled from "styled-components";
 import Details from './Details'
 import Details2 from './Details2'
-import LatestBlocksTilte from './LatestBlocksTilte'
+import  LatestBlocksTilte from './LatestBlocksTilte'
 import {
   UrbanistMediumAbsoluteZero172px,
   UrbanistBoldBlack26px,
@@ -16,15 +16,9 @@ import {
   UrbanistLightBlack24px,
   UrbanistBoldBlack40px,
 } from "../../styledMixins";
-
 import { sha256 } from "@cosmjs/crypto";
-import { Bech32, fromBase64, toHex, fromHex, toBech32 } from "@cosmjs/encoding";
-import { encodeBech32Pubkey } from "@cosmjs/launchpad";
-import { pubkeyToAddress } from "@cosmjs/amino";
-import { decodeBech32Pubkey } from "@cosmjs/launchpad"
+import { Bech32, fromBase64, toHex, fromHex, toBech32  } from "@cosmjs/encoding";
 import { useGetChainActiveValidatorsQuery } from "../../lib/chainApi";
-import Blocks from "../Blocks";
-
 
 function HomePageContent(props) {
   const {
@@ -52,6 +46,25 @@ function HomePageContent(props) {
   } = props;
   //console.log(getBlocks)
 
+//function that receieves proposer address and returns the validators details
+const getChainValidators = useGetChainActiveValidatorsQuery()
+const joinedBlocksValidatorsData = getBlocks.map((block)=> {
+   //convert proposer address to cosmosvalcons
+   const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
+  
+   const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
+     //fetch just the active validators
+    //get the consensus pubkey
+    const ed25519PubkeyRaw = fromBase64(validator.consensus_pubkey.key);
+    const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
+    const bech32Address = Bech32.encode("cosmosvalcons", addressData);
+     
+    if (bech32Address === proposerToBech32){
+      return {validator, block}
+    }
+   })
+  return getActiveChainValidators
+})
 
   // Ed25519 pubkey from genesis
   const pubkey = {
@@ -74,28 +87,6 @@ function HomePageContent(props) {
   const a = sha256(fromBase64(p.value)).slice(0, 20);
   const address = toHex(a).toUpperCase();
   //console.log(address)
-
-  //function that receieves proposer address and returns the validators details
-  const getChainValidators = useGetChainActiveValidatorsQuery()
-  const joinedBlocksValidatorsData = getBlocks.map(block => {
-    //convert proposer address to cosmosvalcons
-    const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
-
-    const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
-      //fetch just the active validators
-      //get the consensus pubkey
-      const ed25519PubkeyRaw = fromBase64(validator.consensus_pubkey.key);
-      const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
-      const bech32Address = Bech32.encode("cosmosvalcons", addressData);
-
-      if (bech32Address === proposerToBech32) {
-        return { ...validator, ...block }
-      }
-    })
-
-    return getActiveChainValidators
-
-  })
 
   //console.log(joinedBlocksValidatorsData)
   joinedBlocksValidatorsData.map((data, i) => {
@@ -261,7 +252,7 @@ function HomePageContent(props) {
         </table>
       </Container>
     </>
-  )
+    )
 }
 
 
@@ -512,28 +503,36 @@ const latestBlocksTilteData = {
 };
 
 const FlexRow1 = styled.div`
+  height: 426px;
   margin-top: 54px;
   display: flex;
-  align-items: flex-start;
-  width: 100%;
+  align-items: flex-end;
+  min-width: 1336px;
 `;
 
 const FlexCol3 = styled.div`
-  width: 65%;
+  width: 835px;
   display: flex;
   flex-direction: column;
-  min-height: 300px;
+  align-items: flex-start;
+  min-height: 426px;
 `;
 
 const Title = styled.h1`
   ${UrbanistBoldBlack40px}
+  min-height: 48px;
   letter-spacing: 0;
   margin-top: 40px;
 `;
 
 const LiveLineChartSection = styled.div`
+  height: 364px;
+  margin-top: 14px;
   display: flex;
   padding: 0 13px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-width: 835px;
   background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0px 7px 30px #0015da29;
@@ -555,29 +554,32 @@ const OverlapGroup = styled.div`
 `;
 
 const FlexCol4 = styled.div`
-  width: 30%;
+  width: 485px;
   margin-left: 16px;
   display: flex;
   flex-direction: column;
-  margin-top: 54px;
+  align-items: flex-start;
+  min-height: 364px;
 `;
 
 const MarketCap = styled.div`
+  height: 174px;
   position: relative;
   display: flex;
   padding: 0 18px;
   align-items: center;
+  min-width: 485px;
   background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0px 7px 30px #0015da29;
-  height: 153px;
 `;
 
 const OverlapGroup12 = styled.div`
+  width: 485px;
+  height: 174px;
   position: relative;
   margin-top: 16px;
   border-radius: 20px;
-  height: 50%;
 `;
 
 const GetOneBlock = styled.div`
@@ -589,6 +591,7 @@ const GetOneBlock = styled.div`
   padding: 0 13px;
   justify-content: flex-end;
   align-items: center;
+  min-width: 485px;
   background-color: var(--white);
   border-radius: 20px;
   box-shadow: 0px 7px 30px #0015da29;
@@ -943,7 +946,7 @@ const Ellipse8 = styled.div`
 const DgtizeStake = styled.div`
   ${UrbanistNormalNewCar172px}
   min-height: 21px;
-  margin-left: 14px;
+  margin-left: 150px;
   margin-top: 0.33px;
   min-width: 97px;
   letter-spacing: 0;
@@ -952,7 +955,7 @@ const DgtizeStake = styled.div`
 const Number = styled.div`
   ${UrbanistNormalBlack172px}
   min-height: 21px;
-  margin-left: 249px;
+  margin-left: 310px;
   margin-top: 0.33px;
   min-width: 9px;
   letter-spacing: 0;
@@ -1035,18 +1038,22 @@ const Corichain1 = styled.div`
 
 const MarketCapTitle = styled.div`
   ${UrbanistNormalBlack24px}
+  width: 141px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-height: 62px;
 `;
 
 const MarketCap0 = styled.div`
   width: 137px;
+  min-height: 23px;
   letter-spacing: 0;
 `;
 
 const X24thVol = styled.div`
   width: 119px;
+  min-height: 23px;
   margin-top: 16px;
   margin-left: 4px;
   letter-spacing: 0;

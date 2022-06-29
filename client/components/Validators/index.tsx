@@ -72,7 +72,7 @@ sortValidatorsByVotingPower(inActiveValidatorsData)
          const commission = data?.commission?.commission_rates?.rate * 100
       return (
         <OverlapGroup10>
-<Link href='/validators[address]' as={`/validators/${data.operator_address}`} ><a> <RankValue>{index+1}</RankValue>
+   <Link href='/validators[address]' as={`/validators/${data.operator_address}`} ><a> <RankValue>{index+1}</RankValue>
        <ValidatorValue>
           <img className="img"  src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
           {data?.description?.moniker}
