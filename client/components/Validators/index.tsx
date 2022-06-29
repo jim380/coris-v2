@@ -1,5 +1,5 @@
-import  React, { useState } from "react";
-import {getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber, sortValidatorsByVotingPower} from "../Util/format"
+import React, { useState } from "react";
+import { getPercentageOfValidatorsBondedTokens, getValidatorsLogoFromWebsites, roundValidatorsVotingPowerToWholeNumber, sortValidatorsByVotingPower } from "../Util/format"
 import ValidatorTilte from "./ValidatorsTitle";
 import styled from "styled-components";
 import Tabs from 'react-bootstrap/Tabs'
@@ -8,137 +8,176 @@ import {
   UrbanistNormalNewCar172px,
   UrbanistNormalBlack172px,
   UrbanistMediumAbsoluteZero172px,
-  UrbanistBoldBlack40px 
+  UrbanistBoldBlack40px
 } from "../../styledMixins";
 import SearchButton from "./SearchButton";
 import Link from "next/link";
+import { Router, useRouter } from "next/router";
 
 function ValidatorsContent(props) {
   const [query, setQuery] = useState("")
 
   const {
-     validators, 
-     totalBondedTokens
+    validators,
+    totalBondedTokens
   } = props;
 
- var activeValidatorsData = validators?.map((data) => {
-     if (data.status === 'BOND_STATUS_BONDED') {
-   return data
-     }
- }) 
+  var activeValidatorsData = validators?.map((data) => {
+    if (data.status === 'BOND_STATUS_BONDED') {
+      return data
+    }
+  })
 
-var inActiveValidatorsData = validators?.map((data) => {
-     if (data.status === 'BOND_STATUS_UNBONDED' || data.status === 'BOND_STATUS_UNBONDING') {
-   return data
-     }
- }) 
+  var inActiveValidatorsData = validators?.map((data) => {
+    if (data.status === 'BOND_STATUS_UNBONDED' || data.status === 'BOND_STATUS_UNBONDING') {
+      return data
+    }
+  })
 
- //sort by voting power
-sortValidatorsByVotingPower(activeValidatorsData)
-sortValidatorsByVotingPower(inActiveValidatorsData)
+  //sort by voting power
+  sortValidatorsByVotingPower(activeValidatorsData)
+  sortValidatorsByVotingPower(inActiveValidatorsData)
 
-//declare cumulative shares for both active and inactive validators
- let activeValidatorsCumulativeShare:number = 0
- let inActiveValidatorsCumulativeShare:number = 0
+  //declare cumulative shares for both active and inactive validators
+  let activeValidatorsCumulativeShare: number = 0
+  let inActiveValidatorsCumulativeShare: number = 0
+
+  const router = useRouter()
 
   return (
     <>
-    <Title>Validators</Title>
-    <Validators>
-    <SearchButton setQuery={setQuery} />
-    <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="" variant="tabs">
-    <Tab eventKey="active" title="Active">
-      <ValidatorTilte
-        rank={ValidatorTitleData.rank}
-        validator={ValidatorTitleData.validator}
-        votingPower={ValidatorTitleData.votingPower}
-        cumulativeshare={ValidatorTitleData.cumulativeshare}
-        commission={ValidatorTitleData.commission}
-      />
-       
-       {activeValidatorsData?.filter(data => {
-         //if Query does not exist
-        if (query === ' ') {
-            return data;
-        }else if (data?.description?.moniker.toLowerCase().includes(query.toLocaleLowerCase())) {
-            return data
-        } 
-     })
-      .map((data, index) => {
-         var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
-  
-         activeValidatorsCumulativeShare += percentageOfVotingPower
-    
-         const commission = data?.commission?.commission_rates?.rate * 100
-      return (
-        <OverlapGroup10>
-   <Link href='/validators[address]' as={`/validators/${data.operator_address}`} ><a> <RankValue>{index+1}</RankValue>
-       <ValidatorValue>
-          <img className="img"  src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
-          {data?.description?.moniker}
-          </ValidatorValue>
-       <Voting>
-         {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
-         <br />
-         <sub className="sub">{percentageOfVotingPower.toFixed(2)+'%'}</sub>
-         </Voting>
-       <CumulativeShare>{activeValidatorsCumulativeShare.toFixed(2)+'%'}</CumulativeShare>
-        <Commission>{commission.toFixed(2)+'%'}</Commission> 
-        <Delegate>
-          Delegate
-        </Delegate>
-        </a></Link> 
-      </OverlapGroup10>
-       )})}
-  </Tab>
-  <Tab eventKey="inactive" title="InActive">
-  <ValidatorTilte
-        rank={ValidatorTitleData.rank}
-        validator={ValidatorTitleData.validator}
-        votingPower={ValidatorTitleData.votingPower}
-        cumulativeshare={ValidatorTitleData.cumulativeshare}
-        commission={ValidatorTitleData.commission}
-      />
-       
-       {inActiveValidatorsData?.filter(data => {
-         //if Query does not exist
-        if (query === ' ') {
-            return data;
-        }else if (data?.description?.moniker.toLowerCase().includes(query.toLocaleLowerCase())) {
-            return data
-        } 
-     })
-       .map((data, index) => {
-         var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
-  
-         inActiveValidatorsCumulativeShare += percentageOfVotingPower
-         const commission = data?.commission?.commission_rates?.rate * 100
-      return (
-        <OverlapGroup10>
-          <Link href='/validators[address]' as={`/validators/${data.operator_address}`} ><a>
-        <RankValue>{index+1}</RankValue>
-        <ValidatorValue>
-          <img className="img"  src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
-          {data?.description?.moniker}
-          </ValidatorValue>
-       <Voting>
-         {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
-         <br />
-         <sub className="sub">{percentageOfVotingPower.toFixed(2)+'%'}</sub>
-         </Voting>
-       <CumulativeShare>{inActiveValidatorsCumulativeShare.toFixed(2)+'%'}</CumulativeShare>
-        <Commission>{commission.toFixed(2)+'%'}</Commission>
-        <Delegate>
-          Delegate
-        </Delegate>
-        </a></Link> 
-      </OverlapGroup10>
-       )})}
-  </Tab>
- </Tabs>
-    </Validators>
-    
-         <style jsx>{`
+      <Title>Validators</Title>
+      <Validators>
+        <SearchButton setQuery={setQuery} />
+        <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="" variant="tabs">
+          <Tab eventKey="active" title="Active" className="w-100">
+            {/* <ValidatorTilte
+              rank={ValidatorTitleData.rank}
+              validator={ValidatorTitleData.validator}
+              votingPower={ValidatorTitleData.votingPower}
+              cumulativeshare={ValidatorTitleData.cumulativeshare}
+              commission={ValidatorTitleData.commission}
+            /> */}
+
+            <table className="w-100 mt-3">
+              <thead>
+                <tr style={{ fontWeight: "bold" }}>
+                  <th>Rank</th>
+                  <th>Validator</th>
+                  <th>Voting Power</th>
+                  <th>Cummulative Share</th>
+                  <th>Commission</th>
+                  <th>Uptime</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activeValidatorsData?.filter(data => {
+                  //if Query does not exist
+                  if (query === ' ') {
+                    return data;
+                  } else if (data?.description?.moniker.toLowerCase().includes(query.toLocaleLowerCase())) {
+                    return data
+                  }
+                })
+                  .map((data, index) => {
+                    var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
+
+                    activeValidatorsCumulativeShare += percentageOfVotingPower
+
+                    const commission = data?.commission?.commission_rates?.rate * 100
+                    return (
+                      <tr className="validator-item-row" onClick={() => router.push(`/validators/${data.operator_address}`)} >
+                        <td>{index + 1}</td>
+                        <td>
+                          <Flex>
+                            <FlexMiddle>
+                              <img className="img" src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
+                            </FlexMiddle>
+                            <FlexMiddle>
+                              {data?.description?.moniker}
+                            </FlexMiddle>
+                          </Flex>
+                        </td>
+                        <td>
+                          {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
+                          <div className="sub">{percentageOfVotingPower.toFixed(2) + '%'}</div>
+                        </td>
+                        <td>{activeValidatorsCumulativeShare.toFixed(2) + '%'}</td>
+                        <td>{commission.toFixed(2) + '%'}</td>
+                        <td>Delegate</td>
+                      </tr>
+                    )
+                  }
+                  )
+                }
+              </tbody>
+            </table>
+          </Tab>
+          <Tab eventKey="inactive" title="InActive">
+            {/* <ValidatorTilte
+              rank={ValidatorTitleData.rank}
+              validator={ValidatorTitleData.validator}
+              votingPower={ValidatorTitleData.votingPower}
+              cumulativeshare={ValidatorTitleData.cumulativeshare}
+              commission={ValidatorTitleData.commission}
+            /> */}
+
+            <table className="w-100 mt-3">
+              <thead>
+                <tr style={{ fontWeight: "bold" }}>
+                  <th>Rank</th>
+                  <th>Validator</th>
+                  <th>Voting Power</th>
+                  <th>Cummulative Share</th>
+                  <th>Commission</th>
+                  <th>Uptime</th>
+                </tr>
+              </thead>
+              <tbody>
+                {inActiveValidatorsData?.filter(data => {
+                  //if Query does not exist
+                  if (query === ' ') {
+                    return data;
+                  } else if (data?.description?.moniker.toLowerCase().includes(query.toLocaleLowerCase())) {
+                    return data
+                  }
+                })
+                  .map((data, index) => {
+                    var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
+
+                    inActiveValidatorsCumulativeShare += percentageOfVotingPower
+                    const commission = data?.commission?.commission_rates?.rate * 100
+                    
+                    return (
+                      <tr className="validator-item-row" onClick={() => router.push(`/validators/${data.operator_address}`)} >
+                        <td>{index + 1}</td>
+                        <td>
+                          <Flex>
+                            <FlexMiddle>
+                              <img className="img" src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
+                            </FlexMiddle>
+                            <FlexMiddle>
+                              {data?.description?.moniker}
+                            </FlexMiddle>
+                          </Flex>
+                        </td>
+                        <td>
+                          {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
+                          <div className="sub">{percentageOfVotingPower.toFixed(2) + '%'}</div>
+                        </td>
+                        <td>{inActiveValidatorsCumulativeShare.toFixed(2) + '%'}</td>
+                        <td>{commission.toFixed(2) + '%'}</td>
+                        <td>Delegate</td>
+                      </tr>
+                    )
+                  })}
+              </tbody>
+            </table>
+          </Tab>
+        </Tabs>
+      </Validators>
+
+      <style jsx>{`
            .img {
            margin-right: 10px;
            }
@@ -150,6 +189,15 @@ sortValidatorsByVotingPower(inActiveValidatorsData)
     </>
   );
 }
+
+const Flex = styled.div`
+  display: flex;
+`;
+
+const FlexMiddle = styled.div`
+  display: flex;
+  align-items:center
+`;
 
 const ValidatorTitleData = {
   rank: "Rank",
