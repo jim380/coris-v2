@@ -42,7 +42,7 @@ function ProposalsContent(props) {
 
     return(
         <>
-        <Title>{title1}</Title>
+        <Title>Proposals</Title>
             <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="" variant="tabs">
           <Tab eventKey="active" title="Active">
             <OverlapGroup13>

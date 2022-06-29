@@ -214,32 +214,62 @@ const joinedBlocksValidatorsData = getBlocks.map((block)=> {
         <ViewAll>{viewAll}</ViewAll>
       </Flex>
       <Container>
-        <table className="w-100">
-          <thead>
-            <tr>
-              <th>Height</th>
-              <th>Hash</th>
-              <th>Proposal</th>
-              <th>No.of Txs</th>
-              <th>Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {getBlocks?.map((block: any) =>
-              <tr>
-                <td>{block?.height}</td>
-                <td><X34567efe34g6j7k85h>{ }</X34567efe34g6j7k85h></td>
-                <td>
-                  <Ellipse8></Ellipse8>
-                  <DgtizeStake>{block?.height}</DgtizeStake>
-                </td>
-                <td><Number>{block?.noTxs}</Number></td>
-                <td><X6sAgo>{block.time}</X6sAgo></td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="tableTr">
+  <table>
+    <thead>
+    <tr>
+      <th>Height</th>
+      <th>Hash</th>
+      <th>Proposer</th>
+      <th>No of Txs</th>
+      <th>Time</th>
+    </tr>
+    </thead>
+    
+    {joinedBlocksValidatorsData.map((details) => {
+          return details?.map((data) => {
+             if (data !== undefined){
+               console.log(data)
+            return(
+    <tr>
+       <Link href='/blocks[height]' as={`/blocks/${data.block.height }`} ><a>
+      <td>{data.block?.height? data.block.height : null}</td> </a></Link>
+      <td>{data.block?.hash? formatHash(data.block.hash, 15, '....') : null}</td>
+      <Link href='/validators[address]' as={`/validators/${data.validator.operator_address}`} ><a>
+      <td>
+      <img className="img" width={30} src={getValidatorsLogoFromWebsites(data?.validator?.description?.website)} alt="" />
+      {data?.validator?.description?.moniker}
+      </td>
+      </a></Link>
+      <td>{data?.block?.noTxs}</td>
+      <td>{data?.block?.time? formatTime(data?.block.time): null}</td>
+    </tr>
+     )}
+    })
+})
+}  
+  </table>
+</div>
       </Container>
+   <style jsx>{`
+           .img {
+           margin-right: 10px;
+           }
+           .tableTr {
+            overflow-x:auto
+           }
+           table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 2px solid #ddd;
+}
+th, td {
+  text-align: left;
+  padding: 14px;
+}
+tr:nth-child(even){background-color: #0015da29}
+         `}</style>
     </>
     )
 }

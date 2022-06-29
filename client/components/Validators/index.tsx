@@ -67,7 +67,7 @@ function ValidatorsContent(props) {
                   <th>Voting Power</th>
                   <th>Cummulative Share</th>
                   <th>Commission</th>
-                  <th>Uptime</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
