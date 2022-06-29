@@ -169,7 +169,7 @@ const Title = styled.h1`
 `;
 
 const Validators = styled.div`
-  width: 1336px;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
