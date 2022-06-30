@@ -12,6 +12,8 @@ A community-built Blockchain explorer for the cosmos ecosystem, brought to you b
    ```
   ## On the Client Folder, include .env.local file
       cd client
+      
+      npm install
        
  
    SAMPLE OF .env.lcoal file
@@ -54,6 +56,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## On the Backend folder, include .env file
   ```
   cd backend
+  
+  npm install
   
   ```
   First, install MongoDB on your device and follow these steps to run the server
