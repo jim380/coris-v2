@@ -14,112 +14,128 @@ import {
 } from "../../styledMixins";
 import SearchButton from './SearchButton';
 import { formatTimeDateYear } from '../Util/format';
+import { useRouter } from 'next/router';
 
 function ProposalsContent(props) {
-    const [query, setQuery] = useState("")
-    const {
-        title1,
-        id,
-        title2,
-        status,
-        votingStart,
-        votingEnd,
-        totalDeposit,
-        proposalsData
-      } = props;
-    //console.log(proposalsData)
-      const activeProposals = proposalsData?.data?.proposals?.map(proposal => {
-          if (proposal.status === 'PROPOSAL_STATUS_VOTING_PERIOD' || proposal.status === 'PROPOSAL_STATUS_PASSED' || proposal.status === 'PROPOSAL_STATUS_REJECTED' || proposal.status === 'PROPOSAL_STATUS_FAILED' ) {
-            return proposal
-          } 
-      })
-      
-      const pendingProposals = proposalsData?.data?.proposals?.map(proposal => {
-          if (proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD' ) {
-            return proposal
-          } 
-      })
+  const [query, setQuery] = useState("")
+  const {
+    title1,
+    id,
+    title2,
+    status,
+    votingStart,
+    votingEnd,
+    totalDeposit,
+    proposalsData
+  } = props;
+  //console.log(proposalsData)
+  const activeProposals = proposalsData?.data?.proposals?.map(proposal => {
+    if (proposal.status === 'PROPOSAL_STATUS_VOTING_PERIOD' || proposal.status === 'PROPOSAL_STATUS_PASSED' || proposal.status === 'PROPOSAL_STATUS_REJECTED' || proposal.status === 'PROPOSAL_STATUS_FAILED') {
+      return proposal
+    }
+  })
 
-    return(
-        <>
-        <Title>Proposals</Title>
-            <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="" variant="tabs">
-          <Tab eventKey="active" title="Active">
-            <OverlapGroup13>
-           <SearchButton setQuery={setQuery} />
-           <ProposalHeading>
-              <ID>{id}</ID>
-              <Title1>{title2}</Title1>
-              <Status>{status}</Status>
-              <VotingStart>{votingStart}</VotingStart>
-              <VotingEnd>{votingEnd}</VotingEnd>
-              <TotalDeposit>{totalDeposit}</TotalDeposit>
-            </ProposalHeading>
-            {activeProposals?.filter(proposal => {
-               if (query === ' '){
-                  return proposal
-               }else if (proposal?.content?.title.toLowerCase().includes(query.toLocaleLowerCase())) {
-                return proposal
-            } 
-            })
-            .map((proposal) =>
-            <OverlapGroupContainer1>
-              <Link href='/proposals[id]' as={`/proposals/${proposal?.proposal_id}`} ><a>
-              <OverlapGroup2>
-                <Number>{proposal?.proposal_id}</Number>
-                <TitleValue>{proposal?.content?.description? proposal.content.title.slice(0, 40)+'....' : null}</TitleValue>
-                <OverlapGroup3>
-                <SatusValue>{proposal.status === 'PROPOSAL_STATUS_PASSED'? (<Badge bg="success">PASSED</Badge>) : proposal.status === 'PROPOSAL_STATUS_REJECTED'? (<Badge bg="danger">REJECTED</Badge>) : proposal.status === 'PROPOSAL_STATUS_VOTING_PERIOD'? (<Badge bg="info">VOTING PERIOD</Badge>) : (<Badge bg="warning">FAILED</Badge>)}</SatusValue>
-                </OverlapGroup3>
-                <VotingStartValue>{formatTimeDateYear(proposal.voting_start_time)}</VotingStartValue>
-                <VotingEndvalue>{formatTimeDateYear(proposal.voting_end_time)}</VotingEndvalue>
-                <TotalDepositValue>{proposal.total_deposit[0].amount+' '+ proposal.total_deposit[0].denom}</TotalDepositValue>
-              </OverlapGroup2>
-              </a></Link>
-            </OverlapGroupContainer1>
-            )}
-            </OverlapGroup13>
-            </Tab>
-     <Tab eventKey="pending" title="Pending">
-       <OverlapGroup13>
-        <SearchButton setQuery={setQuery} />
-         <ProposalHeading>
-              <ID>{id}</ID>
-              <Title1>{title2}</Title1>
-              <Status>{status}</Status>
-              <VotingStart>{votingStart}</VotingStart>
-              <VotingEnd>{votingEnd}</VotingEnd>
-              <TotalDeposit>{totalDeposit}</TotalDeposit>
-            </ProposalHeading>
-            {pendingProposals?.filter(proposal => {
-               if (query === ' '){
-                  return proposal
-               }else if (proposal?.content?.title.toLowerCase().includes(query.toLocaleLowerCase())) {
-                return proposal
-            } 
-            })
-            .map((proposal) =>
-            <OverlapGroupContainer1>
-                 <Link href='/proposals[id]' as={`/proposals/${proposal?.proposal_id}`} ><a>
-              <OverlapGroup2>
-                <Number>{proposal?.proposal_id}</Number>
-                <TitleValue>{proposal?.content?.description? proposal.content.title.slice(0, 55) : null}</TitleValue>
-                <OverlapGroup3>
-                <SatusValue>{proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD'? (<Badge bg="warning">DEPOSIT PERIOD</Badge>) : null}</SatusValue>
-                </OverlapGroup3>
-                <VotingStartValue>{formatTimeDateYear(proposal.voting_start_time)}</VotingStartValue>
-                <VotingEndvalue>{formatTimeDateYear(proposal.voting_end_time)}</VotingEndvalue>
-                <TotalDepositValue>{proposal.total_deposit[0].amount+' '+ proposal.total_deposit[0].denom}</TotalDepositValue>
-              </OverlapGroup2>
-              </a></Link>
-            </OverlapGroupContainer1>
-            )}
-            </OverlapGroup13>
-            </Tab>
-        </Tabs>
-        </>
-    )
+  const pendingProposals = proposalsData?.data?.proposals?.map(proposal => {
+    if (proposal.status === 'PROPOSAL_STATUS_DEPOSIT_PERIOD') {
+      return proposal
+    }
+  })
+
+  const router = useRouter()
+  return (
+    <>
+      <Title>Proposals</Title>
+      <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="" variant="tabs">
+        <Tab eventKey="active" title="Active">
+          <SearchButton setQuery={setQuery} />
+          <Responsive>
+            <table className="w-100">
+              <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>Title</th>
+                  <th>Status</th>
+                  <th>Voting start</th>
+                  <th>Voting end</th>
+                  <th>Total deposit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activeProposals?.filter(proposal => {
+                  if (query === ' ') {
+                    return proposal
+                  } else if (proposal?.content?.title.toLowerCase().includes(query.toLocaleLowerCase())) {
+                    return proposal
+                  }
+                })
+                  .map((proposal) => (
+                    <tr style ={{cursor: 'pointer'}} onClick={() => router.push(`/proposals/${proposal?.proposal_id}`)}>
+                      <td>{proposal?.proposal_id}</td>
+                      <td>{proposal?.content?.description ? proposal.content.title.slice(0, 40) + '....' : null}</td>
+                      <td>{proposal.status === 'PROPOSAL_STATUS_PASSED' ? (<Badge bg="success">PASSED</Badge>) : proposal.status === 'PROPOSAL_STATUS_REJECTED' ? (<Badge bg="danger">REJECTED</Badge>) : proposal.status === 'PROPOSAL_STATUS_VOTING_PERIOD' ? (<Badge bg="info">VOTING PERIOD</Badge>) : (<Badge bg="warning">FAILED</Badge>)}</td>
+                      <td>{formatTimeDateYear(proposal.voting_start_time)}</td>
+                      <td>{formatTimeDateYear(proposal.voting_end_time)}</td>
+                      <td>{proposal.total_deposit[0].amount + ' ' + proposal.total_deposit[0].denom}</td>
+                    </tr>
+                  ))
+              }
+              </tbody>
+            </table>
+          </Responsive>
+        </Tab>
+        <Tab eventKey="pending" title="Pending">
+          <OverlapGroup13>
+            <SearchButton setQuery={setQuery} />
+            <Responsive>
+              <table className="w-100">
+                <thead>
+                  <tr>
+                    <th>#ID</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Voting start</th>
+                    <th>Voting end</th>
+                    <th>Total deposit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pendingProposals?.filter(proposal => {
+                    if (query === ' ') {
+                      return proposal
+                    } else if (proposal?.content?.title.toLowerCase().includes(query.toLocaleLowerCase())) {
+                      return proposal
+                    }
+                  })
+                    .map((proposal) => (
+                      <tr style={{ cursor: 'pointer' }} onClick={() => router.push(`/proposals/${proposal?.proposal_id}`)}>
+                        <td>{proposal?.proposal_id}</td>
+                        <td>{proposal?.content?.description ? proposal.content.title.slice(0, 40) + '....' : null}</td>
+                        <td>{proposal.status === 'PROPOSAL_STATUS_PASSED' ? (<Badge bg="success">PASSED</Badge>) : proposal.status === 'PROPOSAL_STATUS_REJECTED' ? (<Badge bg="danger">REJECTED</Badge>) : proposal.status === 'PROPOSAL_STATUS_VOTING_PERIOD' ? (<Badge bg="info">VOTING PERIOD</Badge>) : (<Badge bg="warning">FAILED</Badge>)}</td>
+                        <td>{formatTimeDateYear(proposal.voting_start_time)}</td>
+                        <td>{formatTimeDateYear(proposal.voting_end_time)}</td>
+                        <td>{proposal.total_deposit[0].amount + ' ' + proposal.total_deposit[0].denom}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </Responsive>
+          </OverlapGroup13>
+        </Tab>
+      </Tabs>
+    </>
+  )
 }
+
+const Responsive = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  @media screen and (max-width: 1075px){
+    width: 96vw;
+  }
+`;
+
+
 
 const Title = styled.h1`
   ${UrbanistBoldBlack40px}
@@ -129,7 +145,7 @@ const Title = styled.h1`
 `;
 
 const OverlapGroup13 = styled.div`
-  width: 1336px;
+  width: 100%;
   margin-top: 14px;
   display: flex;
   flex-direction: column;

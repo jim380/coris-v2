@@ -1,11 +1,11 @@
-import  React, { useState } from "react";
+import React, { useState } from "react";
 import AssetsTitle from "./AssetTitle";
 import styled from "styled-components";
 import {
   UrbanistNormalNewCar172px,
   UrbanistNormalBlack172px,
   UrbanistMediumAbsoluteZero172px,
-  UrbanistBoldBlack40px 
+  UrbanistBoldBlack40px
 } from "../../styledMixins";
 import SearchButton from "./SearchButton";
 
@@ -13,50 +13,74 @@ function AssetsContent(props) {
   const coinsData = props
   //console.log(coinsData)
 
-  const [ query, setQuery] = useState("")
+  const [query, setQuery] = useState("")
 
   return (
     <>
-    <Title>Assets</Title>
-    <CoinList>
-    <SearchButton setQuery={setQuery} />
-      <AssetsTitle
-        id={AssetsTitleData.id}
-        coinName={AssetsTitleData.coinName}
-        coinCurrentPrice={AssetsTitleData.coinCurrentPrice}
-        coinMarketCap={AssetsTitleData.coinMarketCap}
-        coinTotalVolume={AssetsTitleData.coinTotalVolume}
-        totalSupply={AssetsTitleData.totalSupply}
-      />
-     {coinsData?.coinsData?.filter(coin => {
-         //if Query does not exist
-        if (query === ' ') {
-            return coin;
-        }else if (coin.name.toLowerCase().includes(query.toLocaleLowerCase())) {
-            //query exists here
-            return coin
-        } 
-     })
-     .map((coin, index) =>
-        <OverlapGroup10 key={index}>
-        <IdValue>{coin?.market_cap_rank? coin.market_cap_rank : null} </IdValue>
-        <CoinNameValue>
-            <img src={coin?.image? coin.image : null} alt="" className="img" />
-            {coin?.id? coin.id : null}
-            <br/>
-            <sub className="symbol" >{coin?.symbol? coin.symbol : null}
-            </sub>
-        </CoinNameValue>
-       <PriceValue>${coin?.current_price? coin.current_price.toFixed(2) : null}</PriceValue>
-       <MarketCapValue>${coin?.market_cap ? coin.market_cap.toLocaleString() : null}</MarketCapValue>
-        <TotalVolumeValue>{coin?.total_volume ? coin.total_volume.toLocaleString() : null}</TotalVolumeValue>
-            <TotalSupplyValue>
-            {coin?.total_supply ? coin.total_supply.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :  <p className="total_supply">null</p>  }
-        </TotalSupplyValue>
-      </OverlapGroup10>
-        )}
-    </CoinList>
-         <style jsx>{`
+      <FlexBetween>
+        <Title>Assets</Title>
+        <SearchButton setQuery={setQuery} />
+      </FlexBetween>
+
+      <Responsive>
+        <table className="w-100 mt-3">
+          <thead>
+            <tr style={{ fontWeight: "bold" }}>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Mkt cap</th>
+              <th>Total volume</th>
+              <th>Total supply</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {coinsData?.coinsData?.filter(coin => {
+              //if Query does not exist
+              if (query === ' ') {
+                return coin;
+              } else if (coin.name.toLowerCase().includes(query.toLocaleLowerCase())) {
+                //query exists here
+                return coin
+              }
+            })
+              .map((coin, index) => (
+                <tr key={index} className="striped">
+                  <td>
+                    {index + 1}
+                  </td>
+                  <td>
+                    <Flex>
+                      <FlexColumn>
+                        <img src={coin?.image ? coin.image : null} alt="" className="img" />
+                        <sub className="symbol" >{coin?.symbol ? coin.symbol : null}
+                        </sub>
+                      </FlexColumn>
+                      <FlexColumn>
+                        {coin?.id ? coin.id : null}
+                      </FlexColumn>
+                    </Flex>
+                  </td>
+                  <td>
+                    {coin?.current_price ? coin.current_price.toFixed(2) : null}
+                  </td>
+                  <td>
+                    {coin?.market_cap ? coin.market_cap.toLocaleString() : null}
+                  </td>
+                  <td>
+                    {coin?.total_volume ? coin.total_volume.toLocaleString() : null}
+                  </td>
+                  <td>
+                    {coin?.total_supply ? coin.total_supply.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : <p className="total_supply">null</p>}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </Responsive>
+      <style jsx>{`
            .symbol {
              color: red;
              font-size: 10px;
@@ -73,14 +97,30 @@ function AssetsContent(props) {
   );
 }
 
-const AssetsTitleData = {
-  id: "Rank",
-  coinName: "Name",
-  coinCurrentPrice: "Price",
-  coinMarketCap: "Mkt cap",
-  coinTotalVolume: "Total Volume",
-  totalSupply: "Total Supply",
-};
+
+
+const Flex = styled.div`
+  display: flex;
+`;
+
+const Responsive = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  @media screen and (max-width: 1075px){
+    width: 96vw;
+  }
+`;
+
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FlexBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
 
 const Title = styled.h1`
   ${UrbanistBoldBlack40px}
@@ -88,83 +128,6 @@ const Title = styled.h1`
   min-width: 112px;
   letter-spacing: 0;
   margin-top: 30px
-`;
-
-const CoinList = styled.div`
-  width: 1336px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 18.2px 16px;
-  align-items: flex-start;
-  min-height: 797px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
-`;
-
-const OverlapGroup10 = styled.div`
-  height: 60px;
-  margin-top: 19px;
-  display: flex;
-  padding: 13.8px 14.6px;
-  align-items: center;
-  min-width: 1303px;
-  background-color: var(--titan-white);
-`;
-
-const IdValue = styled.div`
-  ${UrbanistMediumAbsoluteZero172px}
-  min-height: 21px;
-  margin-top: 0.33px;
-  min-width: 74px;
-  letter-spacing: 0;
-`;
-
-const CoinNameValue = styled.div`
-  ${UrbanistNormalBlack172px}
-  min-height: 21px;
-  margin-left: 12px;
-  margin-top: 0.33px;
-  min-width: 167px;
-  letter-spacing: 0;
-`;
-
-const PriceValue = styled.div`
-  ${UrbanistNormalNewCar172px}
-  min-height: 21px;
-  margin-left: 70px;
-  margin-top: 0.33px;
-  min-width: 99px;
-  letter-spacing: 0;
-`;
-
-const MarketCapValue = styled.div`
-  ${UrbanistNormalBlack172px}
-  min-height: 21px;
-  margin-left: 140px;
-  margin-top: 0.33px;
-  min-width: 9px;
-  letter-spacing: 0;
-`;
-
-const TotalVolumeValue = styled.div`
-  ${UrbanistNormalBlack172px}
-  min-height: 21px;
-  margin-left: 100px;
-  margin-top: 0.33px;
-  min-width: 51px;
-  letter-spacing: 0;
-`;
-
-const TotalSupplyValue = styled.div`
-  ${UrbanistNormalBlack172px}
-  min-height: 21px;
-  margin-left: 150px;
-  margin-top: 0.33px;
-  min-width: 51px;
-  letter-spacing: 0;
-  color: blue;
 `;
 
 export default AssetsContent

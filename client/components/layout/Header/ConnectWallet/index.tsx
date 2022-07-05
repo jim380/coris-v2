@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
+import { toggleSidebar } from "../../../../lib/features/generalSlice";
 
 function ConnectWallet(props) {
   const { asset62, asset72, outlineMediaShuffle, className } = props;
+  const [open, setOpen] = useState(false)
 
   return (
-    <ConnectWallet1 className={`connect-wallet ${className || ""}`}>
+    <ConnectWallet1 onClick={() => props.toggle(true)} className={`connect-wallet ${className || ""}`}>
       <Flex>
         <Asset62 className="asset-6-2" src={asset62} />
         <Asset72 className="asset-7-2" src={asset72} />

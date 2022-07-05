@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from "styled-components";
-import  Badge  from 'react-bootstrap/Badge';
-import  ProgressBar  from 'react-bootstrap/ProgressBar';
-import  CardGroup  from 'react-bootstrap/CardGroup';
-import  Card  from 'react-bootstrap/Card';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import CardGroup from 'react-bootstrap/CardGroup';
+import Card from 'react-bootstrap/Card';
 import {
   UrbanistNormalBlack24px,
   UrbanistBoldWhite20px,
@@ -13,115 +12,267 @@ import {
 } from "../../../styledMixins";
 import { formatTimeDateYear } from '../../Util/format';
 
-function ProposalDetailsContents(props){
-    const {
-        title,
-        type,
-        total,
-        proposalDetails
-      } = props;
-   
-     //check if still loading and if loading, display the loading page
-     if (proposalDetails.isLoading !== false){
-     }
-     
-     const finalTallyResultSum = Number(proposalDetails?.data?.proposal?.final_tally_result?.yes) + Number(proposalDetails?.data?.proposal?.final_tally_result?.no) + Number(proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto) + Number(proposalDetails?.data?.proposal?.final_tally_result?.abstain)
-     //console.log(finalTallyResultSum)
-    const tallyPercentage = (tallyResult: number) => ((tallyResult/finalTallyResultSum)*100)
+function ProposalDetailsContents(props) {
+  const {
+    title,
+    type,
+    total,
+    proposalDetails
+  } = props;
 
-    const proposalDescription = proposalDetails?.data?.proposal?.content?.description.split('\\n\\n').map(str => <p>{str}</p>)
-    
-    return (
-        <>
-         <Title>{title}</Title>
-          <FlexCol3>
-            <FlexCol4>
-              <TitleValue>{proposalDetails?.data?.proposal?.content?.title? proposalDetails.data.proposal.content.title : null}</TitleValue>
-              <OverlapGroup2>
-                <PASSED>
-                {proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_PASSED'? (<Badge bg="success">PASSED</Badge>) : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_REJECTED'? (<Badge bg="danger">REJECTED</Badge>) : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_VOTING_PERIOD'? (<Badge bg="info">VOTING PERIOD</Badge>) : (<Badge bg="warning">FAILED</Badge>)}
-                </PASSED>
-              </OverlapGroup2>
-              <FlexRow1>
-                <Type>{type}</Type>
-                <TextProposal>{proposalDetails?.data?.proposal.content['@type']}</TextProposal>
-              </FlexRow1>
-              <FlexRow2>
-                <TypeValue>{total}</TypeValue>
-                <TextProposalValue>{finalTallyResultSum} {proposalDetails?.data?.proposal.total_deposit? proposalDetails.data.proposal.total_deposit[0].denom : null} </TextProposalValue>
-              </FlexRow2>
-              <OverlapGroup4>
-                <Rectangle93></Rectangle93>
-                <Rectangle92></Rectangle92>
-                <Rectangle91></Rectangle91>
-              <ProgressBar>
-                <ProgressBar striped variant="success" now={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.yes)} key={1} label={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.yes).toFixed(2)+'%'} />
-                <ProgressBar variant="danger" now={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no)} key={2} label={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no).toFixed(2)+'%'} />
-                <ProgressBar striped variant="warning" now={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto)} key={3} label={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto).toFixed(2)+'%'} />
-                <ProgressBar striped variant="info" now={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.abstain)} key={4} label={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.abstain).toFixed(2)+'%'} />
-               </ProgressBar>
-              </OverlapGroup4>
-            </FlexCol4>
-            <FlexRow3>
-              <Yes><Badge bg="success">YES</Badge> </Yes>
-              <No> <Badge bg="danger">NO</Badge> </No>
-              <Veto><Badge bg="warning">VETO</Badge> </Veto>
-              <Abstain><Badge bg="info">ABSTAIN</Badge> </Abstain>
-            </FlexRow3>
-            <CorContainer>
-              <YesValue>{tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.yes).toFixed(2)+'%'} ({proposalDetails?.data?.proposal?.final_tally_result?.yes ? proposalDetails.data.proposal.final_tally_result.yes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}  {proposalDetails?.data?.proposal.total_deposit? proposalDetails.data.proposal.total_deposit[0].denom : null})
-              </YesValue>
-              <NoValue>{tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no).toFixed(2)+'%'} ({proposalDetails?.data?.proposal?.final_tally_result?.no ? proposalDetails.data.proposal.final_tally_result.no.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null} {proposalDetails?.data?.proposal.total_deposit? proposalDetails.data.proposal.total_deposit[0].denom : null})
-              </NoValue>
-              <VetoValue>{tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto).toFixed(2)+'%'} ({proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto ? proposalDetails.data.proposal.final_tally_result.no_with_veto.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null} {proposalDetails?.data?.proposal.total_deposit? proposalDetails.data.proposal.total_deposit[0].denom : null})
-              </VetoValue>
-              <AbstainValue>{tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.abstain).toFixed(2)+'%'} ({proposalDetails?.data?.proposal?.final_tally_result?.abstain ? proposalDetails.data.proposal.final_tally_result.abstain.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null} {proposalDetails?.data?.proposal.total_deposit? proposalDetails.data.proposal.total_deposit[0].denom : null})
-              </AbstainValue>
-            </CorContainer>
-            <br />
-            <CardGroup>
-                <Card>
-                <Card.Body>
-                <Card.Title>Proposer</Card.Title>
-                <Card.Text>{proposalDetails?.data?.proposal?.content?.recipient? proposalDetails.data.proposal.content.recipient : 'No Recipient'}</Card.Text>
-                <Card.Title>Total Deposit</Card.Title>
-                <Card.Text>{proposalDetails?.data?.proposal.total_deposit? proposalDetails.data.proposal.total_deposit[0].amount.toLocaleString() : null } {proposalDetails?.data?.proposal.total_deposit? proposalDetails.data.proposal.total_deposit[0].denom : null}</Card.Text>
-                </Card.Body>
-            </Card>
-            <Card>
-                <Card.Body>
-                <Card.Title>Voting Start</Card.Title>
-                <Card.Text>{proposalDetails?.data?.proposal?.voting_start_time? formatTimeDateYear(proposalDetails.data.proposal.voting_start_time) : null}</Card.Text>
-                <Card.Title>Voting End</Card.Title>
-                <Card.Text>{proposalDetails?.data?.proposal?.voting_end_time? formatTimeDateYear(proposalDetails.data.proposal.voting_end_time) : null}</Card.Text>
-                </Card.Body>
-            </Card>
-            <Card>
-                <Card.Body>
-                <Card.Title>Submit Time</Card.Title>
-                <Card.Text>{proposalDetails?.data?.proposal?.submit_time? formatTimeDateYear(proposalDetails.data.proposal.submit_time) : null}</Card.Text>
-                <Card.Title>Deposit End Time</Card.Title>
-                <Card.Text>{proposalDetails?.data?.proposal?.deposit_end_time? formatTimeDateYear(proposalDetails.data.proposal.deposit_end_time) : null}</Card.Text>
-                </Card.Body>
-            </Card>
-            </CardGroup> 
-            <br />
-            <CardGroup>
-                <Card>
-                <Card.Body>
-                <Card.Title>Description</Card.Title>
-                <Card.Text>{proposalDescription? proposalDescription : null}
-                </Card.Text>
-                </Card.Body>
-            </Card>
-            </CardGroup>
-          </FlexCol3>
-          <DownBoard>
-            continue work here to display Votes
-          </DownBoard>
-        </>
-    )
+  //check if still loading and if loading, display the loading page
+  if (proposalDetails.isLoading !== false) {
+  }
+
+  const finalTallyResultSum = Number(proposalDetails?.data?.proposal?.final_tally_result?.yes) + Number(proposalDetails?.data?.proposal?.final_tally_result?.no) + Number(proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto) + Number(proposalDetails?.data?.proposal?.final_tally_result?.abstain)
+  //console.log(finalTallyResultSum)
+  const tallyPercentage = (tallyResult: number) => ((tallyResult / finalTallyResultSum) * 100)
+
+  const proposalDescription = proposalDetails?.data?.proposal?.content?.description.split('\\n\\n').map(str => <p>{str}</p>)
+
+  return (
+    <>
+      <Title>Proposer Details</Title>
+      <Box>
+        <span>{proposalDetails?.data?.proposal?.content?.title ? proposalDetails.data.proposal.content.title : null}</span>
+        <Container>
+          <Badge className={proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_PASSED' ? 'success' : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_REJECTED' ? 'danger' : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_VOTING_PERIOD' ? 'info' : 'warning'}>
+            {proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_PASSED' ? "PASSED" : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_REJECTED' ? "REJECTED" : proposalDetails?.data?.proposal?.status === 'PROPOSAL_STATUS_VOTING_PERIOD' ? "VOTING PERIOD" : "FAILED"}
+          </Badge>
+        </Container>
+        <Container>
+          <Flex style={{ marginTop: '10px' }}>
+            <span>{type}</span>
+            <Container style={{ marginLeft: '40px' }}><strong>
+              {proposalDetails?.data?.proposal.content['@type']}
+            </strong></Container>
+          </Flex>
+          <Flex style={{ marginTop: '10px' }}>
+            <span>{total}</span>
+            <Container style={{ marginLeft: '40px' }}><strong>{finalTallyResultSum} {proposalDetails?.data?.proposal.total_deposit ? proposalDetails.data.proposal.total_deposit[0].denom : null}</strong></Container>
+          </Flex>
+          <ProgressBar style={{ height: "30px" }}>
+            <ProgressBar striped variant="success" now={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.yes)} key={1} label={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.yes).toFixed(2) + '%'} />
+            <ProgressBar variant="danger" now={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no)} key={2} label={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no).toFixed(2) + '%'} />
+            <ProgressBar striped variant="warning" now={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto)} key={3} label={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto).toFixed(2) + '%'} />
+            <ProgressBar striped variant="info" now={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.abstain)} key={4} label={tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.abstain).toFixed(2) + '%'} />
+          </ProgressBar>
+        </Container>
+        <Container style={{ marginTop: "20px" }}>
+          <Grid>
+            <Container>
+              <Flex>
+                <Color className="first" />
+                <strong style={{ marginLeft: "10px" }}>Yes</strong>
+              </Flex>
+              <div>{tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.yes).toFixed(2) + '%'} ({proposalDetails?.data?.proposal?.final_tally_result?.yes ? proposalDetails.data.proposal.final_tally_result.yes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}  {proposalDetails?.data?.proposal.total_deposit ? proposalDetails.data.proposal.total_deposit[0].denom : null})</div>
+            </Container>
+            <Container>
+              <Flex>
+                <Color className="second" />
+                <strong style={{ marginLeft: "10px" }}>No</strong>
+              </Flex>
+              <div>{tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no).toFixed(2) + '%'} ({proposalDetails?.data?.proposal?.final_tally_result?.no ? proposalDetails.data.proposal.final_tally_result.no.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null} {proposalDetails?.data?.proposal.total_deposit ? proposalDetails.data.proposal.total_deposit[0].denom : null})</div>
+            </Container>
+            <Container>
+              <Flex>
+                <Color className="third" />
+                <strong style={{ marginLeft: "10px" }}>Veto</strong>
+              </Flex>
+              <div>{tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto).toFixed(2) + '%'} ({proposalDetails?.data?.proposal?.final_tally_result?.no_with_veto ? proposalDetails.data.proposal.final_tally_result.no_with_veto.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null} {proposalDetails?.data?.proposal.total_deposit ? proposalDetails.data.proposal.total_deposit[0].denom : null})</div>
+            </Container>
+            <Container>
+              <Flex>
+                <Color className="fourth" />
+                <strong style={{ marginLeft: "10px" }}>Abstain</strong>
+              </Flex>
+              <div>{tallyPercentage(proposalDetails?.data?.proposal?.final_tally_result?.abstain).toFixed(2) + '%'} ({proposalDetails?.data?.proposal?.final_tally_result?.abstain ? proposalDetails.data.proposal.final_tally_result.abstain.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null} {proposalDetails?.data?.proposal.total_deposit ? proposalDetails.data.proposal.total_deposit[0].denom : null})</div>
+            </Container>
+          </Grid>
+        </Container>
+      </Box>
+
+      <Box style={{ marginTop: "20px", padding: "20px" }}>
+        <FlexBetween>
+          <Container>Propser:</Container>
+          <Container><strong className="text-info">{proposalDetails?.data?.proposal?.content?.recipient ? proposalDetails.data.proposal.content.recipient : 'No Recipient'}</strong></Container>
+        </FlexBetween>
+        <FlexBetween>
+          <Container>Total Deposit:</Container>
+          <Container><strong>{proposalDetails?.data?.proposal.total_deposit ? proposalDetails.data.proposal.total_deposit[0].amount.toLocaleString() : null} {proposalDetails?.data?.proposal.total_deposit ? proposalDetails.data.proposal.total_deposit[0].denom : null}</strong></Container>
+        </FlexBetween>
+        <FlexBetween>
+          <Container>Voting Start</Container>
+          <Container><strong>{proposalDetails?.data?.proposal?.voting_start_time ? formatTimeDateYear(proposalDetails.data.proposal.voting_start_time) : null}</strong></Container>
+        </FlexBetween>
+        <FlexBetween>
+          <Container>Voting End</Container>
+          <Container><strong>{proposalDetails?.data?.proposal?.voting_end_time ? formatTimeDateYear(proposalDetails.data.proposal.voting_end_time) : null}</strong></Container>
+        </FlexBetween>
+        <FlexBetween>
+          <Container>Submit Time</Container>
+          <Container><strong>{proposalDetails?.data?.proposal?.submit_time ? formatTimeDateYear(proposalDetails.data.proposal.submit_time) : null}</strong></Container>
+        </FlexBetween>
+        <FlexBetween>
+          <Container>Deposit End Time</Container>
+          <Container><strong>{proposalDetails?.data?.proposal?.deposit_end_time ? formatTimeDateYear(proposalDetails.data.proposal.deposit_end_time) : null}</strong></Container>
+        </FlexBetween>
+      </Box>
+
+      <div className="my-3">
+        <h4>Description</h4>
+        <Box style ={{width: "100%", wordBreak: 'break-all'}}>
+          {proposalDescription ? proposalDescription : null}
+        </Box>
+      </div>
+      {/* <DownBoard>
+        continue work here to display Votes
+      </DownBoard> */}
+    </>
+  )
 }
+
+const FlexBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`
+
+const Bar = styled.div`
+  display: flex;
+  height: 34px;
+  margin-top: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+`
+
+const BarItemOne = styled.div`
+  width: 50%;
+  height: 100%;
+  background: #16a82e;
+`
+const BarItemTwo = styled.div`
+  width: 50%;
+  height: 100%;
+  background: #dd15e1;
+`
+const BarItemThree = styled.div`
+  width: 25%;
+  height: 100%;
+  background: #4a15e1;
+`
+const BarItemFour = styled.div`
+  width: 10%;
+  height: 100%;
+  background: #b815e1;
+`
+
+const Flex = styled.div`
+  display: flex;
+`
+
+const Box = styled.div`
+  border-radius: 20px;
+  box-shadow: 0px 7px 30px #0015da29;
+  width: 100%;
+  padding: 20px 20px;
+  word-break: break-all;
+`
+
+const Container = styled.div`
+  display:block;
+`
+
+const Badge = styled.div`
+  border-radius: 20px;
+  display: inline-block;
+  padding: 0px 10px;
+  margin-top: 10px;
+  color: white;
+  &.success{
+    background: #16A82E;
+  }
+  &.danger{
+    background:#dc3545;
+  }
+  &.warning{
+    background: #ffc107;
+  }
+  &.info{
+    background: #0d6efd;
+  }
+`
+
+const Grid = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto auto auto auto;
+  @media screen and (max-width: 764px){
+    grid-template-columns: auto auto;
+    grid-gap: 40px;
+  }
+`
+
+const Color = styled.div`
+  width: 25px;
+  height: 25px;
+  background: red;
+  border-radius: 5px;
+  &.first{
+    background: #16A82E;
+  }
+  &.second{
+    background: #dc3545;
+  }
+  &.third{
+    background: #ffc107
+  }
+  &.fourth{
+    background: #0d6efd;
+  }
+`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const Title = styled.h1`
   ${UrbanistBoldBlack40px}

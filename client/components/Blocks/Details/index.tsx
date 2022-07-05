@@ -18,84 +18,229 @@ import {
 } from "../../../styledMixins";
 
 function BlockHeightContent(props) {
-    const {
-        title,
-        address1,
-        height1,
-        text1,
-        time1,
-        mannyel,
-        proposer,
-        address2,
-        timeAgo,
-        number1,
-        noOfCrs,
-        x0975Coris,
-        crTotalFee,
-        x34Gd73874Gf783Ff374G,
-        hash1,
-        iconCopy,
-        signatures,
-        validators2,
-        dgtizeStake1,
-        dgtizeStake2,
-        dgtizeStake3,
-        dgtizeStake4,
-        dgtizeStake5,
-        dgtizeStake6,
-        dgtizeStake7,
-        dgtizeStake8,
-        dgtizeStake9,
-        dgtizeStake10,
-        dgtizeStake11,
-        transactions,
-        height2,
-        hash2,
-        status,
-        fee,
-        message,
-        type,
-        time2,
-        phone1,
-        x34567EfE34G6J7K85H1,
-        place1,
-        number2,
-        number3,
-        x34567EfE34G6J7K85H2,
-        x6SAgo1,
-        phone2,
-        x34567EfE34G6J7K85H3,
-        place2,
-        number4,
-        number5,
-        x34567EfE34G6J7K85H4,
-        x6SAgo2,
-        phone3,
-        x34567EfE34G6J7K85H5,
-        place3,
-        number6,
-        number7,
-        x34567EfE34G6J7K85H6,
-        x6SAgo3,
-        phone4,
-        x34567EfE34G6J7K85H7,
-        place4,
-        number8,
-        number9,
-        x34567EfE34G6J7K85H8,
-        x6SAgo4,
-        phone5,
-        x34567EfE34G6J7K85H9,
-        place5,
-        number10,
-        number11,
-        x34567EfE34G6J7K85H10,
-        x6SAgo5,
-      } = props;
-    return (
-        <>
-         <Title>{title}</Title>
-          <OverlapGroupContainer>
+  const {
+    title,
+    address1,
+    height1,
+    text1,
+    time1,
+    mannyel,
+    proposer,
+    address2,
+    timeAgo,
+    number1,
+    noOfCrs,
+    x0975Coris,
+    crTotalFee,
+    x34Gd73874Gf783Ff374G,
+    hash1,
+    iconCopy,
+    signatures,
+    validators2,
+    dgtizeStake1,
+    dgtizeStake2,
+    dgtizeStake3,
+    dgtizeStake4,
+    dgtizeStake5,
+    dgtizeStake6,
+    dgtizeStake7,
+    dgtizeStake8,
+    dgtizeStake9,
+    dgtizeStake10,
+    dgtizeStake11,
+    transactions,
+    height2,
+    hash2,
+    status,
+    fee,
+    message,
+    type,
+    time2,
+    phone1,
+    x34567EfE34G6J7K85H1,
+    place1,
+    number2,
+    number3,
+    x34567EfE34G6J7K85H2,
+    x6SAgo1,
+    phone2,
+    x34567EfE34G6J7K85H3,
+    place2,
+    number4,
+    number5,
+    x34567EfE34G6J7K85H4,
+    x6SAgo2,
+    phone3,
+    x34567EfE34G6J7K85H5,
+    place3,
+    number6,
+    number7,
+    x34567EfE34G6J7K85H6,
+    x6SAgo3,
+    phone4,
+    x34567EfE34G6J7K85H7,
+    place4,
+    number8,
+    number9,
+    x34567EfE34G6J7K85H8,
+    x6SAgo4,
+    phone5,
+    x34567EfE34G6J7K85H9,
+    place5,
+    number10,
+    number11,
+    x34567EfE34G6J7K85H10,
+    x6SAgo5,
+  } = props;
+  return (
+    <>
+      <Title>{title}</Title>
+      <Container>
+        <Grid>
+          <Card style={{ height: "100px" }}>
+            <FlexCenter>
+              <div>
+                <h4>425353535345</h4>
+                <h6 className="text-center">Height</h6>
+              </div>
+            </FlexCenter>
+          </Card>
+          <Card style={{ height: "100px" }}>
+            <FlexCenter>
+              <div>
+                <h4>425353535345</h4>
+                <h6 className="text-center">Time</h6>
+              </div>
+            </FlexCenter>
+          </Card>
+          <Card style={{ height: "100px" }}>
+            <FlexCenter>
+              <div>
+                <Flex style={{ alignItems: "center" }}>
+                  <Circle className="bg-primary"></Circle>
+                  <h4 className="text-primary" style={{ marginLeft: "10px", marginBottom: "0px" }}>Mannyel</h4>
+                </Flex>
+                <h6 className="text-center">Height</h6>
+              </div>
+            </FlexCenter>
+          </Card>
+          <Card style={{ height: "100px" }}>
+            <FlexCenter>
+              <div>
+                <h4>425353535345</h4>
+                <h6 className="text-center">Time</h6>
+              </div>
+            </FlexCenter>
+          </Card>
+          <Card style={{ height: "100px" }}>
+            <FlexCenter>
+              <div>
+                <h4>3</h4>
+                <h6 className="text-center">No of CR's</h6>
+              </div>
+            </FlexCenter>
+          </Card>
+          <Card style={{ height: "100px" }}>
+            <FlexCenter>
+              <div>
+                <h4>0.7434 CORIS</h4>
+                <h6 className="text-center">CR total fees</h6>
+              </div>
+            </FlexCenter>
+          </Card>
+          <Card className="last-grid-item" style={{ height: "100px" }}>
+            <FlexCenter>
+              <div>
+                <Hash>ertertetertetefwewxfewrwexreormwrowrmojxemorjwrmowjrowrjmw</Hash>
+                <h6 className="text-center">Hash</h6>
+              </div>
+            </FlexCenter>
+          </Card>
+        </Grid>
+      </Container>
+      <Container className='my-3'>
+        <h5>Signatures</h5>
+        <Card className='p-3'>
+          <table className='w-100'>
+            <thead>
+              <tr>
+                <td>Validators</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div>
+                    <Flex style={{ alignItems: "center" }}>
+                      <Circle className="bg-primary"></Circle>
+                      <h4 className="text-primary" style={{ marginLeft: "10px", marginBottom: "0px" }}>Mannyel</h4>
+                    </Flex>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <Flex style={{ alignItems: "center" }}>
+                      <Circle className="bg-primary"></Circle>
+                      <h4 className="text-primary" style={{ marginLeft: "10px", marginBottom: "0px" }}>Mannyel</h4>
+                    </Flex>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+
+                  <div>
+                    <Flex style={{ alignItems: "center" }}>
+                      <Circle className="bg-primary"></Circle>
+                      <h4 className="text-primary" style={{ marginLeft: "10px", marginBottom: "0px" }}>Mannyel</h4>
+                    </Flex>
+                  </div>
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+
+                  <div>
+                    <Flex style={{ alignItems: "center" }}>
+                      <Circle className="bg-primary"></Circle>
+                      <h4 className="text-primary" style={{ marginLeft: "10px", marginBottom: "0px" }}>Mannyel</h4>
+                    </Flex>
+                  </div>
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+
+                  <div>
+                    <Flex style={{ alignItems: "center" }}>
+                      <Circle className="bg-primary"></Circle>
+                      <h4 className="text-primary" style={{ marginLeft: "10px", marginBottom: "0px" }}>Mannyel</h4>
+                    </Flex>
+                  </div>
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+
+                  <div>
+                    <Flex style={{ alignItems: "center" }}>
+                      <Circle className="bg-primary"></Circle>
+                      <h4 className="text-primary" style={{ marginLeft: "10px", marginBottom: "0px" }}>Mannyel</h4>
+                    </Flex>
+                  </div>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </Card>
+      </Container>
+      {/* <OverlapGroupContainer>
             <OverlapGroup18>
               <Address>{address1}</Address>
               <Height>{height1}</Height>
@@ -245,10 +390,153 @@ function BlockHeightContent(props) {
               <X34567efe34g6j7k85h5>{x34567EfE34G6J7K85H10}</X34567efe34g6j7k85h5>
               <X6sAgo1>{x6SAgo5}</X6sAgo1>
             </OverlapGroup3>
-          </OverlapGroup11>
-        </>
-    )
+          </OverlapGroup11> */}
+    </>
+  )
 }
+
+
+
+const Hash = styled.h4`
+  text-align: center;
+  padding: 0px 20px;
+  @media screen and (max-width: 520px){
+   font-size: 14px;
+  }
+`
+
+
+const Card = styled.div`
+  border-radius: 20px;
+  box-shadow: 0px 7px 30px #0015da29;
+  word-break: break-all;
+  &.last-grid-item{
+    grid-column: 1 / span 2;
+  }
+  @media screen and (max-width: 520px){
+   grid-column: 1 / span 2;
+  }
+`;
+
+const Flex = styled.div`
+  display: flex
+`;
+
+const FlexCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+
+const InLineFlex = styled.div`
+  display:inline-flex;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content: center;
+`
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns:auto auto;
+  grid-gap: 20px;
+  @media screen and (max-width: 520px){
+    grid-gap: 10px;
+  }
+`;
+
+const Container = styled.div`
+  display: block;
+`;
+
+const Responsive = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  @media screen and (max-width: 700px){
+    width: 85vw;
+  }
+  `;
+
+const Circle = styled.div`
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background:red;
+`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const Title = styled.h1`
@@ -495,14 +783,6 @@ const X34gd73874gf783ff374g = styled.div`
   letter-spacing: 2.08px;
 `;
 
-const Hash = styled.div`
-  ${UrbanistNormalBlack24px}
-  min-height: 29px;
-  margin-top: 8px;
-  margin-left: 42px;
-  min-width: 53px;
-  letter-spacing: 0;
-`;
 
 const OutlineFilesCopy = styled.img`
   width: 24px;

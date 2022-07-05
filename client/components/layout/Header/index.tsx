@@ -5,11 +5,15 @@ import WalletButton from "./ConnectWallet/walletButton";
 import { useState } from "react";
 import { useAppDispatch } from "../../../lib/hooks";
 import { toggleSidebar } from "../../../lib/features/generalSlice";
+import Modal from "./Modal";
+import ModalContent from "./Modal/ModalContent";
 
 
 function Header() {
   //const {  searchBarProps,  connectWallet1Data } = props;
   const dispatch = useAppDispatch()
+  const [isToggled, toggle] = useState(false)
+
   return (
     <TopNavBar>
       <MobileSideBarToggler onClick={() => dispatch(toggleSidebar(true))}>
@@ -18,6 +22,7 @@ function Header() {
       <FlexBetween>
         <SearchBar src={searchBarData.src} />
         <ConnectWallet
+          toggle={toggle}
           asset62={connectWallet1Data.asset62}
           asset72={connectWallet1Data.asset72}
           outlineMediaShuffle={connectWallet1Data.outlineMediaShuffle}
@@ -26,8 +31,10 @@ function Header() {
           <OutlineGeneralMoon src="/img/outline-general-moon@2x.svg" />
         </NightmodeButton>
         <WalletButton className={''} />
+        <Modal>
+          <ModalContent isToggled={isToggled} toggle={toggle} />
+        </Modal>
       </FlexBetween>
-      
     </TopNavBar>
 
   )

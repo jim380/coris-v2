@@ -602,7 +602,7 @@ html, body, #__next{
   justify-content: space-between;
 }
 
-tr.validator-item-row:nth-child(even){
+tr:nth-child(even){
  background-color: var(--titan-white);;
 }
 
@@ -620,4 +620,38 @@ tr.validator-item-row{
 
 .tab-content{
   width: 100%;
+}
+
+.w-50{
+  width: 50%;
+}
+
+.px-3{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.pt-3{
+  padding-top: 16px;
+}
+
+.copy{
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.ml-3{
+  margin-left: 1rem;
+}
+
+.striped:nth-child(odd){
+  background-color: var(--titan-white);
+}
+
+td, th{
+  padding: 10px 10px;
+}
+
+th{
+  font-weight: bold;
 }

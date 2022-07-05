@@ -22,8 +22,8 @@ function SearchButton (props) {
 }
 
 const Search = styled.div`
-  margin-left: 700px;
-  display: flex;
+  display: block;
+  float:right;
   padding: 5px 19px;
   align-items: center;
   min-width: 280px;
