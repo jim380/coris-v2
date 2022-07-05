@@ -14,7 +14,7 @@ import { Bech32, fromBase64, toHex, fromHex, toBech32  } from "@cosmjs/encoding"
 import { useGetChainActiveValidatorsQuery } from "../../lib/chainApi";
 
 
-function Blocks(props) {
+function BlocksContent(props) {
   const {
     getBlocks
   } = props;
@@ -170,4 +170,4 @@ const TimeValue = styled.div`
   letter-spacing: 0;
 `;
 
-export default Blocks;
+export default BlocksContent;
