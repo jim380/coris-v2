@@ -46,7 +46,173 @@ const joinedBlocksValidatorsData = getBlocks.map((block)=> {
   return (
     <>
     <Title>Blocks</Title>
-    <LatestBlocks1>
+      <Container className="mb-3">
+        <Card style={{padding: "30px 20px"}}>
+          <Responsive>
+            <table className="w-100">
+              <thead>
+                <tr>
+                  <th>Block Height</th>
+                  <th>Hash</th>
+                  <th>Proposer</th>
+                  <th>No. of Txs</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container style={{minWidth: "200px"}}>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+                <tr>
+                  <td className="text-primary">56435335</td>
+                  <td>edf4d3d34f33rd34d324d4d34r</td>
+                  <td>
+                    <Container>
+                      <InLineFlex>
+                        <Circle>{" "}</Circle>
+                        <Container className="text-primary ml-3">Digital Stroke</Container>
+                      </InLineFlex>
+                    </Container>
+                  </td>
+                  <td>3</td>
+                  <td>6s ago</td>
+                </tr>
+              </tbody>
+            </table>
+          </Responsive>
+        </Card>
+      </Container>
+      
+
+
+
+
+
+
+    {/* <LatestBlocks1>
       <LatestBlocksTilte
         height={BlocksTitleData.height}
         hash={BlocksTitleData.hash}
@@ -77,7 +243,7 @@ const joinedBlocksValidatorsData = getBlocks.map((block)=> {
         })
     })
    }   
-    </LatestBlocks1>
+    </LatestBlocks1> */}
     <style jsx>{`
            .img {
            margin-right: 10px;
@@ -86,6 +252,73 @@ const joinedBlocksValidatorsData = getBlocks.map((block)=> {
     </>
   );
 }
+
+
+
+
+
+const Card = styled.div`
+  border-radius: 20px;
+  box-shadow: 0px 7px 30px #0015da29;
+`;
+
+const Flex = styled.div`
+  display: flex
+`;
+
+const InLineFlex = styled.div`
+  display:inline-flex;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content: center;
+`
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns:auto auto;
+`;
+
+const Container = styled.div`
+  display: block;
+`;
+
+const Responsive = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  @media screen and (max-width: 700px){
+    width: 85vw;
+  }
+  `;
+
+const Circle= styled.div`
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background:red;
+`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const BlocksTitleData = {
   height: "Block Height",

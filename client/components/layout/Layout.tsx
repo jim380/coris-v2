@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale-1"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </Head>
       <SideNavBar {...sideNavBarData} />
       <FlexCol2>
@@ -33,6 +33,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div> 
       </FlexCol2>
+      <div id="modal"></div>
     </>
   );
 }

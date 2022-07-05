@@ -47,82 +47,69 @@ function ValidatorsContent(props) {
   return (
     <>
       <Title>Validators</Title>
-      <Validators>
+      <div>
         <SearchButton setQuery={setQuery} />
         <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="" variant="tabs">
           <Tab eventKey="active" title="Active" className="w-100">
-            {/* <ValidatorTilte
-              rank={ValidatorTitleData.rank}
-              validator={ValidatorTitleData.validator}
-              votingPower={ValidatorTitleData.votingPower}
-              cumulativeshare={ValidatorTitleData.cumulativeshare}
-              commission={ValidatorTitleData.commission}
-            /> */}
+            <Responsive>
+              <table className="w-100 mt-3">
+                <thead>
+                  <tr style={{ fontWeight: "bold" }}>
+                    <th>Rank</th>
+                    <th>Validator</th>
+                    <th>Voting Power</th>
+                    <th>Cummulative Share</th>
+                    <th>Commission</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {activeValidatorsData?.filter(data => {
+                    //if Query does not exist
+                    if (query === ' ') {
+                      return data;
+                    } else if (data?.description?.moniker.toLowerCase().includes(query.toLocaleLowerCase())) {
+                      return data
+                    }
+                  })
+                    .map((data, index) => {
+                      var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
 
-            <table className="w-100 mt-3">
-              <thead>
-                <tr style={{ fontWeight: "bold" }}>
-                  <th>Rank</th>
-                  <th>Validator</th>
-                  <th>Voting Power</th>
-                  <th>Cummulative Share</th>
-                  <th>Commission</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {activeValidatorsData?.filter(data => {
-                  //if Query does not exist
-                  if (query === ' ') {
-                    return data;
-                  } else if (data?.description?.moniker.toLowerCase().includes(query.toLocaleLowerCase())) {
-                    return data
-                  }
-                })
-                  .map((data, index) => {
-                    var percentageOfVotingPower: number = getPercentageOfValidatorsBondedTokens(data?.tokens, totalBondedTokens)
+                      activeValidatorsCumulativeShare += percentageOfVotingPower
 
-                    activeValidatorsCumulativeShare += percentageOfVotingPower
-
-                    const commission = data?.commission?.commission_rates?.rate * 100
-                    return (
-                      <tr className="validator-item-row" onClick={() => router.push(`/validators/${data.operator_address}`)} >
-                        <td>{index + 1}</td>
-                        <td>
-                          <Flex>
-                            <FlexMiddle>
-                              <img className="img" src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
-                            </FlexMiddle>
-                            <FlexMiddle>
-                              {data?.description?.moniker}
-                            </FlexMiddle>
-                          </Flex>
-                        </td>
-                        <td>
-                          {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
-                          <div className="sub">{percentageOfVotingPower.toFixed(2) + '%'}</div>
-                        </td>
-                        <td>{activeValidatorsCumulativeShare.toFixed(2) + '%'}</td>
-                        <td>{commission.toFixed(2) + '%'}</td>
-                        <td>Delegate</td>
-                      </tr>
+                      const commission = data?.commission?.commission_rates?.rate * 100
+                      return (
+                        <tr className="validator-item-row" onClick={() => router.push(`/validators/${data.operator_address}`)} >
+                          <td>{index + 1}</td>
+                          <td>
+                            <Flex>
+                              <FlexMiddle>
+                                <img className="img" src={getValidatorsLogoFromWebsites(data?.description?.website)} alt="" />
+                              </FlexMiddle>
+                              <FlexMiddle>
+                                {data?.description?.moniker}
+                              </FlexMiddle>
+                            </Flex>
+                          </td>
+                          <td>
+                            {roundValidatorsVotingPowerToWholeNumber(data?.tokens)}
+                            <div className="sub">{percentageOfVotingPower.toFixed(2) + '%'}</div>
+                          </td>
+                          <td>{activeValidatorsCumulativeShare.toFixed(2) + '%'}</td>
+                          <td>{commission.toFixed(2) + '%'}</td>
+                          <td>Delegate</td>
+                        </tr>
+                      )
+                    }
                     )
                   }
-                  )
-                }
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </Responsive>
           </Tab>
           <Tab eventKey="inactive" title="InActive">
-            {/* <ValidatorTilte
-              rank={ValidatorTitleData.rank}
-              validator={ValidatorTitleData.validator}
-              votingPower={ValidatorTitleData.votingPower}
-              cumulativeshare={ValidatorTitleData.cumulativeshare}
-              commission={ValidatorTitleData.commission}
-            /> */}
-
-            <table className="w-100 mt-3">
+            <Responsive>
+              <table className="w-100 mt-3">
               <thead>
                 <tr style={{ fontWeight: "bold" }}>
                   <th>Rank</th>
@@ -147,7 +134,7 @@ function ValidatorsContent(props) {
 
                     inActiveValidatorsCumulativeShare += percentageOfVotingPower
                     const commission = data?.commission?.commission_rates?.rate * 100
-                    
+
                     return (
                       <tr className="validator-item-row" onClick={() => router.push(`/validators/${data.operator_address}`)} >
                         <td>{index + 1}</td>
@@ -173,9 +160,11 @@ function ValidatorsContent(props) {
                   })}
               </tbody>
             </table>
+            </Responsive>
+            
           </Tab>
         </Tabs>
-      </Validators>
+      </div>
 
       <style jsx>{`
            .img {
@@ -189,6 +178,7 @@ function ValidatorsContent(props) {
     </>
   );
 }
+
 
 const Flex = styled.div`
   display: flex;
@@ -291,6 +281,14 @@ const Delegate = styled.div`
   min-width: 51px;
   letter-spacing: 0;
   color: blue;
+`;
+
+const Responsive = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  @media screen and (max-width: 1075px){
+    width: 96vw;
+  }
 `;
 
 
