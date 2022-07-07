@@ -240,6 +240,75 @@ function BlockHeightContent(props) {
           </table>
         </Card>
       </Container>
+
+      <Container className='w-100'>
+        <h5>Transactions</h5>
+        <Card className='w-100'>
+          <Responsive className="p-3">
+            <table className="w-100 mt-3 table table-responsive">
+              <thead>
+                <tr style={{ fontWeight: "bold" }}>
+                  <th>Tx hash</th>
+                  <th>Height</th>
+                  <th>Status</th>
+                  <th>Fee</th>
+                  <th>Message</th>
+                  <th>Type</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>dowjdlsdjasldjasldas</td>
+                  <td>7 004 033</td>
+                  <td className="text-success">Success</td>
+                  <td>0.43243 CORIS</td>
+                  <td>2</td>
+                  <td>Withdraw Delegator Reward COSMOS</td>
+                  <td>07.07.2022, 12:09:57</td>
+                </tr>
+                <tr>
+                  <td>dowjdlsdjasldjasldas</td>
+                  <td>7 004 033</td>
+                  <td className="text-success">Success</td>
+                  <td>0.43243 CORIS</td>
+                  <td>2</td>
+                  <td>Withdraw Delegator Reward COSMOS</td>
+                  <td>07.07.2022, 12:09:57</td>
+                </tr>
+                <tr>
+                  <td>dowjdlsdjasldjasldas</td>
+                  <td>7 004 033</td>
+                  <td className="text-success">Success</td>
+                  <td>0.43243 CORIS</td>
+                  <td>2</td>
+                  <td>Withdraw Delegator Reward COSMOS</td>
+                  <td>07.07.2022, 12:09:57</td>
+                </tr>
+                <tr>
+                  <td>dowjdlsdjasldjasldas</td>
+                  <td>7 004 033</td>
+                  <td className="text-success">Success</td>
+                  <td>0.43243 CORIS</td>
+                  <td>2</td>
+                  <td>Withdraw Delegator Reward COSMOS</td>
+                  <td>07.07.2022, 12:09:57</td>
+                </tr>
+                <tr>
+                  <td>dowjdlsdjasldjasldas</td>
+                  <td>7 004 033</td>
+                  <td className="text-success">Success</td>
+                  <td>0.43243 CORIS</td>
+                  <td>2</td>
+                  <td>Withdraw Delegator Reward COSMOS</td>
+                  <td>07.07.2022, 12:09:57</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </Responsive>
+        </Card>
+      </Container>
       {/* <OverlapGroupContainer>
             <OverlapGroup18>
               <Address>{address1}</Address>
@@ -454,10 +523,10 @@ const Container = styled.div`
 const Responsive = styled.div`
   width: 100%;
   overflow-x: auto;
-  @media screen and (max-width: 700px){
-    width: 85vw;
+  @media screen and (max-width: 1075px){
+    width: calc(100vw - 40px);
   }
-  `;
+`;
 
 const Circle = styled.div`
   width: 23px;

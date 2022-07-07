@@ -107,7 +107,7 @@ const Responsive = styled.div`
   width: 100%;
   overflow-x: auto;
   @media screen and (max-width: 1075px){
-    width: 96vw;
+    width: calc(100vw - 40px);
   }
 `;
 

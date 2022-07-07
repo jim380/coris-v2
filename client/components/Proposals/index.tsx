@@ -127,11 +127,53 @@ function ProposalsContent(props) {
   )
 }
 
+const Flex = styled.div`
+  display: flex;
+`
+
+const TabToggler = styled.div`
+  background: #e9ebfe;
+  border-radius: 10px;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom:40px;
+  cursor: pointer;
+  @media screen and (max-width: 506px){
+    flex-direction: column;
+    width: 100%;
+  }
+`
+
+const TabTogglerItem = styled.div`
+  diplay: flex; 
+  align-items:center;
+  justify-content: center;
+  &.active{
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 7px 8px 0px #9f9f9f;
+  }
+  @media screen and (max-width: 506px){
+    padding: 10px 0px;
+  }
+
+`
+
+const Card = styled.div`
+  box-shadow: 0px 7px 30px #0015da29;
+  border-radius: 20px;
+  margin-bottom:40px;
+`
+
 const Responsive = styled.div`
   width: 100%;
   overflow-x: auto;
   @media screen and (max-width: 1075px){
-    width: 96vw;
+    width: calc(100vw - 40px);
   }
 `;
 

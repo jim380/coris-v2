@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { toggleSidebar } from '../../../lib/features/generalSlice';
 import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
@@ -14,7 +16,9 @@ import Logo from "./Logo";
 
 function SideNavBar(props) {
   const { sidebarToggled } = useAppSelector(state => state.general)
+  const [selectedPage, setSelectedPage] = useState("/")
   const dispatch = useAppDispatch()
+  const router = useRouter()
   const {
     solidGeneralChartPie,
     iconUser,
@@ -27,76 +31,86 @@ function SideNavBar(props) {
     proposals,
     parameters,
     assets } = props;
+
+  const navigate = (selectedPage) => {
+    dispatch(toggleSidebar(false))
+    setSelectedPage(selectedPage)
+    router.push(selectedPage)
+  }
+
   return (
     <SideNavigation className={sidebarToggled && 'show'}>
       <Close onClick={() => dispatch(toggleSidebar(false))}>&times;</Close>
-      <Link href="/"><a> <Logo /></a></Link>
-      <WalletButton className="mobile"/>
+      <Clicker onClick={() => navigate("/")}><Logo /></Clicker>
+      <WalletButton className="mobile" />
       <SearchBar src={searchBarData.src} className="mobile" />
       <Wrapper>
-        <Link href="/">
+        <Clicker onClick={() => navigate("/")} title="Overview">
           <a className="m-24">
             <FlexRow>
               <FlexCell><SolidGeneralChartPie src={solidGeneralChartPie} /></FlexCell>
-              <FlexCell><Overview>{overview}</Overview></FlexCell>
+              <FlexCell><Overview style={{ color: selectedPage === "/" && 'white' }}>{overview}</Overview></FlexCell>
             </FlexRow>
           </a>
-        </Link>
+        </Clicker>
         <br />
-        <br className='hidden-sm'/>
-        <Link href="/validators">
+        <br className='hidden-sm' />
+        <Clicker onClick={() => navigate("/validators")} title = "Validators">
           <a className="m-24">
             <FlexRow>
               <FlexCell><IconUser src={iconUser} /></FlexCell>
-              <FlexCell><Validators>{validators}</Validators></FlexCell>
+              <FlexCell><Validators style={{ color: selectedPage === "/validators" && 'white' }}>{validators}</Validators></FlexCell>
             </FlexRow>
           </a>
-        </Link>
+        </Clicker>
         <br />
         <br className='hidden-sm' />
-        <Link href="/blocks">
+        <Clicker onClick={() => navigate("/blocks")} title="Blocks">
           <a className="m-24">
             <FlexRow>
               <FlexCell><IconUser src={icon1} /></FlexCell>
-              <FlexCell><Blocks>{blocks}</Blocks></FlexCell>
+              <FlexCell><Blocks style={{ color: selectedPage === "/blocks" && 'white' }}>{blocks}</Blocks></FlexCell>
             </FlexRow>
           </a>
-        </Link>
+        </Clicker>
         <br />
         <br className='hidden-sm' />
-        <Link href="/proposals">
+        <Clicker onClick={() => navigate("/proposals")} title="Proposals">
           <a className="m-24">
             <FlexRow>
               <FlexCell><Icon src={icon2} /></FlexCell>
-              <FlexCell><Proposals>{proposals}</Proposals></FlexCell>
+              <FlexCell><Proposals style={{ color: selectedPage === "/proposals" && 'white' }}>{proposals}</Proposals></FlexCell>
             </FlexRow>
           </a>
-        </Link>
+        </Clicker>
         <br />
         <br className='hidden-sm' />
-        <Link href="/params">
+        <Clicker onClick={() => navigate("/params")} title="Parameters">
           <a className="m-24">
             <FlexRow>
               <FlexCell><Icon1 src={icon3} /></FlexCell>
-              <FlexCell><Parameters>{parameters}</Parameters></FlexCell>
+              <FlexCell><Parameters style={{ color: selectedPage === "/params" && 'white' }}>{parameters}</Parameters></FlexCell>
             </FlexRow>
           </a>
-        </Link>
+        </Clicker>
         <br />
         <br className='hidden-sm' />
-        <Link href="/assets" >
+        <Clicker onClick={() => navigate("/assets")} title="Assets">
           <a className="m-24">
             <FlexRow>
               <FlexCell><Icon1 src={icon3} /></FlexCell>
-              <FlexCell><Assets>{assets}</Assets></FlexCell>
+              <FlexCell><Assets style={{ color: selectedPage === "/assets" && 'white' }}>{assets}</Assets></FlexCell>
             </FlexRow>
           </a>
-        </Link>
+        </Clicker>
       </Wrapper>
     </SideNavigation >
   )
 }
 
+const Clicker = styled.div`
+  cursor: pointer;
+`
 const Close = styled.div`
   position: absolute;
   right: 20px;
@@ -156,6 +170,10 @@ const SideNavigation = styled.div`
 
 const FlexRow = styled.div`
   display: flex;
+  &:hover{
+    background: #ebedff0d;
+    border-radius: 20px;
+  }
 `;
 
 const FlexCol = styled.div`
@@ -201,7 +219,7 @@ const Overview = styled.div`
   height: 29px;
   font-family: var(--font-family-urbanist);
   font-weight: 600;
-  color: var(--coconut);
+  color: var(--blue-bell);
   font-size: var(--font-size-xxxxl);
   letter-spacing: 0;
   display: flex;
