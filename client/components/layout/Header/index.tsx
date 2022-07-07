@@ -16,10 +16,10 @@ function Header() {
 
   return (
     <TopNavBar>
-      <MobileSideBarToggler onClick={() => dispatch(toggleSidebar(true))}>
-        <button type="button" className="hamburger" aria-label="burger"><svg viewBox="0 0 24 24" width="35px" height="35px" focusable="false" className="chakra-icon css-fi0ww0" aria-hidden="true"><path fill="#37458d" d="M 3 5 A 1.0001 1.0001 0 1 0 3 7 L 21 7 A 1.0001 1.0001 0 1 0 21 5 L 3 5 z M 3 11 A 1.0001 1.0001 0 1 0 3 13 L 21 13 A 1.0001 1.0001 0 1 0 21 11 L 3 11 z M 3 17 A 1.0001 1.0001 0 1 0 3 19 L 21 19 A 1.0001 1.0001 0 1 0 21 17 L 3 17 z"></path></svg></button>
-      </MobileSideBarToggler>
       <FlexBetween>
+        <MobileSideBarToggler onClick={() => dispatch(toggleSidebar(true))}>
+          <button type="button" className="hamburger" aria-label="burger"><svg viewBox="0 0 24 24" width="35px" height="35px" focusable="false" className="chakra-icon css-fi0ww0" aria-hidden="true"><path fill="#37458d" d="M 3 5 A 1.0001 1.0001 0 1 0 3 7 L 21 7 A 1.0001 1.0001 0 1 0 21 5 L 3 5 z M 3 11 A 1.0001 1.0001 0 1 0 3 13 L 21 13 A 1.0001 1.0001 0 1 0 21 11 L 3 11 z M 3 17 A 1.0001 1.0001 0 1 0 3 19 L 21 19 A 1.0001 1.0001 0 1 0 21 17 L 3 17 z"></path></svg></button>
+        </MobileSideBarToggler>
         <SearchBar src={searchBarData.src} />
         <ConnectWallet
           toggle={toggle}

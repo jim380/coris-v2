@@ -21,6 +21,7 @@ const SearchBar1 = styled.div`
   border-radius: 59px;
   box-shadow: 0px 7px 30px #0015da29;
   width: 50%;
+  margin-right: 20px;
 
   &.search-bar.search-bar-1 {
     margin-top: 2px;

@@ -31,7 +31,6 @@ const ConnectWallet1 = styled.div`
   align-items: center;
   border-radius: 59px;
   box-shadow: 0px 7px 30px #0015da29;
-  margin-left: 20px;
   width: 200px;
 
   &.connect-wallet.connect-wallet-1 {

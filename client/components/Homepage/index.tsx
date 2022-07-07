@@ -1,10 +1,10 @@
-import  React from "react";
+import React from "react";
 import Link from "next/link";
-import {formatTime, formatHash, getValidatorsLogoFromWebsites} from "../Util/format"
+import { formatTime, formatHash, getValidatorsLogoFromWebsites } from "../Util/format"
 import styled from "styled-components";
 import Details from './Details'
 import Details2 from './Details2'
-import  LatestBlocksTilte from './LatestBlocksTilte'
+import LatestBlocksTilte from './LatestBlocksTilte'
 import {
   UrbanistMediumAbsoluteZero172px,
   UrbanistBoldBlack26px,
@@ -17,7 +17,7 @@ import {
   UrbanistBoldBlack40px,
 } from "../../styledMixins";
 import { sha256 } from "@cosmjs/crypto";
-import { Bech32, fromBase64, toHex, fromHex, toBech32  } from "@cosmjs/encoding";
+import { Bech32, fromBase64, toHex, fromHex, toBech32 } from "@cosmjs/encoding";
 import { useGetChainActiveValidatorsQuery } from "../../lib/chainApi";
 
 function HomePageContent(props) {
@@ -46,25 +46,25 @@ function HomePageContent(props) {
   } = props;
   //console.log(getBlocks)
 
-//function that receieves proposer address and returns the validators details
-const getChainValidators = useGetChainActiveValidatorsQuery()
-const joinedBlocksValidatorsData = getBlocks.map((block)=> {
-   //convert proposer address to cosmosvalcons
-   const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
-  
-   const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
-     //fetch just the active validators
-    //get the consensus pubkey
-    const ed25519PubkeyRaw = fromBase64(validator.consensus_pubkey.key);
-    const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
-    const bech32Address = Bech32.encode("cosmosvalcons", addressData);
-     
-    if (bech32Address === proposerToBech32){
-      return {validator, block}
-    }
-   })
-  return getActiveChainValidators
-})
+  //function that receieves proposer address and returns the validators details
+  const getChainValidators = useGetChainActiveValidatorsQuery()
+  const joinedBlocksValidatorsData = getBlocks.map((block) => {
+    //convert proposer address to cosmosvalcons
+    const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
+
+    const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
+      //fetch just the active validators
+      //get the consensus pubkey
+      const ed25519PubkeyRaw = fromBase64(validator.consensus_pubkey.key);
+      const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
+      const bech32Address = Bech32.encode("cosmosvalcons", addressData);
+
+      if (bech32Address === proposerToBech32) {
+        return { validator, block }
+      }
+    })
+    return getActiveChainValidators
+  })
 
   // Ed25519 pubkey from genesis
   const pubkey = {
@@ -214,64 +214,46 @@ const joinedBlocksValidatorsData = getBlocks.map((block)=> {
         <ViewAll>{viewAll}</ViewAll>
       </Flex>
       <Container>
-      <div className="tableTr">
-  <table>
-    <thead>
-    <tr>
-      <th>Height</th>
-      <th>Hash</th>
-      <th>Proposer</th>
-      <th>No of Txs</th>
-      <th>Time</th>
-    </tr>
-    </thead>
-    
-    {joinedBlocksValidatorsData.map((details) => {
-          return details?.map((data) => {
-             if (data !== undefined){
-               console.log(data)
-            return(
-    <tr>
-       <Link href='/blocks[height]' as={`/blocks/${data.block.height }`} ><a>
-      <td>{data.block?.height? data.block.height : null}</td> </a></Link>
-      <td>{data.block?.hash? formatHash(data.block.hash, 15, '....') : null}</td>
-      <Link href='/validators[address]' as={`/validators/${data.validator.operator_address}`} ><a>
-      <td>
-      <img className="img" width={30} src={getValidatorsLogoFromWebsites(data?.validator?.description?.website)} alt="" />
-      {data?.validator?.description?.moniker}
-      </td>
-      </a></Link>
-      <td>{data?.block?.noTxs}</td>
-      <td>{data?.block?.time? formatTime(data?.block.time): null}</td>
-    </tr>
-     )}
-    })
-})
-}  
-  </table>
-</div>
+        <div className="tableTr">
+          <table>
+            <thead>
+              <tr>
+                <th>Height</th>
+                <th>Hash</th>
+                <th>Proposer</th>
+                <th>No of Txs</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+
+            {joinedBlocksValidatorsData.map((details) => {
+              return details?.map((data) => {
+                if (data !== undefined) {
+                  console.log(data)
+                  return (
+                    <tr>
+                      <Link href='/blocks[height]' as={`/blocks/${data.block.height}`} ><a>
+                        <td>{data.block?.height ? data.block.height : null}</td> </a></Link>
+                      <td>{data.block?.hash ? formatHash(data.block.hash, 15, '....') : null}</td>
+                      <Link href='/validators[address]' as={`/validators/${data.validator.operator_address}`} ><a>
+                        <td>
+                          <img className="img" width={30} src={getValidatorsLogoFromWebsites(data?.validator?.description?.website)} alt="" />
+                          {data?.validator?.description?.moniker}
+                        </td>
+                      </a></Link>
+                      <td>{data?.block?.noTxs}</td>
+                      <td>{data?.block?.time ? formatTime(data?.block.time) : null}</td>
+                    </tr>
+                  )
+                }
+              })
+            })
+            }
+          </table>
+        </div>
       </Container>
-   <style jsx>{`
-           .img {
-           margin-right: 10px;
-           }
-           .tableTr {
-            overflow-x:auto
-           }
-           table {
-      border-collapse: collapse;
-      border-spacing: 0;
-      width: 100%;
-      border: 2px solid #ddd;
-}
-th, td {
-  text-align: left;
-  padding: 14px;
-}
-tr:nth-child(even){background-color: #0015da29}
-         `}</style>
     </>
-    )
+  )
 }
 
 

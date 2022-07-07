@@ -52,7 +52,7 @@ function ValidatorsContent(props) {
         <Tabs defaultActiveKey="active" id="uncontrolled-tab-example" className="" variant="tabs">
           <Tab eventKey="active" title="Active" className="w-100">
             <Responsive>
-              <table className="w-100 mt-3">
+              <table className="w-100 mt-3 table table-responsive">
                 <thead>
                   <tr style={{ fontWeight: "bold" }}>
                     <th>Rank</th>
@@ -165,16 +165,6 @@ function ValidatorsContent(props) {
           </Tab>
         </Tabs>
       </div>
-
-      <style jsx>{`
-           .img {
-           margin-right: 10px;
-           }
-           .sub {
-             color: red;
-             font-size: 10px;
-           }
-         `}</style>
     </>
   );
 }
@@ -287,7 +277,7 @@ const Responsive = styled.div`
   width: 100%;
   overflow-x: auto;
   @media screen and (max-width: 1075px){
-    width: 96vw;
+    width: calc(100vw - 40px);
   }
 `;
 

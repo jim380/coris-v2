@@ -47,9 +47,9 @@ const joinedBlocksValidatorsData = getBlocks.map((block)=> {
     <>
     <Title>Blocks</Title>
       <Container className="mb-3">
-        <Card style={{padding: "30px 20px"}}>
-          <Responsive>
-            <table className="w-100">
+        <Card>
+          <Responsive style={{ padding: "30px 20px" }}>
+            <table className="table table-responsive">
               <thead>
                 <tr>
                   <th>Block Height</th>
@@ -286,7 +286,7 @@ const Responsive = styled.div`
   width: 100%;
   overflow-x: auto;
   @media screen and (max-width: 700px){
-    width: 85vw;
+    width: calc(100vw - 40px)
   }
   `;
 
