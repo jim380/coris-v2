@@ -644,10 +644,6 @@ tr.validator-item-row{
   margin-left: 1rem;
 }
 
-.striped:nth-child(odd){
-  background-color: var(--titan-white);
-}
-
 td, th{
   padding: 10px 10px;
   white-space: nowrap;

@@ -213,9 +213,9 @@ function HomePageContent(props) {
         <LatestBlocks>{latestBlocks}</LatestBlocks>
         <ViewAll>{viewAll}</ViewAll>
       </Flex>
-      <Container>
-        <div className="tableTr">
-          <table>
+      <Container className="w-100">
+        <Responsive>
+          <table className="w-100 mt-3">
             <thead>
               <tr>
                 <th>Height</th>
@@ -250,12 +250,19 @@ function HomePageContent(props) {
             })
             }
           </table>
-        </div>
+        </Responsive>
       </Container>
     </>
   )
 }
 
+const Responsive = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  @media screen and (max-width: 1075px){
+    width: calc(100vw - 40px);
+  }
+`;
 
 const Grid = styled.div`
   display: grid;
