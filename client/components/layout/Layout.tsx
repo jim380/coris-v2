@@ -16,7 +16,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <SideNavBar {...sideNavBarData} />
       <FlexCol2>
         <div className="d-table w-100">
-          <div className="d-table-row w-100 position-sticky" style={{top: "10px", zIndex: "50"}}>
+          <div className="d-table-row w-100 position-sticky" style={{top: "10px", zIndex: 50}}>
             <Header/>
           </div>
           <div className="d-table-row w-100">
