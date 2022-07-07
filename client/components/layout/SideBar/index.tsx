@@ -137,7 +137,7 @@ const FlexCell = styled.div`
   align-items: center;
 `;
 const SideNavigation = styled.div`
-  z-index: 1;
+  z-index: 2;
   height: 100%;
   width: 300px;
   margin: 0;
