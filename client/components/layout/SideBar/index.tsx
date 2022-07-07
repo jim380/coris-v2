@@ -161,6 +161,7 @@ const SideNavigation = styled.div`
       position: fixed !important;
       top: 0px;
       left: 0px;
+      z-index: 2
     }
   }
   @media screen and (max-width: 1074px){
