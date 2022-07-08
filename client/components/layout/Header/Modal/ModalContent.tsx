@@ -1,6 +1,8 @@
 import styled, { keyframes } from "styled-components";
+import { useAppSelector } from "../../../../lib/hooks";
 
-export function ModalContent({ isToggled, toggle }) {
+export function ModalContent({ toggle }) {
+    const isToggled = useAppSelector(state => state.general.connectWalletModalToggled)
     const checkNToggle = (e) => {
         if (e.target !== document.querySelector("#modal-parent")) return
         toggle(false)

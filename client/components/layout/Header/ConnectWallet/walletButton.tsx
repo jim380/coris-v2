@@ -28,9 +28,6 @@ const Wallet = styled.button`
     background: #37458d;
     color: white;
   }
-  @media screen and (max-width: 775px){
-    display: none;
-  }
 `;
 
 

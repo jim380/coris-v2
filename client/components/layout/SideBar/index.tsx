@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { toggleSidebar } from '../../../lib/features/generalSlice';
+import { toggleConnectWalletModal, toggleSidebar } from '../../../lib/features/generalSlice';
 import { useAppDispatch, useAppSelector } from '../../../lib/hooks';
 import {
   UrbanistSemiBoldSoap24px,
@@ -10,6 +10,7 @@ import {
   ValignTextMiddle,
 } from "../../../styledMixins";
 import { searchBarData } from '../Header';
+import ConnectWallet from '../Header/ConnectWallet';
 import WalletButton from '../Header/ConnectWallet/walletButton';
 import SearchBar from '../Header/SearchBar';
 import Logo from "./Logo";
@@ -18,6 +19,7 @@ function SideNavBar(props) {
   const { sidebarToggled } = useAppSelector(state => state.general)
   const [selectedPage, setSelectedPage] = useState("/")
   const dispatch = useAppDispatch()
+  const [isToggled, toggle] = useState(false)
   const router = useRouter()
   const {
     solidGeneralChartPie,
@@ -42,7 +44,6 @@ function SideNavBar(props) {
     <SideNavigation className={sidebarToggled && 'show'}>
       <Close onClick={() => dispatch(toggleSidebar(false))}>&times;</Close>
       <Clicker onClick={() => navigate("/")}><Logo /></Clicker>
-      <WalletButton className="mobile" />
       <SearchBar src={searchBarData.src} className="mobile" />
       <Wrapper>
         <Clicker onClick={() => navigate("/")} title="Overview">
@@ -55,7 +56,7 @@ function SideNavBar(props) {
         </Clicker>
         <br />
         <br className='hidden-sm' />
-        <Clicker onClick={() => navigate("/validators")} title = "Validators">
+        <Clicker onClick={() => navigate("/validators")} title="Validators">
           <a className="m-24">
             <FlexRow>
               <FlexCell><IconUser src={iconUser} /></FlexCell>
@@ -104,9 +105,51 @@ function SideNavBar(props) {
           </a>
         </Clicker>
       </Wrapper>
+      <ConnectWallet
+        className="mobile"
+        toggle={(val) => dispatch(toggleConnectWalletModal(val))}
+        asset62={connectWallet1Data.asset62}
+        asset72={connectWallet1Data.asset72}
+        outlineMediaShuffle={connectWallet1Data.outlineMediaShuffle}
+      />
+      <div className="d-flex align-items-end justify-content-center" style={{marginTop: "50px"}}>
+        <NightmodeButton className='mobile'>
+          <OutlineGeneralMoon src="/img/outline-general-moon@2x.svg" />
+        </NightmodeButton>
+      </div>
+
     </SideNavigation >
   )
 }
+
+const connectWallet1Data = {
+  asset62: "/img/asset-6-2@2x.png",
+  asset72: "/img/asset-7-1@2x.png",
+  outlineMediaShuffle: "/img/outline-media-shuffle@2x.png",
+};
+
+const NightmodeButton = styled.div`
+  height: 50px;
+  margin-left: 16px;
+  display: flex;
+  padding: 10px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-width: 50px;
+  background-color: var(--white);
+  border-radius: 32px;
+  box-shadow: 0px 7px 30px #0015da29;
+  &.mobile{
+     @media screen and (min-width: 775px){
+      display: none;
+    }
+  }
+`;
+
+const OutlineGeneralMoon = styled.img`
+  width: 31px;
+  height: 31px;
+`;
 
 const Clicker = styled.div`
   cursor: pointer;

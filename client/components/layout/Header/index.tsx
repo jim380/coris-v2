@@ -4,7 +4,7 @@ import ConnectWallet from "./ConnectWallet";
 import WalletButton from "./ConnectWallet/walletButton";
 import { useState } from "react";
 import { useAppDispatch } from "../../../lib/hooks";
-import { toggleSidebar } from "../../../lib/features/generalSlice";
+import { toggleConnectWalletModal, toggleSidebar } from "../../../lib/features/generalSlice";
 import Modal from "./Modal";
 import ModalContent from "./Modal/ModalContent";
 
@@ -32,7 +32,7 @@ function Header() {
         </NightmodeButton>
         <WalletButton className={''} />
         <Modal>
-          <ModalContent isToggled={isToggled} toggle={toggle} />
+          <ModalContent  toggle={(val) => dispatch(toggleConnectWalletModal(val))} />
         </Modal>
       </FlexBetween>
     </TopNavBar>
@@ -71,7 +71,7 @@ const TopNavBar = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-`;
+`;                                                                                                       
 
 const NightmodeButton = styled.div`
   height: 50px;
@@ -84,6 +84,9 @@ const NightmodeButton = styled.div`
   background-color: var(--white);
   border-radius: 32px;
   box-shadow: 0px 7px 30px #0015da29;
+  @media screen and (max-width: 775px){
+    display: none;
+  }
 `;
 
 const OutlineGeneralMoon = styled.img`

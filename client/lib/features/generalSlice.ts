@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: {
-    sidebarToggled: boolean
+  sidebarToggled: boolean;
+  connectWalletModalToggled: boolean
 } = {
-    sidebarToggled: false
-}
+  sidebarToggled: false,
+  connectWalletModalToggled: false,
+};
 
 /**
  * @name generalSlice
@@ -16,12 +18,13 @@ export const generalSlice = createSlice({
     reducers: {
         toggleSidebar(state, action) {
             state.sidebarToggled = action.payload
-       }
+        },
+        toggleConnectWalletModal(state, action) {
+            state.connectWalletModalToggled = action.payload
+        }
     },
 })
 
 // eslint-disable-next-line
-export const {
-    toggleSidebar
-} = generalSlice.actions
+export const { toggleSidebar, toggleConnectWalletModal } = generalSlice.actions;
 export default generalSlice.reducer

@@ -260,7 +260,7 @@ const Responsive = styled.div`
   width: 100%;
   overflow-x: auto;
   @media screen and (max-width: 1075px){
-    width: calc(100vw - 40px);
+    width: calc(100vw - 70px);
   }
 `;
 
