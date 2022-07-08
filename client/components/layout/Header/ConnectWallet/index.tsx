@@ -32,11 +32,19 @@ const ConnectWallet1 = styled.div`
   border-radius: 59px;
   box-shadow: 0px 7px 30px #0015da29;
   width: 200px;
+    @media screen and (max-width: 775px){
+    display: none;
+  }
 
   &.connect-wallet.connect-wallet-1 {
     padding: unset;
     justify-content: unset;
     align-items: unset;
+  }
+  &.mobile{
+     @media screen and (max-width: 775px){
+      display: none;
+    }
   }
 `;
 
