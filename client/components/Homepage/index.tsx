@@ -4,15 +4,10 @@ import { formatTime, formatHash, getValidatorsLogoFromWebsites } from "../Util/f
 import styled from "styled-components";
 import Details from './Details'
 import Details2 from './Details2'
-import LatestBlocksTilte from './LatestBlocksTilte'
 import {
-  UrbanistMediumAbsoluteZero172px,
   UrbanistBoldBlack26px,
-  UrbanistNormalBlack172px,
   UrbanistNormalBlack24px,
-  UrbanistNormalNewCar172px,
   UrbanistBoldChambray21px,
-  UrbanistBoldBlack16px,
   UrbanistLightBlack24px,
   UrbanistBoldBlack40px,
 } from "../../styledMixins";
@@ -38,8 +33,6 @@ function HomePageContent(props) {
     bonded,
     phone1,
     phone2,
-    place3,
-    percent4,
     latestBlocks,
     viewAll,
     getBlocks,
@@ -51,7 +44,6 @@ function HomePageContent(props) {
   const joinedBlocksValidatorsData = getBlocks.map((block) => {
     //convert proposer address to cosmosvalcons
     const proposerToBech32 = toBech32("cosmosvalcons", fromHex(block.proposer))
-
     const getActiveChainValidators = getChainValidators?.data?.validators.map((validator) => {
       //fetch just the active validators
       //get the consensus pubkey
@@ -66,16 +58,6 @@ function HomePageContent(props) {
     return getActiveChainValidators
   })
 
-  // Ed25519 pubkey from genesis
-  const pubkey = {
-    type: "tendermint/PubKeyEd25519",
-    value: "w3rKE+tQoLK8G+XPmjn+NszCk07iQ0sWaBbN5hQZcBY=",
-  };
-
-  const ed25519PubkeyRaw = fromBase64(pubkey.value);
-  const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
-  const bech32Address = Bech32.encode("cosmosvalcons", addressData);
-  //console.log(bech32Address); 
 
   //console.log(joinedBlocksValidatorsData)
   joinedBlocksValidatorsData.map((data, i) => {
@@ -423,71 +405,6 @@ const Bullet = styled.div`
   }
 `;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const detailsData = {
   onlineVotingPower: "Online Voting power",
   x36516M1: "365.16m",
@@ -502,120 +419,11 @@ const details2Data = {
   number2: "251",
 };
 
-const latestBlocksTilteData = {
-  height: "Height",
-  hash: "Hash",
-  proposer: "Proposer",
-  noOfTxs: "No. of Txs",
-  time: "Time",
-};
-
-const FlexRow1 = styled.div`
-  height: 426px;
-  margin-top: 54px;
-  display: flex;
-  align-items: flex-end;
-  min-width: 1336px;
-`;
-
-const FlexCol3 = styled.div`
-  width: 835px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 426px;
-`;
-
 const Title = styled.h1`
   ${UrbanistBoldBlack40px}
   min-height: 48px;
   letter-spacing: 0;
   margin-top: 40px;
-`;
-
-const LiveLineChartSection = styled.div`
-  height: 364px;
-  margin-top: 14px;
-  display: flex;
-  padding: 0 13px;
-  justify-content: flex-end;
-  align-items: flex-end;
-  min-width: 835px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
-`;
-
-const OverlapGroup1 = styled.div`
-  width: 807px;
-  height: 345px;
-  position: relative;
-  margin-bottom: -0.76px;
-`;
-
-const OverlapGroup = styled.div`
-  position: absolute;
-  width: 803px;
-  height: 332px;
-  top: 13px;
-  left: 0;
-`;
-
-const FlexCol4 = styled.div`
-  width: 485px;
-  margin-left: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 364px;
-`;
-
-const MarketCap = styled.div`
-  height: 174px;
-  position: relative;
-  display: flex;
-  padding: 0 18px;
-  align-items: center;
-  min-width: 485px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
-`;
-
-const OverlapGroup12 = styled.div`
-  width: 485px;
-  height: 174px;
-  position: relative;
-  margin-top: 16px;
-  border-radius: 20px;
-`;
-
-const GetOneBlock = styled.div`
-  position: absolute;
-  height: 174px;
-  top: 0;
-  left: 0;
-  display: flex;
-  padding: 0 13px;
-  justify-content: flex-end;
-  align-items: center;
-  min-width: 485px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
-`;
-
-const Rectangle31 = styled.div`
-  position: absolute;
-  width: 5px;
-  height: 174px;
-  top: 0;
-  left: 160px;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(57.9999965429306, 66.00001126527786, 138.00000697374344, 0.2199999988079071) 0%,
-    rgba(93.00000205636024, 83.00000265240669, 213.00000250339508, 0) 100%
-  );
 `;
 
 const Rectangle32 = styled.div`
@@ -810,28 +618,10 @@ const Place1 = styled.div`
   letter-spacing: 0;
 `;
 
-const Rectangle34 = styled.div`
-  width: 29px;
-  height: 29px;
-  align-self: flex-end;
-  margin-left: 66px;
-  background-color: var(--fog-2);
-  border-radius: 10px;
-`;
-
 const Bonded = styled.div`
   letter-spacing: 0;
 `;
 
-const PhoneContainer = styled.div`
-  ${UrbanistBoldBlack16px}
-  height: 19px;
-  align-self: flex-end;
-  margin-top: 3px;
-  display: flex;
-  align-items: flex-start;
-  min-width: 300px;
-`;
 
 const Phone = styled.div`
     font-weight: bold;
@@ -843,50 +633,6 @@ const Phone1 = styled.div`
   font-weight: bold;
 `;
 
-const OverlapGroup4 = styled.div`
-  width: 120px;
-  height: 120px;
-  left: 0px;
-
-`;
-
-const Ellipse11 = styled.img`
-  position: absolute;
-  width: 67px;
-  height: 67px;
-  top: -14px;
-  left: -14px;
-`;
-
-const Place2 = styled.div`
-  position: absolute;
-  top: 53px;
-  left: 25px;
-  font-family: var(--font-family-urbanist);
-  font-weight: 700;
-  color: var(--black-4);
-  font-size: 13.6px;
-  letter-spacing: 0;
-`;
-
-const Percent2 = styled.div`
-  position: absolute;
-  top: 24px;
-  left: 19px;
-  font-family: var(--font-family-urbanist);
-  font-weight: 700;
-  color: var(--chambray);
-  font-size: 27.2px;
-  letter-spacing: 2.18px;
-`;
-
-const FlexRow5 = styled.div`
-  height: 38px;
-  margin-top: 28px;
-  display: flex;
-  justify-content: space-between
-  width: 100%;
-`;
 
 const LatestBlocks = styled.div`
   font-family: var(--font-family-urbanist);
@@ -899,91 +645,6 @@ const LatestBlocks = styled.div`
 const ViewAll = styled.div`
   ${UrbanistNormalBlack24px}
   letter-spacing: 0;
-`;
-
-const LatestBlocks1 = styled.div`
-  width: 1336px;
-  position: relative;
-  margin-top: 14px;
-  display: flex;
-  flex-direction: column;
-  padding: 18.2px 16px;
-  align-items: flex-start;
-  min-height: 797px;
-  background-color: var(--white);
-  border-radius: 20px;
-  box-shadow: 0px 7px 30px #0015da29;
-`;
-
-const OverlapGroup10 = styled.div`
-  height: 60px;
-  margin-top: 19px;
-  display: flex;
-  padding: 13.8px 14.6px;
-  align-items: center;
-  min-width: 1303px;
-  background-color: var(--titan-white);
-`;
-
-const Phone2 = styled.div`
-  ${UrbanistMediumAbsoluteZero172px}
-  min-height: 21px;
-  margin-top: 0.33px;
-  min-width: 74px;
-  letter-spacing: 0;
-`;
-
-const X34567efe34g6j7k85h = styled.div`
-  ${UrbanistNormalBlack172px}
-  min-height: 21px;
-  margin-left: 125px;
-  margin-top: 0.33px;
-  min-width: 167px;
-  letter-spacing: 0;
-`;
-
-const Ellipse8 = styled.div`
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  margin-left: 156px;
-  background-color: var(--roman);
-  border-radius: 15.93px;
-`;
-
-const DgtizeStake = styled.div`
-  ${UrbanistNormalNewCar172px}
-  min-height: 21px;
-  margin-left: 150px;
-  margin-top: 0.33px;
-  min-width: 97px;
-  letter-spacing: 0;
-`;
-
-const Number = styled.div`
-  ${UrbanistNormalBlack172px}
-  min-height: 21px;
-  margin-left: 310px;
-  margin-top: 0.33px;
-  min-width: 9px;
-  letter-spacing: 0;
-`;
-
-const X6sAgo = styled.div`
-  ${UrbanistNormalBlack172px}
-  min-height: 21px;
-  margin-left: 186px;
-  margin-top: 0.33px;
-  min-width: 51px;
-  letter-spacing: 0;
-`;
-
-const LatestBlockTitle = styled.div`
-  width: 134px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 76px;
 `;
 
 const LatestBlock = styled.div`
@@ -1000,15 +661,6 @@ const Phone00 = styled.div`
   letter-spacing: 2.08px;
 `;
 
-const BlockTimeTitle = styled.div`
-  width: 118px;
-  margin-left: 31px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 76px;
-`;
-
 const BlockTime = styled.div`
   ${UrbanistNormalBlack24px}
   min-height: 29px;
@@ -1022,15 +674,6 @@ const X602s = styled.div`
   letter-spacing: 2.08px;
 `;
 
-const ChainName = styled.div`
-  width: 136px;
-  margin-left: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 76px;
-`;
-
 const Chain = styled.div`
   ${UrbanistNormalBlack24px}
   min-height: 29px;
@@ -1042,53 +685,6 @@ const Corichain1 = styled.div`
   min-height: 31px;
   margin-top: 16px;
   letter-spacing: 0;
-`;
-
-const MarketCapTitle = styled.div`
-  ${UrbanistNormalBlack24px}
-  width: 141px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 62px;
-`;
-
-const MarketCap0 = styled.div`
-  width: 137px;
-  min-height: 23px;
-  letter-spacing: 0;
-`;
-
-const X24thVol = styled.div`
-  width: 119px;
-  min-height: 23px;
-  margin-top: 16px;
-  margin-left: 4px;
-  letter-spacing: 0;
-`;
-
-const MarketCapValue = styled.div`
-  ${UrbanistBoldBlack26px}
-  width: 182px;
-  margin-left: 23px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 62px;
-`;
-
-const Phone90 = styled.div`
-  width: 176px;
-  min-height: 23px;
-  margin-left: 2px;
-  letter-spacing: 2.08px;
-`;
-
-const Phone900 = styled.div`
-  width: 176px;
-  min-height: 23px;
-  margin-top: 16px;
-  letter-spacing: 2.08px;
 `;
 
 export default HomePageContent
