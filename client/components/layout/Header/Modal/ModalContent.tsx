@@ -36,33 +36,11 @@ export function ModalContent({ toggle }) {
                                     <GridItem>sddfdf</GridItem>
                                     <GridItem>sddfdf</GridItem>
                                     <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
                                 </Grid>
                             </Container>
                             <Container className="mt-3">
                                 <h4 className="text-center">Testnets</h4>
                                 <Grid>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
-                                    <GridItem>sddfdf</GridItem>
                                     <GridItem>sddfdf</GridItem>
                                     <GridItem>sddfdf</GridItem>
                                     <GridItem>sddfdf</GridItem>
@@ -75,7 +53,7 @@ export function ModalContent({ toggle }) {
                     </ShowBox>
                     <div className="d-table-row" style={{ height: "50px" }}>
                         <div>
-                            Developed by Nodes.GURU
+                            Developed by Coris 
                         </div>
                     </div>
                 </div>

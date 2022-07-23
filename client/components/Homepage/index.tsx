@@ -14,6 +14,12 @@ import {
 import { sha256 } from "@cosmjs/crypto";
 import { Bech32, fromBase64, toHex, fromHex, toBech32 } from "@cosmjs/encoding";
 import { useGetChainActiveValidatorsQuery } from "../../lib/chainApi";
+import dynamic from 'next/dynamic'
+
+//import pricechart dynamically
+const PriceChart = dynamic(() => import('./Details/priceChart'), {
+  ssr: false
+})
 
 function HomePageContent(props) {
   const {
@@ -69,7 +75,9 @@ function HomePageContent(props) {
     <>
       <Title>{title}</Title>
       <Grid>
-        <GridItem className="first-item">chat.js here</GridItem>
+        <GridItem className="first-item">
+          <PriceChart />
+        </GridItem>
         <GridItem className="second-item p-3">
           <FlexCol className="h-100">
             <Flex className="h-50 align-items-center">

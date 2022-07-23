@@ -7,6 +7,11 @@ export const formatTimeDateYear = (t: Date) => {
     const d = new Date(t)
     return d.toLocaleString()
   }
+  
+  export const formatGetHour = (t: Date) => {
+    const d = new Date(t)
+    return d.getHours();
+  }
 
  export function formatHash(hash:string,index:number,chr:string) {
     if(index > hash?.length-1) return hash;

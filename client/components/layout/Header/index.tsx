@@ -22,7 +22,7 @@ function Header() {
         </MobileSideBarToggler>
         <SearchBar src={searchBarData.src} />
         <ConnectWallet
-          toggle={toggle}
+          toggle={(val) => dispatch(toggleConnectWalletModal(val))}
           asset62={connectWallet1Data.asset62}
           asset72={connectWallet1Data.asset72}
           outlineMediaShuffle={connectWallet1Data.outlineMediaShuffle}

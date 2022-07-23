@@ -16,4 +16,17 @@ const nextConfig = {
       domains: ['http://www.google.com/s2/favicons?domain=https://stake.fish/'],
     },
 
+    module: {
+      rules: [
+          {
+              test: /\.js$/,
+              loader: 'ify-loader'
+          }
+      ]
+  },
+
+  output: {
+    globalObject: `typeof self !== 'undefined' ? self : this`
+  },
+
   }
