@@ -51,7 +51,7 @@ createCronJob(
   Model.neutronBlockModel
 );
 
-// Define a helper function to prefix the routes with "/agoric"
+// Define a helper function to prefix the routes with "/neutron"
 function neutronRoute(path, handler) {
   return app.get(`/neutron${path}`, corsMiddleware, handler);
 }
