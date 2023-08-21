@@ -80,6 +80,26 @@ services:
      OSMOSIS_RPC_API: https://osmosis-rpc.polkachu.com:443
      EVMOS_REST_API: https://evmos-api.polkachu.com
      EVMOS_RPC_API: https://evmos-rpc.polkachu.com:443
+     CRYPTO_REST_API: https://rest.mainnet.crypto.org
+     CRYPTO_RPC_API: https://rpc.mainnet.crypto.org:443
+     BAND_REST_API: https://laozi1.bandchain.org/api
+     BAND_RPC_API: http://rpc.laozi1.bandchain.org:80
+     BEEZEE_REST_API: https://rest.getbze.com
+     BEEZEE_RPC_API: https://rpc-1.getbze.com:443
+     CANTO_REST_API: https://canto-api.polkachu.com
+     CANTO_RPC_API: https://canto-rpc.polkachu.com:443
+     CRONOS_REST_API: https://rest.cronos.org
+     CRONOS_RPC_API: https://rpc.cronos.org:443
+     DESMOS_REST_API: https://api.mainnet.desmos.network
+     DESMOS_RPC_API: https://rpc.mainnet.desmos.network:443
+     EMONEY_REST_API: https://emoney.validator.network/api
+     EMONEY_RPC_API: https://emoney.validator.network:443
+     MEME_REST_API: https://meme-api.polkachu.com:443
+     MEME_RPC_API: https://meme-rpc.polkachu.com:443
+     MUN_REST_API: https://mainnet1.mun.money
+     MUN_RPC_API: https://mainnet1rpc.mun.money
+     TENET_REST_API: https://tenet-api.lavenderfive.com
+     TENET_RPC_API: https://tenet-rpc.lavenderfive.com
      PORT: 5001
      REDIS_HOST: redis
      REDIS_PORT: 6379

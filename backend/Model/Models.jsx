@@ -122,6 +122,46 @@ const regenTransactions = mongoose.model("regen-Transactions", TxsSchema);
 const irisnetBlocks = mongoose.model("irisnet-Blocks", BlockSchema);
 const irisnetTransactions = mongoose.model("irisnet-Transactions", TxsSchema);
 
+//set band chain schema
+const bandBlocks = mongoose.model("band-Blocks", BlockSchema);
+const bandTransactions = mongoose.model("band-Transactions", TxsSchema);
+
+//set beezee chain schema
+const beezeeBlocks = mongoose.model("beezee-Blocks", BlockSchema);
+const beezeeTransactions = mongoose.model("beezee-Transactions", TxsSchema);
+
+//set canto chain schema
+const cantoBlocks = mongoose.model("canto-Blocks", BlockSchema);
+const cantoTransactions = mongoose.model("canto-Transactions", TxsSchema);
+
+//set cronos chain schema
+const cronosBlocks = mongoose.model("cronos-Blocks", BlockSchema);
+const cronosTransactions = mongoose.model("cronos-Transactions", TxsSchema);
+
+//set desmos chain schema
+const desmosBlocks = mongoose.model("desmos-Blocks", BlockSchema);
+const desmosTransactions = mongoose.model("desmos-Transactions", TxsSchema);
+
+//set meme chain schema
+const memeBlocks = mongoose.model("meme-Blocks", BlockSchema);
+const memeTransactions = mongoose.model("meme-Transactions", TxsSchema);
+
+//set mun chain schema
+const munBlocks = mongoose.model("mun-Blocks", BlockSchema);
+const munTransactions = mongoose.model("mun-Transactions", TxsSchema);
+
+//set tenet chain schema
+const tenetBlocks = mongoose.model("tenet-Blocks", BlockSchema);
+const tenetTransactions = mongoose.model("tenet-Transactions", TxsSchema);
+
+//set crypto chain schema
+const cryptoBlocks = mongoose.model("crypto-Blocks", BlockSchema);
+const cryptoTransactions = mongoose.model("crypto-Transactions", TxsSchema);
+
+//set emoney chain schema
+const emoneyBlocks = mongoose.model("emoney-Blocks", BlockSchema);
+const emoneyTransactions = mongoose.model("emoney-Transactions", TxsSchema);
+
 module.exports = {
   umeeBlockModel: umeeBlocks,
   umeeTxsModel: umeeTransactions,
@@ -173,4 +213,34 @@ module.exports = {
 
   irisnetBlockModel: irisnetBlocks,
   irisnetTxsModel: irisnetTransactions,
+
+  bandBlockModel: bandBlocks,
+  bandTxsModel: bandTransactions,
+
+  beezeeBlockModel: beezeeBlocks,
+  beezeeTxsModel: beezeeTransactions,
+
+  cantoBlockModel: cantoBlocks,
+  cantoTxsModel: cantoTransactions,
+
+  cronosBlockModel: cronosBlocks,
+  cronosTxsModel: cronosTransactions,
+
+  desmosBlockModel: desmosBlocks,
+  desmosTxsModel: desmosTransactions,
+
+  memeBlockModel: memeBlocks,
+  memeTxsModel: memeTransactions,
+
+  munBlockModel: munBlocks,
+  munTxsModel: munTransactions,
+
+  tenetBlockModel: tenetBlocks,
+  tenetTxsModel: tenetTransactions,
+
+  cryptoBlockModel: cryptoBlocks,
+  cryptoTxsModel: cryptoTransactions,
+
+  emoneyBlockModel: emoneyBlocks,
+  emoneyTxsModel: emoneyTransactions,
 };

@@ -18,6 +18,16 @@ const osmosisRouter = require("./Routes/Chains/mainnet/osmosis/routes");
 const regenRouter = require("./Routes/Chains/mainnet/regen/routes");
 const sifchainRouter = require("./Routes/Chains/mainnet/sifchain/routes");
 const skaleRouter = require("./Routes/Chains/mainnet/skale/routes");
+const tenetRouter = require("./Routes/Chains/mainnet/tenet/routes");
+const bandRouter = require("./Routes/Chains/mainnet/band/routes");
+const beezeeRouter = require("./Routes/Chains/mainnet/beezee/routes");
+const cantoRouter = require("./Routes/Chains/mainnet/canto/routes");
+const cronosRouter = require("./Routes/Chains/mainnet/cronos/routes");
+const desmosRouter = require("./Routes/Chains/mainnet/desmos/routes");
+const memeRouter = require("./Routes/Chains/mainnet/meme/routes");
+const munRouter = require("./Routes/Chains/mainnet/mun/routes");
+const cryptoRouter = require("./Routes/Chains/mainnet/crypto/routes");
+const  emoneyRouter = require("./Routes/Chains/mainnet/emoney/routes");
 require("dotenv").config();
 
 const app = express();
@@ -50,6 +60,16 @@ app.use(osmosisRouter);
 app.use(regenRouter);
 app.use(sifchainRouter);
 app.use(skaleRouter);
+app.use(tenetRouter);
+app.use(bandRouter);
+app.use(beezeeRouter);
+app.use(cantoRouter);
+app.use(cronosRouter);
+app.use(desmosRouter);
+app.use(memeRouter);
+app.use(munRouter);
+app.use(cryptoRouter);
+app.use(emoneyRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running at port ${process.env.PORT}`);
