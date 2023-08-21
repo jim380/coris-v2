@@ -16,6 +16,8 @@ export const BaseChainApi = (chain_id) => {
     getApi = chainURL.JUNO_API;
   } else if (chain_id === "stargaze") {
     getApi = chainURL.STARGAZE_API;
+  } else if (chain_id === "osmosis") {
+    getApi = chainURL.OSMOSIS_API;
   }
   return getApi;
 };
