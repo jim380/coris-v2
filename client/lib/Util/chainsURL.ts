@@ -8,4 +8,5 @@ export const chainURL = {
     JUNO_API: process.env.NEXT_PUBLIC_JUNO_API,
     STARGAZE_API: process.env.NEXT_PUBLIC_STARGAZE_API,
     OSMOSIS_API: process.env.NEXT_PUBLIC_OSMOSIS_API,
+    TENET_API: process.env.NEXT_PUBLIC_TENET_API,
 }

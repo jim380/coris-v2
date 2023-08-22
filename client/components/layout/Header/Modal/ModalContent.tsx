@@ -88,6 +88,11 @@ export function ModalContent({ toggle }) {
                       chainName="STARGAZE"
                       chainImage="https://assets.coingecko.com/coins/images/22363/large/stars.png?1645256657"
                     />
+                    <Chain
+                      chain_id={"tenet"}
+                      chainName="TENET"
+                      chainImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTum6pKdlX8yhdY4l0TT8BvmMH8dzZS7d9iCKMj0MoUzA&s"
+                    />
                   </Grid>
                 </Container>
                 <Container className="mt-3">

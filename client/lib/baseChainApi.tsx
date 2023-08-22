@@ -18,6 +18,8 @@ export const BaseChainApi = (chain_id) => {
     getApi = chainURL.STARGAZE_API;
   } else if (chain_id === "osmosis") {
     getApi = chainURL.OSMOSIS_API;
+  } else if (chain_id === "tenet") {
+    getApi = chainURL.TENET_API;
   }
   return getApi;
 };
