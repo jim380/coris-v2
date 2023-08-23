@@ -20,6 +20,8 @@ export const BaseChainApi = (chain_id) => {
     getApi = chainURL.OSMOSIS_API;
   } else if (chain_id === "tenet") {
     getApi = chainURL.TENET_API;
+  } else if (chain_id === "desmos") {
+    getApi = chainURL.DESMOS_API;
   }
   return getApi;
 };

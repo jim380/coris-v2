@@ -74,6 +74,11 @@ export function ModalContent({ toggle }) {
                       chainImage="https://assets.coingecko.com/coins/images/25061/large/logo_200x200.png?1649943220"
                     />
                     <Chain
+                      chain_id={"desmos"}
+                      chainName="DESMOS"
+                      chainImage="https://pbs.twimg.com/profile_images/1482080264914452487/2rNgHghv_400x400.jpg"
+                    />
+                    <Chain
                       chain_id={"juno-network"}
                       chainName="JUNO"
                       chainImage="https://assets.coingecko.com/coins/images/19249/large/juno.png?1642838082"

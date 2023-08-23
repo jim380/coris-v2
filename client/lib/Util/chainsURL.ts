@@ -9,4 +9,5 @@ export const chainURL = {
     STARGAZE_API: process.env.NEXT_PUBLIC_STARGAZE_API,
     OSMOSIS_API: process.env.NEXT_PUBLIC_OSMOSIS_API,
     TENET_API: process.env.NEXT_PUBLIC_TENET_API,
+    DESMOS_API: process.env.NEXT_PUBLIC_DESMOS_API,
 }
