@@ -79,6 +79,11 @@ export function ModalContent({ toggle }) {
                       chainImage="https://pbs.twimg.com/profile_images/1482080264914452487/2rNgHghv_400x400.jpg"
                     />
                     <Chain
+                      chain_id={"irisnet"}
+                      chainName="IRISNET"
+                      chainImage="https://pbs.twimg.com/profile_images/950255247095562246/hpN9o681_400x400.jpg"
+                    />
+                    <Chain
                       chain_id={"juno-network"}
                       chainName="JUNO"
                       chainImage="https://assets.coingecko.com/coins/images/19249/large/juno.png?1642838082"

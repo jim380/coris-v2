@@ -24,6 +24,8 @@ export const BaseChainApi = (chain_id) => {
     getApi = chainURL.DESMOS_API;
   } else if (chain_id === "mun") {
     getApi = chainURL.MUN_API;
+  } else if (chain_id === "irisnet") {
+    getApi = chainURL.IRISNET_API;
   }
   return getApi;
 };
