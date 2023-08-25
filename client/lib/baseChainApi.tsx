@@ -26,6 +26,8 @@ export const BaseChainApi = (chain_id) => {
     getApi = chainURL.MUN_API;
   } else if (chain_id === "irisnet") {
     getApi = chainURL.IRISNET_API;
+  } else if (chain_id === "regen") {
+    getApi = chainURL.REGEN_API;
   }
   return getApi;
 };

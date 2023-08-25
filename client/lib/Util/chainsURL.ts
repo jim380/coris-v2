@@ -12,4 +12,5 @@ export const chainURL = {
     DESMOS_API: process.env.NEXT_PUBLIC_DESMOS_API,
     MUN_API: process.env.NEXT_PUBLIC_MUN_API,
     IRISNET_API: process.env.NEXT_PUBLIC_IRISNET_API,
+    REGEN_API: process.env.NEXT_PUBLIC_REGEN_API,
 }

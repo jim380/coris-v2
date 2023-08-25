@@ -99,6 +99,11 @@ export function ModalContent({ toggle }) {
                       chainImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsmBRniKH6khmxvFJ21uuiAM-yztHJOIDmDA&usqp=CAU"
                     />
                     <Chain
+                      chain_id={"regen"}
+                      chainName="REGEN"
+                      chainImage="https://autostake.com/static/networks/regen.png"
+                    />
+                    <Chain
                       chain_id={"stargaze"}
                       chainName="STARGAZE"
                       chainImage="https://assets.coingecko.com/coins/images/22363/large/stars.png?1645256657"
