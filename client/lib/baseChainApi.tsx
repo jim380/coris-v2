@@ -28,6 +28,14 @@ export const BaseChainApi = (chain_id) => {
     getApi = chainURL.IRISNET_API;
   } else if (chain_id === "regen") {
     getApi = chainURL.REGEN_API;
+  } else if (chain_id === "celo") {
+    getApi = chainURL.CELO_API;
+  } else if (chain_id === "skale") {
+    getApi = chainURL.SKALE_API;
+  } else if (chain_id === "sifchain") {
+    getApi = chainURL.SIFCHAIN_API;
+  } else if (chain_id === "evmos") {
+    getApi = chainURL.EVMOS_API;
   }
   return getApi;
 };

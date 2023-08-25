@@ -13,4 +13,9 @@ export const chainURL = {
     MUN_API: process.env.NEXT_PUBLIC_MUN_API,
     IRISNET_API: process.env.NEXT_PUBLIC_IRISNET_API,
     REGEN_API: process.env.NEXT_PUBLIC_REGEN_API,
+    SKALE_API: process.env.NEXT_PUBLIC_SKALE_API,
+    SIFCHAIN_API: process.env.NEXT_PUBLIC_SIFCHAIN_API,
+    EVMOS_API: process.env.NEXT_PUBLIC_EVMOS_API,
+    CRYPTO_API: process.env.NEXT_PUBLIC_CRYPTO_API,
+    CELO_API: process.env.NEXT_PUBLIC_CELO_API,
 }

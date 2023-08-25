@@ -69,6 +69,11 @@ export function ModalContent({ toggle }) {
                       chainImage="https://assets.coingecko.com/coins/images/1481/large/cosmos_hub.png?1555657960"
                     />
                     <Chain
+                      chain_id={"celo"}
+                      chainName="CELO"
+                      chainImage="https://celoscan.io/images/svg/brands/main.svg?v=23.8.3.0"
+                    />
+                    <Chain
                       chain_id={"crescent-network"}
                       chainName="CRESCENT"
                       chainImage="https://assets.coingecko.com/coins/images/25061/large/logo_200x200.png?1649943220"
@@ -77,6 +82,11 @@ export function ModalContent({ toggle }) {
                       chain_id={"desmos"}
                       chainName="DESMOS"
                       chainImage="https://pbs.twimg.com/profile_images/1482080264914452487/2rNgHghv_400x400.jpg"
+                    />
+                    <Chain
+                      chain_id={"evmos"}
+                      chainName="EVMOS"
+                      chainImage="https://pbs.twimg.com/profile_images/1686497052732293130/6Py4j1hK_400x400.jpg"
                     />
                     <Chain
                       chain_id={"irisnet"}
@@ -107,6 +117,16 @@ export function ModalContent({ toggle }) {
                       chain_id={"stargaze"}
                       chainName="STARGAZE"
                       chainImage="https://assets.coingecko.com/coins/images/22363/large/stars.png?1645256657"
+                    />
+                    <Chain
+                      chain_id={"skale"}
+                      chainName="SKALE"
+                      chainImage="https://s3.coinmarketcap.com/static-gravity/image/067b0d7bcd694752a22d1c3632fb2cd7.png"
+                    />
+                    <Chain
+                      chain_id={"sifchain"}
+                      chainName="SIFCHAIN"
+                      chainImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQZCE70McN0b5YDvoDQV5D65Rhiu8HIeSZu6b5xrJPgfSWvPaLmxWhihc8KN42cx8E_f4&usqp=CAU"
                     />
                     <Chain
                       chain_id={"tenet"}
