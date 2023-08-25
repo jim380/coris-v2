@@ -10,4 +10,5 @@ export const chainURL = {
     OSMOSIS_API: process.env.NEXT_PUBLIC_OSMOSIS_API,
     TENET_API: process.env.NEXT_PUBLIC_TENET_API,
     DESMOS_API: process.env.NEXT_PUBLIC_DESMOS_API,
+    MUN_API: process.env.NEXT_PUBLIC_MUN_API,
 }

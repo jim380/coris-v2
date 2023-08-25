@@ -84,6 +84,11 @@ export function ModalContent({ toggle }) {
                       chainImage="https://assets.coingecko.com/coins/images/19249/large/juno.png?1642838082"
                     />
                     <Chain
+                      chain_id={"mun"}
+                      chainName="MUN"
+                      chainImage="https://miro.medium.com/v2/resize:fit:2400/1*_BF1LOMrAl5W09nrNiyN6Q.jpeg"
+                    />
+                    <Chain
                       chain_id={"osmosis"}
                       chainName="OSMOSIS"
                       chainImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsmBRniKH6khmxvFJ21uuiAM-yztHJOIDmDA&usqp=CAU"

@@ -22,6 +22,8 @@ export const BaseChainApi = (chain_id) => {
     getApi = chainURL.TENET_API;
   } else if (chain_id === "desmos") {
     getApi = chainURL.DESMOS_API;
+  } else if (chain_id === "mun") {
+    getApi = chainURL.MUN_API;
   }
   return getApi;
 };
