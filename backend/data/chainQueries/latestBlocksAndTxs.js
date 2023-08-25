@@ -10,22 +10,22 @@ const fetchLatestBlocksAndTxs = async (api, txModel, blockModel) => {
 
     // Get transactions data in each block
     const getTxs = await fetch(
-      api + endpoints.chainBlockHeightTxs(block.block.header.height),
+      api + endpoints.chainBlockHeightTxs(block.block.header.height)
     );
     if (!getTxs.ok) throw new Error("unexpected response");
 
     const txData = await getTxs.json();
     const mapTxData = txData.tx_responses.map(async (tx) => {
+      // Skip saving if transaction with the same hash already exists
       const existingTx = await txModel.findOne({ txHash: tx.txhash });
-
       if (existingTx) {
-        // Skip saving if transaction with the same hash already exists
         return;
       }
 
       const transactionsData = new txModel({
         txHash: tx.txhash,
         messages: tx.tx.body.messages,
+        memo: tx.tx.body.memo,
         result: tx.code,
         fee: tx.tx.auth_info.fee.amount,
         height: tx.height,
@@ -54,7 +54,7 @@ const fetchLatestBlocksAndTxs = async (api, txModel, blockModel) => {
         signatures: block.block.last_commit.signatures.map(
           (validatorDetails) => {
             return { validator_address: validatorDetails.validator_address };
-          },
+          }
         ),
       });
 

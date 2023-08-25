@@ -36,6 +36,7 @@ const TxsSchema = new mongoose.Schema({
     unique: true,
   },
   messages: [],
+  memo : String,
   result: {
     type: Number,
     required: true,
