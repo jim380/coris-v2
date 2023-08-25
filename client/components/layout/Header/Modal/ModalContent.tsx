@@ -89,19 +89,9 @@ export function ModalContent({ toggle }) {
                       chainImage="https://pbs.twimg.com/profile_images/1686497052732293130/6Py4j1hK_400x400.jpg"
                     />
                     <Chain
-                      chain_id={"irisnet"}
-                      chainName="IRISNET"
-                      chainImage="https://pbs.twimg.com/profile_images/950255247095562246/hpN9o681_400x400.jpg"
-                    />
-                    <Chain
                       chain_id={"juno-network"}
                       chainName="JUNO"
                       chainImage="https://assets.coingecko.com/coins/images/19249/large/juno.png?1642838082"
-                    />
-                    <Chain
-                      chain_id={"mun"}
-                      chainName="MUN"
-                      chainImage="https://miro.medium.com/v2/resize:fit:2400/1*_BF1LOMrAl5W09nrNiyN6Q.jpeg"
                     />
                     <Chain
                       chain_id={"osmosis"}
@@ -127,11 +117,6 @@ export function ModalContent({ toggle }) {
                       chain_id={"sifchain"}
                       chainName="SIFCHAIN"
                       chainImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQZCE70McN0b5YDvoDQV5D65Rhiu8HIeSZu6b5xrJPgfSWvPaLmxWhihc8KN42cx8E_f4&usqp=CAU"
-                    />
-                    <Chain
-                      chain_id={"tenet"}
-                      chainName="TENET"
-                      chainImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTum6pKdlX8yhdY4l0TT8BvmMH8dzZS7d9iCKMj0MoUzA&s"
                     />
                   </Grid>
                 </Container>
