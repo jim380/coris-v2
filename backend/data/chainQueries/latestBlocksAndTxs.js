@@ -27,6 +27,7 @@ const fetchLatestBlocksAndTxs = async (api, txModel, blockModel) => {
         messages: tx.tx.body.messages,
         memo: tx.tx.body.memo,
         result: tx.code,
+        raw_log: tx.raw_log,
         fee: tx.tx.auth_info.fee.amount,
         height: tx.height,
         time: tx.timestamp,

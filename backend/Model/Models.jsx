@@ -42,6 +42,7 @@ const TxsSchema = new mongoose.Schema({
     required: true,
     unique: false,
   },
+  raw_log: String,
   fee: [],
   height: {
     type: Number,
