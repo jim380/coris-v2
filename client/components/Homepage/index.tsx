@@ -52,9 +52,9 @@ function HomePageContent(props) {
   } = props;
 
   getBlocks?.map((block) => {
-    //convert proposer address to cosmosvalcons
+    //convert proposer address to valcons
     const proposerToBech32 = toBech32(
-      "cosmosvalcons",
+      chain_id + "valcons",
       fromHex(block?.proposer)
     );
     activeValidators?.validators?.map((validator) => {
@@ -62,7 +62,7 @@ function HomePageContent(props) {
       //get the consensus pubkey
       const ed25519PubkeyRaw = fromBase64(validator?.consensus_pubkey?.key);
       const addressData = sha256(ed25519PubkeyRaw).slice(0, 20);
-      const bech32Address = Bech32.encode("cosmosvalcons", addressData);
+      const bech32Address = Bech32.encode(chain_id + "valcons", addressData);
 
       //attached validators details to the blocks they proposed
       if (bech32Address?.includes(proposerToBech32)) {
