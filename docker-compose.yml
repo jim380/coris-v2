@@ -131,7 +131,22 @@ services:
       NEXT_PUBLIC_CRESCENT_API: http://localhost:5001/crescent
       NEXT_PUBLIC_CHIHUAHUA_API: http://localhost:5001/chihuahua
       NEXT_PUBLIC_JUNO_API: http://localhost:5001/juno
-      NEXT_PUBLIC_STARGAZE_API: http://localhost:5001/stargaze  
+      NEXT_PUBLIC_STARGAZE_API: http://localhost:5001/stargaze
+      NEXT_PUBLIC_CELO_API: http://localhost:5001/celo
+      NEXT_PUBLIC_CRYPTO_API: http://localhost:5001/crypto
+      NEXT_PUBLIC_EVMOS_API: http://localhost:5001/evmos
+      NEXT_PUBLIC_IRISNET_API: http://localhost:5001/irisnet
+      NEXT_PUBLIC_OSMOSIS_API: http://localhost:5001/osmosis
+      NEXT_PUBLIC_REGEN_API: http://localhost:5001/regen
+      NEXT_PUBLIC_SIFCHAIN_API: http://localhost:5001/sifchain
+      NEXT_PUBLIC_SKALE_API: http://localhost:5001/skale
+      NEXT_PUBLIC_STRIDE_API: http://localhost:5001/stride
+      NEXT_PUBLIC_UMEE_API: http://localhost:5001/umee
+      NEXT_PUBLIC_TENET_API: http://localhost:5001/tenet
+      NEXT_PUBLIC_DESMOS_API: http://localhost:5001/desmos
+      NEXT_PUBLIC_MUN_API: http://localhost:5001/mun
+      NEXT_PUBLIC_IRISNET_API: http://localhost:5001/irisnet
+      NEXT_PUBLIC_REGEN_API: http://localhost:5001/regen
     volumes:
       - ./client:/usr/app/client
       - client-ignore:/usr/app/client/node_modules
