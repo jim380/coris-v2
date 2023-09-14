@@ -124,45 +124,29 @@ const regenTransactions = mongoose.model("regen-Transactions", TxsSchema);
 const irisnetBlocks = mongoose.model("irisnet-Blocks", BlockSchema);
 const irisnetTransactions = mongoose.model("irisnet-Transactions", TxsSchema);
 
-//set band chain schema
-const bandBlocks = mongoose.model("band-Blocks", BlockSchema);
-const bandTransactions = mongoose.model("band-Transactions", TxsSchema);
+//set lum chain schema
+const lumBlocks = mongoose.model("lum-Blocks", BlockSchema);
+const lumTransactions = mongoose.model("lum-Transactions", TxsSchema);
 
-//set beezee chain schema
-const beezeeBlocks = mongoose.model("beezee-Blocks", BlockSchema);
-const beezeeTransactions = mongoose.model("beezee-Transactions", TxsSchema);
+//set gravitybridge chain schema
+const gravitybridgeBlocks = mongoose.model("gravitybridge-Blocks", BlockSchema);
+const gravitybridgeTransactions = mongoose.model("gravitybridge-Transactions", TxsSchema);
 
-//set canto chain schema
-const cantoBlocks = mongoose.model("canto-Blocks", BlockSchema);
-const cantoTransactions = mongoose.model("canto-Transactions", TxsSchema);
+//set passage chain schema
+const passageBlocks = mongoose.model("passage-Blocks", BlockSchema);
+const passageTransactions = mongoose.model("passage-Transactions", TxsSchema);
 
-//set cronos chain schema
-const cronosBlocks = mongoose.model("cronos-Blocks", BlockSchema);
-const cronosTransactions = mongoose.model("cronos-Transactions", TxsSchema);
+//set rizon chain schema
+const rizonBlocks = mongoose.model("rizon-Blocks", BlockSchema);
+const rizonTransactions = mongoose.model("rizon-Transactions", TxsSchema);
 
-//set desmos chain schema
-const desmosBlocks = mongoose.model("desmos-Blocks", BlockSchema);
-const desmosTransactions = mongoose.model("desmos-Transactions", TxsSchema);
+//set provenance chain schema
+const provenanceBlocks = mongoose.model("provenance-Blocks", BlockSchema);
+const provenanceTransactions = mongoose.model("provenance-Transactions", TxsSchema);
 
-//set meme chain schema
-const memeBlocks = mongoose.model("meme-Blocks", BlockSchema);
-const memeTransactions = mongoose.model("meme-Transactions", TxsSchema);
-
-//set mun chain schema
-const munBlocks = mongoose.model("mun-Blocks", BlockSchema);
-const munTransactions = mongoose.model("mun-Transactions", TxsSchema);
-
-//set tenet chain schema
-const tenetBlocks = mongoose.model("tenet-Blocks", BlockSchema);
-const tenetTransactions = mongoose.model("tenet-Transactions", TxsSchema);
-
-//set crypto chain schema
-const cryptoBlocks = mongoose.model("crypto-Blocks", BlockSchema);
-const cryptoTransactions = mongoose.model("crypto-Transactions", TxsSchema);
-
-//set emoney chain schema
-const emoneyBlocks = mongoose.model("emoney-Blocks", BlockSchema);
-const emoneyTransactions = mongoose.model("emoney-Transactions", TxsSchema);
+//set assetmantle chain schema
+const assetmantleBlocks = mongoose.model("assetmantle-Blocks", BlockSchema);
+const assetmantleTransactions = mongoose.model("assetmantle-Transactions", TxsSchema);
 
 module.exports = {
   umeeBlockModel: umeeBlocks,
@@ -216,33 +200,21 @@ module.exports = {
   irisnetBlockModel: irisnetBlocks,
   irisnetTxsModel: irisnetTransactions,
 
-  bandBlockModel: bandBlocks,
-  bandTxsModel: bandTransactions,
+  provenanceBlockModel: provenanceBlocks,
+  provenanceTxsModel: provenanceTransactions,
 
-  beezeeBlockModel: beezeeBlocks,
-  beezeeTxsModel: beezeeTransactions,
+  rizonBlockModel: rizonBlocks,
+  rizonTxsModel: rizonTransactions,
 
-  cantoBlockModel: cantoBlocks,
-  cantoTxsModel: cantoTransactions,
+  lumBlockModel: lumBlocks,
+  lumTxsModel: lumTransactions,
 
-  cronosBlockModel: cronosBlocks,
-  cronosTxsModel: cronosTransactions,
+  gravitybridgeBlockModel: gravitybridgeBlocks,
+  gravitybridgeTxsModel: gravitybridgeTransactions,
 
-  desmosBlockModel: desmosBlocks,
-  desmosTxsModel: desmosTransactions,
+  passageBlockModel: passageBlocks,
+  passageTxsModel: passageTransactions,
 
-  memeBlockModel: memeBlocks,
-  memeTxsModel: memeTransactions,
-
-  munBlockModel: munBlocks,
-  munTxsModel: munTransactions,
-
-  tenetBlockModel: tenetBlocks,
-  tenetTxsModel: tenetTransactions,
-
-  cryptoBlockModel: cryptoBlocks,
-  cryptoTxsModel: cryptoTransactions,
-
-  emoneyBlockModel: emoneyBlocks,
-  emoneyTxsModel: emoneyTransactions,
+  assetmantleBlockModel: assetmantleBlocks,
+  assetmantleTxsModel: assetmantleTransactions,
 };

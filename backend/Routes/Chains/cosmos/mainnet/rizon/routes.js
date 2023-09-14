@@ -43,79 +43,79 @@ const {
 
 const corsMiddleware = require("../../../../../corsMiddleware.js");
 
-const API = process.env.CRYPTO_REST_API;
-const RPC = process.env.CRYPTO_RPC_API;
+const API = process.env.RIZON_REST_API;
+const RPC = process.env.RIZON_RPC_API;
 
-//cron task for emoney
-createCronJob(API, Model.emoneyTxsModel, Model.emoneyBlockModel);
+//cron task for rizon
+createCronJob(API, Model.rizonTxsModel, Model.rizonBlockModel);
 
-// Define a helper function to prefix the routes with "/emoney"
-function emoneyRoute(path, handler) {
-  return app.get(`/emoney${path}`, corsMiddleware, handler);
+// Define a helper function to prefix the routes with "/rizon"
+function rizonRoute(path, handler) {
+  return app.get(`/rizon${path}`, corsMiddleware, handler);
 }
 
 // Define the routes
-emoneyRoute("/blocks/latest", latestBlocksHandler(Model.emoneyBlockModel));
-emoneyRoute("/txs", allTxsHandler(Model.emoneyTxsModel));
-emoneyRoute("/all_validators", allValidatorsHandler(API));
-emoneyRoute("/active_validators", activeValidatorsHandler(API));
-emoneyRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));
-emoneyRoute("/chain_inflation", chainInflationHandler(API));
-emoneyRoute("/chain_community_pool", chainCommunityPoolHandler(API));
-emoneyRoute("/chain_pool", chainPoolHandler(API));
-emoneyRoute("/block_height_details", chainBlockHeightDetailsHandler(API));
-emoneyRoute("/block_height_txs", chainBlockHeightTxsHandler(API));
-emoneyRoute("/chain_txs_hash", chainTxsByHashHandler(API));
-emoneyRoute(
+rizonRoute("/blocks/latest", latestBlocksHandler(Model.rizonBlockModel));
+rizonRoute("/txs", allTxsHandler(Model.rizonTxsModel));
+rizonRoute("/all_validators", allValidatorsHandler(API));
+rizonRoute("/active_validators", activeValidatorsHandler(API));
+rizonRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));
+rizonRoute("/chain_inflation", chainInflationHandler(API));
+rizonRoute("/chain_community_pool", chainCommunityPoolHandler(API));
+rizonRoute("/chain_pool", chainPoolHandler(API));
+rizonRoute("/block_height_details", chainBlockHeightDetailsHandler(API));
+rizonRoute("/block_height_txs", chainBlockHeightTxsHandler(API));
+rizonRoute("/chain_txs_hash", chainTxsByHashHandler(API));
+rizonRoute(
   "/chain_validator_slashing_signing_info_details",
   chainValidatorsSlashingSigningInfosDetailsHandler(API)
 );
-emoneyRoute(
+rizonRoute(
   "/chain_validator_delegations",
   chainValidatorDelegationsHandler(API)
 );
-emoneyRoute(
+rizonRoute(
   "/chain_validator_undelegations",
   chainValidatorUnDelegationsHandler(API)
 );
-emoneyRoute(
+rizonRoute(
   "/chain_validator_redelegations",
   chainValidatorReDelegationsHandler(API)
 );
-emoneyRoute("/chain_consensus", chainConsensusStateHandler(RPC));
-emoneyRoute("/chain_minting_params", chainMintingParamsHandler(API));
-emoneyRoute("/chain_gov_params", chainGovParamsHandler(API));
-emoneyRoute("/chain_slashing_params", chainSlashingParamsHandler(API));
-emoneyRoute("/chain_staking_params", chainStakingParamsHandler(API));
-emoneyRoute("/chain_distribution_params", chainDistributionParamsHandler(API));
-emoneyRoute("/chain_node_info", chainNodeInfoHandler(API));
-emoneyRoute("/chain_proposals", chainProposalsHandler(API));
-emoneyRoute("/chain_proposal_details", chainProposalDetailsHandler(API));
-emoneyRoute(
+rizonRoute("/chain_consensus", chainConsensusStateHandler(RPC));
+rizonRoute("/chain_minting_params", chainMintingParamsHandler(API));
+rizonRoute("/chain_gov_params", chainGovParamsHandler(API));
+rizonRoute("/chain_slashing_params", chainSlashingParamsHandler(API));
+rizonRoute("/chain_staking_params", chainStakingParamsHandler(API));
+rizonRoute("/chain_distribution_params", chainDistributionParamsHandler(API));
+rizonRoute("/chain_node_info", chainNodeInfoHandler(API));
+rizonRoute("/chain_proposals", chainProposalsHandler(API));
+rizonRoute("/chain_proposal_details", chainProposalDetailsHandler(API));
+rizonRoute(
   "/chain_proposal_voting_options",
   chainProposalVotingOptionsHandler(API)
 );
-emoneyRoute(
+rizonRoute(
   "/chain_proposal_tally_options",
   chainProposalTallyOptionsHandler(API)
 );
-emoneyRoute("/chain_proposal_deposits", chainProposalDepositsHandler(API));
-emoneyRoute("/chain_auth_account", chainAuthAccountHandler(API));
-emoneyRoute(
+rizonRoute("/chain_proposal_deposits", chainProposalDepositsHandler(API));
+rizonRoute("/chain_auth_account", chainAuthAccountHandler(API));
+rizonRoute(
   "/chain_account_txs_by_events",
   chainAccountTxsByEventsHandler(API)
 );
-emoneyRoute("/chain_account_balance", chainAccountBalanceHandler(API));
-emoneyRoute(
+rizonRoute("/chain_account_balance", chainAccountBalanceHandler(API));
+rizonRoute(
   "/chain_account_delegation_rewards",
   chainAccountDelegationRewardsHandler(API)
 );
-emoneyRoute("/chain_account_delegations", chainAccountDelegationsHandler(API));
-emoneyRoute(
+rizonRoute("/chain_account_delegations", chainAccountDelegationsHandler(API));
+rizonRoute(
   "/chain_account_redelegations",
   chainAccountReDelegationsHandler(API)
 );
-emoneyRoute(
+rizonRoute(
   "/chain_account_undelegations",
   chainAccountUnDelegationsHandler(API)
 );

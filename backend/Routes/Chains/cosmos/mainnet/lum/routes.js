@@ -43,76 +43,79 @@ const {
 
 const corsMiddleware = require("../../../../../corsMiddleware.js");
 
-const API = process.env.CANTO_REST_API;
-const RPC = process.env.CANTO_RPC_API;
+const API = process.env.LUM_REST_API;
+const RPC = process.env.LUM_RPC_API;
 
-//cron task for canto
-createCronJob(API, Model.cantoTxsModel, Model.cantoBlockModel);
+//cron task for lum
+createCronJob(API, Model.lumTxsModel, Model.lumBlockModel);
 
-// Define a helper function to prefix the routes with "/canto"
-function cantoRoute(path, handler) {
-  return app.get(`/canto${path}`, corsMiddleware, handler);
+// Define a helper function to prefix the routes with "/lum"
+function lumRoute(path, handler) {
+  return app.get(`/lum${path}`, corsMiddleware, handler);
 }
 
 // Define the routes
-cantoRoute("/blocks/latest", latestBlocksHandler(Model.cantoBlockModel));
-cantoRoute("/txs", allTxsHandler(Model.cantoTxsModel));
-cantoRoute("/all_validators", allValidatorsHandler(API));
-cantoRoute("/active_validators", activeValidatorsHandler(API));
-cantoRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));
-cantoRoute("/chain_inflation", chainInflationHandler(API));
-cantoRoute("/chain_community_pool", chainCommunityPoolHandler(API));
-cantoRoute("/chain_pool", chainPoolHandler(API));
-cantoRoute("/block_height_details", chainBlockHeightDetailsHandler(API));
-cantoRoute("/block_height_txs", chainBlockHeightTxsHandler(API));
-cantoRoute("/chain_txs_hash", chainTxsByHashHandler(API));
-cantoRoute(
+lumRoute("/blocks/latest", latestBlocksHandler(Model.lumBlockModel));
+lumRoute("/txs", allTxsHandler(Model.lumTxsModel));
+lumRoute("/all_validators", allValidatorsHandler(API));
+lumRoute("/active_validators", activeValidatorsHandler(API));
+lumRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));
+lumRoute("/chain_inflation", chainInflationHandler(API));
+lumRoute("/chain_community_pool", chainCommunityPoolHandler(API));
+lumRoute("/chain_pool", chainPoolHandler(API));
+lumRoute("/block_height_details", chainBlockHeightDetailsHandler(API));
+lumRoute("/block_height_txs", chainBlockHeightTxsHandler(API));
+lumRoute("/chain_txs_hash", chainTxsByHashHandler(API));
+lumRoute(
   "/chain_validator_slashing_signing_info_details",
   chainValidatorsSlashingSigningInfosDetailsHandler(API)
 );
-cantoRoute(
+lumRoute(
   "/chain_validator_delegations",
   chainValidatorDelegationsHandler(API)
 );
-cantoRoute(
+lumRoute(
   "/chain_validator_undelegations",
   chainValidatorUnDelegationsHandler(API)
 );
-cantoRoute(
+lumRoute(
   "/chain_validator_redelegations",
   chainValidatorReDelegationsHandler(API)
 );
-cantoRoute("/chain_consensus", chainConsensusStateHandler(RPC));
-cantoRoute("/chain_minting_params", chainMintingParamsHandler(API));
-cantoRoute("/chain_gov_params", chainGovParamsHandler(API));
-cantoRoute("/chain_slashing_params", chainSlashingParamsHandler(API));
-cantoRoute("/chain_staking_params", chainStakingParamsHandler(API));
-cantoRoute("/chain_distribution_params", chainDistributionParamsHandler(API));
-cantoRoute("/chain_node_info", chainNodeInfoHandler(API));
-cantoRoute("/chain_proposals", chainProposalsHandler(API));
-cantoRoute("/chain_proposal_details", chainProposalDetailsHandler(API));
-cantoRoute(
+lumRoute("/chain_consensus", chainConsensusStateHandler(RPC));
+lumRoute("/chain_minting_params", chainMintingParamsHandler(API));
+lumRoute("/chain_gov_params", chainGovParamsHandler(API));
+lumRoute("/chain_slashing_params", chainSlashingParamsHandler(API));
+lumRoute("/chain_staking_params", chainStakingParamsHandler(API));
+lumRoute("/chain_distribution_params", chainDistributionParamsHandler(API));
+lumRoute("/chain_node_info", chainNodeInfoHandler(API));
+lumRoute("/chain_proposals", chainProposalsHandler(API));
+lumRoute("/chain_proposal_details", chainProposalDetailsHandler(API));
+lumRoute(
   "/chain_proposal_voting_options",
   chainProposalVotingOptionsHandler(API)
 );
-cantoRoute(
+lumRoute(
   "/chain_proposal_tally_options",
   chainProposalTallyOptionsHandler(API)
 );
-cantoRoute("/chain_proposal_deposits", chainProposalDepositsHandler(API));
-cantoRoute("/chain_auth_account", chainAuthAccountHandler(API));
-cantoRoute("/chain_account_txs_by_events", chainAccountTxsByEventsHandler(API));
-cantoRoute("/chain_account_balance", chainAccountBalanceHandler(API));
-cantoRoute(
+lumRoute("/chain_proposal_deposits", chainProposalDepositsHandler(API));
+lumRoute("/chain_auth_account", chainAuthAccountHandler(API));
+lumRoute(
+  "/chain_account_txs_by_events",
+  chainAccountTxsByEventsHandler(API)
+);
+lumRoute("/chain_account_balance", chainAccountBalanceHandler(API));
+lumRoute(
   "/chain_account_delegation_rewards",
   chainAccountDelegationRewardsHandler(API)
 );
-cantoRoute("/chain_account_delegations", chainAccountDelegationsHandler(API));
-cantoRoute(
+lumRoute("/chain_account_delegations", chainAccountDelegationsHandler(API));
+lumRoute(
   "/chain_account_redelegations",
   chainAccountReDelegationsHandler(API)
 );
-cantoRoute(
+lumRoute(
   "/chain_account_undelegations",
   chainAccountUnDelegationsHandler(API)
 );
