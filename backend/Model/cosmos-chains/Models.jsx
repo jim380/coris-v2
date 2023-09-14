@@ -144,10 +144,6 @@ const rizonTransactions = mongoose.model("rizon-Transactions", TxsSchema);
 const provenanceBlocks = mongoose.model("provenance-Blocks", BlockSchema);
 const provenanceTransactions = mongoose.model("provenance-Transactions", TxsSchema);
 
-//set assetmantle chain schema
-const assetmantleBlocks = mongoose.model("assetmantle-Blocks", BlockSchema);
-const assetmantleTransactions = mongoose.model("assetmantle-Transactions", TxsSchema);
-
 module.exports = {
   umeeBlockModel: umeeBlocks,
   umeeTxsModel: umeeTransactions,
@@ -213,8 +209,6 @@ module.exports = {
   gravitybridgeTxsModel: gravitybridgeTransactions,
 
   passageBlockModel: passageBlocks,
-  passageTxsModel: passageTransactions,
-
-  assetmantleBlockModel: assetmantleBlocks,
-  assetmantleTxsModel: assetmantleTransactions,
+  passageTxsModel: passageTransactions
+  
 };
