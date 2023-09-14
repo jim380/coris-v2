@@ -50,7 +50,7 @@ const RPC = process.env.GRAVITYBRIDGE_RPC_API;
 createCronJob(API, Model.gravitybridgeTxsModel, Model.gravitybridgeBlockModel);
 
 // Define a helper function to prefix the routes with "/gravitybridge"
-function agoricRoute(path, handler) {
+function gravitybridgeRoute(path, handler) {
   return app.get(`/gravitybridge${path}`, corsMiddleware, handler);
 }
 
