@@ -1,4 +1,5 @@
 module.exports = {
+    // cosmos chains
     latestBlocks: '/blocks/latest',
     latestBlocksRecentVersion: '/cosmos/base/tendermint/v1beta1/blocks/latest',
     allChainValidators: '/cosmos/staking/v1beta1/validators?pagination.limit=500',
@@ -33,5 +34,8 @@ module.exports = {
     accountDelegations:  (delegator_address) => `/cosmos/staking/v1beta1/delegations/${delegator_address}`,
     accountReDelegations:  (delegator_address) =>  `/cosmos/staking/v1beta1/delegators/${delegator_address}/redelegations`,
     accountUnDelegations:  (delegator_address) => `/cosmos/staking/v1beta1/delegators/${delegator_address}/unbonding_delegations`,
+
+    // bitcoin
+    bitcoinTxs : '/v3/block/latest/tx',
 }
 

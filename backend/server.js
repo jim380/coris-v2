@@ -1,33 +1,36 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const umeeRouter = require("./Routes/Chains/mainnet/umee/routes");
-const cosmosRouter = require("./Routes/Chains/mainnet/cosmos/routes");
-const agoricRouter = require("./Routes/Chains/mainnet/agoric/routes");
-const akashRouter = require("./Routes/Chains/mainnet/akash/routes");
-const chihuahuaRouter = require("./Routes/Chains/mainnet/chihuahua/routes");
-const crescentRouter = require("./Routes/Chains/mainnet/crescent/routes");
-const junoRouter = require("./Routes/Chains/mainnet/juno/routes");
-const neutronRouter = require("./Routes/Chains/mainnet/neutron/routes");
-const stargazeRouter = require("./Routes/Chains/mainnet/stargaze/routes");
-const strideRouter = require("./Routes/Chains/mainnet/stride/routes");
-const celoRouter = require("./Routes/Chains/mainnet/celo/routes");
-const evmosRouter = require("./Routes/Chains/mainnet/evmos/routes");
-const irisnetRouter = require("./Routes/Chains/mainnet/irisnet/routes");
-const osmosisRouter = require("./Routes/Chains/mainnet/osmosis/routes");
-const regenRouter = require("./Routes/Chains/mainnet/regen/routes");
-const sifchainRouter = require("./Routes/Chains/mainnet/sifchain/routes");
-const skaleRouter = require("./Routes/Chains/mainnet/skale/routes");
-const tenetRouter = require("./Routes/Chains/mainnet/tenet/routes");
-const bandRouter = require("./Routes/Chains/mainnet/band/routes");
-const beezeeRouter = require("./Routes/Chains/mainnet/beezee/routes");
-const cantoRouter = require("./Routes/Chains/mainnet/canto/routes");
-const cronosRouter = require("./Routes/Chains/mainnet/cronos/routes");
-const desmosRouter = require("./Routes/Chains/mainnet/desmos/routes");
-const memeRouter = require("./Routes/Chains/mainnet/meme/routes");
-const munRouter = require("./Routes/Chains/mainnet/mun/routes");
-const cryptoRouter = require("./Routes/Chains/mainnet/crypto/routes");
-const  emoneyRouter = require("./Routes/Chains/mainnet/emoney/routes");
+const umeeRouter = require("./Routes/Chains/cosmos/mainnet/umee/routes");
+const cosmosRouter = require("./Routes/Chains/cosmos/mainnet/cosmosHub/routes");
+const agoricRouter = require("./Routes/Chains/cosmos/mainnet/agoric/routes");
+const akashRouter = require("./Routes/Chains/cosmos/mainnet/akash/routes");
+const chihuahuaRouter = require("./Routes/Chains/cosmos/mainnet/chihuahua/routes");
+const crescentRouter = require("./Routes/Chains/cosmos/mainnet/crescent/routes");
+const junoRouter = require("./Routes/Chains/cosmos/mainnet/juno/routes");
+const neutronRouter = require("./Routes/Chains/cosmos/mainnet/neutron/routes");
+const stargazeRouter = require("./Routes/Chains/cosmos/mainnet/stargaze/routes");
+const strideRouter = require("./Routes/Chains/cosmos/mainnet/stride/routes");
+const celoRouter = require("./Routes/Chains/cosmos/mainnet/celo/routes");
+const evmosRouter = require("./Routes/Chains/cosmos/mainnet/evmos/routes");
+const irisnetRouter = require("./Routes/Chains/cosmos/mainnet/irisnet/routes");
+const osmosisRouter = require("./Routes/Chains/cosmos/mainnet/osmosis/routes");
+const regenRouter = require("./Routes/Chains/cosmos/mainnet/regen/routes");
+const sifchainRouter = require("./Routes/Chains/cosmos/mainnet/sifchain/routes");
+const skaleRouter = require("./Routes/Chains/cosmos/mainnet/skale/routes");
+const tenetRouter = require("./Routes/Chains/cosmos/mainnet/tenet/routes");
+const bandRouter = require("./Routes/Chains/cosmos/mainnet/band/routes");
+const beezeeRouter = require("./Routes/Chains/cosmos/mainnet/beezee/routes");
+const cantoRouter = require("./Routes/Chains/cosmos/mainnet/canto/routes");
+const cronosRouter = require("./Routes/Chains/cosmos/mainnet/cronos/routes");
+const desmosRouter = require("./Routes/Chains/cosmos/mainnet/desmos/routes");
+const memeRouter = require("./Routes/Chains/cosmos/mainnet/meme/routes");
+const munRouter = require("./Routes/Chains/cosmos/mainnet/mun/routes");
+const cryptoRouter = require("./Routes/Chains/cosmos/mainnet/crypto/routes");
+const emoneyRouter = require("./Routes/Chains/cosmos/mainnet/emoney/routes");
+
+const bitcoinRouter = require("./Routes/Chains/bitcoin/routes");
+
 require("dotenv").config();
 
 const app = express();
@@ -70,6 +73,8 @@ app.use(memeRouter);
 app.use(munRouter);
 app.use(cryptoRouter);
 app.use(emoneyRouter);
+
+app.use(bitcoinRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running at port ${process.env.PORT}`);
