@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: agoricBlockModel, TxsModel: agoricTxsModel} = createBlockchainModels("agoric");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.AGORIC_REST_API;
 const RPC = process.env.AGORIC_RPC_API;
 
 //cron task for agoric
-createCronJob(API, Model.agoricTxsModel, Model.agoricBlockModel);
+createCronJob(API, agoricTxsModel, agoricBlockModel);
 
 // Define a helper function to prefix the routes with "/agoric"
 function agoricRoute(path, handler) {
@@ -55,8 +56,8 @@ function agoricRoute(path, handler) {
 }
 
 // Define the routes
-agoricRoute("/blocks/latest", latestBlocksHandler(Model.agoricBlockModel));
-agoricRoute("/txs", allTxsHandler(Model.agoricTxsModel));
+agoricRoute("/blocks/latest", latestBlocksHandler(agoricBlockModel));
+agoricRoute("/txs", allTxsHandler(agoricTxsModel));
 agoricRoute("/all_validators", allValidatorsHandler(API));
 agoricRoute("/active_validators", activeValidatorsHandler(API));
 agoricRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

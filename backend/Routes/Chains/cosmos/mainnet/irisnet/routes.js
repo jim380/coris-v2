@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: irisnetBlockModel, TxsModel: irisnetTxsModel} = createBlockchainModels("irisnet");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.IRISNET_REST_API;
 const RPC = process.env.IRISNET_RPC_API;
 
 //cron task for irisnet
-createCronJob(API, Model.irisnetTxsModel, Model.irisnetBlockModel);
+createCronJob(API, irisnetTxsModel, irisnetBlockModel);
 
 // Define a helper function to prefix the routes with "/irisnet"
 function irisnetRoute(path, handler) {
@@ -55,8 +56,8 @@ function irisnetRoute(path, handler) {
 }
 
 // Define the routes
-irisnetRoute("/blocks/latest", latestBlocksHandler(Model.irisnetBlockModel));
-irisnetRoute("/txs", allTxsHandler(Model.irisnetTxsModel));
+irisnetRoute("/blocks/latest", latestBlocksHandler(irisnetBlockModel));
+irisnetRoute("/txs", allTxsHandler(irisnetTxsModel));
 irisnetRoute("/all_validators", allValidatorsHandler(API));
 irisnetRoute("/active_validators", activeValidatorsHandler(API));
 irisnetRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: crescentBlockModel, TxsModel: crescentTxsModel} = createBlockchainModels("crescent");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.CRESCENT_REST_API;
 const RPC = process.env.CRESCENT_RPC_API;
 
 // cron task for cresent
-createCronJob(API, Model.crescentTxsModel, Model.crescentBlockModel);
+createCronJob(API, crescentTxsModel, crescentBlockModel);
 
 // Define a helper function to prefix the routes with "/crescent"
 function crescentRoute(path, handler) {
@@ -55,8 +56,8 @@ function crescentRoute(path, handler) {
 }
 
 // Define the routes
-crescentRoute("/blocks/latest", latestBlocksHandler(Model.crescentBlockModel));
-crescentRoute("/txs", allTxsHandler(Model.crescentTxsModel));
+crescentRoute("/blocks/latest", latestBlocksHandler(crescentBlockModel));
+crescentRoute("/txs", allTxsHandler(crescentTxsModel));
 crescentRoute("/all_validators", allValidatorsHandler(API));
 crescentRoute("/active_validators", activeValidatorsHandler(API));
 crescentRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

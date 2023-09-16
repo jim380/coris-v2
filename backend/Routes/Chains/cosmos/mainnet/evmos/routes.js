@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: evmosBlockModel, TxsModel: evmosTxsModel} = createBlockchainModels("evmos");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.EVMOS_REST_API;
 const RPC = process.env.EVMOS_RPC_API;
 
 //cron task for evmos
-createCronJob(API, Model.evmosTxsModel, Model.evmosBlockModel);
+createCronJob(API, evmosTxsModel, evmosBlockModel);
 
 // Define a helper function to prefix the routes with "/evmos"
 function evmosRoute(path, handler) {
@@ -55,8 +56,8 @@ function evmosRoute(path, handler) {
 }
 
 // Define the routes
-evmosRoute("/blocks/latest", latestBlocksHandler(Model.evmosBlockModel));
-evmosRoute("/txs", allTxsHandler(Model.evmosTxsModel));
+evmosRoute("/blocks/latest", latestBlocksHandler(evmosBlockModel));
+evmosRoute("/txs", allTxsHandler(evmosTxsModel));
 evmosRoute("/all_validators", allValidatorsHandler(API));
 evmosRoute("/active_validators", activeValidatorsHandler(API));
 evmosRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

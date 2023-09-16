@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: lumBlockModel, TxsModel: lumTxsModel} = createBlockchainModels("lum");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.LUM_REST_API;
 const RPC = process.env.LUM_RPC_API;
 
 //cron task for lum
-createCronJob(API, Model.lumTxsModel, Model.lumBlockModel);
+createCronJob(API, lumTxsModel, lumBlockModel);
 
 // Define a helper function to prefix the routes with "/lum"
 function lumRoute(path, handler) {
@@ -55,8 +56,8 @@ function lumRoute(path, handler) {
 }
 
 // Define the routes
-lumRoute("/blocks/latest", latestBlocksHandler(Model.lumBlockModel));
-lumRoute("/txs", allTxsHandler(Model.lumTxsModel));
+lumRoute("/blocks/latest", latestBlocksHandler(lumBlockModel));
+lumRoute("/txs", allTxsHandler(lumTxsModel));
 lumRoute("/all_validators", allValidatorsHandler(API));
 lumRoute("/active_validators", activeValidatorsHandler(API));
 lumRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

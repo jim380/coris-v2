@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: strideBlockModel, TxsModel: strideTxsModel} = createBlockchainModels("stride");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.STRIDE_REST_API;
 const RPC = process.env.STRIDE_RPC_API;
 
 // cron task for stride
-createCronJob(API, Model.strideTxsModel, Model.strideBlockModel);
+createCronJob(API, strideTxsModel, strideBlockModel);
 
 // Define a helper function to prefix the routes with "/stride"
 function strideRoute(path, handler) {
@@ -55,8 +56,8 @@ function strideRoute(path, handler) {
 }
 
 // Define the routes
-strideRoute("/blocks/latest", latestBlocksHandler(Model.strideBlockModel));
-strideRoute("/txs", allTxsHandler(Model.strideTxsModel));
+strideRoute("/blocks/latest", latestBlocksHandler(strideBlockModel));
+strideRoute("/txs", allTxsHandler(strideTxsModel));
 strideRoute("/all_validators", allValidatorsHandler(API));
 strideRoute("/active_validators", activeValidatorsHandler(API));
 strideRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

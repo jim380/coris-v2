@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: provenanceBlockModel, TxsModel: provenanceTxsModel} = createBlockchainModels("provenance");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.PROVENANCE_REST_API;
 const RPC = process.env.PROVENANCE_RPC_API;
 
 //cron task for provenance
-createCronJob(API, Model.provenanceTxsModel, Model.provenanceBlockModel);
+createCronJob(API, provenanceTxsModel, provenanceBlockModel);
 
 // Define a helper function to prefix the routes with "/provenance"
 function provenanceRoute(path, handler) {
@@ -55,8 +56,8 @@ function provenanceRoute(path, handler) {
 }
 
 // Define the routes
-provenanceRoute("/blocks/latest", latestBlocksHandler(Model.provenanceBlockModel));
-provenanceRoute("/txs", allTxsHandler(Model.provenanceTxsModel));
+provenanceRoute("/blocks/latest", latestBlocksHandler(provenanceBlockModel));
+provenanceRoute("/txs", allTxsHandler(provenanceTxsModel));
 provenanceRoute("/all_validators", allValidatorsHandler(API));
 provenanceRoute("/active_validators", activeValidatorsHandler(API));
 provenanceRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

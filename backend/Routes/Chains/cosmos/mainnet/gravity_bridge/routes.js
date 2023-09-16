@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: gravitybridgeBlockModel, TxsModel: gravitybridgeTxsModel} = createBlockchainModels("gravitybridge");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.GRAVITYBRIDGE_REST_API;
 const RPC = process.env.GRAVITYBRIDGE_RPC_API;
 
 //cron task for gravitybridge
-createCronJob(API, Model.gravitybridgeTxsModel, Model.gravitybridgeBlockModel);
+createCronJob(API, gravitybridgeTxsModel, gravitybridgeBlockModel);
 
 // Define a helper function to prefix the routes with "/gravitybridge"
 function gravitybridgeRoute(path, handler) {
@@ -55,8 +56,8 @@ function gravitybridgeRoute(path, handler) {
 }
 
 // Define the routes
-gravitybridgeRoute("/blocks/latest", latestBlocksHandler(Model.gravitybridgeBlockModel));
-gravitybridgeRoute("/txs", allTxsHandler(Model.gravitybridgeTxsModel));
+gravitybridgeRoute("/blocks/latest", latestBlocksHandler(gravitybridgeBlockModel));
+gravitybridgeRoute("/txs", allTxsHandler(gravitybridgeTxsModel));
 gravitybridgeRoute("/all_validators", allValidatorsHandler(API));
 gravitybridgeRoute("/active_validators", activeValidatorsHandler(API));
 gravitybridgeRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

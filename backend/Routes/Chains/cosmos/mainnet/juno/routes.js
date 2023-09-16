@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: junoBlockModel, TxsModel: junoTxsModel} = createBlockchainModels("juno");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.JUNO_REST_API;
 const RPC = process.env.JUNO_RPC_API;
 
 // cron task for juno
-createCronJob(API, Model.junoTxsModel, Model.junoBlockModel);
+createCronJob(API, junoTxsModel,junoBlockModel);
 
 // Define a helper function to prefix the routes with "/juno"
 function junoRoute(path, handler) {
@@ -55,8 +56,8 @@ function junoRoute(path, handler) {
 }
 
 // Define the routes
-junoRoute("/blocks/latest", latestBlocksHandler(Model.junoBlockModel));
-junoRoute("/txs", allTxsHandler(Model.junoTxsModel));
+junoRoute("/blocks/latest", latestBlocksHandler(junoBlockModel));
+junoRoute("/txs", allTxsHandler(junoTxsModel));
 junoRoute("/all_validators", allValidatorsHandler(API));
 junoRoute("/active_validators", activeValidatorsHandler(API));
 junoRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

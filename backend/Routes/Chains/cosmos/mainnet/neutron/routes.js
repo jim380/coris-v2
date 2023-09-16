@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: neutronBlockModel, TxsModel: neutronTxsModel} = createBlockchainModels("neutron");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.NEUTRON_REST_API;
 const RPC = process.env.NEUTRON_RPC_API;
 
 // cron task for neutron
-createCronJob(API, Model.neutronTxsModel, Model.neutronBlockModel);
+createCronJob(API, neutronTxsModel, neutronBlockModel);
 
 // Define a helper function to prefix the routes with "/neutron"
 function neutronRoute(path, handler) {
@@ -55,8 +56,8 @@ function neutronRoute(path, handler) {
 }
 
 // Define the routes
-neutronRoute("/blocks/latest", latestBlocksHandler(Model.neutronBlockModel));
-neutronRoute("/txs", allTxsHandler(Model.neutronTxsModel));
+neutronRoute("/blocks/latest", latestBlocksHandler(neutronBlockModel));
+neutronRoute("/txs", allTxsHandler(neutronTxsModel));
 neutronRoute("/all_validators", allValidatorsHandler(API));
 neutronRoute("/active_validators", activeValidatorsHandler(API));
 neutronRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

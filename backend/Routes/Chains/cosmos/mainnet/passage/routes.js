@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: passageBlockModel, TxsModel: passageTxsModel} = createBlockchainModels("passage");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.PASSAGE_REST_API;
 const RPC = process.env.PASSAGE_RPC_API;
 
 //cron task for passage
-createCronJob(API, Model.passageTxsModel, Model.passageBlockModel);
+createCronJob(API, passageTxsModel, passageBlockModel);
 
 // Define a helper function to prefix the routes with "/passage"
 function passageRoute(path, handler) {
@@ -55,8 +56,8 @@ function passageRoute(path, handler) {
 }
 
 // Define the routes
-passageRoute("/blocks/latest", latestBlocksHandler(Model.passageBlockModel));
-passageRoute("/txs", allTxsHandler(Model.passageTxsModel));
+passageRoute("/blocks/latest", latestBlocksHandler(passageBlockModel));
+passageRoute("/txs", allTxsHandler(passageTxsModel));
 passageRoute("/all_validators", allValidatorsHandler(API));
 passageRoute("/active_validators", activeValidatorsHandler(API));
 passageRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

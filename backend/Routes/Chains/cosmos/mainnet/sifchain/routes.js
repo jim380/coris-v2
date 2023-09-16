@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: sifchainBlockModel, TxsModel: sifchainTxsModel} = createBlockchainModels("sifchain");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.SIFCHAIN_REST_API;
 const RPC = process.env.SIFCHAIN_RPC_API;
 
 //cron task for sifchain
-createCronJob(API, Model.sifchainTxsModel, Model.sifchainBlockModel);
+createCronJob(API, sifchainTxsModel, sifchainBlockModel);
 
 // Define a helper function to prefix the routes with "/sifchain"
 function sifchainRoute(path, handler) {
@@ -55,8 +56,8 @@ function sifchainRoute(path, handler) {
 }
 
 // Define the routes
-sifchainRoute("/blocks/latest", latestBlocksHandler(Model.sifchainBlockModel));
-sifchainRoute("/txs", allTxsHandler(Model.sifchainTxsModel));
+sifchainRoute("/blocks/latest", latestBlocksHandler(sifchainBlockModel));
+sifchainRoute("/txs", allTxsHandler(sifchainTxsModel));
 sifchainRoute("/all_validators", allValidatorsHandler(API));
 sifchainRoute("/active_validators", activeValidatorsHandler(API));
 sifchainRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

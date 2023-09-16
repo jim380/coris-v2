@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: umeeBlockModel, TxsModel: umeeTxsModel} = createBlockchainModels("umee");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,15 +48,15 @@ const API = process.env.UMEE_REST_API;
 const RPC = process.env.UMEE_RPC_API;
 
 // cron task for umee
-createCronJob(API, Model.umeeTxsModel, Model.umeeBlockModel);
+createCronJob(API, umeeTxsModel, umeeBlockModel);
 // Define a helper function to prefix the routes with "/umee"
 function umeeRoute(path, handler) {
   return app.get(`/umee${path}`, corsMiddleware, handler);
 }
 
 // Define the routes
-umeeRoute("/blocks/latest", latestBlocksHandler(Model.umeeBlockModel));
-umeeRoute("/txs", allTxsHandler(Model.umeeTxsModel));
+umeeRoute("/blocks/latest", latestBlocksHandler(umeeBlockModel));
+umeeRoute("/txs", allTxsHandler(umeeTxsModel));
 umeeRoute("/all_validators", allValidatorsHandler(API));
 umeeRoute("/active_validators", activeValidatorsHandler(API));
 umeeRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

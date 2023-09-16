@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: akashBlockModel, TxsModel: akashTxsModel} = createBlockchainModels("akash");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.AKASH_REST_API;
 const RPC = process.env.AKASH_RPC_API;
 
 //cron task for akash
-createCronJob(API, Model.akashTxsModel, Model.akashBlockModel);
+createCronJob(API, akashTxsModel, akashBlockModel);
 
 // Define a helper function to prefix the routes with "/akash"
 function akashRoute(path, handler) {
@@ -55,8 +56,8 @@ function akashRoute(path, handler) {
 }
 
 // Define the routes
-akashRoute("/blocks/latest", latestBlocksHandler(Model.akashBlockModel));
-akashRoute("/txs", allTxsHandler(Model.akashTxsModel));
+akashRoute("/blocks/latest", latestBlocksHandler(akashBlockModel));
+akashRoute("/txs", allTxsHandler(akashTxsModel));
 akashRoute("/all_validators", allValidatorsHandler(API));
 akashRoute("/active_validators", activeValidatorsHandler(API));
 akashRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

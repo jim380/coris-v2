@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: cosmosBlockModel, TxsModel: cosmosTxsModel} = createBlockchainModels("cosmos");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.COSMOS_REST_API;
 const RPC = process.env.COSMOS_RPC_API;
 
 // cron task for cosmos
-createCronJob(API, Model.cosmosTxsModel, Model.cosmosBlockModel);
+createCronJob(API, cosmosTxsModel, cosmosBlockModel);
 
 // Define a helper function to prefix the routes with "/cosmos"
 function cosmosRoute(path, handler) {
@@ -55,8 +56,8 @@ function cosmosRoute(path, handler) {
 }
 
 // Define the routes
-cosmosRoute("/blocks/latest", latestBlocksHandler(Model.cosmosBlockModel));
-cosmosRoute("/txs", allTxsHandler(Model.cosmosTxsModel));
+cosmosRoute("/blocks/latest", latestBlocksHandler(cosmosBlockModel));
+cosmosRoute("/txs", allTxsHandler(cosmosTxsModel));
 cosmosRoute("/all_validators", allValidatorsHandler(API));
 cosmosRoute("/active_validators", activeValidatorsHandler(API));
 cosmosRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: stargazeBlockModel, TxsModel: stargazeTxsModel} = createBlockchainModels("stargaze");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.STARGAZE_REST_API;
 const RPC = process.env.STARGAZE_RPC_API;
 
 // cron task for stargaze
-createCronJob(API, Model.stargazeTxsModel, Model.stargazeBlockModel);
+createCronJob(API, stargazeTxsModel, stargazeBlockModel);
 
 // Define a helper function to prefix the routes with "/stargaze"
 function stargazeRoute(path, handler) {
@@ -55,8 +56,8 @@ function stargazeRoute(path, handler) {
 }
 
 // Define the routes
-stargazeRoute("/blocks/latest", latestBlocksHandler(Model.stargazeBlockModel));
-stargazeRoute("/txs", allTxsHandler(Model.stargazeTxsModel));
+stargazeRoute("/blocks/latest", latestBlocksHandler(stargazeBlockModel));
+stargazeRoute("/txs", allTxsHandler(stargazeTxsModel));
 stargazeRoute("/all_validators", allValidatorsHandler(API));
 stargazeRoute("/active_validators", activeValidatorsHandler(API));
 stargazeRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

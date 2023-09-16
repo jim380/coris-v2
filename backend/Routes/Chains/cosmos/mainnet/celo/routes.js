@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: celoBlockModel, TxsModel: celoTxsModel} = createBlockchainModels("celo");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.CELO_REST_API;
 const RPC = process.env.CELO_RPC_API;
 
 //cron task for celo
-createCronJob(API, Model.celoTxsModel, Model.celoBlockModel);
+createCronJob(API, celoTxsModel, celoBlockModel);
 
 // Define a helper function to prefix the routes with "/celo"
 function celoRoute(path, handler) {
@@ -55,8 +56,8 @@ function celoRoute(path, handler) {
 }
 
 // Define the routes
-celoRoute("/blocks/latest", latestBlocksHandler(Model.celoBlockModel));
-celoRoute("/txs", allTxsHandler(Model.celoTxsModel));
+celoRoute("/blocks/latest", latestBlocksHandler(celoBlockModel));
+celoRoute("/txs", allTxsHandler(celoTxsModel));
 celoRoute("/all_validators", allValidatorsHandler(API));
 celoRoute("/active_validators", activeValidatorsHandler(API));
 celoRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

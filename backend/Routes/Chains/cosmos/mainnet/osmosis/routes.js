@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: osmosisBlockModel, TxsModel: osmosisTxsModel} = createBlockchainModels("osmosis");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.OSMOSIS_REST_API;
 const RPC = process.env.OSMOSIS_RPC_API;
 
 //cron task for osmosis
-createCronJob(API, Model.osmosisTxsModel, Model.osmosisBlockModel);
+createCronJob(API, osmosisTxsModel, osmosisBlockModel);
 
 // Define a helper function to prefix the routes with "/osmosis"
 function osmosisRoute(path, handler) {
@@ -55,8 +56,8 @@ function osmosisRoute(path, handler) {
 }
 
 // Define the routes
-osmosisRoute("/blocks/latest", latestBlocksHandler(Model.osmosisBlockModel));
-osmosisRoute("/txs", allTxsHandler(Model.osmosisTxsModel));
+osmosisRoute("/blocks/latest", latestBlocksHandler(osmosisBlockModel));
+osmosisRoute("/txs", allTxsHandler(osmosisTxsModel));
 osmosisRoute("/all_validators", allValidatorsHandler(API));
 osmosisRoute("/active_validators", activeValidatorsHandler(API));
 osmosisRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

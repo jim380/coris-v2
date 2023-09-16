@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: regenBlockModel, TxsModel: regenTxsModel} = createBlockchainModels("regen");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.REGEN_REST_API;
 const RPC = process.env.REGEN_RPC_API;
 
 //cron task for regen
-createCronJob(API, Model.regenTxsModel, Model.regenBlockModel);
+createCronJob(API, regenTxsModel, regenBlockModel);
 
 // Define a helper function to prefix the routes with "/regen"
 function regenRoute(path, handler) {
@@ -55,8 +56,8 @@ function regenRoute(path, handler) {
 }
 
 // Define the routes
-regenRoute("/blocks/latest", latestBlocksHandler(Model.regenBlockModel));
-regenRoute("/txs", allTxsHandler(Model.regenTxsModel));
+regenRoute("/blocks/latest", latestBlocksHandler(regenBlockModel));
+regenRoute("/txs", allTxsHandler(regenTxsModel));
 regenRoute("/all_validators", allValidatorsHandler(API));
 regenRoute("/active_validators", activeValidatorsHandler(API));
 regenRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

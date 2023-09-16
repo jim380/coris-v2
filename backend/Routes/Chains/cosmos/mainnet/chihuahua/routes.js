@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: chihuahuaBlockModel, TxsModel: chihuahuaTxsModel} = createBlockchainModels("chihuahua");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.CHIHUAHUA_REST_API;
 const RPC = process.env.CHIHUAHUA_RPC_API;
 
 //cron task for chihuahua
-createCronJob(API, Model.chihuahuaTxsModel, Model.chihuahuaBlockModel);
+createCronJob(API, chihuahuaTxsModel, chihuahuaBlockModel);
 
 // Define a helper function to prefix the routes with "/chihuahua"
 function chihuahuaRoute(path, handler) {
@@ -57,9 +58,9 @@ function chihuahuaRoute(path, handler) {
 // Define the routes
 chihuahuaRoute(
   "/blocks/latest",
-  latestBlocksHandler(Model.chihuahuaBlockModel)
+  latestBlocksHandler(chihuahuaBlockModel)
 );
-chihuahuaRoute("/txs", allTxsHandler(Model.chihuahuaTxsModel));
+chihuahuaRoute("/txs", allTxsHandler(chihuahuaTxsModel));
 chihuahuaRoute("/all_validators", allValidatorsHandler(API));
 chihuahuaRoute("/active_validators", activeValidatorsHandler(API));
 chihuahuaRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));

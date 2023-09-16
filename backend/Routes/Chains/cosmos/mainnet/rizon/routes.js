@@ -1,5 +1,6 @@
 const express = require("express");
-const Model = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {createBlockchainModels} = require("../../../../../Model/cosmos-chains/Models.jsx");
+const {BlockModel: rizonBlockModel, TxsModel: rizonTxsModel} = createBlockchainModels("rizon");
 const { createCronJob } = require("../../../../../cron.js");
 const app = express();
 require("dotenv").config();
@@ -47,7 +48,7 @@ const API = process.env.RIZON_REST_API;
 const RPC = process.env.RIZON_RPC_API;
 
 //cron task for rizon
-createCronJob(API, Model.rizonTxsModel, Model.rizonBlockModel);
+createCronJob(API, rizonTxsModel, rizonBlockModel);
 
 // Define a helper function to prefix the routes with "/rizon"
 function rizonRoute(path, handler) {
@@ -55,8 +56,8 @@ function rizonRoute(path, handler) {
 }
 
 // Define the routes
-rizonRoute("/blocks/latest", latestBlocksHandler(Model.rizonBlockModel));
-rizonRoute("/txs", allTxsHandler(Model.rizonTxsModel));
+rizonRoute("/blocks/latest", latestBlocksHandler(rizonBlockModel));
+rizonRoute("/txs", allTxsHandler(rizonTxsModel));
 rizonRoute("/all_validators", allValidatorsHandler(API));
 rizonRoute("/active_validators", activeValidatorsHandler(API));
 rizonRoute("/chain_validator_details", chainValidatorsDetailsHandler(API));
